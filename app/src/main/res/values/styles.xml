@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+
+    <style name="mukta">
+        <item name="android:letterSpacing">0.2</item>
+    </style>
+
+    <!-- 3XS -->
+
+    <style name="mukta_3xs" parent="mukta">
+        <item name="android:textSize">10sp</item>
+        <item name="android:lineHeight" >12sp</item>
+    </style>
+
+    <style name="mukta_3xs.light" parent="mukta_3xs">
+        <item name="android:fontFamily" >@font/mukta_light</item>
+    </style>
+
+    <style name="mukta_3xs.regular" parent="mukta_3xs">
+        <item name="android:fontFamily" >@font/mukta_regular</item>
+    </style>
+
+    <style name="mukta_3xs.medium" parent="mukta_3xs">
+        <item name="android:fontFamily" >@font/mukta_medium</item>
+    </style>
+
+    <style name="mukta_3xs.semibold" parent="mukta_3xs">
+        <item name="android:fontFamily" >@font/mukta_semibold</item>
+    </style>
+
+    <style name="mukta_3xs.bold" parent="mukta_3xs">
+        <item name="android:fontFamily" >@font/mukta_bold</item>
+    </style>
+
+    <!-- 2XS -->
+
+    <style name="mukta_2xs" parent="mukta">
+        <item name="android:textSize">11sp</item>
+        <item name="android:lineHeight" >13sp</item>
+    </style>
+
+    <style name="mukta_2xs.light" parent="mukta_2xs">
+        <item name="android:fontFamily" >@font/mukta_light</item>
+    </style>
+
+    <style name="mukta_2xs.regular" parent="mukta_2xs">
+        <item name="android:fontFamily" >@font/mukta_regular</item>
+    </style>
+
+    <style name="mukta_2xs.medium" parent="mukta_2xs">
+        <item name="android:fontFamily" >@font/mukta_medium</item>
+    </style>
+
+    <style name="mukta_2xs.semibold" parent="mukta_2xs">
+        <item name="android:fontFamily" >@font/mukta_semibold</item>
+    </style>
+
+    <style name="mukta_2xs.bold" parent="mukta_2xs">
+        <item name="android:fontFamily" >@font/mukta_bold</item>
+    </style>
+
+    <!-- XS -->
+
+    <style name="mukta_xs" parent="mukta">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight" >14sp</item>
+    </style>
+
+    <style name="mukta_xs.light" parent="mukta_xs">
+        <item name="android:fontFamily" >@font/mukta_light</item>
+    </style>
+
+    <style name="mukta_xs.regular" parent="mukta_xs">
+        <item name="android:fontFamily" >@font/mukta_regular</item>
+    </style>
+
+    <style name="mukta_xs.medium" parent="mukta_xs">
+        <item name="android:fontFamily" >@font/mukta_medium</item>
+    </style>
+
+    <style name="mukta_xs.semibold" parent="mukta_xs">
+        <item name="android:fontFamily" >@font/mukta_semibold</item>
+    </style>
+
+    <style name="mukta_xs.bold" parent="mukta_xs">
+        <item name="android:fontFamily" >@font/mukta_bold</item>
+    </style>
+
+    <!-- S -->
+
+    <style name="mukta_s" parent="mukta">
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineHeight" >15sp</item>
+    </style>
+
+    <style name="mukta_s.light" parent="mukta_s">
+        <item name="android:fontFamily" >@font/mukta_light</item>
+    </style>
+
+    <style name="mukta_s.regular" parent="mukta_s">
+        <item name="android:fontFamily" >@font/mukta_regular</item>
+    </style>
+
+    <style name="mukta_s.medium" parent="mukta_s">
+        <item name="android:fontFamily" >@font/mukta_medium</item>
+    </style>
+
+    <style name="mukta_s.semibold" parent="mukta_s">
+        <item name="android:fontFamily" >@font/mukta_semibold</item>
+    </style>
+
+    <style name="mukta_s.bold" parent="mukta_s">
+        <item name="android:fontFamily" >@font/mukta_bold</item>
+    </style>
+
+    <!-- m -->
+
+    <style name="mukta_m" parent="mukta">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight" >16sp</item>
+    </style>
+
+    <style name="mukta_m.light" parent="mukta_m">
+        <item name="android:fontFamily" >@font/mukta_light</item>
+    </style>
+
+    <style name="mukta_m.regular" parent="mukta_m">
+        <item name="android:fontFamily" >@font/mukta_regular</item>
+    </style>
+
+    <style name="mukta_m.medium" parent="mukta_m">
+        <item name="android:fontFamily" >@font/mukta_medium</item>
+    </style>
+
+    <style name="mukta_m.semibold" parent="mukta_m">
+        <item name="android:fontFamily" >@font/mukta_semibold</item>
+    </style>
+
+    <style name="mukta_m.bold" parent="mukta_m">
+        <item name="android:fontFamily" >@font/mukta_bold</item>
+    </style>
+
+    <!-- l -->
+
+    <style name="mukta_l" parent="mukta">
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineHeight" >18sp</item>
+    </style>
+
+    <style name="mukta_l.light" parent="mukta_l">
+        <item name="android:fontFamily" >@font/mukta_light</item>
+    </style>
+
+    <style name="mukta_l.regular" parent="mukta_l">
+        <item name="android:fontFamily" >@font/mukta_regular</item>
+    </style>
+
+    <style name="mukta_l.medium" parent="mukta_l">
+        <item name="android:fontFamily" >@font/mukta_medium</item>
+    </style>
+
+    <style name="mukta_l.semibold" parent="mukta_l">
+        <item name="android:fontFamily" >@font/mukta_semibold</item>
+    </style>
+
+    <style name="mukta_l.bold" parent="mukta_l">
+        <item name="android:fontFamily" >@font/mukta_bold</item>
+    </style>
+
+    <!-- Xl -->
+
+    <style name="mukta_xl" parent="mukta">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineHeight" >19sp</item>
+    </style>
+
+    <style name="mukta_xl.light" parent="mukta_xl">
+        <item name="android:fontFamily" >@font/mukta_light</item>
+    </style>
+
+    <style name="mukta_xl.regular" parent="mukta_xl">
+        <item name="android:fontFamily" >@font/mukta_regular</item>
+    </style>
+
+    <style name="mukta_xl.medium" parent="mukta_xl">
+        <item name="android:fontFamily" >@font/mukta_medium</item>
+    </style>
+
+    <style name="mukta_xl.semibold" parent="mukta_xl">
+        <item name="android:fontFamily" >@font/mukta_semibold</item>
+    </style>
+
+    <style name="mukta_xl.bold" parent="mukta_xl">
+        <item name="android:fontFamily" >@font/mukta_bold</item>
+    </style>
+
+    <!-- 2Xl -->
+
+    <style name="mukta_2xl" parent="mukta">
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineHeight" >21sp</item>
+    </style>
+
+    <style name="mukta_2xl.semibold" parent="mukta_2xl">
+        <item name="android:fontFamily" >@font/mukta_semibold</item>
+    </style>
+
+    <style name="mukta_2xl.bold" parent="mukta_2xl">
+        <item name="android:fontFamily" >@font/mukta_bold</item>
+    </style>
+
+    <!-- 3Xl -->
+
+    <style name="mukta_3xl" parent="mukta">
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineHeight" >23sp</item>
+    </style>
+
+    <style name="mukta_3xl.bold" parent="mukta_3xl">
+        <item name="android:fontFamily" >@font/mukta_bold</item>
+    </style>
+
+    <!-- 4Xl -->
+
+    <style name="mukta_4xl" parent="mukta">
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineHeight" >28sp</item>
+    </style>
+
+    <style name="mukta_4xl.light" parent="mukta_4xl">
+        <item name="android:fontFamily" >@font/mukta_light</item>
+    </style>
+
+    <style name="mukta_4xl.regular" parent="mukta_4xl">
+        <item name="android:fontFamily" >@font/mukta_regular</item>
+    </style>
+
+    <style name="mukta_4xl.bold" parent="mukta_4xl">
+        <item name="android:fontFamily" >@font/mukta_bold</item>
+    </style>
+
+    <!-- 5Xl -->
+
+    <style name="mukta_5xl" parent="mukta">
+        <item name="android:textSize">50sp</item>
+        <item name="android:lineHeight" >50sp</item>
+    </style>
+
+    <style name="mukta_5xl.bold" parent="mukta_5xl">
+        <item name="android:fontFamily" >@font/mukta_bold</item>
+    </style>
+
+</resources>
