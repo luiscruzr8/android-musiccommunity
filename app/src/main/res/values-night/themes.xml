@@ -11,6 +11,10 @@
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/black</item>
+        <!-- Customized splaash screen background color. -->
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="android:windowSplashScreenBackground">@color/secondary_dark</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/primary_dark</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>
