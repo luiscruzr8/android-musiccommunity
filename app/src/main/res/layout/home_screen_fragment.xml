@@ -3,54 +3,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/homeScreenFragment"
+    style="@style/Theme.MusicCommunityApp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeScreenFragment">
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/homeScreenTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Music Community"
-        android:textColor="@color/white"
+        android:layout_marginEnd="16dp"
+        android:text="@string/home_screen_title"
+        android:textAppearance="?attr/textAppearanceDisplayLarge"
+        android:textColor="@color/onSurfaceVariantColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/homeScreenSubtitle1"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:text="@string/home_screen_subtitle"
+        android:textAppearance="?attr/textAppearanceBody1"
+        android:textColor="@color/onSurfaceColor"
+        app:layout_constraintEnd_toEndOf="@+id/homeScreenTitle"
+        app:layout_constraintStart_toStartOf="@+id/homeScreenTitle"
+        app:layout_constraintTop_toBottomOf="@+id/homeScreenTitle" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/homeScreenShowMoreInfoButton"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/home_screen_show_more_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeScreenSubtitle1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/homeScreenLoginButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/home_screen_login_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message"
-        app:layout_constraintVertical_bias="1.0">
-
-        <TextView
-            android:id="@+id/message1"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="TExt1"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/message2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="text 2"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/message1" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        app:layout_constraintTop_toBottomOf="@+id/homeScreenShowMoreInfoButton"
+        style="@style/Widget.Material3.Button.TonalButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

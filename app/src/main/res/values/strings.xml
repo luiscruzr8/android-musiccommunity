@@ -1,3 +1,41 @@
 <resources>
+    <string name="test">test</string>
+    <!-- Common -->
     <string name="app_name">Music Community</string>
+    <string name="or">Or</string>
+
+    <!-- Home screen -->
+    <string name="home_screen_title">Welcome to Music Community</string>
+    <string name="home_screen_subtitle">An application where you can find events, advertisements, discussions or recommendations of your musical interests. \n\nHere you can keep your scores and share then with whoever you want!</string>
+    <string name="home_screen_show_more_button">More information…</string>
+    <string name="home_screen_login_button">Log in</string>
+
+    <!-- Show more screen -->
+    <string name="show_more_screen_title">About this app</string>
+    <string name="show_more_screen_subtitle_1">This is Music Community</string>
+    <string name="show_more_screen_subtitle_2">We have built this so you can have an application where you can store and share your own compositions.
+        \n\nIt will allow you to manage events and announcements that you consider of interest to the community of users, hold discussions on musical topics of interest and even ask for feedback on your scores.
+        \n\nIt will even allow you to recommend any type of publication to the community, so that your followers are aware of what you like.</string>
+    <string name="show_more_screen_footer">Thanks for choosing our application!</string>
+
+    <!-- Login screen -->
+    <string name="login_screen_login_title">Welcome back, please log in to your account</string>
+    <string name="login_screen_signup_title">Are you new here? Create a new account now</string>
+    <string name="login_screen_username">Username</string>
+    <string name="login_screen_username_required">Username required</string>
+    <string name="login_screen_password">Password</string>
+    <string name="login_screen_password_required">Password required</string>
+    <string name="login_screen_email">Email</string>
+    <string name="login_screen_email_required">Email required</string>
+    <string name="login_screen_phone_number">Phone number</string>
+    <string name="login_screen_phone_number_required">Phone number required</string>
+    <string name="login_screen_login_button">Log in</string>
+    <string name="login_screen_login_helper">Do you already have an account? Log in</string>
+    <string name="login_screen_signup_button">Sign up</string>
+    <string name="login_screen_signup_helper">New around here? Register now</string>
+
+    <!-- Navigation menu -->
+    <string name="bottom_nav_menu_item_1">Home</string>
+    <string name="bottom_nav_menu_item_2">Profile</string>
+
 </resources>
