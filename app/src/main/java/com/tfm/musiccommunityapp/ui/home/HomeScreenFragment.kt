@@ -31,22 +31,19 @@ class HomeScreenFragment : BaseFragment(R.layout.home_screen_fragment) {
         }
     }
 
-    private fun navigateSafe(action: NavDirections) {
-        view?.post { findNavController().navigateSafe(action) }
-    }
     /*private fun navigateToProfile() {
         val action = HomeScreenFragmentDirections
         navigateSafe(action)
     }*/
 
     private fun navigateToMoreInformation() {
-        val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToShowMoreInfoFragment()
-        navigateSafe(action)
+        val direction = HomeScreenFragmentDirections.actionHomeScreenFragmentToShowMoreInfoFragment()
+        navigateSafe(direction)
     }
 
     private fun navigateToLogin() {
-        val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToLoginFragment()
-        navigateSafe(action)
+        val direction = HomeScreenFragmentDirections.actionHomeScreenFragmentToLoginFragment()
+        navigateSafe(direction)
     }
 
 }

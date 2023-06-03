@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:autofillHints="username"
                     android:hint="@string/login_screen_username"
-                    android:inputType="text" />
+                    android:inputType="text"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -32,6 +32,11 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.tfm.musiccommunityapp.ui.login.LoginFragment"
-        android:label="LoginScreenFragment"/>
+        android:label="LoginScreenFragment">
+
+        <action
+            android:id="@+id/action_loginFragment_to_showMoreInfoFragment"
+            app:destination="@+id/showMoreInfoFragment" />
+    </fragment>
 
 </navigation>
