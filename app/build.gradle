@@ -53,9 +53,10 @@ android {
 }
 
 dependencies {
-    def koin_version = '3.4.0'
+    def koin_version = '3.4.1'
     def nav_version = "2.5.3"
     def moshi_version = '1.15.0'
+    def mockk_version = '1.13.5'
 
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -86,7 +87,7 @@ dependencies {
 
     //Tests
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'io:mockk:mockk:1.10.6'
+    testImplementation "io.mockk:mockk-android:$mockk_version"
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
