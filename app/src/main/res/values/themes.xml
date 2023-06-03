@@ -1,20 +1,65 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme. >
     <style name="Theme.MusicCommunityApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
+
         <item name="colorPrimary">@color/secondary_light</item>
         <item name="colorPrimaryVariant">@color/primary_light</item>
         <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
+
         <item name="colorSecondary">@color/especial_light</item>
         <item name="colorSecondaryVariant">@color/tertiary_light</item>
         <item name="colorOnSecondary">@color/white</item>
-        <!-- Status bar color. -->
+
         <item name="android:statusBarColor">@color/black</item>
-        <!-- Customized splash screen. -->
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <item name="android:windowSplashScreenBackground">@color/secondary_light</item>
-        <item name="android:windowSplashScreenIconBackgroundColor">@color/primary_light</item>
-        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">#D21A1A</item>
+
+    </style-->
+
+    <style name="Theme.MusicCommunityApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Original AppCompat attributes. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/onPrimaryContainerColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="android:colorBackground">@color/surfaceColor</item>
+        <item name="colorError">@color/errorColor</item>
+
+        <!-- Material3 attributes (needed if parent="Theme.MaterialComponents"). -->
+        <item name="colorPrimaryInverse">@color/onPrimaryColor</item>
+        <item name="colorPrimaryContainer">@color/primaryContainerColor</item>
+        <item name="colorOnPrimaryContainer">@color/onPrimaryContainerColor</item>
+        <item name="colorSecondaryContainer">@color/secondaryContainerColor</item>
+        <item name="colorOnSecondaryContainer">@color/onSecondaryContainerColor</item>
+        <item name="colorTertiary">@color/tertiaryColor</item>
+        <item name="colorOnTertiary">@color/onTertiaryColor</item>
+        <item name="colorTertiaryContainer">@color/tertiaryContainerColor</item>
+        <item name="colorOnTertiaryContainer">@color/onTertiaryContainerColor</item>
+        <item name="colorSurface">@color/surfaceColor</item>
+        <item name="colorOnSurface">@color/onSurfaceColor</item>
+        <item name="colorSurfaceVariant">@color/surfaceDimColor</item>
+        <item name="colorOnSurfaceVariant">@color/onSurfaceVariantColor</item>
+        <item name="colorSurfaceInverse">@color/onSurfaceColor</item>
+        <item name="colorOnSurfaceInverse">@color/onSurfaceColor</item>
+        <item name="colorOutline">@color/outlineColor</item>
+        <item name="colorErrorContainer">@color/errorContainerColor</item>
+        <item name="colorOnErrorContainer">@color/onErrorContainerColor</item>
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.Material3.DisplayLarge</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.Material3.DisplayMedium</item>
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.Material3.DisplaySmall</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Material3.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Material3.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Material3.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.Material3.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.Material3.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.Material3.TitleSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Material3.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Material3.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.Material3.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Material3.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.Material3.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.Material3.LabelSmall</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Material3.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Material3.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Material3.LargeComponent</item>
     </style>
 </resources>

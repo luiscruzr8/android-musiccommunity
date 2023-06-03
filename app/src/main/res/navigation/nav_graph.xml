@@ -9,6 +9,34 @@
         android:id="@+id/homeScreenFragment"
         android:name="com.tfm.musiccommunityapp.ui.home.HomeScreenFragment"
         android:label="HomeScreenFragment">
+
+        <action
+            android:id="@+id/action_homeScreenFragment_to_showMoreInfoFragment"
+            app:destination="@+id/showMoreInfoFragment" />
+
+        <action
+            android:id="@+id/action_homeScreenFragment_to_loginFragment"
+            app:destination="@+id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/showMoreInfoFragment"
+        android:name="com.tfm.musiccommunityapp.ui.home.ShowMoreInfoFragment"
+        android:label="ShowMoreInfoFragment">
+
+        <action
+            android:id="@+id/action_showMoreInfoFragment_to_homeFragment"
+            app:destination="@+id/homeScreenFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.tfm.musiccommunityapp.ui.login.LoginFragment"
+        android:label="LoginScreenFragment">
+
+        <action
+            android:id="@+id/action_loginFragment_to_showMoreInfoFragment"
+            app:destination="@+id/showMoreInfoFragment" />
     </fragment>
 
 </navigation>

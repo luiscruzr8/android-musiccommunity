@@ -1,7 +1,11 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
+
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'kotlin-kapt'
 
 android {
     namespace 'com.tfm.musiccommunityapp'
@@ -9,14 +13,18 @@ android {
 
     defaultConfig {
         applicationId "com.tfm.musiccommunityapp"
-        minSdk 31
+        minSdk 30
         targetSdk 33
         versionCode 1
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "BACKEND_URL", "\"http://localhost:8080/api\""
+        kapt {
+            correctErrorTypes true
+        }
+
+        buildConfigField "String", "BACKEND_URL", "\"http://192.168.0.18:8080/api/\""
     }
 
     buildTypes {
@@ -29,11 +37,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '17'
     }
 
     buildFeatures {
@@ -45,12 +53,13 @@ android {
 }
 
 dependencies {
-    def koin_version = "3.1.5"
+    def koin_version = '3.4.0'
     def nav_version = "2.5.3"
+    def moshi_version = '1.15.0'
 
-    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
@@ -71,6 +80,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
 
+    //Moshi
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
+
     //Tests
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'io:mockk:mockk:1.10.6'
@@ -79,6 +92,10 @@ dependencies {
 
     // Encrypted shared preferences
     implementation "androidx.security:security-crypto:1.0.0"
+
+    // Arrow
+    implementation 'io.arrow-kt:arrow-core:1.2.0-RC'
+    implementation 'io.arrow-kt:arrow-fx-coroutines:1.2.0-RC'
 
     //Splash screen
     implementation("androidx.core:core-splashscreen:1.0.1")

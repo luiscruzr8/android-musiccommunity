@@ -1,4 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="test">test</string>
+    <!-- Common -->
     <string name="app_name">Music Community</string>
+    <string name="or">O</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="accept">Aceptar</string>
+    <string name="decline">Declinar</string>
+    <string name="discard">Descartar</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+
+    <!-- Home screen -->
+    <string name="home_screen_title">Bienvenido a Music Community</string>
+    <string name="home_screen_subtitle">Una aplicación donde puedes encontrar eventos, anuncios, discusiones o recomendaciones de tu interés musical. \n\nAquí puedes guardar tus partituras y compartirlas con quien tú quieras!</string>
+    <string name="home_screen_show_more_button">Más información…</string>
+    <string name="home_screen_login_button">Acceder</string>
+
+    <!-- Show more screen -->
+    <string name="show_more_screen_title">Sobre esta app</string>
+    <string name="show_more_screen_subtitle_1">Esto es Music Community</string>
+    <string name="show_more_screen_subtitle_2">La hemos creado para que puedas tener una aplicación donde puedas almacenar y compartir tus propias composiciones.
+        \n\nQue te permitirá gestionar eventos y anuncios que consideres de interés para la comunidad de usuarios, mantener discusiones sobre temas musicales de interés e incluso pedir opinión sobre tus partituras.
+        \n\nIncluso permitirá recomendar cualquier tipo de publicación con la comunidad, para que tus seguidores esten al tanto de lo que te gusta.</string>
+    <string name="show_more_screen_footer">¡Gracias por escoger nuestra aplicación!</string>
+
+    <!-- Login screen -->
+    <string name="login_screen_login_title">Bienvenido de nuevo, por favor iniciar sesión en tu cuenta</string>
+    <string name="login_screen_signup_title">¿Eres nuevo aquí? Crea una nueva cuenta ya</string>
+    <string name="login_screen_username">Nombre de usuario</string>
+    <string name="login_screen_username_required">Nombre de usuario requerido</string>
+    <string name="login_screen_username_incorrect_format">Nombre de usuario debe tener entre 6–40 caracteres</string>
+    <string name="login_screen_password">Contraseña</string>
+    <string name="login_screen_password_required">Contraseña requerida</string>
+    <string name="login_screen_password_incorrect_format">Contraseña debe tener entre 6–40 caracteres</string>
+    <string name="login_screen_email">Correo electrónico</string>
+    <string name="login_screen_email_required">Correo electrónico requerido</string>
+    <string name="login_screen_email_incorrect_format">Correo electrónico debe tener entre 6–40 caracteres</string>
+    <string name="login_screen_phone_number">Número de teléfono</string>
+    <string name="login_screen_phone_number_required">Número de teléfono requerido</string>
+    <string name="login_screen_phone_number_incorrect_format">Número de teléfono debe tener entre 6–9 dígitos</string>
+    <string name="login_screen_login_button">Iniciar sesión</string>
+    <string name="login_screen_login_helper">¿Ya tienes una cuenta? Inicia sesión</string>
+    <string name="login_screen_signup_button">Registrarme</string>
+    <string name="login_screen_signup_helper">¿Nuevo por aquí? Regístrate ya</string>
+
+    <!-- Login screen errors -->
+    <string name="login_screen_error_sign_in_title">Error de autenticación</string>
+    <string name="login_screen_success_sign_up_title">Registrado con éxito</string>
+    <string name="login_screen_success_sign_up_message">Ahora ya puedes usar tus credenciales para acceder a la aplicación</string>
+    <string name="login_screen_error_sign_up_title">Error de registro</string>
+
+    <!-- Navigation menu -->
+    <string name="bottom_nav_menu_item_1">Inicio</string>
+    <string name="bottom_nav_menu_item_2">Perfil</string>
 </resources>
