@@ -1,0 +1,20 @@
+\selectlanguage *{galician}
+\selectlanguage *{english}
+\selectlanguage *{galician}
+\selectlanguage *{galician}
+\contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Objetivos}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Objetivos principales}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Objetivos concretos}{3}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Estructura de la memoria}{3}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Ejemplos de uso}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Inclusión de imágenes}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Inclusión de varias sub-imaxes}{6}{subsection.2.1.1}%
+\contentsline {section}{\numberline {2.2}Inclusión de tablas}{6}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Código fuente}{9}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Acrónimos y Glosario}{10}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Errores comunes}{10}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Conclusiones}{13}{chapter.3}%
+\contentsline {chapter}{\numberline {A}Material adicional}{19}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Ejemplo de apartado en anejos}{19}{section.A.1}%
+\contentsline {chapter}{Bibliografía}{23}{appendix*.7}%

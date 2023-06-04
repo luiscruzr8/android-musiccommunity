@@ -1,0 +1,184 @@
+\chapter{Ejemplos de uso}
+\label{chap:demo}
+
+\lettrine{E}{ntre} la introducción y las conclusiones, este documento 
+debiera de contener todos los detalles necesario para explicar el 
+desarrollo del proyecto en su totalidad. 
+
+En las siguientes secciones se mostrará el uso de algunos de los 
+elementos más habituales dentro de los TFMs o que con mayor recurrencia 
+se utilizan\footnote{Por ejemplo, la inclusión de notas al pie de página}.
+
+
+\section{Inclusión de imágenes}\label{sec:incluirImagen}
+Uno de los elementos que con total seguridad será necesario es la 
+inclusión de imágenes que apoyen la explicación del texto con un apoyo visual.
+Estos elementos junto con las tablas, qué se abordan en el apartado
+\ref{sec:tablas} en la página \pageref{sec:tablas}, es lo que se conoce como flotantes ya que
+no tienen un lugar predeterminado si no que \LaTeX intenta colocarlos de la mejor 
+manera posible dentro de nuestro texto.
+
+Por ejemplo, piense que quiere incluir una figura como la que aparece en la 
+figura~\ref{fig:ejemplo} dentro de la página~\pageref{fig:ejemplo}. Si se hace 
+de está manera, \LaTeX intentará ubicar  la si bien la puede recolocar a medida 
+que el documento crezca.
+
+\begin{figure}[hp!] % opciones de forzar lo má arriba posible (h) y que forme un párrafo(p)
+  \centering
+  \includegraphics[width=0.75\textwidth]{06_imagenes/udc.png}
+  \caption{Todas las imágenes deberían de llevar un pie descriptivo}
+  \label{fig:ejemplo}
+\end{figure}
+
+Como recomendación general, es conveniente el guardar todos los ficheros de 
+imágenes en el directorio (carpeta) 
+\texttt{06\_imagenes}.
+
+\subsection{Inclusión de varias sub-imaxes}\label{subsec:imagenes}
+
+En el caso más que provable de que sea necerasia la inclusión de más de una imagen, 
+existen diferentes alternativas. Dentro de las posibilidades una es el uso de 
+subfiguras como se puede ver en el ejmplo de la figura~\ref{fig:ejemplo-subfiguras}.
+La principal ventaja es que, de este modo, se pueden refecrencias cada una de las subfiguras 
+como en este caso la imagen de la izquierda (figura~\ref{fig:subfigura-rotada}) y la 
+de las derecha (figura~\ref{fig:subfigura-deformada}). 
+
+\begin{figure}[hp!]
+  \centering
+  \begin{subfigure}[c]{0.3\textwidth}
+    \includegraphics[angle=45,width=\textwidth]{06_imagenes/MUEI.png}
+    \caption{Logo del MUEI}
+    \label{fig:subfigura-rotada}
+  \end{subfigure}
+  \hspace{0.1\textwidth}
+  \begin{subfigure}[c]{0.3\textwidth}
+    \includegraphics[width=\textwidth,height=3cm]{06_imagenes/euro_inf_master_verde.png}
+    \caption{Logo Euro-INF}
+    \label{fig:subfigura-deformada}
+  \end{subfigure}
+  \caption{Logos relacionados con el MUEI que han sido usados como ejemplos de uso para las figuras}
+  \label{fig:ejemplo-subfiguras}
+\end{figure}
+
+\section{Inclusión de tablas}\label{sec:tablas}
+
+Otro de los elementos que se utilizarán con total seguridad dentro 
+del documento son las tablas. Estas al igual que las imágenes (apartado 
+\ref{sec:incluirImagen} serán ubicadas en el sitio que \LaTeX considere más adecuado 
+para la maquetación. Si la ubicamos como en el ejemplo de la Tabla~\ref{tab:ejemplo} en 
+la página~\pageref{tab:ejemplo}), estas se podrán referenciar sin problemas. 
+
+\begin{table}[hp!]
+  \centering
+  \rowcolors{2}{white}{udcgray!15}
+  \begin{tabular}{l|c} % Posibles valores izquierda (l), centro (c), derecha (r)
+  \rowcolor{ficblue!50}
+  \textcolor{white}{\textbf{Cabecera}} & \textcolor{white}{\textbf{Cabecera Valores}} \\\hline
+  \textit{Fila de ejemplo} & Valor asociado \\
+  \textit{Fila de ejemplo} & Valor asociado \\
+  \textit{Fila de ejemplo} & Valor asociado \\
+  \textit{Fila de ejemplo} & Valor asociado \\
+  \multicolumn{2}{c}{Ejemplo de combinación de dos columnas en una}\\
+  \textit{Fila de ejemplo} & Valor asociado \\
+  \end{tabular}
+  \caption{Leyenda de la tabla que se ubica en la parte inferior}
+  \label{tab:ejemplo}
+\end{table}
+
+
+Así mismo, en el caso de tener muchos resultados es posible que la tabla sea tan grande 
+que no entre en una sola página. Para las tablas excesivamente grandes se pude usar 
+el paquete \texttt{longtable}. Este nos ayudará a gestionar este problema como se ve en 
+en el ejemplo de la Tabla \ref{tab:longtable}.
+
+\input{02_contenido_principal/021_tabla}
+
+UN elemento a resaltar es que las tablas largas no se consideran del todo flotantes y por 
+lo tanto no entran en la maquetación. Tenga cuidado porque una tabla más pequeña puede 
+aparecer más tarde que una tabla larga que se encuentre en un punto posterior del texto.
+
+\section{Código fuente}
+
+Habrá veces que sea necesario también la inclusión de código fuente en el texto para 
+ello se puede usar el entorno \texttt{lstlisting}. Vease el siguiente ejemplo
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#define N 10
+
+int main()
+{
+  int i;
+  
+  /*Ejemplo de código que imprime 10 veces 
+    el mensaje más famoso de la informática
+  */
+
+  for (i = 0; i < N; i++)
+  {
+    printf("Hola mundo!");
+  }
+
+  return 0;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+def main():
+
+  #Mismo programa que el anterior pero en Python
+  for _ in range(10)
+      print(f"Hola Mundo!")
+}
+
+if __name__ = __main__:
+    main()   
+\end{lstlisting}
+
+\section{Acrónimos y Glosario}
+
+En \texttt{04\_terminos/01\_acronimos.tex}, se pueden editar los acrónimos 
+o abreviaturas que se van a utilizar. Para hacer uso de los que 
+se hayan defino simplemente se necesitará usar las instrucciones 
+\texttt{acrlong} para la versión larga del término y \texttt{acrshort}
+para obtener el acrónimo. Es de destacar que, la primera vez que se 
+referencia a algo en el texto, es necesario poner el nombre completo y 
+la definición del corto. Para no tener que invocar ambas instruicciones 
+se puede usar la instrucción \texttt{acrfull}, que nos dará el resultado
+deseado. Por ejemplo, la primera vez que llamamos al máster deberíamos referirnos
+a el como \acrfull{muei}. A partir de ese punto podría mos usar 
+\acrlong{muei} si quisiéramos el nombre completo, o bien \acrshort{muei}
+para referirnos por el acrónimo. Un punto a destacare es el hecho de que sólo 
+los acrónimos que se usan en el documento aparecen en la relación final.
+Por ejemplo, el acrónimo de API está definido en el fichero pero no lo 
+se utilizado y por lo tanto no está en el PDF resultante
+
+En cuanto a los términos del glosario, serán las definiciones de los
+términos técnicos como puede ser un bytecode o un hash. Además también 
+se debieran de incluir aquellos términos relacionados con el problema 
+de especial relevancia.
+Por ejemplo, piense en que esta realizando una  aplicación para la gestión 
+del máster, un término que a cualquier lector tendrái que explicarsele es
+el significado de \gls{credito} en el marco de la enseñanza universitaria.
+Estos términos estarán definidos en \texttt{05\_terminos/02\_glo\-sa\-rio.tex} 
+y se pueden invocar con la orden \texttt{gls} (por ejemplo, \gls{credito}) 
+o bien \texttt{Gls} ( \Gls{credito}). Igual que los acrónimos, aquellos 
+términos que no se usen en el texto no se incluirán en el listado final.
+
+\section{Errores comunes}
+
+Existen algunos errores que son sencillos de detectar pero que, en muchas ocasiones, 
+al autor se le pasan inadvertidos por culpa de una lectura un tanto descuidada. 
+
+\begin{itemize}
+    \item Errores con las comillas. El autor queriendo escribir algo entrecomillado 
+    como ``ejemplo de entrecomillado''. Acaba escribiendo algo similar a ''error 
+    de entrecomillado'' o "error de entrecomillado". En ambos casos se debe que las 
+    comillas se han aplicado de manera incorrecta siendo la forma correcta 
+    \texttt{``ejemplo de entrecomillado''}.
+    \item Errores debido la posición de barras bajas o comillas. Un autor despistado 
+    puede acabar escribiendo $06_imagenes$ o algo peor en el párrafo en lugar de 
+    06\_imagenes. El problema  viene de que el caracter \_ y el carácter " debieran 
+    de escaparse con la barra ya que de otra manera tiene el significado de subindice 
+    o superindice, respectivamente.
+\end{itemize}

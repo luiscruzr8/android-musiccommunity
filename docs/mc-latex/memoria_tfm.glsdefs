@@ -1,0 +1,84 @@
+\glsdefs@newdocentry{api}%
+{%
+name={\acronymfont {\glsentryshort {api}}},%
+sort={\textit {API}},%
+type={acronym},%
+first={\protect \textit  {API}},%
+firstplural={\protect \textit  {API}s},%
+text={\protect \textit  {API}},%
+plural={\protect \textit  {API}s},%
+description={\textit {Application Programming Interfaces}},%
+descriptionplural={\textit {Application Programming Interfaces}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Application Programming Interfaces}},%
+longplural={\protect \textit  {Application Programming Interfaces}s},%
+short={\protect \textit  {API}},%
+shortplural={\protect \textit  {API}s},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{muei}%
+{%
+name={\acronymfont {\glsentryshort {muei}}},%
+sort={MUEI},%
+type={acronym},%
+first={MUEI},%
+firstplural={MUEIs},%
+text={MUEI},%
+plural={MUEIs},%
+description={Máster Universitario de Enxeñaría en Informática},%
+descriptionplural={Máster Universitario de Enxeñaría en Informática},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Máster Universitario de Enxeñaría en Informática},%
+longplural={Máster Universitario de Enxeñaría en Informáticas},%
+short={MUEI},%
+shortplural={MUEIs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{credito}%
+{%
+name={Crédito},%
+sort={Crédito},%
+type={main},%
+first={Crédito},%
+firstplural={Créditos},%
+text={Crédito},%
+plural={Créditos},%
+description={Un crédito en el ámbito de la educación universitaria hace referencia a un conjunto de horas en una materia. Dicho conjunto de horas incluye tanto el trabajo realizado en el aula, como el trabajo realizado en casa por parte de los alumnos},%
+descriptionplural={Un crédito en el ámbito de la educación universitaria hace referencia a un conjunto de horas en una materia. Dicho conjunto de horas incluye tanto el trabajo realizado en el aula, como el trabajo realizado en casa por parte de los alumnos},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+
