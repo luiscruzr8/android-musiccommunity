@@ -6,10 +6,13 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.tfm.musiccommunityapp.BuildConfig
 import com.tfm.musiccommunityapp.data.api.AuthApi
+import com.tfm.musiccommunityapp.data.api.UsersApi
 import com.tfm.musiccommunityapp.data.datasource.AuthDatasource
 import com.tfm.musiccommunityapp.data.datasource.LoginDatasource
+import com.tfm.musiccommunityapp.data.datasource.UserDatasource
 import com.tfm.musiccommunityapp.data.datasource.preferences.SharedPreferencesAuthImpl
 import com.tfm.musiccommunityapp.data.datasource.remote.LoginRemoteDatasourceImpl
+import com.tfm.musiccommunityapp.data.datasource.remote.UserRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.network.di.NetworkDatasourceModule
 import com.tfm.musiccommunityapp.data.repository.AuthRepositoryImpl
 import com.tfm.musiccommunityapp.domain.repository.AuthRepository
@@ -29,6 +32,10 @@ val apiModules = module {
     single {
         get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(AuthApi::class.java)
     }
+
+    single {
+        get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(UsersApi::class.java)
+    }
 }
 
 val remoteDatasourceModules = module {
@@ -39,6 +46,11 @@ val remoteDatasourceModules = module {
         )
     } bind LoginDatasource::class
 
+    single {
+        UserRemoteDatasourceImpl(
+            usersApi = get()
+        )
+    } bind UserDatasource::class
 }
 
 val localDatasourceModule = module {

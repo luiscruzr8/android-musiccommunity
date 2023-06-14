@@ -8,12 +8,14 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 
 
-suspend fun <T, R> eitherOf(request: suspend () -> Response<T>, mapper: (T?) -> R, errorMapper : (ResponseBody) -> DomainError): Either<DomainError, R> =
+suspend fun <T, R> eitherOf(request: suspend () -> Response<T>, mapper: (T?) -> R, errorMapper : (Response<T>) -> DomainError): Either<DomainError, R> =
     eitherOf(request(), mapper, errorMapper)
 
-suspend fun <T, R> eitherOf(response: Response<T>, mapper: (T?) -> R, errorMapper : (ResponseBody) -> DomainError): Either<DomainError, R> =
+fun <T, R> eitherOf(response: Response<T>, mapper: (T?) -> R, errorMapper : (Response<T>) -> DomainError): Either<DomainError, R> =
      response.toEither(mapper, errorMapper)
 
-private fun <T, R> Response<T>.toEither(mapper: (T?) -> R, errorMapper : (ResponseBody) -> DomainError): Either<DomainError, R> = this.let { response ->
-    response.errorBody()?.let { errorMapper(it).left() } ?: (mapper(response.body())).right()
+private fun <T, R> Response<T>.toEither(mapper: (T?) -> R, errorMapper : (Response<T>) -> DomainError): Either<DomainError, R> = this.let { response ->
+    response.body()?.let {
+        mapper(it).right()
+    } ?: errorMapper(response).left()
 }
