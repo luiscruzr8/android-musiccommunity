@@ -24,6 +24,13 @@ android {
             correctErrorTypes true
         }
 
+        testOptions {
+            unitTests {
+                includeAndroidResources = true
+                returnDefaultValues = true
+            }
+        }
+
         buildConfigField "String", "BACKEND_URL", "\"http://192.168.0.18:8080/api/\""
     }
 
@@ -36,10 +43,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = '17'
     }
@@ -47,14 +56,21 @@ android {
     buildFeatures {
         viewBinding true
     }
+
     dataBinding {
         enabled = true
+    }
+
+    packagingOptions {
+        exclude '/META-INF/LICENSE*'
+        exclude '/META-INF/NOTICE*'
+        exclude '/META-INF/DEPENDENCIES'
     }
 }
 
 dependencies {
     def koin_version = '3.4.1'
-    def nav_version = "2.5.3"
+    def nav_version = "2.6.0"
     def moshi_version = '1.15.0'
     def mockk_version = '1.13.5'
 
@@ -65,10 +81,15 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
 
+    //For runBlockingTest, CoroutineDispatcher etc.
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+
     //Koin
     implementation "io.insert-koin:koin-core:$koin_version"
     implementation "io.insert-koin:koin-android:$koin_version"
     implementation "io.insert-koin:koin-test:$koin_version"
+    implementation "io.insert-koin:koin-test-junit4:$koin_version"
+    implementation "io.insert-koin:koin-test-junit5:$koin_version"
 
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
