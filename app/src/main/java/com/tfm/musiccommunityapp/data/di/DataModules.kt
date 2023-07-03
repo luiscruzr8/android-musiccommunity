@@ -15,7 +15,9 @@ import com.tfm.musiccommunityapp.data.datasource.remote.LoginRemoteDatasourceImp
 import com.tfm.musiccommunityapp.data.datasource.remote.UserRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.network.di.NetworkDatasourceModule
 import com.tfm.musiccommunityapp.data.repository.AuthRepositoryImpl
+import com.tfm.musiccommunityapp.data.repository.UserProfileRepositoryImpl
 import com.tfm.musiccommunityapp.domain.repository.AuthRepository
+import com.tfm.musiccommunityapp.domain.repository.UserProfileRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.bind
@@ -74,6 +76,11 @@ val repositoriesModule = module {
         )
     } bind AuthRepository::class
 
+    single {
+        UserProfileRepositoryImpl(
+            userDatasource = get(),
+        )
+    } bind UserProfileRepository::class
 }
 
 val preferencesModule = module {

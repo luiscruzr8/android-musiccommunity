@@ -21,28 +21,28 @@ data class NetworkError(
     val cause: Throwable? = null
 ) : DomainError(title, message, code, cause)
 
-data class  ValidationError(
+data class ValidationError(
     override val title: String,
     override val message: String,
     override val code: Int,
     val cause: Throwable? = null
 ) : DomainError(title, message, code, cause)
 
-data class  NotFoundError(
+data class NotFoundError(
     override val title: String,
     override val message: String,
     override val code: Int,
     val cause: Throwable? = null
 ) : DomainError(title, message, code, cause)
 
-data class  ServerError(
+data class ServerError(
     override val title: String,
     override val message: String,
     override val code: Int,
     val cause: Throwable? = null
 ) : DomainError(title, message, code, cause)
 
-data class  GenericError(
+data class GenericError(
     override val title: String,
     override val message: String,
     override val code: Int,
