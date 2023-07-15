@@ -3,10 +3,8 @@ package com.tfm.musiccommunityapp.ui.login
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.progressindicator.CircularProgressIndicatorSpec
 import com.google.android.material.progressindicator.IndeterminateDrawable
-import com.google.android.material.snackbar.Snackbar
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.LoginFragmentBinding
@@ -30,7 +28,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
             when (signInResult) {
                 is SignInUseCaseResult.Success -> {
                     clearFields()
-                    navigateToMoreInformation()
+                    navigateToUserProfile()
                 }
                 is SignInUseCaseResult.GenericError -> {
                     alertDialogOneOption(
@@ -63,6 +61,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
                     )
                     swapBetweenLoginAndRegisterAction(true)
                 }
+                
                 is SignUpUseCaseResult.GenericError -> {
                     alertDialogOneOption(
                         requireContext(),
@@ -73,6 +72,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
                         null
                     )
                 }
+
                 null -> {
                     //Nothing to do here
                 }
@@ -80,8 +80,8 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
         }
     }
 
-    private fun navigateToMoreInformation() {
-        val direction = LoginFragmentDirections.actionLoginFragmentToShowMoreInfoFragment()
+    private fun navigateToUserProfile() {
+        val direction = LoginFragmentDirections.actionLoginFragmentToProfileFragment()
         navigateSafe(direction)
     }
 

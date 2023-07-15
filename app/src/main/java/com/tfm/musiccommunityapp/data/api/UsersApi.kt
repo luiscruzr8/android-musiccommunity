@@ -13,7 +13,7 @@ import retrofit2.http.Query
 internal interface UsersApi {
 
     companion object {
-        const val API_USERS_URL = BuildConfig.BACKEND_URL + "/users"
+        const val API_USERS_URL = BuildConfig.BACKEND_URL + "users"
     }
 
     //region User profiles

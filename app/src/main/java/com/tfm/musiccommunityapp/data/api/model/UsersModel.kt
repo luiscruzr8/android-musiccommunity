@@ -8,7 +8,7 @@ internal data class UserResponse(
     val login: String,
     val email: String,
     val phone: String,
-    val bio: String,
+    val bio: String?,
     val interests: List<TagResponse>
 )
 
@@ -17,7 +17,7 @@ internal fun UserResponse.toDomain() = UserDomain(
     login = login,
     email = email,
     phone = phone,
-    bio = bio,
+    bio = bio ?: "",
     interests = interests.map { it.toDomain() }
 )
 

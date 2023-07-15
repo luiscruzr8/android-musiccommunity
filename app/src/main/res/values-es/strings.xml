@@ -11,6 +11,7 @@
     <string name="discard">Descartar</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
+    <string name="user_alert">Alerta</string>
 
     <!-- Home screen -->
     <string name="home_screen_title">Bienvenido a Music Community</string>
@@ -51,6 +52,18 @@
     <string name="login_screen_success_sign_up_title">Registrado con éxito</string>
     <string name="login_screen_success_sign_up_message">Ahora ya puedes usar tus credenciales para acceder a la aplicación</string>
     <string name="login_screen_error_sign_up_title">Error de registro</string>
+
+    <!-- Profile screen -->
+    <string name="profile_screen_title">Perfil</string>
+    <string name="profile_screen_edit_button">Editar</string>
+    <string name="profile_screen_image_description">Imagen de perfil</string>
+    <string name="profile_screen_username_label">Perfil de %1$s</string>
+    <string name="profile_screen_bio_label">Mi biografía:</string>
+    <string name="profile_screen_interests_label">Mis intereses:</string>
+    <string name="profile_screen_followers_button">%1$d seguidores</string>
+    <string name="profile_screen_no_followers">Este usuario no tiene seguidores aún</string>
+    <string name="profile_screen_following_button">%1$d siguiendo</string>
+    <string name="profile_screen_no_following">Este usuario no esta siguiendo a nadie</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Inicio</string>
