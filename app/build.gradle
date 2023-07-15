@@ -70,9 +70,10 @@ android {
 
 dependencies {
     def koin_version = '3.4.1'
-    def nav_version = "2.6.0"
+    def nav_version = '2.6.0'
     def moshi_version = '1.15.0'
     def mockk_version = '1.13.5'
+    def avatar_image_generator_version = '1.5.0'
 
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -121,4 +122,10 @@ dependencies {
 
     //Splash screen
     implementation("androidx.core:core-splashscreen:1.0.1")
+
+    //AvatarImageGenerator
+    implementation "com.github.amoskorir:avatarimagegenerator:$avatar_image_generator_version"
+
+    //FlexboxLayout
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 }

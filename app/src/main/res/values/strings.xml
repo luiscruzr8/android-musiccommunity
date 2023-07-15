@@ -10,6 +10,7 @@
     <string name="discard">Discard</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="user_alert">Alert</string>
 
     <!-- Home screen -->
     <string name="home_screen_title">Welcome to Music Community</string>
@@ -50,6 +51,18 @@
     <string name="login_screen_success_sign_up_title">Sign up succeed</string>
     <string name="login_screen_success_sign_up_message">Now you can use your credentials to access the app</string>
     <string name="login_screen_error_sign_up_title">Sign up failed</string>
+
+    <!-- Profile screen -->
+    <string name="profile_screen_title">Profile</string>
+    <string name="profile_screen_edit_button">Edit</string>
+    <string name="profile_screen_image_description">Profile image</string>
+    <string name="profile_screen_username_label">%1$s\'s profile</string>
+    <string name="profile_screen_bio_label">My bio:</string>
+    <string name="profile_screen_interests_label">My interests:</string>
+    <string name="profile_screen_followers_button">%1$d followers</string>
+    <string name="profile_screen_no_followers">This user does not have followers</string>
+    <string name="profile_screen_following_button">%1$d following</string>
+    <string name="profile_screen_no_following">This user is not following anyone</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Home</string>

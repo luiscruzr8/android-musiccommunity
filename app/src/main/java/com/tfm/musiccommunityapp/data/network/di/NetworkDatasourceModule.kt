@@ -5,12 +5,14 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.tfm.musiccommunityapp.data.clients.ApiOkHttpClient
 import com.tfm.musiccommunityapp.data.clients.RetrofitOkHttpClient
+import com.tfm.musiccommunityapp.data.network.authenticators.BackendAuthenticator
 import com.tfm.musiccommunityapp.data.utils.CookieManager
 import com.tfm.musiccommunityapp.data.utils.DateJsonAdapter
 import com.tfm.musiccommunityapp.data.utils.NetworkTrackerImpl
-import com.tfm.musiccommunityapp.data.utils.NullToEmptyListAdapter
+import okhttp3.Authenticator
 import okhttp3.Cache
 import org.koin.core.qualifier.named
+import org.koin.dsl.bind
 import org.koin.dsl.module
 import java.util.Date
 
@@ -52,13 +54,20 @@ class NetworkDatasourceModule(
 
         single(named(SERVICE_OKHTTP_CLIENT)) {
             ApiOkHttpClient(
-                context = get(),
+                authenticator = get(),
                 isForTesting = isForTesting,
                 localAuth = get(),
                 cookieManager = get(),
                 cache = get()
             ).build()
         }
+
+        single {
+            BackendAuthenticator(
+                localAuth = get(),
+                cookieManager = get()
+            )
+        } bind Authenticator::class
 
         single {
             NetworkTrackerImpl(
