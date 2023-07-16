@@ -1,5 +1,7 @@
 package com.tfm.musiccommunityapp.domain.di
 
+import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCase
+import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.login.SignInUseCase
 import com.tfm.musiccommunityapp.domain.interactor.login.SignInUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.login.SignOutUseCase
@@ -46,6 +48,13 @@ val useCaseModule = module {
             authRepository = get()
         )
     } bind SignOutUseCase::class
+
+    single {
+        GetCurrentUserUseCaseImpl(
+            authRepository = get(),
+            userProfileRepository = get()
+        )
+    } bind GetCurrentUserUseCase::class
 
     //endregion
 

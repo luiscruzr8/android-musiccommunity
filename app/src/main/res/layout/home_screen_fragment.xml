@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/homeScreenSubtitle1"
+        android:id="@+id/homeScreenSubtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -43,7 +43,7 @@
         android:layout_margin="16dp"
         android:text="@string/home_screen_show_more_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeScreenSubtitle1" />
+        app:layout_constraintTop_toBottomOf="@+id/homeScreenSubtitle" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/homeScreenLoginButton"

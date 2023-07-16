@@ -3,7 +3,6 @@ package com.tfm.musiccommunityapp.ui.profile
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.view.isVisible
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
@@ -26,6 +25,34 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         observeUserInfo()
         observeFollowers()
         observeFollowing()
+        observeProfileError()
+        observeSignOutResult()
+
+        binding.signoutButton.setOnClickListener {
+            viewModel.signOut()
+        }
+    }
+
+    private fun observeProfileError() {
+        viewModel.getErrorProfile().observe(viewLifecycleOwner) { error ->
+            error?.let {
+                alertDialogOneOption(
+                    requireContext(),
+                    getString(R.string.user_alert),
+                    null,
+                    error,
+                    getString(R.string.ok),
+                    null
+                )
+            }
+        }
+    }
+
+    private fun observeSignOutResult() {
+        viewModel.getSignOutSuccess().observe(viewLifecycleOwner) {
+            val action = R.id.action_global_homeScreenFragmentAfterSignOut
+            navigateSafe(action)
+        }
     }
 
     private fun observeUserInfo() {
@@ -34,6 +61,8 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                 binding.apply {
                     tvUsername.text =
                         String.format(getString(R.string.profile_screen_username_label), it.login)
+                    tvEmail.text = it.email
+                    tvPhoneNumber.text = it.phone
 
                     imageView.setImageDrawable(
                         AvatarGenerator.AvatarBuilder(requireContext().applicationContext)
@@ -45,24 +74,24 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                             .build()
                     )
 
-                    tvEmail.text = it.email
                     it.bio.let { bio ->
                         if (bio.isEmpty()) {
-                            tvBioLabel.isVisible = false
-                            tvBio.isVisible = false
+                            tvBioLabel.visibility = View.INVISIBLE
+                            tvBio.visibility = View.INVISIBLE
                         } else {
-                            tvBioLabel.isVisible = true
-                            tvBio.isVisible = true
+                            tvBioLabel.visibility = View.VISIBLE
+                            tvBio.visibility = View.VISIBLE
                             tvBio.text = bio
                         }
                     }
+                    
                     it.interests.let { interests ->
                         if (interests.isEmpty()) {
-                            tvInterestsLabel.isVisible = false
-                            profileTagsLayout.isVisible = false
+                            tvInterestsLabel.visibility = View.INVISIBLE
+                            profileTagsLayout.visibility = View.INVISIBLE
                         } else {
-                            tvInterestsLabel.isVisible = true
-                            profileTagsLayout.isVisible = true
+                            tvInterestsLabel.visibility = View.VISIBLE
+                            profileTagsLayout.visibility = View.VISIBLE
                             profileTagsLayout.setTagList(interests.map { it2 -> it2.tagName })
                         }
                     }
