@@ -1,13 +1,10 @@
 package com.tfm.musiccommunityapp.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.navigation.NavDirections
-import androidx.navigation.fragment.findNavController
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.databinding.HomeScreenFragmentBinding
 import com.tfm.musiccommunityapp.base.BaseFragment
+import com.tfm.musiccommunityapp.databinding.HomeScreenFragmentBinding
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,29 +17,53 @@ class HomeScreenFragment : BaseFragment(R.layout.home_screen_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.homeScreenShowMoreInfoButton.setOnClickListener {
-            Log.e("HomeScreenFragment", "Show more info button clicked")
-            navigateToMoreInformation()
-        }
+        viewModel.setUp()
 
-        binding.homeScreenLoginButton.setOnClickListener {
-            Log.e("HomeScreenFragment", "Login button clicked")
-            navigateToLogin()
+        observeCurrentUser()
+
+        binding.homeScreenShowMoreInfoButton.setOnClickListener {
+            navigateToMoreInformation()
         }
     }
 
-    /*private fun navigateToProfile() {
-        val action = HomeScreenFragmentDirections
-        navigateSafe(action)
-    }*/
+    private fun observeCurrentUser() {
+        viewModel.getCurrentUserLiveData().observe(viewLifecycleOwner) { user ->
+            binding.apply {
+                user?.let {
+                    homeScreenTitle.text = String.format(
+                        getString(R.string.home_screen_title_already_signed_in),
+                        user.login
+                    )
+                    homeScreenSubtitle.text =
+                        getString(R.string.home_screen_subtitle_already_signed_in)
+                    homeScreenLoginButton.text = getString(R.string.home_screen_profile_button)
+                    homeScreenLoginButton.setOnClickListener {
+                        navigateToLoginOrProfile(true)
+                    }
+                } ?: run {
+                    homeScreenTitle.text = getString(R.string.home_screen_title)
+                    homeScreenSubtitle.text = getString(R.string.home_screen_subtitle)
+                    homeScreenLoginButton.text = getString(R.string.home_screen_login_button)
+                    homeScreenLoginButton.setOnClickListener {
+                        navigateToLoginOrProfile(false)
+                    }
+                }
+            }
+        }
+    }
 
     private fun navigateToMoreInformation() {
-        val direction = HomeScreenFragmentDirections.actionHomeScreenFragmentToShowMoreInfoFragment()
+        val direction =
+            HomeScreenFragmentDirections.actionHomeScreenFragmentToShowMoreInfoFragment()
         navigateSafe(direction)
     }
 
-    private fun navigateToLogin() {
-        val direction = HomeScreenFragmentDirections.actionHomeScreenFragmentToLoginFragment()
+    private fun navigateToLoginOrProfile(alreadySignedIn: Boolean) {
+        val direction = if (alreadySignedIn) {
+            HomeScreenFragmentDirections.actionHomeScreenFragmentToProfileFragment()
+        } else {
+            HomeScreenFragmentDirections.actionHomeScreenFragmentToLoginFragment()
+        }
         navigateSafe(direction)
     }
 

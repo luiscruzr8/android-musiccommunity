@@ -15,9 +15,12 @@
 
     <!-- Home screen -->
     <string name="home_screen_title">Bienvenido a Music Community</string>
+    <string name="home_screen_title_already_signed_in">Bienvenido de nuevo, %1$s</string>
     <string name="home_screen_subtitle">Una aplicación donde puedes encontrar eventos, anuncios, discusiones o recomendaciones de tu interés musical. \n\nAquí puedes guardar tus partituras y compartirlas con quien tú quieras!</string>
+    <string name="home_screen_subtitle_already_signed_in">¡Empieza a navegar entre publicaciones de tu interés, y comparte tus partituras con la comunidad!</string>
     <string name="home_screen_show_more_button">Más información…</string>
     <string name="home_screen_login_button">Acceder</string>
+    <string name="home_screen_profile_button">Mi perfil</string>
 
     <!-- Show more screen -->
     <string name="show_more_screen_title">Sobre esta app</string>
@@ -56,6 +59,7 @@
     <!-- Profile screen -->
     <string name="profile_screen_title">Perfil</string>
     <string name="profile_screen_edit_button">Editar</string>
+    <string name="profile_screen_logout_button">Cerrar sesión</string>
     <string name="profile_screen_image_description">Imagen de perfil</string>
     <string name="profile_screen_username_label">Perfil de %1$s</string>
     <string name="profile_screen_bio_label">Mi biografía:</string>

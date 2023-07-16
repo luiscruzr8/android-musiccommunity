@@ -5,7 +5,6 @@ import com.tfm.musiccommunityapp.data.api.model.SignInResponse
 import com.tfm.musiccommunityapp.data.datasource.AuthDatasource
 import com.tfm.musiccommunityapp.data.datasource.LoginDatasource
 import com.tfm.musiccommunityapp.domain.model.AuthError
-import com.tfm.musiccommunityapp.domain.model.GenericError
 import com.tfm.musiccommunityapp.domain.model.NetworkError
 import com.tfm.musiccommunityapp.domain.model.NotFoundError
 import com.tfm.musiccommunityapp.domain.model.ServerError
@@ -15,15 +14,13 @@ import com.tfm.musiccommunityapp.domain.repository.SignInStatus
 import com.tfm.musiccommunityapp.domain.repository.SignOutStatus
 import com.tfm.musiccommunityapp.domain.repository.SignUpStatus
 import okhttp3.Cache
-import okio.ByteString.Companion.decodeBase64
-import java.util.logging.Logger
 
 class AuthRepositoryImpl(
     private val authDatasource: AuthDatasource,
     private val loginRemoteDatasource: LoginDatasource,
     private val cache: Cache,
 ): AuthRepository {
-    override fun isSignedIn(): Boolean = authDatasource.accessToken.decodeBase64()?.utf8()?.isNotEmpty() ?: false
+    override fun isSignedIn(): Boolean = authDatasource.accessToken.isNotEmpty()
 
     override suspend fun refreshLogin(): SignInStatus  {
         TODO("Not yet implemented")

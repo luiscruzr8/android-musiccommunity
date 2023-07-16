@@ -56,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:autofillHints="username"
                     android:hint="@string/login_screen_username"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textColor="@color/primaryColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,7 +79,8 @@
                     android:layout_height="wrap_content"
                     android:autofillHints="emailAddress"
                     android:hint="@string/login_screen_email"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/primaryColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,7 +101,8 @@
                     android:layout_height="wrap_content"
                     android:autofillHints="password"
                     android:hint="@string/login_screen_password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:textColor="@color/primaryColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,7 +124,8 @@
                     android:layout_height="wrap_content"
                     android:autofillHints="password"
                     android:hint="@string/login_screen_phone_number"
-                    android:inputType="phone" />
+                    android:inputType="phone"
+                    android:textColor="@color/primaryColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

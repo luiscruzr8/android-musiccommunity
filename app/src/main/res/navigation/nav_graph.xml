@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_homeScreenFragment_to_loginFragment"
             app:destination="@+id/loginFragment" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
     <fragment
@@ -36,11 +39,20 @@
 
         <action
             android:id="@+id/action_loginFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.tfm.musiccommunityapp.ui.profile.ProfileFragment"
         android:label="ProfileFragment" />
+
+    <action
+        android:id="@+id/action_global_homeScreenFragmentAfterSignOut"
+        app:destination="@id/homeScreenFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@+id/nav_graph"
+        app:popUpToInclusive="true" />
 
 </navigation>

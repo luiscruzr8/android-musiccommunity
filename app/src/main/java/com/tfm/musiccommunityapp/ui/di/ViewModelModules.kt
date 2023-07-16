@@ -9,7 +9,9 @@ import org.koin.dsl.module
 val viewModelModule = module {
 
     viewModel {
-        HomeScreenViewModel()
+        HomeScreenViewModel(
+            getCurrentUser = get()
+        )
     }
 
     viewModel {
@@ -23,7 +25,8 @@ val viewModelModule = module {
         ProfileViewModel(
             getUserInfo = get(),
             getUserFollowers = get(),
-            getUserFollowing = get()
+            getUserFollowing = get(),
+            signOut = get()
         )
     }
 

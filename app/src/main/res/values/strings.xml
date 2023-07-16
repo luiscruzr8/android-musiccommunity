@@ -14,9 +14,12 @@
 
     <!-- Home screen -->
     <string name="home_screen_title">Welcome to Music Community</string>
+    <string name="home_screen_title_already_signed_in">Welcome back, %1$s</string>
     <string name="home_screen_subtitle">An application where you can find events, advertisements, discussions or recommendations of your musical interests. \n\nHere you can keep your scores and share then with whoever you want!</string>
+    <string name="home_screen_subtitle_already_signed_in">Start browsing through posts of you interest, and share your tabs with the community!</string>
     <string name="home_screen_show_more_button">More information…</string>
     <string name="home_screen_login_button">Log in</string>
+    <string name="home_screen_profile_button">My profile</string>
 
     <!-- Show more screen -->
     <string name="show_more_screen_title">About this app</string>
@@ -55,6 +58,7 @@
     <!-- Profile screen -->
     <string name="profile_screen_title">Profile</string>
     <string name="profile_screen_edit_button">Edit</string>
+    <string name="profile_screen_logout_button">Logout</string>
     <string name="profile_screen_image_description">Profile image</string>
     <string name="profile_screen_username_label">%1$s\'s profile</string>
     <string name="profile_screen_bio_label">My bio:</string>
