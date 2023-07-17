@@ -12,15 +12,16 @@ class SignInUseCaseImpl(
     private val authRepository: AuthRepository
 ) : SignInUseCase {
     override suspend fun invoke(username: String, password: String): SignInUseCaseResult {
-        return when (val result = authRepository.signIn(username, password)) {
+        return when (authRepository.signIn(username, password)) {
             SignInStatus.SUCCESS -> SignInUseCaseResult.Success
             SignInStatus.AUTH_ERROR -> SignInUseCaseResult.GenericError(
                 DomainGenericError(
-                "Authentication error",
-                "Incorrect username or password",
-                401
+                    "Authentication error",
+                    "Incorrect username or password",
+                    401
                 )
             )
+
             SignInStatus.NETWORK_ERROR -> SignInUseCaseResult.GenericError(
                 DomainGenericError(
                     "Network error",

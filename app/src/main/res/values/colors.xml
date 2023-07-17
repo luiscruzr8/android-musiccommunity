@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="semiTransparent">#AD6F6F6F</color>
 
     <color name="errorColor">#b3261e</color>
     <color name="onErrorColor">#ffffff</color>

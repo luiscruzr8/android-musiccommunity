@@ -13,6 +13,11 @@
     <string name="no">No</string>
     <string name="user_alert">Alerta</string>
 
+    <!-- Common -->
+    <string name="username_tools">Nombre de usuario muy largo</string>
+    <string name="email_tools">thisisareallyreallylongemail@email.com</string>
+    <string name="interest_tools">interesLarguisimo</string>
+
     <!-- Home screen -->
     <string name="home_screen_title">Bienvenido a Music Community</string>
     <string name="home_screen_title_already_signed_in">Bienvenido de nuevo, %1$s</string>
@@ -68,6 +73,11 @@
     <string name="profile_screen_no_followers">Este usuario no tiene seguidores aún</string>
     <string name="profile_screen_following_button">%1$d siguiendo</string>
     <string name="profile_screen_no_following">Este usuario no esta siguiendo a nadie</string>
+
+    <!-- Followers/Following screen -->
+    <string name="follower_screen_followers_title">Seguidores</string>
+    <string name="follower_screen_following_title">Seguidos</string>
+    <string name="follower_screen_interests_label">Interesado en:</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Inicio</string>

@@ -43,11 +43,34 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.tfm.musiccommunityapp.ui.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment">
+        <action
+            android:id="@+id/action_profileFragment_to_followersFragment"
+            app:destination="@id/followersFragment">
+            <argument
+                android:name="fragmentLabel"
+                android:defaultValue="Followers"
+                app:nullable="false"
+                app:argType="string" />
+        </action>
+    </fragment>
 
+    <fragment
+        android:id="@+id/followersFragment"
+        android:name="com.tfm.musiccommunityapp.ui.profile.followers.FollowersFragment"
+        android:label="FollowersFragment">
+        <argument
+            android:name="fragmentLabel"
+            android:defaultValue="Followers"
+            app:nullable="false"
+            app:argType="string" />
+    </fragment>
+
+    <!--Global actions-->
     <action
         android:id="@+id/action_global_homeScreenFragmentAfterSignOut"
         app:destination="@id/homeScreenFragment"

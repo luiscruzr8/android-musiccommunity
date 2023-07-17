@@ -1,7 +1,6 @@
 package com.tfm.musiccommunityapp.ui.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.tfm.musiccommunityapp.R
@@ -22,6 +21,7 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.setUp()
 
+        observeLoader()
         observeUserInfo()
         observeFollowers()
         observeFollowing()
@@ -30,6 +30,12 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
         binding.signoutButton.setOnClickListener {
             viewModel.signOut()
+        }
+    }
+
+    private fun observeLoader() {
+        viewModel.getShowLoader().observe(viewLifecycleOwner) { showLoader ->
+            if (showLoader) showLoader() else hideLoader()
         }
     }
 
@@ -64,12 +70,12 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                     tvEmail.text = it.email
                     tvPhoneNumber.text = it.phone
 
-                    imageView.setImageDrawable(
+                    ivProfileImage.setImageDrawable(
                         AvatarGenerator.AvatarBuilder(requireContext().applicationContext)
                             .setLabel(it.login)
-                            .setAvatarSize(64)
-                            .setTextSize(22)
-                            .toSquare()
+                            .setAvatarSize(80)
+                            .setTextSize(24)
+                            .toCircle()
                             .setBackgroundColor(getRandomColor())
                             .build()
                     )
@@ -107,7 +113,7 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
             binding.followersButton.setOnClickListener {
                 if (followers.isNotEmpty()) {
-                    Log.d("ProfileFragment", "Followers: $followers")
+                    navigateToFollowersOrFollowing(getString(R.string.follower_screen_followers_title))
                 } else {
                     alertDialogOneOption(
                         requireContext(),
@@ -129,7 +135,7 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
             binding.followingButton.setOnClickListener {
                 if (following.isNotEmpty()) {
-                    Log.d("ProfileFragment", "Following: $following")
+                    navigateToFollowersOrFollowing(getString(R.string.follower_screen_following_title))
                 } else {
                     alertDialogOneOption(
                         requireContext(),
@@ -142,6 +148,12 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                 }
             }
         }
+    }
+
+    private fun navigateToFollowersOrFollowing(fragmentLabel: String) {
+        val action =
+            ProfileFragmentDirections.actionProfileFragmentToFollowersFragment(fragmentLabel)
+        navigateSafe(action)
     }
 
 }

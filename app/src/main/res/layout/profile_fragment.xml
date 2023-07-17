@@ -33,9 +33,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:id="@+id/ivProfileImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/profile_screen_image_description"
@@ -55,7 +55,7 @@
         android:textAppearance="?attr/textAppearanceTitleMedium"
         android:textColor="@color/onSurfaceColor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <TextView
@@ -74,6 +74,7 @@
         android:id="@+id/tvPhoneNumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:textAppearance="?attr/textAppearanceBodyMedium"
         android:textColor="@color/onSurfaceVariantColor"
         app:layout_constraintEnd_toEndOf="@+id/tvEmail"
@@ -87,11 +88,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/profile_screen_bio_label"
-        android:textAppearance="?attr/textAppearanceBodySmall"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
         android:textColor="@color/onSurfaceVariantColor"
         app:layout_constraintEnd_toEndOf="@+id/tvEmail"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="@+id/ivProfileImage"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfileImage" />
 
     <TextView
         android:id="@+id/tvBio"
@@ -99,6 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:maxLines="5"
+        android:ellipsize="end"
         android:textAppearance="?attr/textAppearanceBodyMedium"
         android:textColor="@color/onSurfaceVariantColor"
         app:layout_constraintEnd_toEndOf="@+id/tvBioLabel"
@@ -112,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/profile_screen_interests_label"
-        android:textAppearance="?attr/textAppearanceBodySmall"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
         android:textColor="@color/onSurfaceVariantColor"
         app:layout_constraintEnd_toEndOf="@+id/tvBio"
         app:layout_constraintStart_toStartOf="@+id/tvBio"

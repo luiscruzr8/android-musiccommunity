@@ -14,10 +14,15 @@ class HomeScreenFragment : BaseFragment(R.layout.home_screen_fragment) {
 
     private val viewModel by viewModel<HomeScreenViewModel>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        showLoader()
+        viewModel.setUp()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.setUp()
 
         observeCurrentUser()
 
@@ -48,6 +53,7 @@ class HomeScreenFragment : BaseFragment(R.layout.home_screen_fragment) {
                         navigateToLoginOrProfile(false)
                     }
                 }
+                hideLoader()
             }
         }
     }

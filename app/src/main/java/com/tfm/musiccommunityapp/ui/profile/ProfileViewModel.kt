@@ -39,15 +39,20 @@ class ProfileViewModel(
     fun getSignOutSuccess() = _signOutSuccess as LiveData<Unit>
     fun getErrorProfile() = _errorProfile as LiveData<String>
 
+    private val showLoader = SingleLiveEvent<Boolean>()
+    fun getShowLoader() = showLoader as LiveData<Boolean>
 
     fun setUp() {
         viewModelScope.launch(Dispatchers.IO) {
+            showLoader.postValue(true)
 
             handleGetUserInfoResult(getUserInfo(null))
 
             handleGetFollowersResult(getUserFollowers(null))
 
             handleGetFollowingResult(getUserFollowing())
+
+            showLoader.postValue(false)
         }
     }
 

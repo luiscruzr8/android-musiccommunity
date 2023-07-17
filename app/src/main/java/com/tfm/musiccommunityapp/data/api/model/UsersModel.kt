@@ -33,13 +33,13 @@ internal fun UserDomain.toResponse() = UserResponse(
 internal data class FollowerResponse(
     val id: Long,
     val login: String,
-    val bio: String,
+    val bio: String?,
     val interests: List<TagResponse>
 )
 
 internal fun FollowerResponse.toDomain() = ShortUserDomain(
     id = id,
     login = login,
-    bio = bio,
+    bio = bio ?: "",
     interests = interests.map { it.toDomain() }
 )

@@ -25,7 +25,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginSwapScreenTitle">
@@ -67,10 +66,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:labelFor="@string/login_screen_email"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/username_text_input_layout"
-                android:visibility="gone"
                 tools:visibility="visible">
 
                 <EditText
@@ -112,10 +111,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:labelFor="@string/login_screen_phone_number"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password_text_input_layout"
-                android:visibility="gone"
                 tools:visibility="visible">
 
                 <EditText
@@ -131,14 +130,14 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/submit_button"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="@string/login_screen_login_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phone_number_text_input_layout"
-                style="@style/Widget.Material3.Button"/>
+                app:layout_constraintTop_toBottomOf="@+id/phone_number_text_input_layout" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/or_text_view"
@@ -154,6 +153,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/swapBetweenLoginAndRegisterButton"
+                style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -161,8 +161,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/or_text_view"
-                style="@style/Widget.Material3.Button.TextButton"/>
+                app:layout_constraintTop_toBottomOf="@+id/or_text_view" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
