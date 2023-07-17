@@ -47,14 +47,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/homeScreenLoginButton"
+        style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/home_screen_login_button"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeScreenShowMoreInfoButton"
-        style="@style/Widget.Material3.Button.TonalButton"/>
+        app:layout_constraintTop_toBottomOf="@+id/homeScreenShowMoreInfoButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

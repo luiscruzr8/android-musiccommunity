@@ -23,6 +23,12 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
 
     private var signUpClicked = false
 
+    private fun observeLoader() {
+        viewModel.getShowLoader().observe(viewLifecycleOwner) { showLoader ->
+            if (showLoader) showLoader() else hideLoader()
+        }
+    }
+
     private fun observeSignInResult() {
         viewModel.getSignInResult().observe(viewLifecycleOwner) { signInResult ->
             when (signInResult) {
@@ -30,6 +36,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
                     clearFields()
                     navigateToUserProfile()
                 }
+
                 is SignInUseCaseResult.GenericError -> {
                     alertDialogOneOption(
                         requireContext(),
@@ -85,6 +92,11 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
         navigateSafe(direction)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        observeLoader()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -93,7 +105,10 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
 
         binding.apply {
             val progressIndicatorSpec = CircularProgressIndicatorSpec(requireContext(), null)
-            val progressIndicator = IndeterminateDrawable.createCircularDrawable(requireContext(), progressIndicatorSpec)
+            val progressIndicator = IndeterminateDrawable.createCircularDrawable(
+                requireContext(),
+                progressIndicatorSpec
+            )
 
             submitButton.setOnClickListener {
                 submitButton.icon = progressIndicator

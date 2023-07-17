@@ -17,12 +17,14 @@ class GetCurrentUserUseCaseImpl(
             GetCurrentUserResult.NoUser
         } else {
             userProfileRepository.getUserInfo(null).fold(
-                ifLeft = { GetCurrentUserResult.NoUser },
-                ifRight = { it.let { GetCurrentUserResult.Success(it) }  }
+                ifLeft = { toErrorResult() },
+                ifRight = { it.let { GetCurrentUserResult.Success(it) } }
             )
         }
     }
 }
+
+private fun toErrorResult() = GetCurrentUserResult.NoUser
 
 sealed interface GetCurrentUserResult {
     data class Success(val user: UserDomain?) : GetCurrentUserResult
