@@ -48,14 +48,27 @@
         android:id="@+id/profileFragment"
         android:name="com.tfm.musiccommunityapp.ui.profile.ProfileFragment"
         android:label="ProfileFragment">
+
+        <argument
+            android:name="username"
+            app:nullable="true"
+            app:argType="string" />
+
         <action
             android:id="@+id/action_profileFragment_to_followersFragment"
             app:destination="@id/followersFragment">
+
             <argument
                 android:name="fragmentLabel"
                 android:defaultValue="Followers"
                 app:nullable="false"
                 app:argType="string" />
+
+            <argument
+                android:name="username"
+                app:nullable="true"
+                app:argType="string" />
+
         </action>
     </fragment>
 
@@ -63,11 +76,28 @@
         android:id="@+id/followersFragment"
         android:name="com.tfm.musiccommunityapp.ui.profile.followers.FollowersFragment"
         android:label="FollowersFragment">
+
         <argument
             android:name="fragmentLabel"
             android:defaultValue="Followers"
             app:nullable="false"
             app:argType="string" />
+
+        <argument
+            android:name="username"
+            app:nullable="true"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_followersFragment_to_profileFragment"
+            app:destination="@id/profileFragment">
+
+            <argument
+                android:name="username"
+                app:nullable="false"
+                app:argType="string" />
+
+        </action>
     </fragment>
 
     <!--Global actions-->

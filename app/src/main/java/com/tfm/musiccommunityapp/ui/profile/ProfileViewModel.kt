@@ -42,15 +42,17 @@ class ProfileViewModel(
     private val showLoader = SingleLiveEvent<Boolean>()
     fun getShowLoader() = showLoader as LiveData<Boolean>
 
-    fun setUp() {
+    fun setUp(username: String?) {
         viewModelScope.launch(Dispatchers.IO) {
             showLoader.postValue(true)
 
-            handleGetUserInfoResult(getUserInfo(null))
+            handleGetUserInfoResult(getUserInfo(username))
 
-            handleGetFollowersResult(getUserFollowers(null))
+            handleGetFollowersResult(getUserFollowers(username))
 
-            handleGetFollowingResult(getUserFollowing())
+            if (username.isNullOrEmpty()) {
+                handleGetFollowingResult(getUserFollowing())
+            }
 
             showLoader.postValue(false)
         }
