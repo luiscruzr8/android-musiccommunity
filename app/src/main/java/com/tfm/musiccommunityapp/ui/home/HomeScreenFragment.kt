@@ -66,7 +66,7 @@ class HomeScreenFragment : BaseFragment(R.layout.home_screen_fragment) {
 
     private fun navigateToLoginOrProfile(alreadySignedIn: Boolean) {
         val direction = if (alreadySignedIn) {
-            HomeScreenFragmentDirections.actionHomeScreenFragmentToProfileFragment()
+            HomeScreenFragmentDirections.actionHomeScreenFragmentToProfileFragment(null)
         } else {
             HomeScreenFragmentDirections.actionHomeScreenFragmentToLoginFragment()
         }

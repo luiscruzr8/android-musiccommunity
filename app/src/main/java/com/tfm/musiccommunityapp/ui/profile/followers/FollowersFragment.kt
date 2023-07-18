@@ -1,7 +1,6 @@
 package com.tfm.musiccommunityapp.ui.profile.followers
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -24,9 +23,9 @@ class FollowersFragment : BaseFragment(R.layout.followers_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.setUp()
-
         val fragmentLabel = args.fragmentLabel
+        val userProfileLogin = args.username
+        viewModel.setUp(userProfileLogin)
 
         binding.rvFollowersOrFollowing.apply {
             adapter = usersAdapter
@@ -71,6 +70,8 @@ class FollowersFragment : BaseFragment(R.layout.followers_fragment) {
     }
 
     private fun onUserClicked(user: ShortUserDomain) {
-        Log.d("FollowersFragment", "User clicked (navigate to user...): $user")
+        val action =
+            FollowersFragmentDirections.actionFollowersFragmentToProfileFragment(user.login)
+        navigateSafe(action)
     }
 }

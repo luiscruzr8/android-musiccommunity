@@ -88,18 +88,14 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun navigateToUserProfile() {
-        val direction = LoginFragmentDirections.actionLoginFragmentToProfileFragment()
+        val direction = LoginFragmentDirections.actionLoginFragmentToProfileFragment(null)
         navigateSafe(direction)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        observeLoader()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeLoader()
         observeSignInResult()
         observeSignUpResult()
 

@@ -2,6 +2,8 @@ package com.tfm.musiccommunityapp.ui.profile
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.navArgs
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
@@ -17,19 +19,34 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
     private val viewModel by viewModel<ProfileViewModel>()
 
+    private val args: ProfileFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.setUp()
+
+        val userProfileLogin = args.username
+        viewModel.setUp(userProfileLogin)
 
         observeLoader()
         observeUserInfo()
-        observeFollowers()
+        observeFollowers(userProfileLogin)
         observeFollowing()
         observeProfileError()
         observeSignOutResult()
 
+        displayMyProfileButtons(userProfileLogin.isNullOrEmpty())
+
         binding.signoutButton.setOnClickListener {
             viewModel.signOut()
+        }
+    }
+
+    private fun displayMyProfileButtons(displayButtons: Boolean) {
+        binding.apply {
+            tvPhoneNumber.isVisible = displayButtons
+            signoutButton.isVisible = displayButtons
+            editProfileButton.isVisible = displayButtons
+            followingButton.isVisible = displayButtons
         }
     }
 
@@ -106,14 +123,17 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         }
     }
 
-    private fun observeFollowers() {
+    private fun observeFollowers(userProfileLogin: String?) {
         viewModel.getFollowers().observe(viewLifecycleOwner) { followers ->
             binding.followersButton.text =
                 String.format(getString(R.string.profile_screen_followers_button), followers.size)
 
             binding.followersButton.setOnClickListener {
                 if (followers.isNotEmpty()) {
-                    navigateToFollowersOrFollowing(getString(R.string.follower_screen_followers_title))
+                    navigateToFollowersOrFollowing(
+                        getString(R.string.follower_screen_followers_title),
+                        userProfileLogin
+                    )
                 } else {
                     alertDialogOneOption(
                         requireContext(),
@@ -150,9 +170,15 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         }
     }
 
-    private fun navigateToFollowersOrFollowing(fragmentLabel: String) {
+    private fun navigateToFollowersOrFollowing(
+        fragmentLabel: String,
+        userProfileLogin: String? = null
+    ) {
         val action =
-            ProfileFragmentDirections.actionProfileFragmentToFollowersFragment(fragmentLabel)
+            ProfileFragmentDirections.actionProfileFragmentToFollowersFragment(
+                userProfileLogin,
+                fragmentLabel
+            )
         navigateSafe(action)
     }
 
