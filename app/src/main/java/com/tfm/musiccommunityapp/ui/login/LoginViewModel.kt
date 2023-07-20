@@ -8,13 +8,13 @@ import com.tfm.musiccommunityapp.domain.interactor.login.SignInUseCaseResult
 import com.tfm.musiccommunityapp.domain.interactor.login.SignUpUseCase
 import com.tfm.musiccommunityapp.domain.interactor.login.SignUpUseCaseResult
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val signInUseCase: SignInUseCase,
     private val signUpUseCase: SignUpUseCase,
-   //TODO check how to send dispatcher here: private val dispatcher: Dispatcher
+    private val dispatcher: CoroutineDispatcher
 ): ViewModel() {
 
     private val showLoader = SingleLiveEvent<Boolean>()
@@ -27,7 +27,7 @@ class LoginViewModel(
 
     fun performSignIn(username: String, password: String) {
         showLoader.postValue(true)
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             _signInResult.postValue(signInUseCase(username, password))
             showLoader.postValue(false)
         }
@@ -35,7 +35,7 @@ class LoginViewModel(
 
     fun performSignUp(username: String, password: String, email: String, phone: String) {
         showLoader.postValue(true)
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             _signUpResult.postValue(signUpUseCase(username, password, email, phone))
             showLoader.postValue(false)
         }

@@ -73,6 +73,19 @@
     <string name="profile_screen_following_button">%1$d following</string>
     <string name="profile_screen_no_following">This user is not following anyone</string>
 
+    <!-- Edit profile dialog -->
+    <string name="edit_screen_title">Edit profile</string>
+    <string name="edit_screen_username">Username</string>
+    <string name="edit_screen_email">Email</string>
+    <string name="edit_screen_phone_number">Phone number</string>
+    <string name="edit_screen_phone_number_required">Phone number required</string>
+    <string name="edit_screen_phone_number_incorrect_format">Phone number must have between 6–9 digits</string>
+    <string name="edit_screen_bio">Biography</string>
+    <string name="edit_screen_bio_incorrect_format">Bio may not be longer than 500 characters</string>
+    <string name="edit_screen_save_button">Save</string>
+    <string name="edit_screen_save_dialog_title">Confirm save</string>
+    <string name="edit_screen_save_dialog_message">Would you like to save your changes?</string>
+
     <!-- Followers/Following screen -->
     <string name="follower_screen_followers_title">Followers</string>
     <string name="follower_screen_following_title">Following</string>

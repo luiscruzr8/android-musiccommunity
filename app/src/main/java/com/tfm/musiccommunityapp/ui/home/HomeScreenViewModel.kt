@@ -7,11 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.domain.model.UserDomain
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class HomeScreenViewModel(
-    private val getCurrentUser: GetCurrentUserUseCase
+    private val getCurrentUser: GetCurrentUserUseCase,
+    private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _currentUser: MutableLiveData<UserDomain?> = MutableLiveData()
@@ -19,7 +20,7 @@ class HomeScreenViewModel(
     fun getCurrentUserLiveData() = _currentUser as LiveData<UserDomain?>
 
     fun setUp() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             handleGetCurrentUserResult(getCurrentUser())
         }
     }

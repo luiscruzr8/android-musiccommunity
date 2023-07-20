@@ -8,7 +8,9 @@ import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.ProfileFragmentBinding
+import com.tfm.musiccommunityapp.domain.model.UserDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
+import com.tfm.musiccommunityapp.ui.dialogs.profile.EditProfileDialog
 import com.tfm.musiccommunityapp.utils.getRandomColor
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,7 +41,9 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         binding.signoutButton.setOnClickListener {
             viewModel.signOut()
         }
+
     }
+
 
     private fun displayMyProfileButtons(displayButtons: Boolean) {
         binding.apply {
@@ -78,9 +82,20 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         }
     }
 
+    private fun setEditDialogOnClick(userDomain: UserDomain) {
+        binding.editProfileButton.setOnClickListener {
+            EditProfileDialog(userDomain, ::saveEditProfile).show(
+                this.parentFragmentManager,
+                EditProfileDialog::class.java.simpleName
+            )
+        }
+    }
+
     private fun observeUserInfo() {
         viewModel.getUserInfo().observe(viewLifecycleOwner) { userInfo ->
             userInfo?.let {
+                setEditDialogOnClick(it)
+
                 binding.apply {
                     tvUsername.text =
                         String.format(getString(R.string.profile_screen_username_label), it.login)
@@ -107,7 +122,7 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                             tvBio.text = bio
                         }
                     }
-                    
+
                     it.interests.let { interests ->
                         if (interests.isEmpty()) {
                             tvInterestsLabel.visibility = View.INVISIBLE
@@ -180,6 +195,10 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                 fragmentLabel
             )
         navigateSafe(action)
+    }
+
+    private fun saveEditProfile(userDomain: UserDomain) {
+        viewModel.sendUpdateProfile(userDomain)
     }
 
 }
