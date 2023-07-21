@@ -12,17 +12,21 @@ import com.tfm.musiccommunityapp.domain.interactor.userprofile.GetFollowingUseCa
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.GetFollowingUseCaseResult
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.GetUserProfileUseCase
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.GetUserProfileUseCaseResult
+import com.tfm.musiccommunityapp.domain.interactor.userprofile.UpdateUserProfileUseCase
+import com.tfm.musiccommunityapp.domain.interactor.userprofile.UpdateUserProfileUseCaseResult
 import com.tfm.musiccommunityapp.domain.model.ShortUserDomain
 import com.tfm.musiccommunityapp.domain.model.UserDomain
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val getUserInfo: GetUserProfileUseCase,
     private val getUserFollowers: GetFollowersUseCase,
     private val getUserFollowing: GetFollowingUseCase,
-    private val signOut: SignOutUseCase
+    private val updateProfile: UpdateUserProfileUseCase,
+    private val signOut: SignOutUseCase,
+    private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _userInfo: MutableLiveData<UserDomain?> = MutableLiveData()
@@ -43,7 +47,7 @@ class ProfileViewModel(
     fun getShowLoader() = showLoader as LiveData<Boolean>
 
     fun setUp(username: String?) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             showLoader.postValue(true)
 
             handleGetUserInfoResult(getUserInfo(username))
@@ -59,7 +63,7 @@ class ProfileViewModel(
     }
 
     fun signOut() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             handleSignOutResult(signOut.invoke())
         }
     }
@@ -120,7 +124,35 @@ class ProfileViewModel(
         }
     }
 
+    private fun handleUpdateProfileResult(result: UpdateUserProfileUseCaseResult) {
+        when (result) {
+            is UpdateUserProfileUseCaseResult.Success -> {
+                _userInfo.postValue(result.user)
+            }
+
+            is UpdateUserProfileUseCaseResult.NotFoundError ->
+                sendProfileError(result.error.code, result.error.message)
+
+            is UpdateUserProfileUseCaseResult.GenericError ->
+                sendProfileError(result.error.code, result.error.message)
+
+            is UpdateUserProfileUseCaseResult.NetworkError ->
+                sendProfileError(result.error.code, result.error.message)
+        }
+    }
+
     private fun sendProfileError(code: Int, message: String) {
         _errorProfile.postValue("Error code: $code - $message")
+    }
+
+    fun sendUpdateProfile(updatedProfile: UserDomain) {
+        viewModelScope.launch(dispatcher) {
+            showLoader.postValue(true)
+            handleUpdateProfileResult(updateProfile(updatedProfile)).run {
+                showLoader.postValue(
+                    false
+                )
+            }
+        }
     }
 }
