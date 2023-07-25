@@ -7,6 +7,7 @@ import com.google.android.material.progressindicator.CircularProgressIndicatorSp
 import com.google.android.material.progressindicator.IndeterminateDrawable
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
+import com.tfm.musiccommunityapp.base.MainActivity
 import com.tfm.musiccommunityapp.databinding.LoginFragmentBinding
 import com.tfm.musiccommunityapp.domain.interactor.login.SignInUseCaseResult
 import com.tfm.musiccommunityapp.domain.interactor.login.SignUpUseCaseResult
@@ -34,6 +35,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
             when (signInResult) {
                 is SignInUseCaseResult.Success -> {
                     clearFields()
+                    (activity as MainActivity).setUpLoggedInBottomNavigation()
                     navigateToUserProfile()
                 }
 

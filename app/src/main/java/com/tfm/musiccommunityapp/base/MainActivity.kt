@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.MainActivityBinding
 import com.tfm.musiccommunityapp.utils.viewBinding
@@ -16,24 +17,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(binding.root)
     }
 
     override fun onStart() {
         super.onStart()
-        binding.navHostFragment.findNavController()
+
+        val navigator = binding.navHostFragment.findNavController()
+        binding.bottomNavigation.setupWithNavController(navigator)
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.title) {
-                getString(R.string.bottom_nav_menu_item_1) -> {
-                    binding.navHostFragment.findNavController().navigateSafeAndRemoveBackStack(R.id.homeScreenFragment)
+            when (item.itemId) {
+                R.id.homeScreenFragment -> {
+                    binding.navHostFragment.findNavController().navigate(R.id.homeScreenFragment)
                     true
                 }
 
-                getString(R.string.bottom_nav_menu_item_2) -> {
-                    binding.navHostFragment.findNavController()
-                        .navigateSafeAndRemoveBackStack(R.id.loginFragment)
+                R.id.profileFragment -> {
+                    binding.navHostFragment.findNavController().navigate(R.id.profileFragment)
                     true
                 }
 
@@ -56,6 +57,27 @@ class MainActivity : AppCompatActivity() {
             popBackStack()
         } catch (e: IllegalArgumentException) {
             Log.e("Navigator", "navigateSafe error $e")
+        }
+    }
+
+    fun setUpNotLoggedInBottomNavigation() {
+        binding.apply {
+            if (bottomNavigation.menu.findItem(R.id.profileFragment) != null) {
+                bottomNavigation.menu.removeItem(R.id.profileFragment)
+            }
+        }
+    }
+
+    fun setUpLoggedInBottomNavigation() {
+        binding.apply {
+            if (bottomNavigation.menu.findItem(R.id.profileFragment) == null) {
+                bottomNavigation.menu.add(
+                    R.id.profileFragment,
+                    R.id.profileFragment,
+                    1,
+                    getString(R.string.bottom_nav_menu_item_2)
+                ).setIcon(R.drawable.bottom_nav_profile_selector)
+            }
         }
     }
 
