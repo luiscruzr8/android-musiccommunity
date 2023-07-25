@@ -61,4 +61,18 @@
         app:layout_constraintStart_toStartOf="@+id/showMoreSubtitle2"
         app:layout_constraintTop_toBottomOf="@+id/showMoreSubtitle2" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/versionFooter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        tools:text="@string/version"
+        android:textAppearance="?attr/textAppearanceCaption"
+        android:textColor="@color/primaryColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/showMoreFooter"
+        app:layout_constraintStart_toStartOf="@+id/showMoreFooter"
+        app:layout_constraintTop_toBottomOf="@+id/showMoreFooter" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
