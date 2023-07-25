@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeScreenFragment">
+
+    <fragment
+        android:id="@+id/homeScreenFragment"
+        android:name="com.tfm.musiccommunityapp.ui.home.HomeScreenFragment"
+        android:label="HomeScreenFragment">
+
+        <action
+            android:id="@+id/action_homeScreenFragment_to_showMoreInfoFragment"
+            app:destination="@+id/showMoreInfoFragment" />
+
+        <action
+            android:id="@+id/action_homeScreenFragment_to_loginFragment"
+            app:destination="@+id/loginFragment" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/showMoreInfoFragment"
+        android:name="com.tfm.musiccommunityapp.ui.home.ShowMoreInfoFragment"
+        android:label="ShowMoreInfoFragment">
+
+        <action
+            android:id="@+id/action_showMoreInfoFragment_to_homeFragment"
+            app:destination="@+id/homeScreenFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.tfm.musiccommunityapp.ui.login.LoginFragment"
+        android:label="LoginScreenFragment">
+
+        <action
+            android:id="@+id/action_loginFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.tfm.musiccommunityapp.ui.profile.ProfileFragment"
+        android:label="ProfileFragment">
+
+        <argument
+            android:name="username"
+            app:nullable="true"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_profileFragment_to_followersFragment"
+            app:destination="@id/followersFragment">
+
+            <argument
+                android:name="fragmentLabel"
+                android:defaultValue="Followers"
+                app:nullable="false"
+                app:argType="string" />
+
+            <argument
+                android:name="username"
+                app:nullable="true"
+                app:argType="string" />
+
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/followersFragment"
+        android:name="com.tfm.musiccommunityapp.ui.profile.followers.FollowersFragment"
+        android:label="FollowersFragment">
+
+        <argument
+            android:name="fragmentLabel"
+            android:defaultValue="Followers"
+            app:nullable="false"
+            app:argType="string" />
+
+        <argument
+            android:name="username"
+            app:nullable="true"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_followersFragment_to_profileFragment"
+            app:destination="@id/profileFragment">
+
+            <argument
+                android:name="username"
+                app:nullable="false"
+                app:argType="string" />
+
+        </action>
+    </fragment>
+
+    <!--Global actions-->
+    <action
+        android:id="@+id/action_global_homeScreenFragmentAfterSignOut"
+        app:destination="@id/homeScreenFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@+id/nav_graph"
+        app:popUpToInclusive="true" />
+
+</navigation>

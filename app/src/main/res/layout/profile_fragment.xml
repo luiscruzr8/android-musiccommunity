@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profileLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/editProfileButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/profile_screen_edit_button"
+        app:icon="@drawable/ic_edit"
+        app:iconGravity="textStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal"
+        android:text="@string/profile_screen_title"
+        android:textAppearance="?attr/textAppearanceDisplaySmall"
+        android:textColor="@color/onSurfaceColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivProfileImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/profile_screen_image_description"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/profile_screen_username_label"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        android:textColor="@color/onSurfaceColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="@color/onSurfaceVariantColor"
+        app:layout_constraintEnd_toEndOf="@+id/tvUsername"
+        app:layout_constraintStart_toStartOf="@+id/tvUsername"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername"
+        tools:text="thisistheemail@email.com" />
+
+    <TextView
+        android:id="@+id/tvPhoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="@color/onSurfaceVariantColor"
+        app:layout_constraintEnd_toEndOf="@+id/tvEmail"
+        app:layout_constraintStart_toStartOf="@+id/tvEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail"
+        tools:text="999666333" />
+
+    <TextView
+        android:id="@+id/tvBioLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/profile_screen_bio_label"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="@color/onSurfaceVariantColor"
+        app:layout_constraintEnd_toEndOf="@+id/tvEmail"
+        app:layout_constraintStart_toStartOf="@+id/ivProfileImage"
+        app:layout_constraintTop_toBottomOf="@+id/ivProfileImage" />
+
+    <TextView
+        android:id="@+id/tvBio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:maxLines="5"
+        android:ellipsize="end"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="@color/onSurfaceVariantColor"
+        app:layout_constraintEnd_toEndOf="@+id/tvBioLabel"
+        app:layout_constraintStart_toStartOf="@+id/tvBioLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvBioLabel"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
+        android:id="@+id/tvInterestsLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/profile_screen_interests_label"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="@color/onSurfaceVariantColor"
+        app:layout_constraintEnd_toEndOf="@+id/tvBio"
+        app:layout_constraintStart_toStartOf="@+id/tvBio"
+        app:layout_constraintTop_toBottomOf="@+id/tvBio" />
+
+    <com.tfm.musiccommunityapp.ui.custom.HorizontalTagsLayout
+        android:id="@+id/profileTagsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvBio"
+        app:layout_constraintStart_toStartOf="@+id/tvBio"
+        app:layout_constraintTop_toBottomOf="@+id/tvInterestsLabel" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/followersButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/profile_screen_followers_button"
+        android:textColor="@color/primaryColor"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/tvInterestsLabel"
+        app:layout_constraintTop_toBottomOf="@+id/profileTagsLayout"
+        style="@style/Widget.Material3.Button.TonalButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/followingButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/profile_screen_following_button"
+        android:textColor="@color/primaryColor"
+        app:layout_constraintEnd_toEndOf="@+id/tvInterestsLabel"
+        app:layout_constraintStart_toEndOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/followersButton"
+        style="@style/Widget.Material3.Button.TonalButton" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50121653" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signoutButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/profile_screen_logout_button"
+        android:textColor="@color/onErrorContainerColor"
+        android:backgroundTint="@color/errorContainerColor"
+        app:icon="@drawable/ic_logout"
+        app:iconTint="@color/onErrorContainerColor"
+        app:iconGravity="textStart"
+        app:layout_constraintEnd_toEndOf="@+id/followingButton"
+        app:layout_constraintStart_toStartOf="@+id/followersButton"
+        app:layout_constraintTop_toBottomOf="@+id/followersButton"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
