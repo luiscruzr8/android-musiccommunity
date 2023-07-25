@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/ic_profile"
+        android:state_checked="true"
+        android:tint="@color/primaryColor"/>
+
+    <item
+        android:drawable="@drawable/ic_profile"
+        android:state_checked="false"
+        android:tint="@color/semiTransparent"/>
+</selector>

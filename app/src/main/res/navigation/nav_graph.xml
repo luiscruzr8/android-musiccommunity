@@ -51,6 +51,7 @@
 
         <argument
             android:name="username"
+            android:defaultValue="@null"
             app:nullable="true"
             app:argType="string" />
 

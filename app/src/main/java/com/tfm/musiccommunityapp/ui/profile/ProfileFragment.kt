@@ -3,10 +3,12 @@ package com.tfm.musiccommunityapp.ui.profile
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
+import com.tfm.musiccommunityapp.base.MainActivity
 import com.tfm.musiccommunityapp.databinding.ProfileFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.UserDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
@@ -69,14 +71,14 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                     null,
                     error,
                     getString(R.string.ok),
-                    null
-                )
+                ) { findNavController().popBackStack() }
             }
         }
     }
 
     private fun observeSignOutResult() {
         viewModel.getSignOutSuccess().observe(viewLifecycleOwner) {
+            (activity as MainActivity).setUpNotLoggedInBottomNavigation()
             val action = R.id.action_global_homeScreenFragmentAfterSignOut
             navigateSafe(action)
         }
