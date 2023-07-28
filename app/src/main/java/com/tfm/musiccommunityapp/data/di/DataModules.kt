@@ -6,17 +6,22 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.tfm.musiccommunityapp.BuildConfig
 import com.tfm.musiccommunityapp.data.api.AuthApi
+import com.tfm.musiccommunityapp.data.api.TagsApi
 import com.tfm.musiccommunityapp.data.api.UsersApi
 import com.tfm.musiccommunityapp.data.datasource.AuthDatasource
 import com.tfm.musiccommunityapp.data.datasource.LoginDatasource
+import com.tfm.musiccommunityapp.data.datasource.TagDatasource
 import com.tfm.musiccommunityapp.data.datasource.UserDatasource
 import com.tfm.musiccommunityapp.data.datasource.preferences.SharedPreferencesAuthImpl
 import com.tfm.musiccommunityapp.data.datasource.remote.LoginRemoteDatasourceImpl
+import com.tfm.musiccommunityapp.data.datasource.remote.TagRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.datasource.remote.UserRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.network.di.NetworkDatasourceModule
 import com.tfm.musiccommunityapp.data.repository.AuthRepositoryImpl
+import com.tfm.musiccommunityapp.data.repository.TagRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.UserProfileRepositoryImpl
 import com.tfm.musiccommunityapp.domain.repository.AuthRepository
+import com.tfm.musiccommunityapp.domain.repository.TagRepository
 import com.tfm.musiccommunityapp.domain.repository.UserProfileRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
@@ -38,6 +43,10 @@ val apiModules = module {
     single {
         get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(UsersApi::class.java)
     }
+
+    single {
+        get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(TagsApi::class.java)
+    }
 }
 
 val remoteDatasourceModules = module {
@@ -53,6 +62,12 @@ val remoteDatasourceModules = module {
             usersApi = get()
         )
     } bind UserDatasource::class
+
+    single {
+        TagRemoteDatasourceImpl(
+            tagsApi = get()
+        )
+    } bind TagDatasource::class
 }
 
 val localDatasourceModule = module {
@@ -81,6 +96,13 @@ val repositoriesModule = module {
             userDatasource = get(),
         )
     } bind UserProfileRepository::class
+
+    single {
+        TagRepositoryImpl(
+            tagDatasource = get()
+        )
+    } bind TagRepository::class
+
 }
 
 val preferencesModule = module {
