@@ -7,6 +7,7 @@ import com.tfm.musiccommunityapp.data.clients.ApiOkHttpClient
 import com.tfm.musiccommunityapp.data.clients.RetrofitOkHttpClient
 import com.tfm.musiccommunityapp.data.network.authenticators.BackendAuthenticator
 import com.tfm.musiccommunityapp.data.utils.CookieManager
+import com.tfm.musiccommunityapp.data.utils.LocalDateJsonAdapter
 import com.tfm.musiccommunityapp.data.utils.LocalDateTimeJsonAdapter
 import com.tfm.musiccommunityapp.data.utils.NetworkTrackerImpl
 import okhttp3.Authenticator
@@ -14,6 +15,7 @@ import okhttp3.Cache
 import org.koin.core.qualifier.named
 import org.koin.dsl.bind
 import org.koin.dsl.module
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 class NetworkDatasourceModule(
@@ -29,6 +31,7 @@ class NetworkDatasourceModule(
 
         single <Gson> {
             GsonBuilder()
+                .registerTypeAdapter(LocalDate::class.java, LocalDateJsonAdapter())
                 .registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeJsonAdapter())
                 .create()
         }

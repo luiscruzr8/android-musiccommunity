@@ -6,6 +6,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.tfm.musiccommunityapp.BuildConfig
 import com.tfm.musiccommunityapp.data.api.AuthApi
+import com.tfm.musiccommunityapp.data.api.PostsApi
 import com.tfm.musiccommunityapp.data.api.TagsApi
 import com.tfm.musiccommunityapp.data.api.UsersApi
 import com.tfm.musiccommunityapp.data.datasource.AuthDatasource
@@ -47,6 +48,11 @@ val apiModules = module {
     single {
         get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(TagsApi::class.java)
     }
+
+    single {
+        get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(PostsApi::class.java)
+    }
+
 }
 
 val remoteDatasourceModules = module {

@@ -1,11 +1,12 @@
 package com.tfm.musiccommunityapp.data.api
 
 import com.tfm.musiccommunityapp.BuildConfig
+import com.tfm.musiccommunityapp.data.api.model.FollowerResponse
 import com.tfm.musiccommunityapp.data.api.model.GenericPostResponse
 import com.tfm.musiccommunityapp.data.api.model.TagResponse
-import com.tfm.musiccommunityapp.data.api.model.UserResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 internal interface TagsApi {
 
@@ -17,9 +18,9 @@ internal interface TagsApi {
     suspend fun getAllTags(): Response<List<TagResponse>>
 
     @GET("${API_TAGS_URL}/users")
-    suspend fun getUsersByTag(tagName: String): Response<List<UserResponse>>
+    suspend fun getUsersByTag(@Query("tagName") tagName: String): Response<List<FollowerResponse>>
 
     @GET("${API_TAGS_URL}/posts")
-    suspend fun getPostsByTag(tagName: String): Response<List<GenericPostResponse>>
+    suspend fun getPostsByTag(@Query("tagName") tagName: String): Response<List<GenericPostResponse>>
 
 }
