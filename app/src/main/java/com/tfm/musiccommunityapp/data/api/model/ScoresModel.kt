@@ -17,3 +17,11 @@ internal fun ScoreResponse.toDomain() = ScoreDomain(
     login = login,
     uploadedOn = uploadDateTime
 )
+
+internal fun ScoreDomain.toResponse() = ScoreResponse(
+    id = id,
+    scoreName = name,
+    login = login,
+    uploadDateTime = uploadedOn,
+    fileType = "application/pdf"
+)

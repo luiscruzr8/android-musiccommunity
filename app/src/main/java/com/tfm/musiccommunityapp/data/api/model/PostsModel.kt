@@ -6,6 +6,7 @@ import com.tfm.musiccommunityapp.domain.model.DiscussionDomain
 import com.tfm.musiccommunityapp.domain.model.EventDomain
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
 import com.tfm.musiccommunityapp.domain.model.OpinionDomain
+import retrofit2.http.Multipart
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -27,6 +28,10 @@ internal fun GenericPostResponse.toDomain() = GenericPostDomain(
     postType = type,
     createdOn = creationDateTime,
     tags = tags.map { it.toDomain() }
+)
+
+internal data class ImageRequest(
+    val file: Multipart
 )
 
 internal data class CommentResponse(
@@ -79,6 +84,19 @@ internal fun EventPostResponse.toDomain() = EventDomain(
     tags = tags.map { it.toDomain() }
 )
 
+internal fun EventDomain.toRequest() = EventPostResponse(
+    id = id,
+    title = title,
+    description = description,
+    login = login,
+    type = postType,
+    cityName = cityName,
+    creationDateTime = createdOn,
+    startDateTime = from,
+    endDateTime = to,
+    tags = tags.map { it.toResponse() }
+)
+
 internal data class AdvertisementPostResponse(
     val id: Long,
     val title: String,
@@ -105,6 +123,19 @@ internal fun AdvertisementPostResponse.toDomain() = AdvertisementDomain(
     tags = tags.map { it.toDomain() }
 )
 
+internal fun AdvertisementDomain.toRequest() = AdvertisementPostResponse(
+    id = id,
+    title = title,
+    description = description,
+    login = login,
+    type = postType,
+    cityName = cityName,
+    contactPhone = phone,
+    creationDateTime = createdOn,
+    endDate = until,
+    tags = tags.map { it.toResponse() }
+)
+
 internal data class DiscussionPostResponse(
     val id: Long,
     val title: String,
@@ -123,6 +154,16 @@ internal fun DiscussionPostResponse.toDomain() = DiscussionDomain(
     postType = type,
     createdOn = creationDateTime,
     tags = tags.map { it.toDomain() }
+)
+
+internal fun DiscussionDomain.toRequest() = DiscussionPostResponse(
+    id = id,
+    title = title,
+    description = description,
+    login = login,
+    type = postType,
+    creationDateTime = createdOn,
+    tags = tags.map { it.toResponse() }
 )
 
 internal data class OpinionPostResponse(
@@ -147,4 +188,16 @@ internal fun OpinionPostResponse.toDomain() = OpinionDomain(
     score = scoreDto.toDomain(),
     createdOn = creationDateTime,
     tags = tags.map { it.toDomain() }
+)
+
+internal fun OpinionDomain.toRequest() = OpinionPostResponse(
+    id = id,
+    title = title,
+    description = description,
+    login = login,
+    type = postType,
+    scoreId = scoreId,
+    scoreDto = score.toResponse(),
+    creationDateTime = createdOn,
+    tags = tags.map { it.toResponse() }
 )

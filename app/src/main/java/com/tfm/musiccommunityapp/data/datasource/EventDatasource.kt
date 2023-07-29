@@ -8,7 +8,7 @@ interface EventDatasource {
 
     suspend fun getAllEvents(keyword: String?): Either<DomainError, List<EventDomain>>
 
-    suspend fun getEventById(eventId: Long): Either<DomainError, EventDomain>
+    suspend fun getEventById(eventId: Long): Either<DomainError, EventDomain?>
 
     suspend fun createEvent(event: EventDomain): Either<DomainError, Long>
 

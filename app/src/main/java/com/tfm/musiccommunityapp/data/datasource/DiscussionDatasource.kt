@@ -8,7 +8,7 @@ interface DiscussionDatasource {
 
     suspend fun getAllDiscussions(keyword: String?): Either<DomainError, List<DiscussionDomain>>
 
-    suspend fun getDiscussionById(discussionId: Long): Either<DomainError, DiscussionDomain>
+    suspend fun getDiscussionById(discussionId: Long): Either<DomainError, DiscussionDomain?>
 
     suspend fun createDiscussion(discussion: DiscussionDomain): Either<DomainError, Long>
 

@@ -8,7 +8,7 @@ interface AdvertisementDatasource {
 
     suspend fun getAllAdvertisements(keyword: String?): Either<DomainError, List<AdvertisementDomain>>
 
-    suspend fun getAdvertisementById(advertisementId: Long): Either<DomainError, AdvertisementDomain>
+    suspend fun getAdvertisementById(advertisementId: Long): Either<DomainError, AdvertisementDomain?>
 
     suspend fun createAdvertisement(advertisement: AdvertisementDomain): Either<DomainError, Long>
 

@@ -7,12 +7,15 @@ import com.tfm.musiccommunityapp.data.api.model.DiscussionPostResponse
 import com.tfm.musiccommunityapp.data.api.model.EventPostResponse
 import com.tfm.musiccommunityapp.data.api.model.GenericPostResponse
 import com.tfm.musiccommunityapp.data.api.model.OpinionPostResponse
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -44,10 +47,12 @@ internal interface PostsApi {
         @Query("cityName") cityName: String,
     ): Response<List<GenericPostResponse>>
 
+    @Multipart
     @POST("${API_POSTS_URL}/{id}/img")
     suspend fun uploadPostImage(
         @Path("id") id: String,
-    ): Response<String>
+        @Part("img") image: MultipartBody.Part,
+    ): Response<Long>
 
     //endregion
 

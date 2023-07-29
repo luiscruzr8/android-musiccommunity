@@ -8,7 +8,7 @@ interface OpinionDatasource {
 
     suspend fun getAllOpinions(keyword: String?): Either<DomainError, List<OpinionDomain>>
 
-    suspend fun getOpinionById(opinionId: Long): Either<DomainError, OpinionDomain>
+    suspend fun getOpinionById(opinionId: Long): Either<DomainError, OpinionDomain?>
 
     suspend fun createOpinion(opinion: OpinionDomain): Either<DomainError, Long>
 
