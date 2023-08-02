@@ -1,4 +1,4 @@
-package com.tfm.musiccommunityapp.domain.interactor.tags
+package com.tfm.musiccommunityapp.domain.interactor.tag
 
 import com.tfm.musiccommunityapp.domain.model.DomainError
 import com.tfm.musiccommunityapp.domain.model.NetworkError

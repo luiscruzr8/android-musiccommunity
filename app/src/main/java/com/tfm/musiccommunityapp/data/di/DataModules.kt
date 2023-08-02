@@ -9,19 +9,39 @@ import com.tfm.musiccommunityapp.data.api.AuthApi
 import com.tfm.musiccommunityapp.data.api.PostsApi
 import com.tfm.musiccommunityapp.data.api.TagsApi
 import com.tfm.musiccommunityapp.data.api.UsersApi
+import com.tfm.musiccommunityapp.data.datasource.AdvertisementDatasource
 import com.tfm.musiccommunityapp.data.datasource.AuthDatasource
+import com.tfm.musiccommunityapp.data.datasource.DiscussionDatasource
+import com.tfm.musiccommunityapp.data.datasource.EventDatasource
+import com.tfm.musiccommunityapp.data.datasource.GenericPostDatasource
 import com.tfm.musiccommunityapp.data.datasource.LoginDatasource
+import com.tfm.musiccommunityapp.data.datasource.OpinionDatasource
 import com.tfm.musiccommunityapp.data.datasource.TagDatasource
 import com.tfm.musiccommunityapp.data.datasource.UserDatasource
 import com.tfm.musiccommunityapp.data.datasource.preferences.SharedPreferencesAuthImpl
+import com.tfm.musiccommunityapp.data.datasource.remote.AdvertisementRemoteDatasourceImpl
+import com.tfm.musiccommunityapp.data.datasource.remote.DiscussionRemoteDatasourceImpl
+import com.tfm.musiccommunityapp.data.datasource.remote.EventRemoteDatasourceImpl
+import com.tfm.musiccommunityapp.data.datasource.remote.GenericPostRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.datasource.remote.LoginRemoteDatasourceImpl
+import com.tfm.musiccommunityapp.data.datasource.remote.OpinionRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.datasource.remote.TagRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.datasource.remote.UserRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.network.di.NetworkDatasourceModule
+import com.tfm.musiccommunityapp.data.repository.AdvertisementRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.AuthRepositoryImpl
+import com.tfm.musiccommunityapp.data.repository.CommonPostRepositoryImpl
+import com.tfm.musiccommunityapp.data.repository.DiscussionRepositoryImpl
+import com.tfm.musiccommunityapp.data.repository.EventRepositoryImpl
+import com.tfm.musiccommunityapp.data.repository.OpinionRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.TagRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.UserProfileRepositoryImpl
+import com.tfm.musiccommunityapp.domain.repository.AdvertisementRepository
 import com.tfm.musiccommunityapp.domain.repository.AuthRepository
+import com.tfm.musiccommunityapp.domain.repository.CommonPostRepository
+import com.tfm.musiccommunityapp.domain.repository.DiscussionRepository
+import com.tfm.musiccommunityapp.domain.repository.EventRepository
+import com.tfm.musiccommunityapp.domain.repository.OpinionRepository
 import com.tfm.musiccommunityapp.domain.repository.TagRepository
 import com.tfm.musiccommunityapp.domain.repository.UserProfileRepository
 import org.koin.android.ext.koin.androidContext
@@ -74,6 +94,37 @@ val remoteDatasourceModules = module {
             tagsApi = get()
         )
     } bind TagDatasource::class
+
+    single {
+        GenericPostRemoteDatasourceImpl(
+            postsApi = get()
+        )
+    } bind GenericPostDatasource::class
+
+    single {
+        AdvertisementRemoteDatasourceImpl(
+            advertisementApi = get()
+        )
+    } bind AdvertisementDatasource::class
+
+    single {
+        DiscussionRemoteDatasourceImpl(
+            discussionApi = get()
+        )
+    } bind DiscussionDatasource::class
+
+    single {
+        EventRemoteDatasourceImpl(
+            eventApi = get()
+        )
+    } bind EventDatasource::class
+
+    single {
+        OpinionRemoteDatasourceImpl(
+            opinionApi = get()
+        )
+    } bind OpinionDatasource::class
+
 }
 
 val localDatasourceModule = module {
@@ -108,6 +159,36 @@ val repositoriesModule = module {
             tagDatasource = get()
         )
     } bind TagRepository::class
+
+    single {
+        CommonPostRepositoryImpl(
+            commonDatasource = get()
+        )
+    } bind CommonPostRepository::class
+
+    single {
+        EventRepositoryImpl(
+            eventDatasource = get()
+        )
+    } bind EventRepository::class
+
+    single {
+        AdvertisementRepositoryImpl(
+            advertisementDatasource = get()
+        )
+    } bind AdvertisementRepository::class
+
+    single {
+        DiscussionRepositoryImpl(
+            discussionDatasource = get()
+        )
+    } bind DiscussionRepository::class
+
+    single {
+        OpinionRepositoryImpl(
+            opinionDatasource = get()
+        )
+    } bind OpinionRepository::class
 
 }
 

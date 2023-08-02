@@ -17,9 +17,9 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
-internal class GenericPostRemoteDatasource(
+internal class GenericPostRemoteDatasourceImpl(
     private val postsApi: PostsApi
-): GenericPostDatasource {
+) : GenericPostDatasource {
 
     //region Common
 
@@ -53,7 +53,6 @@ internal class GenericPostRemoteDatasource(
         String.format(PostsApi.POST_IMAGE, postId).right()
 
     override suspend fun uploadPostImage(postId: Long, image: File): Either<DomainError, Long> {
-        //TODO: TRANSFORM FILE TO MULTIPART THEN RETURN RESPONSE
         return try {
             val requestFile = image.asRequestBody("image/*".toMediaTypeOrNull())
             val imagePart = MultipartBody.Part.createFormData("img", image.name, requestFile)
