@@ -54,12 +54,16 @@ import com.tfm.musiccommunityapp.domain.interactor.opinion.GetOpinionsUseCase
 import com.tfm.musiccommunityapp.domain.interactor.opinion.GetOpinionsUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.opinion.UpdateOpinionUseCase
 import com.tfm.musiccommunityapp.domain.interactor.opinion.UpdateOpinionUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageUseCase
+import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostsByCityUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostsByCityUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostsByCoordinatesUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostsByCoordinatesUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.post.GetUserPostsUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetUserPostsUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.post.UploadPostImageUseCase
+import com.tfm.musiccommunityapp.domain.interactor.post.UploadPostImageUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.search.GetPostsByTagUseCase
 import com.tfm.musiccommunityapp.domain.interactor.search.GetPostsByTagUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.search.GetUsersByTagUseCase
@@ -217,6 +221,18 @@ val useCaseModule = module {
             commonPostRepository = get()
         )
     } bind GetPostsByCoordinatesUseCase::class
+
+    single {
+        GetPostImageUseCaseImpl(
+            commonPostRepository = get()
+        )
+    } bind GetPostImageUseCase::class
+
+    single {
+        UploadPostImageUseCaseImpl(
+            commonPostRepository = get()
+        )
+    } bind UploadPostImageUseCase::class
 
     //endregion
 

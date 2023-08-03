@@ -27,8 +27,7 @@ interface GenericPostDatasource {
     suspend fun getPostImage(postId: Long): Either<DomainError, String>
 
     suspend fun uploadPostImage(postId: Long, image: File): Either<DomainError, Long>
-
-
+    
     //endregion
 
     //region Comments

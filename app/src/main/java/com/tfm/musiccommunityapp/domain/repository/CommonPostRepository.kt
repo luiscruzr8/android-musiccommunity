@@ -4,6 +4,7 @@ import arrow.core.Either
 import com.tfm.musiccommunityapp.domain.model.CommentDomain
 import com.tfm.musiccommunityapp.domain.model.DomainError
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
+import java.io.File
 
 interface CommonPostRepository {
 
@@ -25,7 +26,7 @@ interface CommonPostRepository {
 
     suspend fun getPostImage(postId: Long): Either<DomainError, String>
 
-
+    suspend fun uploadPostImage(postId: Long, image: File): Either<DomainError, Long>
 
     //endregion
 
