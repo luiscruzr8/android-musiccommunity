@@ -5,7 +5,6 @@ import arrow.core.left
 import arrow.core.right
 import com.tfm.musiccommunityapp.data.api.AuthApi
 import com.tfm.musiccommunityapp.data.api.extensions.toErrorResponse
-import com.tfm.musiccommunityapp.data.api.model.ErrorResponse
 import com.tfm.musiccommunityapp.data.api.model.SignInBody
 import com.tfm.musiccommunityapp.data.api.model.SignInResponse
 import com.tfm.musiccommunityapp.data.api.model.SignUpBody

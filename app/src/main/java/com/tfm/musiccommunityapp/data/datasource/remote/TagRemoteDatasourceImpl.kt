@@ -14,18 +14,24 @@ import com.tfm.musiccommunityapp.domain.model.TagDomain
 internal class TagRemoteDatasourceImpl(
     private val tagsApi: TagsApi
 ) : TagDatasource {
-    override suspend fun getAllTags(): Either<DomainError, List<TagDomain>>  = eitherOf(
+    override suspend fun getAllTags(): Either<DomainError, List<TagDomain>> = eitherOf(
         response = tagsApi.getAllTags(),
         mapper = { result -> result?.map { it.toDomain() } ?: emptyList() },
         errorMapper = { error -> error.toErrorResponse().toDomain() }
     )
 
-    override suspend fun getUsersByTag(tagName: String): Either<DomainError, List<ShortUserDomain>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getUsersByTag(tagName: String): Either<DomainError, List<ShortUserDomain>> =
+        eitherOf(
+            response = tagsApi.getUsersByTag(tagName),
+            mapper = { result -> result?.map { it.toDomain() } ?: emptyList() },
+            errorMapper = { error -> error.toErrorResponse().toDomain() }
+        )
 
-    override suspend fun getPostsByTag(tagName: String): Either<DomainError, List<GenericPostDomain>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getPostsByTag(tagName: String): Either<DomainError, List<GenericPostDomain>> =
+        eitherOf(
+            response = tagsApi.getPostsByTag(tagName),
+            mapper = { result -> result?.map { it.toDomain() } ?: emptyList() },
+            errorMapper = { error -> error.toErrorResponse().toDomain() }
+        )
 
 }
