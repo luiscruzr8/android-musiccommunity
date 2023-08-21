@@ -1,5 +1,6 @@
 package com.tfm.musiccommunityapp.ui.di
 
+import com.tfm.musiccommunityapp.ui.community.users.UsersViewModel
 import com.tfm.musiccommunityapp.ui.home.HomeScreenViewModel
 import com.tfm.musiccommunityapp.ui.login.LoginViewModel
 import com.tfm.musiccommunityapp.ui.profile.ProfileViewModel
@@ -33,6 +34,13 @@ val viewModelModule = module {
             getUserFollowing = get(),
             updateProfile = get(),
             signOut = get(),
+            dispatcher = get()
+        )
+    }
+
+    viewModel {
+        UsersViewModel(
+            getUsers = get(),
             dispatcher = get()
         )
     }

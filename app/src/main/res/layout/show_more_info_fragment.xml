@@ -26,7 +26,7 @@
         android:id="@+id/showMoreSubtitle1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="200dp"
         android:text="@string/show_more_screen_subtitle_1"
         android:textAppearance="?attr/textAppearanceHeadline5"
         android:textColor="@color/onSurfaceColor"
@@ -74,5 +74,16 @@
         app:layout_constraintEnd_toEndOf="@+id/showMoreFooter"
         app:layout_constraintStart_toStartOf="@+id/showMoreFooter"
         app:layout_constraintTop_toBottomOf="@+id/showMoreFooter" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/app_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/showMoreScreenTitle"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

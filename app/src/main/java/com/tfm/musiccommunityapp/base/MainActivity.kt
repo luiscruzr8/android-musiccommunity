@@ -38,6 +38,11 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
+                R.id.communityFragment -> {
+                    binding.navHostFragment.findNavController().navigate(R.id.communityFragment)
+                    true
+                }
+
                 else -> false
             }
         }
@@ -65,6 +70,9 @@ class MainActivity : AppCompatActivity() {
             if (bottomNavigation.menu.findItem(R.id.profileFragment) != null) {
                 bottomNavigation.menu.removeItem(R.id.profileFragment)
             }
+            if (bottomNavigation.menu.findItem(R.id.communityFragment) != null) {
+                bottomNavigation.menu.removeItem(R.id.communityFragment)
+            }
         }
     }
 
@@ -77,6 +85,14 @@ class MainActivity : AppCompatActivity() {
                     1,
                     getString(R.string.bottom_nav_menu_item_2)
                 ).setIcon(R.drawable.bottom_nav_profile_selector)
+            }
+            if (bottomNavigation.menu.findItem(R.id.communityFragment) == null) {
+                bottomNavigation.menu.add(
+                    R.id.communityFragment,
+                    R.id.communityFragment,
+                    2,
+                    getString(R.string.bottom_nav_menu_item_3)
+                ).setIcon(R.drawable.bottom_nav_community_selector)
             }
         }
     }
