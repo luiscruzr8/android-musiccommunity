@@ -1,0 +1,224 @@
+\ProvidesPackage{estilo_tfm}
+\typeout{=============== Estilo LaTeX para TFMs MUEI FIC ===============}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   PAQUETES POR DEFECTO         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage[table]{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{lettrine}
+\RequirePackage{appendix}
+\RequirePackage{polyglossia}
+\RequirePackage{ifthen}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   Comprobación del idioma      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifdefined\idioma
+  \message{Estilo TFM: la lengua vehicular es el \idioma}
+\else
+  \message{Estilo TFM: No se ha establecido idioma, por defecto se usa el  castellano}
+  \def\idioma{esp} 
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   Establecer cabeceras y títulos según el idioma     %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifthenelse{\equal{\idioma}{esp}}{%
+  \message{Estilo del TFM en castellano( esp[añol)}
+  \setdefaultlanguage{spanish}
+  \setotherlanguage{english}
+  \def\acknowledgement_header{Agradecimientos}
+  \def\keywords{Palabras clave}
+  \def\keywordsAlt{Keywords}
+  \def\acronymHeader{Lista de acrónimos}
+  \def\glossaryHeader{Glosario}
+  \newenvironment{abstractAlt}
+                 {\begin{english}\centerline{\bfseries \abstractname}\vspace*{0.5cm}}
+                 {\end{english}}
+  \def\lastAccessDate{consultado el}
+  \renewcommand{\appendixpagename}{Apéndices}
+  \gappto\captionsspanish{\renewcommand{\tablename}{Tabla}}
+  \gappto\captionsspanish{\renewcommand{\listtablename}{Índice de tablas}}
+  \def\bibconfig{05_bibliografia/conf/bibconf-es}
+}{%
+\ifthenelse{\equal{\idioma}{gal}}{%
+  \message{Estilo do TFM en galego}
+  \setdefaultlanguage{galician}
+  \setotherlanguage{english}
+  \def\acknowledgement_header{Agradecementos}
+  \def\keywords{Palabras chave}
+  \def\keywordsAlt{Keywords}
+  \def\acronymHeader{Relación de Acrónimos}
+  \def\glossaryHeader{Glosario}
+  \newenvironment{abstractAlt}
+                 {\begin{english}\centerline{\bfseries \abstractname}\vspace*{0.5cm}}
+                 {\end{english}}
+  \def\lastAccessDate{consultado o}
+  \renewcommand{\appendixpagename}{Apéndices}
+  \def\bibconfig{05_bibliografia/conf/bibconf-gl}  
+}{%
+\ifthenelse{\equal{\idioma}{eng}}{%
+  \message{Style of the Master Thesis is english}
+  \setdefaultlanguage{english}
+  \setotherlanguage{spanish}
+  \def\acknowledgement_header{Acknowledgement}
+  \def\keywords{Keywords}
+  \def\keywordsAlt{Palabras clave}
+  \def\acronymHeader{List of Acronyms}
+  \def\glossaryHeader{Glossary}
+  \newenvironment{abstractAlt}
+                 {\begin{spanish}\centerline{\bfseries \abstractname}\vspace*{0.5cm}}
+                 {\end{spanish}}
+  \def\lastAccessDate{last accessed }
+  \def\bibconfig{05_bibliografia/conf/bibconf-en}
+}{%
+  \message{Estilo por defecto en castellano (español)}
+}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   Diferentes paquetes de estilo     %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage[hmargin={4cm,2.5cm},tmargin=4cm,bmargin=4cm]{geometry}
+
+\usepackage{libertine}
+
+\usepackage[calc]{datetime2}
+\usepackage{fancyhdr}
+\usepackage{IEEEtrantools}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage[numbers,sort]{natbib}
+\usepackage{setspace}
+\usepackage{subcaption}
+\usepackage[nottoc,notlot,notlof,notindex]{tocbibind}
+\usepackage{titlesec}
+\usepackage{url}
+
+\usepackage{blindtext}
+\usepackage{silence}
+\WarningsOff[blindtext] % suppress warnings related to package blindtext 
+\usepackage[pdfencoding=auto,colorlinks]{hyperref}
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% % definición de comandos               %
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Colores coorporativos
+\definecolor{udcpink}{RGB}{177,0,114}
+\definecolor{udcgray}{RGB}{100,100,100}
+\definecolor{ficblue}{RGB}{50,110,118}
+
+%% Comandos de utilidad
+\newcommand{\paginablanca}{\mbox{}\thispagestyle{empty}\clearpage}
+\newcommand{\linearosa}{{\color{udcpink}\titlerule[0.5mm]}}
+\newcommand{\lineagris}{{\color{udcgray}\titlerule[0.5mm]}}
+
+%% Entorno para los agradecimientos
+\newenvironment{agradecimientos}
+               {\thispagestyle{empty}
+                 \vspace*{90pt}
+                 \subsection*{\acknowledgement_header}
+                 \lineagris
+                 \vspace*{20pt} }
+               {\paginablanca}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% opciones de titlesec                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titleformat{\chapter}[display]%
+{\bfseries\Huge}%
+{\filleft\Large\chaptertitlename \Large{} \thechapter}%
+{0mm}{\filleft}[\vspace{0.5cm} \linearosa]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% opcións fancyhdr                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Para establecer límite de páginas
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LO]{{\footnotesize\nouppercase{\leftmark}}}
+\fancyhead[RE]{{\footnotesize\nouppercase{\rightmark}}}
+\fancyfoot{}
+\fancyfoot[CE,CO]{\thepage}
+\setlength{\headheight}{14pt}
+
+\fancypagestyle{sobrante}{\fancyfoot[CE,CO]{\color{red} \hrulefill PÁGINA EXTRA \hrulefill \thepage{} \hrulefill PÁGINA EXTRA \hrulefill}}
+
+\AddToHook{shipout/background}{\put(1in,-1in){
+  \ifthenelse{\(\value{page}>99\) \AND \(\NOT \equal{\@chapapp}{\appendixname}\)}
+             {\message{Estilo TFM warning: sobrepasado el límite de 100 páginas antes de los apéndices!}\thispagestyle{sobrante}}
+}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% opciones setspace                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\onehalfspacing
+
+\setlength{\arrayrulewidth}{0.5mm}
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{1.5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% opciones hyperref                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hypersetup{
+ linkcolor=ficblue,
+ filecolor=ficblue,      
+ urlcolor=ficblue,
+ citecolor=ficblue,
+ pdfauthor={\alumno},
+ pdftitle={\titulo}
+}
+\usepackage{footnotebackref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% opciones datetime2                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DTMsavenow{lastcompilationdate}
+\def\fecha{\DTMmonthname{\DTMfetchmonth{lastcompilationdate}} de \DTMfetchyear{lastcompilationdate}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% opcións listings  (Código fuente)    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize, % estilo de fuente para entornos de código
+  breakatwhitespace=true,            % dividir las lineas solo por espacios en blanco
+  breaklines=true,                   % partir las líneas de manera automática
+  captionpos=b,                      % pie en la parte de abajo
+  commentstyle=\color{udcgray},      % los comentarios van en gris
+  frame=single,	                     % marco para el código
+  keepspaces=true,                   % rsi se guardan los espacios de Latex
+  keywordstyle=\color{ficblue},      % las palabras del lenguaje salen en azul
+  linewidth=0.95\textwidth,          % ancho del entorno
+  numbers=left,                      % números a la izquierda
+  numbersep=5pt,                     % separación de las líneas
+  numberstyle=\tiny\color{udcgray},  % estilo de los números
+  rulecolor=\color{black},           % color del cuadro
+  showspaces=false,                  % no marcar los espacios
+  showstringspaces=false,            % no marcar los espacios (en cadenas de texto)
+  showtabs=false,                    % no marcar los tabuladores
+  stepnumber=1,                      % la numeración va de dos en dos
+  stringstyle=\color{udcpink},       % las cadenas de texto salen en rosa
+  tabsize=4,	                     % los tabuladores son 4 espacios
+  xleftmargin=0.05\textwidth         % indentación extra
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Forzar a la inclusión de los glosarios %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[toc,acronym]{glossaries}
+\makeglossaries
+
+\endinput
