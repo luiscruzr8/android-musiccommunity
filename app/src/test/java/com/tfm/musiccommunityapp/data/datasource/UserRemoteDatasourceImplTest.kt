@@ -40,9 +40,9 @@ class UserRemoteDatasourceImplTest {
     @Test
     fun `test that getAllUsers returns a list of users`() {
         val usersResponse = listOf(
-            UserResponseBuilder.default,
-            UserResponseBuilder.default.copy(id = 2, login = "User 2", email = "user2@mail.com", phone = "987654321", bio = "Bio user 2"),
-            UserResponseBuilder.default.copy(id = 3, login = "User 3", email = "user3@mail.com", phone = "987123465", bio = "Bio user 3")
+            FollowerResponseBuilder.default,
+            FollowerResponseBuilder.default.copy(id = 2, login = "User 2", bio = "Bio user 2"),
+            FollowerResponseBuilder.default.copy(id = 3, login = "User 3", bio = "Bio user 3")
         )
         val usersDomain = usersResponse.map { it.toDomain() }
         coEvery { userApi.getAllUsers() } returns Response.success(usersResponse)
@@ -56,8 +56,14 @@ class UserRemoteDatasourceImplTest {
 
     @Test
     fun `test that getAllUsers returns an error`() {
-        val errorResponse = Response.error<List<UserResponse>>(HttpURLConnection.HTTP_INTERNAL_ERROR, internalErrorString.toResponseBody())
-        val expected = ErrorResponse(code = HttpURLConnection.HTTP_INTERNAL_ERROR, message = DEFAULT_ERROR_500_MESSAGE).toDomain()
+        val errorResponse = Response.error<List<FollowerResponse>>(
+            HttpURLConnection.HTTP_INTERNAL_ERROR,
+            internalErrorString.toResponseBody()
+        )
+        val expected = ErrorResponse(
+            code = HttpURLConnection.HTTP_INTERNAL_ERROR,
+            message = DEFAULT_ERROR_500_MESSAGE
+        ).toDomain()
         coEvery { userApi.getAllUsers() } returns errorResponse
 
         val result = runBlocking { sut.getAllUsers() }
@@ -82,8 +88,14 @@ class UserRemoteDatasourceImplTest {
 
     @Test
     fun `test that getUserInfo returns a 404 error`() {
-        val errorResponse = Response.error<List<UserResponse>>(HttpURLConnection.HTTP_NOT_FOUND, notFoundErrorString.toResponseBody())
-        val expected = ErrorResponse(code = HttpURLConnection.HTTP_NOT_FOUND, message = DEFAULT_ERROR_404_MESSAGE).toDomain()
+        val errorResponse = Response.error<List<FollowerResponse>>(
+            HttpURLConnection.HTTP_NOT_FOUND,
+            notFoundErrorString.toResponseBody()
+        )
+        val expected = ErrorResponse(
+            code = HttpURLConnection.HTTP_NOT_FOUND,
+            message = DEFAULT_ERROR_404_MESSAGE
+        ).toDomain()
         coEvery { userApi.getAllUsers() } returns errorResponse
 
         val result = runBlocking { sut.getAllUsers() }

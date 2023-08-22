@@ -2,7 +2,7 @@ package com.tfm.musiccommunityapp.domain.interactor.userprofile
 
 import com.tfm.musiccommunityapp.domain.model.DomainError
 import com.tfm.musiccommunityapp.domain.model.NetworkError
-import com.tfm.musiccommunityapp.domain.model.UserDomain
+import com.tfm.musiccommunityapp.domain.model.ShortUserDomain
 import com.tfm.musiccommunityapp.domain.repository.UserProfileRepository
 
 interface GetUsersUseCase {
@@ -26,7 +26,7 @@ private fun DomainError.toErrorResult() = when (this) {
 }
 
 sealed interface GetUsersUseCaseResult {
-    data class Success(val users: List<UserDomain>) : GetUsersUseCaseResult
+    data class Success(val users: List<ShortUserDomain>) : GetUsersUseCaseResult
     data class NetworkError(val error: DomainError) : GetUsersUseCaseResult
     data class GenericError(val error: DomainError) : GetUsersUseCaseResult
 }

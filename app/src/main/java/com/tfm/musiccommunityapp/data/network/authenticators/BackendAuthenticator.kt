@@ -1,9 +1,9 @@
 package com.tfm.musiccommunityapp.data.network.authenticators
 
 import com.tfm.musiccommunityapp.data.datasource.AuthDatasource
-import com.tfm.musiccommunityapp.data.network.di.OkHttpClientProvider
 import com.tfm.musiccommunityapp.data.extensions.isSignInRequest
 import com.tfm.musiccommunityapp.data.extensions.server
+import com.tfm.musiccommunityapp.data.network.di.OkHttpClientProvider
 import com.tfm.musiccommunityapp.data.utils.CookieManager
 import okhttp3.Authenticator
 import okhttp3.HttpUrl
@@ -29,7 +29,7 @@ internal class BackendAuthenticator(private val localAuth: AuthDatasource, priva
 
         return synchronized(this) {
             val urlCredentials = "${request.url.baseUrl}${request.url.server}/signin"
-            val credentials = localAuth.bearerToken ?: ""
+            val credentials = localAuth.bearerToken
 
             val requestLogin = Request.Builder()
                 .url(urlCredentials)

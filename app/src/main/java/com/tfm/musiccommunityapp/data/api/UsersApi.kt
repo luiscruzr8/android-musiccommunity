@@ -18,7 +18,7 @@ internal interface UsersApi {
 
     //region User profiles
     @GET(API_USERS_URL)
-    suspend fun getAllUsers(): Response<List<UserResponse>>
+    suspend fun getAllUsers(): Response<List<FollowerResponse>>
 
     @GET("${API_USERS_URL}/user")
     suspend fun getUser(@Query("login") login: String?): Response<UserResponse?>

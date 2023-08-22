@@ -101,6 +101,29 @@
         </action>
     </fragment>
 
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.tfm.musiccommunityapp.ui.community.CommunityFragment"
+        android:label="CommunityFragment">
+
+        <action
+            android:id="@+id/action_communityFragment_to_profileFragment"
+            app:destination="@id/profileFragment">
+
+            <argument
+                android:name="username"
+                app:nullable="false"
+                app:argType="string" />
+        </action>
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.tfm.musiccommunityapp.ui.community.users.UsersFragment"
+        android:label="UsersFragment" />
+
     <!--Global actions-->
     <action
         android:id="@+id/action_global_homeScreenFragmentAfterSignOut"

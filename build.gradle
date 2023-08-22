@@ -19,9 +19,10 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
     id 'androidx.navigation.safeargs.kotlin' version '2.5.3' apply false
     id 'org.jlleitschuh.gradle.ktlint' version '11.3.2' apply true
+    id 'com.google.devtools.ksp' version '1.8.10-1.0.9' apply false
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
 

@@ -14,6 +14,7 @@
     <string name="user_alert">Alert</string>
 
     <!-- Common -->
+    <string name="app_logo">App logo</string>
     <string name="username_tools">Username very long login</string>
     <string name="email_tools">thisisareallyreallylongemail@email.com</string>
     <string name="interest_tools">longInterest</string>
@@ -92,8 +93,23 @@
     <string name="follower_screen_following_title">Following</string>
     <string name="follower_screen_interests_label">Interested in:</string>
 
+    <!-- Community screen -->
+    <string name="community_screen_title">Community</string>
+    <string name="community_screen_browse">Browse between the different categories</string>
+    <string name="community_screen_tab_layout">Tab selector</string>
+    <string name="community_tab_users">Users</string>
+    <string name="community_tab_advertisements">Advertisements</string>
+    <string name="community_tab_events">Events</string>
+    <string name="community_tab_discussions">Discussions</string>
+    <string name="community_tab_opinions">Opinions</string>
+    <string name="community_tab_recommendations">Recommendations</string>
+
+    <!-- Community - Users screen -->
+    <string name="community_users_no_users">No users found</string>
+
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Home</string>
     <string name="bottom_nav_menu_item_2">Profile</string>
+    <string name="bottom_nav_menu_item_3">Community</string>
 
 </resources>

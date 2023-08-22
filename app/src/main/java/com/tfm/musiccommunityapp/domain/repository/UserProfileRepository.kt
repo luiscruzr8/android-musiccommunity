@@ -9,7 +9,7 @@ interface UserProfileRepository {
 
     //region User
 
-    suspend fun getUsers(): Either<DomainError, List<UserDomain>>
+    suspend fun getUsers(): Either<DomainError, List<ShortUserDomain>>
 
     suspend fun getUserInfo(username: String?): Either<DomainError, UserDomain?>
 

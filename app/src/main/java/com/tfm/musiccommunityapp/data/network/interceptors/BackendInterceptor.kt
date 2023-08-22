@@ -19,7 +19,7 @@ internal class BackendInterceptor(private val localAuth: AuthDatasource): Interc
     }
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val authUrl = chain.request().url.let { url ->
+        val authUrl = chain.request().url.let { _ ->
             "${BuildConfig.BACKEND_URL}auth/signin"
         }
 
