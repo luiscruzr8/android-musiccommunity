@@ -2,7 +2,8 @@ package com.tfm.musiccommunityapp.ui.community
 
 import android.os.Bundle
 import android.view.View
-import androidx.viewpager2.widget.ViewPager2
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
@@ -29,29 +30,51 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
             tab.icon = setUpAdapter().getPageIcon(position)
         }.attach()
 
-        binding.communityViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                when(val currentFragment = adapter.getFragmentOnPosition(position)){
-                    is UsersFragment -> currentFragment.restartViewPager()
-                    /*is AdvertisementsFragment -> currentFragment..restartViewPager()
-                    is EventsFragment -> currentFragment..restartViewPager()
-                    is DiscussionsFragment -> currentFragment..restartViewPager()
-                    is OpinionsFragment -> currentFragment..restartViewPager()
-                    is RatingsFragment -> currentFragment..restartViewPager()*/
+        childFragmentManager.registerFragmentLifecycleCallbacks(object :
+            FragmentManager.FragmentLifecycleCallbacks() {
+            override fun onFragmentResumed(fm: FragmentManager, f: Fragment) {
+                super.onFragmentResumed(fm, f)
+                when (f) {
+                    is UsersFragment -> f.restartViewPager()
+                    /*is AdvertisementsFragment -> f.restartViewPager()
+                    is EventsFragment -> f.restartViewPager()
+                    is DiscussionsFragment -> f.restartViewPager()
+                    is OpinionsFragment -> f.restartViewPager()
+                    is RatingsFragment -> f.restartViewPager()*/
                     else -> {}
                 }
             }
-        })
+        }, false)
+        
     }
 
     private fun setUpAdapter():ViewPagerAdapter {
         val adapter = ViewPagerAdapter(this)
-        adapter.addFragment(UsersFragment(), getString(R.string.community_tab_users), resources.getDrawable(R.drawable.ic_tab_users))
-        adapter.addFragment(AdvertisementsFragment(), getString(R.string.community_tab_advertisements), resources.getDrawable(R.drawable.ic_tab_advertisement))
-        adapter.addFragment(EventsFragment(), getString(R.string.community_tab_events), resources.getDrawable(R.drawable.ic_tab_events))
-        adapter.addFragment(DiscussionsFragment(), getString(R.string.community_tab_discussions), resources.getDrawable(R.drawable.ic_tab_discussions))
-        adapter.addFragment(OpinionsFragment(), getString(R.string.community_tab_opinions), resources.getDrawable(R.drawable.ic_tab_opinions))
+        adapter.addFragment(
+            UsersFragment(),
+            getString(R.string.community_tab_users),
+            resources.getDrawable(R.drawable.ic_tab_users)
+        )
+        adapter.addFragment(
+            AdvertisementsFragment(),
+            getString(R.string.community_tab_advertisements),
+            resources.getDrawable(R.drawable.ic_tab_advertisement)
+        )
+        adapter.addFragment(
+            EventsFragment(),
+            getString(R.string.community_tab_events),
+            resources.getDrawable(R.drawable.ic_tab_events)
+        )
+        adapter.addFragment(
+            DiscussionsFragment(),
+            getString(R.string.community_tab_discussions),
+            resources.getDrawable(R.drawable.ic_tab_discussions)
+        )
+        adapter.addFragment(
+            OpinionsFragment(),
+            getString(R.string.community_tab_opinions),
+            resources.getDrawable(R.drawable.ic_tab_opinions)
+        )
         //adapter.addFragment(RatingsFragment(), getString(R.string.community_tab_recommendations), resources.getDrawable(R.drawable.ic_tab_recommendations))
         return adapter
     }

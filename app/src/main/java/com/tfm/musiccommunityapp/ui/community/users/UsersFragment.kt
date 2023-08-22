@@ -17,16 +17,12 @@ class UsersFragment: BaseFragment(R.layout.users_fragment) {
     private val viewModel by viewModel<UsersViewModel>()
     private val usersAdapter = UsersAdapter(::onUserClicked)
 
-    override fun onStart() {
-        super.onStart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         observeLoader()
         observeUsersResult()
         observeUsersError()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        restartViewPager()
 
         binding.rvCommunityUsers.apply {
             adapter = usersAdapter
@@ -70,11 +66,6 @@ class UsersFragment: BaseFragment(R.layout.users_fragment) {
         viewModel.getCommunityError().observe(viewLifecycleOwner) { error ->
             binding.noUsersFound.text = error
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        restartViewPager()
     }
 
 }
