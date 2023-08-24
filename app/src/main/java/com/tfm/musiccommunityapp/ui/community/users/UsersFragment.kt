@@ -35,8 +35,8 @@ class UsersFragment: BaseFragment(R.layout.users_fragment) {
         }
     }
 
-    fun restartViewPager() {
-        viewModel.setUpUsers()
+    fun restartViewPager(username: String?) {
+        viewModel.setUpUsers(if (username.isNullOrBlank()) null else username)
     }
 
     private fun observeLoader() {
@@ -48,12 +48,7 @@ class UsersFragment: BaseFragment(R.layout.users_fragment) {
     private fun observeUsersResult() {
         viewModel.getUsersLiveData().observe(viewLifecycleOwner) { users ->
             usersAdapter.setUsers(users)
-            if (users.isEmpty()) {
-                binding.noUsersFound.visibility = View.VISIBLE
-            } else {
-                binding.noUsersFound.visibility = View.GONE
-            }
-
+            binding.noUsersFound.visibility = if (users.isEmpty()) View.VISIBLE else View.GONE
         }
     }
 
@@ -63,7 +58,7 @@ class UsersFragment: BaseFragment(R.layout.users_fragment) {
     }
 
     private fun observeUsersError() {
-        viewModel.getCommunityError().observe(viewLifecycleOwner) { error ->
+        viewModel.getCommunityUsersError().observe(viewLifecycleOwner) { error ->
             binding.noUsersFound.text = error
         }
     }

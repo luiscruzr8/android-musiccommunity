@@ -9,7 +9,7 @@ interface UserDatasource {
 
     //region User
 
-    suspend fun getAllUsers(): Either<DomainError, List<ShortUserDomain>>
+    suspend fun getAllUsers(username: String?): Either<DomainError, List<ShortUserDomain>>
 
     suspend fun getUserInfo(username: String?): Either<DomainError, UserDomain?>
 

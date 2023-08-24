@@ -16,18 +16,17 @@ class UsersViewModel(
     private val dispatcher: CoroutineDispatcher
 ): ViewModel() {
     private val _users: MutableLiveData<List<ShortUserDomain>> = MutableLiveData()
-    private val _communityError: SingleLiveEvent<String> = SingleLiveEvent()
+    private val _communityUsersError: SingleLiveEvent<String> = SingleLiveEvent()
+    private val showUsersLoader = MutableLiveData<Boolean>()
 
     fun getUsersLiveData() = _users as LiveData<List<ShortUserDomain>>
-    fun getCommunityError() = _communityError as LiveData<String>
-
-    private val showUsersLoader = MutableLiveData<Boolean>()
+    fun getCommunityUsersError() = _communityUsersError as LiveData<String>
     fun isUsersLoading() = showUsersLoader as LiveData<Boolean>
 
-    fun setUpUsers() {
+    fun setUpUsers(searchTerm: String?) {
         viewModelScope.launch(dispatcher) {
             showUsersLoader.postValue(true)
-            handleGetUsersResult(getUsers())
+            handleGetUsersResult(getUsers(searchTerm))
         }
     }
 
@@ -49,6 +48,6 @@ class UsersViewModel(
     }
 
     private fun sendCommunityUsersError(code: Int, message: String) {
-        _communityError.postValue("Error code: $code - $message")
+        _communityUsersError.postValue("Error code: $code - $message")
     }
 }

@@ -104,9 +104,14 @@
     <string name="community_tab_discussions">Discusiones</string>
     <string name="community_tab_opinions">Opiniones</string>
     <string name="community_tab_recommendations">Recomendaciones</string>
+    <string name="community_search_label">Buscar</string>
+    <string name="community_search_hint">Búsqueda…</string>
 
     <!-- Community - Users screen -->
     <string name="community_users_no_users">No se han encontrado usuarios</string>
+
+    <!-- Community - Events screen -->
+    <string name="community_events_no_events">No se han encontrado eventos</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Inicio</string>

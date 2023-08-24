@@ -103,9 +103,14 @@
     <string name="community_tab_discussions">Discussions</string>
     <string name="community_tab_opinions">Opinions</string>
     <string name="community_tab_recommendations">Recommendations</string>
+    <string name="community_search_label">Search</string>
+    <string name="community_search_hint">Search…</string>
 
     <!-- Community - Users screen -->
     <string name="community_users_no_users">No users found</string>
+
+    <!-- Community - Events screen -->
+    <string name="community_events_no_events">No events found</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Home</string>
