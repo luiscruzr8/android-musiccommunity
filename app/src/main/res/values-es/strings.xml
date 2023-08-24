@@ -13,12 +13,17 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="user_alert">Alerta</string>
-
-    <!-- Common -->
     <string name="app_logo">App logo</string>
     <string name="username_tools">Nombre de usuario muy largo</string>
+    <string name="post_title_tools">Este es un título muy muy muy muy largo para un post que quiero publicar en esta red social</string>
+    <string name="post_location_tools">Esto es una ubicación</string>
+    <string name="default_id">#999</string>
+    <string name="post_id">#%1$d</string>
+    <string name="post_creation_date_tools">99/99/99</string>
     <string name="email_tools">thisisareallyreallylongemail@email.com</string>
     <string name="interest_tools">interesLarguisimo</string>
+    <string name="post_related_tags_label">Etiquetas:</string>
+    <string name="chip_post">#%1$d %2$s</string>
 
     <!-- Home screen -->
     <string name="home_screen_title">Bienvenido a Music Community</string>

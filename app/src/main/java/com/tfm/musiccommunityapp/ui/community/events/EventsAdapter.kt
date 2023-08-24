@@ -2,11 +2,13 @@ package com.tfm.musiccommunityapp.ui.community.events
 
 import android.content.Context
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.EventItemRowBinding
 import com.tfm.musiccommunityapp.domain.model.EventDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
+import com.tfm.musiccommunityapp.utils.formatDateTimeToString
 
 class EventsAdapter(
     private val onItemClicked: (EventDomain) -> Unit
@@ -51,8 +53,25 @@ class EventsAdapter(
 
         fun bind(item: EventDomain, context: Context) {
             binding.apply {
-
+                relatedTagsLayout.setTagList(emptyList())
+                tvEventChip.text = String.format(
+                    context.getString(R.string.chip_post),
+                    item.id,
+                    item.postType
+                )
+                tvEventTitle.text = item.title
+                tvEventLocation.text = item.cityName
+                tvCreationDate.text = item.createdOn.formatDateTimeToString()
+                item.tags.let { tags ->
+                    if (tags.isEmpty()) {
+                        relatedTagsLayout.isVisible = false
+                    } else {
+                        relatedTagsLayout.isVisible = true
+                        relatedTagsLayout.setTagList(tags.map { it.tagName })
+                    }
+                }
             }
+
         }
     }
 }
