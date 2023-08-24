@@ -45,11 +45,11 @@ class UserRemoteDatasourceImplTest {
             FollowerResponseBuilder.default.copy(id = 3, login = "User 3", bio = "Bio user 3")
         )
         val usersDomain = usersResponse.map { it.toDomain() }
-        coEvery { userApi.getAllUsers() } returns Response.success(usersResponse)
+        coEvery { userApi.getAllUsers(null) } returns Response.success(usersResponse)
 
-        val result = runBlocking { sut.getAllUsers() }
+        val result = runBlocking { sut.getAllUsers(null) }
 
-        coVerify { userApi.getAllUsers() }
+        coVerify { userApi.getAllUsers(null) }
         assertTrue(result.isRight())
         assertEquals(usersDomain, result.getOrNull())
     }
@@ -64,11 +64,11 @@ class UserRemoteDatasourceImplTest {
             code = HttpURLConnection.HTTP_INTERNAL_ERROR,
             message = DEFAULT_ERROR_500_MESSAGE
         ).toDomain()
-        coEvery { userApi.getAllUsers() } returns errorResponse
+        coEvery { userApi.getAllUsers(null) } returns errorResponse
 
-        val result = runBlocking { sut.getAllUsers() }
+        val result = runBlocking { sut.getAllUsers(null) }
 
-        coVerify { userApi.getAllUsers() }
+        coVerify { userApi.getAllUsers(null) }
         assertTrue { result.isLeft() }
         assertEquals(expected.code, result.swap().getOrNull()?.code)
     }
@@ -96,11 +96,11 @@ class UserRemoteDatasourceImplTest {
             code = HttpURLConnection.HTTP_NOT_FOUND,
             message = DEFAULT_ERROR_404_MESSAGE
         ).toDomain()
-        coEvery { userApi.getAllUsers() } returns errorResponse
+        coEvery { userApi.getAllUsers(null) } returns errorResponse
 
-        val result = runBlocking { sut.getAllUsers() }
+        val result = runBlocking { sut.getAllUsers(null) }
 
-        coVerify { userApi.getAllUsers() }
+        coVerify { userApi.getAllUsers(null) }
         assertTrue { result.isLeft() }
         assertEquals(expected.code, result.swap().getOrNull()?.code)
     }

@@ -6,15 +6,15 @@ import com.tfm.musiccommunityapp.domain.model.ShortUserDomain
 import com.tfm.musiccommunityapp.domain.repository.UserProfileRepository
 
 interface GetUsersUseCase {
-    suspend operator fun invoke(): GetUsersUseCaseResult
+    suspend operator fun invoke(username: String?): GetUsersUseCaseResult
 }
 
 class GetUsersUseCaseImpl(
     private val userProfileRepository: UserProfileRepository
 ) : GetUsersUseCase {
 
-    override suspend fun invoke(): GetUsersUseCaseResult =
-        userProfileRepository.getUsers().fold(
+    override suspend fun invoke(username: String?): GetUsersUseCaseResult =
+        userProfileRepository.getUsers(username).fold(
             ifLeft = { it.toErrorResult() },
             ifRight = { GetUsersUseCaseResult.Success(it) }
         )

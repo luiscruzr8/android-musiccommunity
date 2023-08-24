@@ -15,18 +15,20 @@ internal class UserRemoteDatasourceImpl(
     private val usersApi: UsersApi
 ) : UserDatasource {
 
-    override suspend fun getAllUsers(): Either<DomainError, List<ShortUserDomain>> = eitherOf(
-        response = usersApi.getAllUsers(),
-        mapper = { it -> it?.map { it.toDomain() } ?: emptyList() },
-        errorMapper = { error -> error.toErrorResponse().toDomain() }
-    )
+    override suspend fun getAllUsers(username: String?): Either<DomainError, List<ShortUserDomain>> =
+        eitherOf(
+            response = usersApi.getAllUsers(username),
+            mapper = { it -> it?.map { it.toDomain() } ?: emptyList() },
+            errorMapper = { error -> error.toErrorResponse().toDomain() }
+        )
 
 
-    override suspend fun getUserInfo(username: String?): Either<DomainError, UserDomain?> = eitherOf(
-        response = usersApi.getUser(username),
-        mapper = { it?.toDomain() },
-        errorMapper = { error -> error.toErrorResponse().toDomain() }
-    )
+    override suspend fun getUserInfo(username: String?): Either<DomainError, UserDomain?> =
+        eitherOf(
+            response = usersApi.getUser(username),
+            mapper = { it?.toDomain() },
+            errorMapper = { error -> error.toErrorResponse().toDomain() }
+        )
 
     override suspend fun updateUserInfo(user: UserDomain): Either<DomainError, UserDomain?> = eitherOf(
         response = usersApi.updateUserInfo(user.toResponse()),

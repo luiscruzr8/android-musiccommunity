@@ -61,9 +61,8 @@ class UsersAdapter (
                         tvFollowerInterestsLabel.isVisible = false
                     } else {
                         tvFollowerInterestsLabel.isVisible = true
-                        followerTagsLayout.setTagList(interests.map { it2 -> it2.tagName })
+                        followerTagsLayout.setTagList(interests.map { it.tagName })
                     }
-
                 }
                 ivFollowerImage.setImageDrawable(
                     AvatarGenerator.AvatarBuilder(context)

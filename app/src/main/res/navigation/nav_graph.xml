@@ -116,13 +116,32 @@
                 app:argType="string" />
         </action>
 
+        <action
+            android:id="@+id/action_communityFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment">
 
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/usersFragment"
         android:name="com.tfm.musiccommunityapp.ui.community.users.UsersFragment"
         android:label="UsersFragment" />
+
+    <fragment
+        android:id="@+id/eventDetailFragment"
+        android:name="com.tfm.musiccommunityapp.ui.community.events.detail.EventDetailFragment"
+        android:label="UsersFragment">
+
+        <argument
+            android:name="id"
+            app:nullable="false"
+            app:argType="long" />
+    </fragment>
 
     <!--Global actions-->
     <action

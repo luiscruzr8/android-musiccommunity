@@ -12,12 +12,17 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="user_alert">Alert</string>
-
-    <!-- Common -->
     <string name="app_logo">App logo</string>
     <string name="username_tools">Username very long login</string>
+    <string name="post_title_tools">This is a very very very very very long title for a post that i want to publish on this social network</string>
+    <string name="post_location_tools">This is a location</string>
+    <string name="default_id">#999</string>
+    <string name="post_id">#%1$d</string>
+    <string name="post_creation_date_tools">99/99/99</string>
     <string name="email_tools">thisisareallyreallylongemail@email.com</string>
     <string name="interest_tools">longInterest</string>
+    <string name="post_related_tags_label">Tags:</string>
+    <string name="chip_post">#%1$d %2$s</string>
 
     <!-- Home screen -->
     <string name="home_screen_title">Welcome to Music Community</string>
@@ -103,9 +108,14 @@
     <string name="community_tab_discussions">Discussions</string>
     <string name="community_tab_opinions">Opinions</string>
     <string name="community_tab_recommendations">Recommendations</string>
+    <string name="community_search_label">Search</string>
+    <string name="community_search_hint">Search…</string>
 
     <!-- Community - Users screen -->
     <string name="community_users_no_users">No users found</string>
+
+    <!-- Community - Events screen -->
+    <string name="community_events_no_events">No events found</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Home</string>
