@@ -125,6 +125,16 @@
                 app:nullable="false"
                 app:argType="long" />
         </action>
+
+        <action
+            android:id="@+id/action_communityFragment_to_advertisementDetailFragment"
+            app:destination="@id/advertisementDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
     </fragment>
 
     <fragment
@@ -135,7 +145,18 @@
     <fragment
         android:id="@+id/eventDetailFragment"
         android:name="com.tfm.musiccommunityapp.ui.community.events.detail.EventDetailFragment"
-        android:label="UsersFragment">
+        android:label="EventDetailFragment">
+
+        <argument
+            android:name="id"
+            app:nullable="false"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/advertisementDetailFragment"
+        android:name="com.tfm.musiccommunityapp.ui.community.advertisements.detail.AdvertisementDetailFragment"
+        android:label="AdvertisementDetailFragment">
 
         <argument
             android:name="id"

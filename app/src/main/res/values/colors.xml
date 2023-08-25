@@ -39,4 +39,10 @@
     <color name="outlineColor">#74796d</color>
     <color name="outlineVariantColor">#c3c8bb</color>
 
+    <color name="advertisementColor">#fdc02e</color>
+    <color name="eventColor">#30a54a</color>
+    <color name="discussionColor">#24a2b6</color>
+    <color name="opinionColor">#d93749</color>
+    <color name="recommendationColor">#f8f9fa</color>
+
 </resources>

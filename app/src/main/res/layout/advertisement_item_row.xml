@@ -8,12 +8,12 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/tvEventChip"
+            android:id="@+id/tvAdvertisementChip"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:backgroundTint="@color/eventColor"
+            android:backgroundTint="@color/advertisementColor"
             android:textAlignment="center"
             android:textColor="@color/onPrimaryColor"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,13 +26,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvEventChip"
-            app:layout_constraintStart_toEndOf="@+id/tvEventChip"
-            app:layout_constraintTop_toTopOf="@+id/tvEventChip"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAdvertisementChip"
+            app:layout_constraintStart_toEndOf="@+id/tvAdvertisementChip"
+            app:layout_constraintTop_toTopOf="@+id/tvAdvertisementChip"
             app:srcCompat="@drawable/ic_location" />
 
         <TextView
-            android:id="@+id/tvEventLocation"
+            android:id="@+id/tvAdvertisementLocation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -48,7 +48,7 @@
             tools:text="@string/post_location_tools" />
 
         <TextView
-            android:id="@+id/tvEventTitle"
+            android:id="@+id/tvAdvertisementTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -60,7 +60,7 @@
             android:textColor="@color/onSurfaceColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvEventChip"
+            app:layout_constraintTop_toBottomOf="@+id/tvAdvertisementChip"
             tools:text="@string/post_title_tools" />
 
         <TextView
@@ -70,9 +70,9 @@
             android:layout_marginEnd="12dp"
             android:textAppearance="?attr/textAppearanceBodySmall"
             android:textColor="@color/onSurfaceColor"
-            app:layout_constraintBottom_toBottomOf="@+id/tvEventLocation"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAdvertisementLocation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvEventLocation"
+            app:layout_constraintTop_toTopOf="@+id/tvAdvertisementLocation"
             tools:text="@string/post_creation_date_tools" />
 
         <TextView
@@ -84,8 +84,8 @@
             android:textAppearance="?attr/textAppearanceBodySmall"
             android:textColor="@color/onSurfaceVariantColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tvEventTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tvEventTitle" />
+            app:layout_constraintStart_toStartOf="@+id/tvAdvertisementTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvAdvertisementTitle" />
 
         <com.tfm.musiccommunityapp.ui.custom.HorizontalTagsLayout
             android:id="@+id/relatedTagsLayout"
@@ -95,7 +95,7 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="@+id/tvRelatedTags"
-            app:layout_constraintStart_toStartOf="@+id/tvEventTitle"
+            app:layout_constraintStart_toStartOf="@+id/tvAdvertisementTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvRelatedTags" />
 
         <View

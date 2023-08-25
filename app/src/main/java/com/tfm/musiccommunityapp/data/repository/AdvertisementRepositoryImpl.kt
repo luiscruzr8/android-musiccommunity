@@ -10,18 +10,18 @@ class AdvertisementRepositoryImpl(
     private val advertisementDatasource: AdvertisementDatasource
 ) : AdvertisementRepository {
     override suspend fun getAdvertisements(keyword: String?): Either<DomainError, List<AdvertisementDomain>> =
-        getAdvertisements(keyword)
+        advertisementDatasource.getAllAdvertisements(keyword)
 
     override suspend fun getAdvertisementById(advertisementId: Long): Either<DomainError, AdvertisementDomain?> =
-        getAdvertisementById(advertisementId)
+        advertisementDatasource.getAdvertisementById(advertisementId)
 
     override suspend fun createAdvertisement(advertisement: AdvertisementDomain): Either<DomainError, Long> =
-        createAdvertisement(advertisement)
+        advertisementDatasource.createAdvertisement(advertisement)
 
     override suspend fun updateAdvertisement(advertisement: AdvertisementDomain): Either<DomainError, Long> =
-        updateAdvertisement(advertisement)
+        advertisementDatasource.updateAdvertisement(advertisement)
 
     override suspend fun deleteAdvertisement(advertisementId: Long): Either<DomainError, Unit> =
-        deleteAdvertisement(advertisementId)
+        advertisementDatasource.deleteAdvertisement(advertisementId)
 
 }
