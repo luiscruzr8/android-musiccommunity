@@ -39,7 +39,7 @@ class EventsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsAdapter.EventViewHolder =
         EventViewHolder(
-            parent.bindingInflate(R.layout.post_item_row, false)
+            parent.bindingInflate(R.layout.event_item_row, false)
         ) { onItemClicked(it) }
 
     inner class EventViewHolder(

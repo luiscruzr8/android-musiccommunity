@@ -118,6 +118,16 @@
     <!-- Community - Events screen -->
     <string name="community_events_no_events">No se han encontrado eventos</string>
 
+    <!-- Community - Advertisements screen -->
+    <string name="community_advertisements_no_advertisements">No se han encontrado anuncios</string>
+
+    <!-- Community - Opinions screen -->
+    <string name="community_opinions_no_opinions">No se han encontrado opiniones</string>
+
+    <!-- Community - Discussions screen -->
+    <string name="community_discussions_no_discussions">No se han encontrado discusiones</string>
+
+
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Inicio</string>
     <string name="bottom_nav_menu_item_2">Perfil</string>

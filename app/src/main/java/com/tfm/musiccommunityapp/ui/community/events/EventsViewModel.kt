@@ -17,7 +17,7 @@ class EventsViewModel(
 ) : ViewModel() {
     private val _events: MutableLiveData<List<EventDomain>> = MutableLiveData()
     private val _communityEventsError: SingleLiveEvent<String> = SingleLiveEvent()
-    private val showEventsLoader = MutableLiveData<Boolean>()
+    private val showEventsLoader: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getEventsLiveData() = _events as LiveData<List<EventDomain>>
     fun getCommunityEventsError() = _communityEventsError as LiveData<String>
