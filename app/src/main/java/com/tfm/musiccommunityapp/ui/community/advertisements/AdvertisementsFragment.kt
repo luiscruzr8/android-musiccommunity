@@ -35,8 +35,8 @@ class AdvertisementsFragment: BaseFragment(R.layout.advertisements_fragment) {
         }
     }
 
-    fun restartViewPager(username: String?) {
-        viewModel.setUpAdvertisements(if (username.isNullOrBlank()) null else username)
+    fun restartViewPager(searchTerm: String?) {
+        viewModel.setUpAdvertisements(if (searchTerm.isNullOrBlank()) null else searchTerm)
     }
 
     private fun observeLoader() {
