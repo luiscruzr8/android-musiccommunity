@@ -103,7 +103,10 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                         String.format(getString(R.string.profile_screen_username_label), it.login)
                     tvEmail.text = it.email
                     tvPhoneNumber.text = it.phone
-
+                    tvUserChip.text = String.format(
+                        getString(R.string.chip_user),
+                        it.id
+                    )
                     ivProfileImage.setImageDrawable(
                         AvatarGenerator.AvatarBuilder(requireContext().applicationContext)
                             .setLabel(it.login)

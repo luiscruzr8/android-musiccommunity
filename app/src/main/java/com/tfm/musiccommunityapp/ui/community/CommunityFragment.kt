@@ -57,7 +57,7 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
                         is EventsFragment -> fragment.restartViewPager(searchTerm)
                         is AdvertisementsFragment -> fragment.restartViewPager(searchTerm)
                         is DiscussionsFragment -> fragment.restartViewPager(searchTerm)
-                        //is OpinionsFragment -> fragment.restartViewPager(searchTerm)
+                        is OpinionsFragment -> fragment.restartViewPager(searchTerm)
                         //is RatingsFragment -> fragment.restartViewPager(searchTerm)
                         else -> {}
                     }
@@ -78,8 +78,8 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
                     is EventsFragment -> f.restartViewPager(searchTerm)
                     is AdvertisementsFragment -> f.restartViewPager(searchTerm)
                     is DiscussionsFragment -> f.restartViewPager(searchTerm)
-                    /*is OpinionsFragment -> f.restartViewPager(searchTerm)
-                    is RatingsFragment -> f.restartViewPager(searchTerm)*/
+                    is OpinionsFragment -> f.restartViewPager(searchTerm)
+                    /*is RatingsFragment -> f.restartViewPager(searchTerm)*/
                     else -> {}
                 }
             }

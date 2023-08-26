@@ -9,6 +9,7 @@ import com.tfm.musiccommunityapp.databinding.EventItemRowBinding
 import com.tfm.musiccommunityapp.domain.model.EventDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
 import com.tfm.musiccommunityapp.utils.formatDateTimeToString
+import com.tfm.musiccommunityapp.utils.getChipLabel
 
 class EventsAdapter(
     private val onItemClicked: (EventDomain) -> Unit
@@ -57,7 +58,7 @@ class EventsAdapter(
                 tvEventChip.text = String.format(
                     context.getString(R.string.chip_post),
                     item.id,
-                    item.postType
+                    getChipLabel(item.postType, context)
                 )
                 tvEventTitle.text = item.title
                 tvEventLocation.text = item.cityName

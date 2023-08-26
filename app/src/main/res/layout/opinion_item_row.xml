@@ -8,12 +8,12 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/tvAdvertisementChip"
+            android:id="@+id/tvOpinionChip"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            android:backgroundTint="@color/advertisementColor"
+            android:backgroundTint="@color/opinionColor"
             android:textAlignment="center"
             android:textColor="@color/onPrimaryColor"
             app:layout_constraintStart_toStartOf="parent"
@@ -21,34 +21,8 @@
             tools:text="@string/chip_post" />
 
 
-        <ImageView
-            android:id="@+id/ivLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvAdvertisementChip"
-            app:layout_constraintStart_toEndOf="@+id/tvAdvertisementChip"
-            app:layout_constraintTop_toTopOf="@+id/tvAdvertisementChip"
-            app:srcCompat="@drawable/ic_location" />
-
         <TextView
-            android:id="@+id/tvAdvertisementLocation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="12dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textAppearance="?attr/textAppearanceTitleMedium"
-            android:textColor="@color/onSurfaceColor"
-            app:layout_constraintBottom_toBottomOf="@+id/ivLocation"
-            app:layout_constraintEnd_toStartOf="@+id/tvCreationDate"
-            app:layout_constraintStart_toEndOf="@+id/ivLocation"
-            app:layout_constraintTop_toTopOf="@+id/ivLocation"
-            tools:text="@string/post_location_tools" />
-
-        <TextView
-            android:id="@+id/tvAdvertisementTitle"
+            android:id="@+id/tvOpinionTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -60,7 +34,7 @@
             android:textColor="@color/onSurfaceColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAdvertisementChip"
+            app:layout_constraintTop_toBottomOf="@+id/tvOpinionChip"
             tools:text="@string/post_title_tools" />
 
         <TextView
@@ -68,11 +42,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
+            android:layout_marginBottom="22dp"
             android:textAppearance="?attr/textAppearanceBodySmall"
             android:textColor="@color/onSurfaceColor"
-            app:layout_constraintBottom_toBottomOf="@+id/tvAdvertisementLocation"
+            app:layout_constraintBottom_toBottomOf="@+id/tvOpinionChip"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvAdvertisementLocation"
+            app:layout_constraintTop_toTopOf="@+id/tvOpinionChip"
             tools:text="@string/post_creation_date_tools" />
 
         <TextView
@@ -84,8 +59,8 @@
             android:textAppearance="?attr/textAppearanceBodySmall"
             android:textColor="@color/onSurfaceVariantColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tvAdvertisementTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tvAdvertisementTitle" />
+            app:layout_constraintStart_toStartOf="@+id/tvOpinionTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvOpinionTitle" />
 
         <com.tfm.musiccommunityapp.ui.custom.HorizontalTagsLayout
             android:id="@+id/relatedTagsLayout"
@@ -95,7 +70,7 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="@+id/tvRelatedTags"
-            app:layout_constraintStart_toStartOf="@+id/tvAdvertisementTitle"
+            app:layout_constraintStart_toStartOf="@+id/tvOpinionTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvRelatedTags" />
 
         <View

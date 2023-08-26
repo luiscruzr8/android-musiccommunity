@@ -17,15 +17,15 @@ class EventsViewModel(
 ) : ViewModel() {
     private val _events: MutableLiveData<List<EventDomain>> = MutableLiveData()
     private val _communityEventsError: SingleLiveEvent<String> = SingleLiveEvent()
-    private val showEventsLoader: MutableLiveData<Boolean> = MutableLiveData()
+    private val _showEventsLoader: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getEventsLiveData() = _events as LiveData<List<EventDomain>>
     fun getCommunityEventsError() = _communityEventsError as LiveData<String>
-    fun isEventsLoading() = showEventsLoader as LiveData<Boolean>
+    fun isEventsLoading() = _showEventsLoader as LiveData<Boolean>
 
     fun setUpEvents(searchTerm: String?) {
         viewModelScope.launch(dispatcher) {
-            showEventsLoader.postValue(true)
+            _showEventsLoader.postValue(true)
             handleGetEventsResult(getEvents(searchTerm))
         }
     }
@@ -44,7 +44,7 @@ class EventsViewModel(
                 sendCommunityEventsError(result.error.code, result.error.message)
             }
         }
-        showEventsLoader.postValue(false)
+        _showEventsLoader.postValue(false)
     }
 
     private fun sendCommunityEventsError(code: Int, message: String) {

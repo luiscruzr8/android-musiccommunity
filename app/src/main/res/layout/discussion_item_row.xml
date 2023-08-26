@@ -20,7 +20,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/chip_post" />
 
-
         <TextView
             android:id="@+id/tvDiscussionTitle"
             android:layout_width="0dp"
@@ -54,7 +53,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
-            android:text="@string/follower_screen_interests_label"
+            android:text="@string/post_related_tags_label"
             android:textAppearance="?attr/textAppearanceBodySmall"
             android:textColor="@color/onSurfaceVariantColor"
             app:layout_constraintEnd_toEndOf="parent"
