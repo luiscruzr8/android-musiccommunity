@@ -35,8 +35,8 @@ class EventsFragment: BaseFragment(R.layout.events_fragment) {
         }
     }
 
-    fun restartViewPager(username: String?) {
-        viewModel.setUpEvents(if (username.isNullOrBlank()) null else username)
+    fun restartViewPager(searchTerm: String?) {
+        viewModel.setUpEvents(if (searchTerm.isNullOrBlank()) null else searchTerm)
     }
 
     private fun observeLoader() {

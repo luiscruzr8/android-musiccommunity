@@ -12,7 +12,7 @@ import com.tfm.musiccommunityapp.utils.formatDateTimeToString
 
 class AdvertisementsAdapter(
     private val onItemClicked: (AdvertisementDomain) -> Unit
-)  : RecyclerView.Adapter<AdvertisementsAdapter.AdvertisementViewHolder>() {
+) : RecyclerView.Adapter<AdvertisementsAdapter.AdvertisementViewHolder>() {
 
     private val advertisements: MutableList<AdvertisementDomain> = mutableListOf()
 
@@ -22,7 +22,7 @@ class AdvertisementsAdapter(
 
     override fun getItemCount(): Int = advertisements.size
 
-    override fun getItemId(position: Int): Long  = advertisements.getOrNull(position)?.id ?: 0
+    override fun getItemId(position: Int): Long = advertisements.getOrNull(position)?.id ?: 0
 
     fun setAdvertisements(advertisementList: List<AdvertisementDomain>) {
         advertisements.apply {
@@ -61,7 +61,7 @@ class AdvertisementsAdapter(
         fun bind(item: AdvertisementDomain, context: Context) {
             binding.apply {
                 relatedTagsLayout.setTagList(emptyList())
-tvAdvertisementChip.text = String.format(
+                tvAdvertisementChip.text = String.format(
                     context.getString(R.string.chip_post),
                     item.id,
                     item.postType

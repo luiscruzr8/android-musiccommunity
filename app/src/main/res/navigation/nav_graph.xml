@@ -135,6 +135,16 @@
                 app:nullable="false"
                 app:argType="long" />
         </action>
+
+        <action
+            android:id="@+id/action_communityFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
     </fragment>
 
     <fragment
@@ -157,6 +167,17 @@
         android:id="@+id/advertisementDetailFragment"
         android:name="com.tfm.musiccommunityapp.ui.community.advertisements.detail.AdvertisementDetailFragment"
         android:label="AdvertisementDetailFragment">
+
+        <argument
+            android:name="id"
+            app:nullable="false"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/discussionDetailFragment"
+        android:name="com.tfm.musiccommunityapp.ui.community.discussions.detail.DiscussionDetailFragment"
+        android:label="DiscussionDetailFragment">
 
         <argument
             android:name="id"

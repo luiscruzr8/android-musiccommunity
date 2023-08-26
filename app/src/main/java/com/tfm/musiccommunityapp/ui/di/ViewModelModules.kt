@@ -1,6 +1,7 @@
 package com.tfm.musiccommunityapp.ui.di
 
 import com.tfm.musiccommunityapp.ui.community.advertisements.AdvertisementsViewModel
+import com.tfm.musiccommunityapp.ui.community.discussions.DiscussionsViewModel
 import com.tfm.musiccommunityapp.ui.community.events.EventsViewModel
 import com.tfm.musiccommunityapp.ui.community.users.UsersViewModel
 import com.tfm.musiccommunityapp.ui.home.HomeScreenViewModel
@@ -60,5 +61,49 @@ val viewModelModule = module {
             dispatcher = get()
         )
     }
+
+    viewModel {
+        DiscussionsViewModel(
+            getDiscussions = get(),
+            dispatcher = get()
+        )
+    }
+
+    /*
+    viewModel {
+        OpinionsViewModel(
+            getOpinions = get(),
+            dispatcher = get()
+        )
+    }
+
+    viewModel {
+        EventDetailViewModel(
+            getEventById = get(),
+            dispatcher = get()
+        )
+    }
+
+    viewModel {
+        AdvertisementDetailViewModel(
+            getAdvertisementById = get(),
+            dispatcher = get()
+        )
+    }
+
+    viewModel {
+        DiscussionDetailViewModel(
+            getDiscussionById = get(),
+            dispatcher = get()
+        )
+    }
+
+    viewModel {
+        OpinionDetailViewModel(
+            getDiscussionById = get(),
+            dispatcher = get()
+        )
+    }
+    */
 
 }

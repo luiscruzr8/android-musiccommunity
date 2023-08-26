@@ -35,8 +35,8 @@ class UsersFragment: BaseFragment(R.layout.users_fragment) {
         }
     }
 
-    fun restartViewPager(username: String?) {
-        viewModel.setUpUsers(if (username.isNullOrBlank()) null else username)
+    fun restartViewPager(searchTerm: String?) {
+        viewModel.setUpUsers(if (searchTerm.isNullOrBlank()) null else searchTerm)
     }
 
     private fun observeLoader() {
