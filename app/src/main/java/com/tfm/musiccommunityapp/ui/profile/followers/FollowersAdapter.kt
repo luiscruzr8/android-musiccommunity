@@ -55,7 +55,11 @@ class FollowersAdapter(
         fun bind(item: ShortUserDomain, context: Context) {
             binding.apply {
                 tvFollowerUsername.text = item.login
-                item.interests.let {interests ->
+                tvUserChip.text = String.format(
+                    context.getString(R.string.chip_user),
+                    item.id
+                )
+                item.interests.let { interests ->
                     if (interests.isEmpty()) {
                         tvFollowerInterestsLabel.isVisible = false
                     } else {

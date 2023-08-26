@@ -3,6 +3,7 @@ package com.tfm.musiccommunityapp.ui.di
 import com.tfm.musiccommunityapp.ui.community.advertisements.AdvertisementsViewModel
 import com.tfm.musiccommunityapp.ui.community.discussions.DiscussionsViewModel
 import com.tfm.musiccommunityapp.ui.community.events.EventsViewModel
+import com.tfm.musiccommunityapp.ui.community.opinions.OpinionsViewModel
 import com.tfm.musiccommunityapp.ui.community.users.UsersViewModel
 import com.tfm.musiccommunityapp.ui.home.HomeScreenViewModel
 import com.tfm.musiccommunityapp.ui.login.LoginViewModel
@@ -69,7 +70,6 @@ val viewModelModule = module {
         )
     }
 
-    /*
     viewModel {
         OpinionsViewModel(
             getOpinions = get(),
@@ -77,7 +77,7 @@ val viewModelModule = module {
         )
     }
 
-    viewModel {
+    /*viewModel {
         EventDetailViewModel(
             getEventById = get(),
             dispatcher = get()

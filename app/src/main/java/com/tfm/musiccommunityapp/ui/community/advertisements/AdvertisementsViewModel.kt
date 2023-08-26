@@ -17,15 +17,15 @@ class AdvertisementsViewModel(
 ) : ViewModel(){
     private val _advertisements: MutableLiveData<List<AdvertisementDomain>> = MutableLiveData()
     private val _communityAdvertisementsError: SingleLiveEvent<String> = SingleLiveEvent()
-    private val showAdvertisementsLoader: MutableLiveData<Boolean> = MutableLiveData()
+    private val _showAdvertisementsLoader: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getAdvertisementsLiveData() = _advertisements as LiveData<List<AdvertisementDomain>>
     fun getCommunityAdvertisementsError() = _communityAdvertisementsError as LiveData<String>
-    fun isAdvertisementsLoading() = showAdvertisementsLoader as LiveData<Boolean>
+    fun isAdvertisementsLoading() = _showAdvertisementsLoader as LiveData<Boolean>
 
     fun setUpAdvertisements(searchTerm: String?) {
         viewModelScope.launch(dispatcher) {
-            showAdvertisementsLoader.postValue(true)
+            _showAdvertisementsLoader.postValue(true)
             handleGetAdvertisementsResult(getAdvertisements(searchTerm))
         }
     }
@@ -44,10 +44,10 @@ class AdvertisementsViewModel(
                 sendCommunityAdvertisementsError(result.error.code, result.error.message)
             }
         }
-        showAdvertisementsLoader.postValue(false)
+        _showAdvertisementsLoader.postValue(false)
     }
 
-private fun sendCommunityAdvertisementsError(code: Int, message: String) {
+    private fun sendCommunityAdvertisementsError(code: Int, message: String) {
         _communityAdvertisementsError.postValue("Error code: $code - $message")
     }
 

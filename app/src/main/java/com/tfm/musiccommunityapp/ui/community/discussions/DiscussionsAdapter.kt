@@ -9,6 +9,7 @@ import com.tfm.musiccommunityapp.databinding.DiscussionItemRowBinding
 import com.tfm.musiccommunityapp.domain.model.DiscussionDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
 import com.tfm.musiccommunityapp.utils.formatDateTimeToString
+import com.tfm.musiccommunityapp.utils.getChipLabel
 
 class DiscussionsAdapter(
     private val onDiscussionClicked: (DiscussionDomain) -> Unit
@@ -63,7 +64,7 @@ class DiscussionsAdapter(
                 tvDiscussionChip.text = String.format(
                     context.getString(R.string.chip_post),
                     item.id,
-                    item.postType
+                    getChipLabel(item.postType, context)
                 )
                 tvDiscussionTitle.text = item.title
                 tvCreationDate.text = item.createdOn.formatDateTimeToString()

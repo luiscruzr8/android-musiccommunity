@@ -9,6 +9,7 @@ import com.tfm.musiccommunityapp.databinding.AdvertisementItemRowBinding
 import com.tfm.musiccommunityapp.domain.model.AdvertisementDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
 import com.tfm.musiccommunityapp.utils.formatDateTimeToString
+import com.tfm.musiccommunityapp.utils.getChipLabel
 
 class AdvertisementsAdapter(
     private val onItemClicked: (AdvertisementDomain) -> Unit
@@ -64,7 +65,7 @@ class AdvertisementsAdapter(
                 tvAdvertisementChip.text = String.format(
                     context.getString(R.string.chip_post),
                     item.id,
-                    item.postType
+                    getChipLabel(item.postType, context)
                 )
                 tvAdvertisementTitle.text = item.title
                 tvAdvertisementLocation.text = item.cityName

@@ -17,15 +17,15 @@ class UsersViewModel(
 ): ViewModel() {
     private val _users: MutableLiveData<List<ShortUserDomain>> = MutableLiveData()
     private val _communityUsersError: SingleLiveEvent<String> = SingleLiveEvent()
-    private val showUsersLoader = MutableLiveData<Boolean>()
+    private val _showUsersLoader = MutableLiveData<Boolean>()
 
     fun getUsersLiveData() = _users as LiveData<List<ShortUserDomain>>
     fun getCommunityUsersError() = _communityUsersError as LiveData<String>
-    fun isUsersLoading() = showUsersLoader as LiveData<Boolean>
+    fun isUsersLoading() = _showUsersLoader as LiveData<Boolean>
 
     fun setUpUsers(searchTerm: String?) {
         viewModelScope.launch(dispatcher) {
-            showUsersLoader.postValue(true)
+            _showUsersLoader.postValue(true)
             handleGetUsersResult(getUsers(searchTerm))
         }
     }
@@ -44,7 +44,7 @@ class UsersViewModel(
                 sendCommunityUsersError(result.error.code, result.error.message)
             }
         }
-        showUsersLoader.postValue(false)
+        _showUsersLoader.postValue(false)
     }
 
     private fun sendCommunityUsersError(code: Int, message: String) {
