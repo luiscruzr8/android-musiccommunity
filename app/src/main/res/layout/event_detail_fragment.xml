@@ -76,10 +76,10 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/tvDescription"
         app:layout_constraintTop_toBottomOf="@+id/clImageBox"
-        app:srcCompat="@drawable/ic_location" />
+        app:srcCompat="@drawable/ic_loc" />
 
     <TextView
-        android:id="@+id/tvEventLocation"
+        android:id="@+id/tvLocation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"

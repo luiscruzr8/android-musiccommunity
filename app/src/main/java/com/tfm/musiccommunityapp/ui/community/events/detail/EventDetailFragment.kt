@@ -72,7 +72,7 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
                     tvCreationDate.text = event.createdOn.formatDateTimeToString()
                     tvCreationUser.text = event.login
 
-                    tvEventLocation.text = event.cityName
+                    tvLocation.text = event.cityName
                     tvStartAndEndDate.text = String.format(
                         getString(R.string.post_start_end_text),
                         event.from.formatDateTimeToString(),

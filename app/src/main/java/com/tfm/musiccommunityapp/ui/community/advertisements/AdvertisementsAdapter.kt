@@ -62,6 +62,9 @@ class AdvertisementsAdapter(
         fun bind(item: AdvertisementDomain, context: Context) {
             binding.apply {
                 relatedTagsLayout.setTagList(emptyList())
+                tvRelatedTags.isVisible = false
+                relatedTagsLayout.isVisible = false
+
                 tvAdvertisementChip.text = String.format(
                     context.getString(R.string.chip_post),
                     item.id,
@@ -71,9 +74,8 @@ class AdvertisementsAdapter(
                 tvAdvertisementLocation.text = item.cityName
                 tvCreationDate.text = item.createdOn.formatDateTimeToString()
                 item.tags.let { tags ->
-                    if (tags.isEmpty()) {
-                        relatedTagsLayout.isVisible = false
-                    } else {
+                    if (tags.isNotEmpty()) {
+                        tvRelatedTags.isVisible = true
                         relatedTagsLayout.isVisible = true
                         relatedTagsLayout.setTagList(tags.map { it.tagName })
                     }

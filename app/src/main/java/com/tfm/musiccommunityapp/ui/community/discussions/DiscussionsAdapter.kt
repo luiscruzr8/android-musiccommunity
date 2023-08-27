@@ -61,6 +61,9 @@ class DiscussionsAdapter(
         fun bind (item: DiscussionDomain, context: Context) {
             binding.apply {
                 relatedTagsLayout.setTagList(emptyList())
+                tvRelatedTags.isVisible = false
+                relatedTagsLayout.isVisible = false
+
                 tvDiscussionChip.text = String.format(
                     context.getString(R.string.chip_post),
                     item.id,
@@ -69,9 +72,8 @@ class DiscussionsAdapter(
                 tvDiscussionTitle.text = item.title
                 tvCreationDate.text = item.createdOn.formatDateTimeToString()
                 item.tags.let { tags ->
-                    if (tags.isEmpty()) {
-                        relatedTagsLayout.isVisible = false
-                    } else {
+                    if (tags.isNotEmpty()) {
+                        tvRelatedTags.isVisible = true
                         relatedTagsLayout.isVisible = true
                         relatedTagsLayout.setTagList(tags.map { it.tagName })
                     }
