@@ -54,7 +54,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <TextView
         android:id="@+id/tvPostTitle"
         android:layout_width="0dp"
@@ -66,53 +65,6 @@
         app:layout_constraintStart_toStartOf="@+id/tvPostChip"
         app:layout_constraintTop_toBottomOf="@+id/tvPostChip"
         tools:text="@string/post_title_tools" />
-
-    <ImageView
-        android:id="@+id/ivLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/tvDescription"
-        app:layout_constraintTop_toBottomOf="@+id/clImageBox"
-        app:srcCompat="@drawable/ic_loc" />
-
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textAppearance="?attr/textAppearanceBodyMedium"
-        android:textColor="@color/onSurfaceColor"
-        app:layout_constraintBottom_toBottomOf="@+id/ivLocation"
-        app:layout_constraintEnd_toEndOf="@+id/tvPostTitle"
-        app:layout_constraintStart_toEndOf="@+id/ivLocation"
-        app:layout_constraintTop_toTopOf="@+id/ivLocation"
-        tools:text="@string/post_location_tools" />
-
-    <ImageView
-        android:id="@+id/ivCalendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/ivLocation"
-        app:layout_constraintTop_toBottomOf="@+id/ivLocation"
-        app:srcCompat="@drawable/ic_calendar" />
-
-    <TextView
-        android:id="@+id/tvUntilDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:maxLines="2"
-        android:textAppearance="?attr/textAppearanceBodyMedium"
-        android:textColor="@color/onSurfaceColor"
-        app:layout_constraintBottom_toBottomOf="@+id/ivCalendar"
-        app:layout_constraintEnd_toEndOf="@+id/tvPostTitle"
-        app:layout_constraintStart_toEndOf="@+id/ivCalendar"
-        app:layout_constraintTop_toTopOf="@+id/ivCalendar"
-        tools:text="@string/post_end_tools" />
 
     <TextView
         android:id="@+id/tvCreationDate"
@@ -161,7 +113,7 @@
         app:layout_constraintEnd_toEndOf="@+id/tvPostTitle"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/tvPostTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvUntilDate"
+        app:layout_constraintTop_toBottomOf="@+id/clImageBox"
         tools:text="@tools:sample/lorem/random" />
 
     <TextView

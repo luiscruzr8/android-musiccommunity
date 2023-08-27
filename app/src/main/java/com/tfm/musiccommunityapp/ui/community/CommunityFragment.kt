@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayoutMediator
@@ -50,18 +51,7 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
         })
 
         binding.materialButton.setOnClickListener {
-            adapter.getFragmentOnPosition(binding.communityViewPager.currentItem)
-                .let { fragment ->
-                    when (fragment) {
-                        is UsersFragment -> fragment.restartViewPager(searchTerm)
-                        is EventsFragment -> fragment.restartViewPager(searchTerm)
-                        is AdvertisementsFragment -> fragment.restartViewPager(searchTerm)
-                        is DiscussionsFragment -> fragment.restartViewPager(searchTerm)
-                        is OpinionsFragment -> fragment.restartViewPager(searchTerm)
-                        //is RatingsFragment -> fragment.restartViewPager(searchTerm)
-                        else -> {}
-                    }
-                }
+            setUpTab(adapter.getFragmentOnPosition(binding.communityViewPager.currentItem))
         }
 
         TabLayoutMediator(binding.tabLayout, binding.communityViewPager) { tab, position ->
@@ -73,15 +63,7 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
             FragmentManager.FragmentLifecycleCallbacks() {
             override fun onFragmentResumed(fm: FragmentManager, f: Fragment) {
                 super.onFragmentResumed(fm, f)
-                when (f) {
-                    is UsersFragment -> f.restartViewPager(searchTerm)
-                    is EventsFragment -> f.restartViewPager(searchTerm)
-                    is AdvertisementsFragment -> f.restartViewPager(searchTerm)
-                    is DiscussionsFragment -> f.restartViewPager(searchTerm)
-                    is OpinionsFragment -> f.restartViewPager(searchTerm)
-                    /*is RatingsFragment -> f.restartViewPager(searchTerm)*/
-                    else -> {}
-                }
+                setUpTab(f)
             }
         }, false)
         
@@ -116,6 +98,40 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
         )
         //adapter.addFragment(RatingsFragment(), getString(R.string.community_tab_recommendations), resources.getDrawable(R.drawable.ic_tab_recommendations))
         return adapter
+    }
+
+    private fun setUpTab(fragment: Fragment) {
+        when (fragment) {
+            is UsersFragment -> {
+                fragment.restartViewPager(searchTerm)
+                binding.fabAddItem.isVisible = false
+            }
+
+            is EventsFragment -> {
+                fragment.restartViewPager(searchTerm)
+                binding.fabAddItem.isVisible = true
+            }
+
+            is AdvertisementsFragment -> {
+                fragment.restartViewPager(searchTerm)
+                binding.fabAddItem.isVisible = true
+            }
+
+            is DiscussionsFragment -> {
+                fragment.restartViewPager(searchTerm)
+                binding.fabAddItem.isVisible = true
+            }
+
+            is OpinionsFragment -> {
+                fragment.restartViewPager(searchTerm)
+                binding.fabAddItem.isVisible = true
+            }
+            /*is RatingsFragment -> {
+                fragment.restartViewPager(searchTerm)
+                binding.fabAddItem.isVisible = true
+            }*/
+            else -> {}
+        }
     }
 
     companion object {

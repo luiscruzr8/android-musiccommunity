@@ -14,7 +14,8 @@ fun <T, R> eitherOf(response: Response<T>, mapper: (T?) -> R, errorMapper : (Res
      response.toEither(mapper, errorMapper)
 
 private fun <T, R> Response<T>.toEither(mapper: (T?) -> R, errorMapper : (Response<T>) -> DomainError): Either<DomainError, R> = this.let { response ->
-    response.body()?.let {
-        mapper(it).right()
-    } ?: errorMapper(response).left()
+    if (response.isSuccessful)
+        mapper(response.body()).right()
+    else
+        errorMapper(response).left()
 }

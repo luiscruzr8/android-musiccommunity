@@ -29,7 +29,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvAdvertisementChip"
             app:layout_constraintStart_toEndOf="@+id/tvAdvertisementChip"
             app:layout_constraintTop_toTopOf="@+id/tvAdvertisementChip"
-            app:srcCompat="@drawable/ic_location" />
+            app:srcCompat="@drawable/ic_loc" />
 
         <TextView
             android:id="@+id/tvAdvertisementLocation"

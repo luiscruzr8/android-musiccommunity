@@ -29,7 +29,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvEventChip"
             app:layout_constraintStart_toEndOf="@+id/tvEventChip"
             app:layout_constraintTop_toTopOf="@+id/tvEventChip"
-            app:srcCompat="@drawable/ic_location" />
+            app:srcCompat="@drawable/ic_loc" />
 
         <TextView
             android:id="@+id/tvEventLocation"

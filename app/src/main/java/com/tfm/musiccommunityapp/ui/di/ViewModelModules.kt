@@ -1,9 +1,13 @@
 package com.tfm.musiccommunityapp.ui.di
 
 import com.tfm.musiccommunityapp.ui.community.advertisements.AdvertisementsViewModel
+import com.tfm.musiccommunityapp.ui.community.advertisements.detail.AdvertisementDetailViewModel
 import com.tfm.musiccommunityapp.ui.community.discussions.DiscussionsViewModel
+import com.tfm.musiccommunityapp.ui.community.discussions.detail.DiscussionDetailViewModel
 import com.tfm.musiccommunityapp.ui.community.events.EventsViewModel
+import com.tfm.musiccommunityapp.ui.community.events.detail.EventDetailViewModel
 import com.tfm.musiccommunityapp.ui.community.opinions.OpinionsViewModel
+import com.tfm.musiccommunityapp.ui.community.opinions.detail.OpinionDetailViewModel
 import com.tfm.musiccommunityapp.ui.community.users.UsersViewModel
 import com.tfm.musiccommunityapp.ui.home.HomeScreenViewModel
 import com.tfm.musiccommunityapp.ui.login.LoginViewModel
@@ -77,9 +81,13 @@ val viewModelModule = module {
         )
     }
 
-    /*viewModel {
+    viewModel {
         EventDetailViewModel(
             getEventById = get(),
+            getPostImageByPostId = get(),
+            getCurrentUser = get(),
+            updateEvent = get(),
+            deleteEvent = get(),
             dispatcher = get()
         )
     }
@@ -87,6 +95,10 @@ val viewModelModule = module {
     viewModel {
         AdvertisementDetailViewModel(
             getAdvertisementById = get(),
+            getPostImageByPostId = get(),
+            getCurrentUser = get(),
+            updateAdvertisement = get(),
+            deleteAdvertisement = get(),
             dispatcher = get()
         )
     }
@@ -94,16 +106,22 @@ val viewModelModule = module {
     viewModel {
         DiscussionDetailViewModel(
             getDiscussionById = get(),
+            getPostImageByPostId = get(),
+            getCurrentUser = get(),
+            updateDiscussion = get(),
+            deleteDiscussion = get(),
             dispatcher = get()
         )
     }
 
     viewModel {
         OpinionDetailViewModel(
-            getDiscussionById = get(),
+            getOpinionById = get(),
+            getCurrentUser = get(),
+            updateOpinion = get(),
+            deleteOpinion = get(),
             dispatcher = get()
         )
     }
-    */
 
 }

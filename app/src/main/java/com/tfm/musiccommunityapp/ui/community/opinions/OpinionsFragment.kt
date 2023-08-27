@@ -50,6 +50,14 @@ class OpinionsFragment: BaseFragment(R.layout.opinions_fragment) {
             opinionsAdapter.setOpinions(opinions)
             binding.noOpinionsFound.visibility =
                 if (opinions.isEmpty()) View.VISIBLE else View.GONE
+
+            binding.noOpinionsFound.setOnClickListener {
+                val action =
+                    CommunityFragmentDirections.actionCommunityFragmentToOpinionDetailFragment(
+                        99
+                    )
+                navigateSafe(action)
+            }
         }
     }
 

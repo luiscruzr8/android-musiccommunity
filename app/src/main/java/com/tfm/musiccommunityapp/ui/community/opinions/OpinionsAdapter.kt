@@ -61,6 +61,9 @@ class OpinionsAdapter(
         fun bind(item: OpinionDomain, context: Context) {
             binding.apply {
                 relatedTagsLayout.setTagList(emptyList())
+                tvRelatedTags.isVisible = false
+                relatedTagsLayout.isVisible = false
+
                 tvOpinionChip.text = String.format(
                     context.getString(R.string.chip_post),
                     item.id,
@@ -69,9 +72,8 @@ class OpinionsAdapter(
                 tvOpinionTitle.text = item.title
                 tvCreationDate.text = item.createdOn.formatDateTimeToString()
                 item.tags.let { tags ->
-                    if (tags.isEmpty()) {
-                        relatedTagsLayout.isVisible = false
-                    } else {
+                    if (tags.isNotEmpty()) {
+                        tvRelatedTags.isVisible = true
                         relatedTagsLayout.isVisible = true
                         relatedTagsLayout.setTagList(tags.map { it.tagName })
                     }
