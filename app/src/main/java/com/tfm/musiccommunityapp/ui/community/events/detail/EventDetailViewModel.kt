@@ -4,8 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tfm.musiccommunityapp.domain.interactor.event.DeleteEventResult
+import com.tfm.musiccommunityapp.domain.interactor.event.DeleteEventUseCase
 import com.tfm.musiccommunityapp.domain.interactor.event.GetEventByIdResult
 import com.tfm.musiccommunityapp.domain.interactor.event.GetEventByIdUseCase
+import com.tfm.musiccommunityapp.domain.interactor.event.UpdateEventUseCase
+import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserResult
+import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageResult
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageUseCase
 import com.tfm.musiccommunityapp.domain.model.EventDomain
@@ -16,23 +21,36 @@ import kotlinx.coroutines.launch
 class EventDetailViewModel(
     private val getEventById: GetEventByIdUseCase,
     private val getPostImageByPostId: GetPostImageUseCase,
+    private val getCurrentUser: GetCurrentUserUseCase,
+    private val updateEvent: UpdateEventUseCase,
+    private val deleteEvent: DeleteEventUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
+
+    enum class EventOperationSuccess { UPDATE, DELETE }
+
     private val _event: MutableLiveData<EventDomain?> = MutableLiveData()
     private val _eventImageURL: SingleLiveEvent<String> = SingleLiveEvent()
     private val _getEventByIdError: SingleLiveEvent<String> = SingleLiveEvent()
     private val _showEventLoader: MutableLiveData<Boolean> = MutableLiveData()
+    private val _isOwnerUser: SingleLiveEvent<Boolean> = SingleLiveEvent()
+    private val _isOperationSuccessful: SingleLiveEvent<EventOperationSuccess> =
+        SingleLiveEvent()
 
     fun getEventLiveData() = _event as LiveData<EventDomain?>
     fun getPostImageLiveData() = _eventImageURL as LiveData<String>
     fun getEventByIdError() = _getEventByIdError as LiveData<String>
     fun isEventLoading() = _showEventLoader as LiveData<Boolean>
+    fun isUserOwnerLiveData() = _isOwnerUser as LiveData<Boolean>
+    fun isOperationSuccessfulLiveData() =
+        _isOperationSuccessful as LiveData<EventOperationSuccess>
 
     fun setUpEvent(eventId: Long) {
         viewModelScope.launch(dispatcher) {
             _showEventLoader.postValue(true)
             handleGetEventByIdResult(getEventById(eventId))
             handleGetPostImageResult(getPostImageByPostId(eventId))
+            handleGetCurrentUserResult(getCurrentUser())
         }
     }
 
@@ -53,6 +71,37 @@ class EventDetailViewModel(
             }
         }
         _showEventLoader.postValue(false)
+    }
+
+    private fun handleGetCurrentUserResult(result: GetCurrentUserResult) {
+        when (result) {
+            is GetCurrentUserResult.Success -> {
+                _isOwnerUser.postValue(result.user?.let { _event.value?.login == it.login }
+                    ?: false)
+            }
+
+            GetCurrentUserResult.NoUser -> _isOwnerUser.postValue(false)
+        }
+    }
+
+    fun sendDeleteEvent() {
+        viewModelScope.launch(dispatcher) {
+            _showEventLoader.postValue(true)
+            handleDeleteEventResult(deleteEvent(_event.value?.id ?: 0))
+        }
+    }
+
+    private fun handleDeleteEventResult(result: DeleteEventResult) {
+        when (result) {
+            is DeleteEventResult.Success ->
+                _isOperationSuccessful.postValue(EventOperationSuccess.DELETE)
+
+            is DeleteEventResult.GenericError ->
+                _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+
+            is DeleteEventResult.NetworkError ->
+                _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
     }
 
 }

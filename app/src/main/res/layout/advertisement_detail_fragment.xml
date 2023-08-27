@@ -18,14 +18,12 @@
         tools:text="@string/chip_post" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/editProfileButton"
-        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:id="@+id/optionsButton"
+        style="@style/Widget.Material3.Button.IconButton.Outlined"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
-        android:text="@string/profile_screen_edit_button"
-        app:icon="@drawable/ic_edit"
-        app:iconGravity="textStart"
+        app:icon="@drawable/ic_dots_more"
         app:layout_constraintBottom_toBottomOf="@+id/tvPostChip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvPostChip" />
@@ -64,7 +62,7 @@
         android:layout_marginTop="8dp"
         android:textAppearance="?attr/textAppearanceTitleLarge"
         android:textColor="@color/onSurfaceColor"
-        app:layout_constraintEnd_toEndOf="@+id/editProfileButton"
+        app:layout_constraintEnd_toEndOf="@+id/optionsButton"
         app:layout_constraintStart_toStartOf="@+id/tvPostChip"
         app:layout_constraintTop_toBottomOf="@+id/tvPostChip"
         tools:text="@string/post_title_tools" />

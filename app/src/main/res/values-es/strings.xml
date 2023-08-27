@@ -36,6 +36,11 @@
     <string name="discussion">Discusión</string>
     <string name="opinion">Opinión</string>
 
+    <!-- PopUp option post menu -->
+    <string name="popup_edit_option">Editar</string>
+    <string name="popup_delete_option">Eliminar</string>
+    <string name="popup_recommend_option">Recomendar</string>
+
     <!-- Home screen -->
     <string name="home_screen_title">Bienvenido a Music Community</string>
     <string name="home_screen_title_already_signed_in">Bienvenido de nuevo, %1$s</string>

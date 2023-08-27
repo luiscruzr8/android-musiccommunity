@@ -1,7 +1,9 @@
 package com.tfm.musiccommunityapp.ui.community.discussions.detail
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -32,6 +34,8 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
         observePostImageResult()
         observeDiscussionResult()
         observeDiscussionError()
+        observeIsUserOwner()
+        observeOperationSuccessful()
     }
 
     private fun observeLoader() {
@@ -83,6 +87,32 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
         }
     }
 
+    private fun observeIsUserOwner() {
+        viewModel.isUserOwnerLiveData().observe(viewLifecycleOwner) { isOwner ->
+            binding.optionsButton.setOnClickListener {
+                val popup = PopupMenu(requireContext(), binding.optionsButton)
+                popup.menuInflater.inflate(R.menu.popup_post_options, popup.menu)
+
+                if (!isOwner) {
+                    popup.menu.removeItem(R.id.edit_option)
+                    popup.menu.removeItem(R.id.delete_option)
+                } else {
+                    popup.menu.removeItem(R.id.recommend_option)
+                }
+
+                popup.setOnMenuItemClickListener { item: MenuItem ->
+                    when (item.itemId) {
+                        R.id.edit_option -> {}
+                        R.id.delete_option -> deleteDiscussion()
+                        R.id.recommend_option -> {}
+                    }
+                    true
+                }
+                popup.show()
+            }
+        }
+    }
+
     private fun observeDiscussionError() {
         viewModel.getDiscussionByIdError().observe(viewLifecycleOwner) { error ->
             error?.let {
@@ -95,6 +125,23 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
                 ) { findNavController().popBackStack() }
             }
         }
+    }
+
+    private fun observeOperationSuccessful() {
+        viewModel.isOperationSuccessfulLiveData().observe(viewLifecycleOwner) { type ->
+            type?.let {
+                when (type) {
+                    DiscussionDetailViewModel.DiscussionOperationSuccess.DELETE ->
+                        findNavController().popBackStack()
+
+                    DiscussionDetailViewModel.DiscussionOperationSuccess.UPDATE -> {}
+                }
+            }
+        }
+    }
+
+    private fun deleteDiscussion() {
+        viewModel.sendDeleteDiscussion()
     }
 
 }

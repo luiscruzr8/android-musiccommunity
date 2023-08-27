@@ -7,6 +7,7 @@ import com.tfm.musiccommunityapp.ui.community.discussions.detail.DiscussionDetai
 import com.tfm.musiccommunityapp.ui.community.events.EventsViewModel
 import com.tfm.musiccommunityapp.ui.community.events.detail.EventDetailViewModel
 import com.tfm.musiccommunityapp.ui.community.opinions.OpinionsViewModel
+import com.tfm.musiccommunityapp.ui.community.opinions.detail.OpinionDetailViewModel
 import com.tfm.musiccommunityapp.ui.community.users.UsersViewModel
 import com.tfm.musiccommunityapp.ui.home.HomeScreenViewModel
 import com.tfm.musiccommunityapp.ui.login.LoginViewModel
@@ -84,6 +85,9 @@ val viewModelModule = module {
         EventDetailViewModel(
             getEventById = get(),
             getPostImageByPostId = get(),
+            getCurrentUser = get(),
+            updateEvent = get(),
+            deleteEvent = get(),
             dispatcher = get()
         )
     }
@@ -92,6 +96,9 @@ val viewModelModule = module {
         AdvertisementDetailViewModel(
             getAdvertisementById = get(),
             getPostImageByPostId = get(),
+            getCurrentUser = get(),
+            updateAdvertisement = get(),
+            deleteAdvertisement = get(),
             dispatcher = get()
         )
     }
@@ -100,16 +107,21 @@ val viewModelModule = module {
         DiscussionDetailViewModel(
             getDiscussionById = get(),
             getPostImageByPostId = get(),
+            getCurrentUser = get(),
+            updateDiscussion = get(),
+            deleteDiscussion = get(),
             dispatcher = get()
         )
     }
 
-    /*viewModel {
+    viewModel {
         OpinionDetailViewModel(
-            getDiscussionById = get(),
+            getOpinionById = get(),
+            getCurrentUser = get(),
+            updateOpinion = get(),
+            deleteOpinion = get(),
             dispatcher = get()
         )
     }
-    */
 
 }

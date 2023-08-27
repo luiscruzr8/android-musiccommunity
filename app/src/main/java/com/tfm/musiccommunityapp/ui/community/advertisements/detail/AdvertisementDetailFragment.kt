@@ -1,7 +1,9 @@
 package com.tfm.musiccommunityapp.ui.community.advertisements.detail
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -33,6 +35,8 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
         observePostImageResult()
         observeAdvertisementResult()
         observeAdvertisementError()
+        observeIsUserOwner()
+        observeOperationSuccessful()
     }
 
     private fun observeLoader() {
@@ -90,6 +94,32 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
         }
     }
 
+    private fun observeIsUserOwner() {
+        viewModel.isUserOwnerLiveData().observe(viewLifecycleOwner) { isOwner ->
+            binding.optionsButton.setOnClickListener {
+                val popup = PopupMenu(requireContext(), binding.optionsButton)
+                popup.menuInflater.inflate(R.menu.popup_post_options, popup.menu)
+
+                if (!isOwner) {
+                    popup.menu.removeItem(R.id.edit_option)
+                    popup.menu.removeItem(R.id.delete_option)
+                } else {
+                    popup.menu.removeItem(R.id.recommend_option)
+                }
+
+                popup.setOnMenuItemClickListener { item: MenuItem ->
+                    when (item.itemId) {
+                        R.id.edit_option -> {}
+                        R.id.delete_option -> deleteAdvertisement()
+                        R.id.recommend_option -> {}
+                    }
+                    true
+                }
+                popup.show()
+            }
+        }
+    }
+
     private fun observeAdvertisementError() {
         viewModel.getAdvertisementByIdError().observe(viewLifecycleOwner) { error ->
             error?.let {
@@ -102,5 +132,22 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
                 ) { findNavController().popBackStack() }
             }
         }
+    }
+
+    private fun observeOperationSuccessful() {
+        viewModel.isOperationSuccessfulLiveData().observe(viewLifecycleOwner) { type ->
+            type?.let {
+                when (type) {
+                    AdvertisementDetailViewModel.AdvertisementOperationSuccess.DELETE ->
+                        findNavController().popBackStack()
+
+                    AdvertisementDetailViewModel.AdvertisementOperationSuccess.UPDATE -> {}
+                }
+            }
+        }
+    }
+
+    private fun deleteAdvertisement() {
+        viewModel.sendDeleteAdvertisement()
     }
 }

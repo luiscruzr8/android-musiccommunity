@@ -1,7 +1,9 @@
 package com.tfm.musiccommunityapp.ui.community.events.detail
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -32,6 +34,8 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
         observePostImageResult()
         observeEventResult()
         observeEventError()
+        observeIsUserOwner()
+        observeOperationSuccessful()
     }
 
     private fun observeLoader() {
@@ -90,6 +94,32 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
         }
     }
 
+    private fun observeIsUserOwner() {
+        viewModel.isUserOwnerLiveData().observe(viewLifecycleOwner) { isOwner ->
+            binding.optionsButton.setOnClickListener {
+                val popup = PopupMenu(requireContext(), binding.optionsButton)
+                popup.menuInflater.inflate(R.menu.popup_post_options, popup.menu)
+
+                if (!isOwner) {
+                    popup.menu.removeItem(R.id.edit_option)
+                    popup.menu.removeItem(R.id.delete_option)
+                } else {
+                    popup.menu.removeItem(R.id.recommend_option)
+                }
+
+                popup.setOnMenuItemClickListener { item: MenuItem ->
+                    when (item.itemId) {
+                        R.id.edit_option -> {}
+                        R.id.delete_option -> deleteEvent()
+                        R.id.recommend_option -> {}
+                    }
+                    true
+                }
+                popup.show()
+            }
+        }
+    }
+
     private fun observeEventError() {
         viewModel.getEventByIdError().observe(viewLifecycleOwner) { error ->
             error?.let {
@@ -102,5 +132,22 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
                 ) { findNavController().popBackStack() }
             }
         }
+    }
+
+    private fun observeOperationSuccessful() {
+        viewModel.isOperationSuccessfulLiveData().observe(viewLifecycleOwner) { type ->
+            type?.let {
+                when (type) {
+                    EventDetailViewModel.EventOperationSuccess.DELETE ->
+                        findNavController().popBackStack()
+
+                    EventDetailViewModel.EventOperationSuccess.UPDATE -> {}
+                }
+            }
+        }
+    }
+
+    private fun deleteEvent() {
+        viewModel.sendDeleteEvent()
     }
 }
