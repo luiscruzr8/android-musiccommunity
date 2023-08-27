@@ -17,6 +17,10 @@
     <string name="username_tools">Nombre de usuario muy largo</string>
     <string name="post_title_tools">Este es un título muy muy muy muy largo para un post que quiero publicar en esta red social</string>
     <string name="post_location_tools">Esto es una ubicación</string>
+    <string name="post_start_end_tools">De 11/11/11 19:00/nA 12/12/12 20:00</string>
+    <string name="post_start_end_text">De %1$s/nA %2$s</string>
+    <string name="post_end_tools">Hasta 11/11/11 19:00</string>
+    <string name="post_end_text">Hasta %1$s</string>
     <string name="default_id">#999</string>
     <string name="post_id">#%1$d</string>
     <string name="post_creation_date_tools">99/99/99</string>
@@ -118,6 +122,7 @@
     <string name="community_tab_recommendations">Recomendaciones</string>
     <string name="community_search_label">Buscar</string>
     <string name="community_search_hint">Búsqueda…</string>
+    <string name="community_fab_add">Nuevo</string>
 
     <!-- Community - Users screen -->
     <string name="community_users_no_users">No se han encontrado usuarios</string>
