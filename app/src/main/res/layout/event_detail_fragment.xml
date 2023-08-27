@@ -56,7 +56,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <TextView
         android:id="@+id/tvPostTitle"
         android:layout_width="0dp"
