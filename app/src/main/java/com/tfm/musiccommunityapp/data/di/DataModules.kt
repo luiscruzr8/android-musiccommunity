@@ -6,11 +6,13 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.tfm.musiccommunityapp.BuildConfig
 import com.tfm.musiccommunityapp.data.api.AuthApi
+import com.tfm.musiccommunityapp.data.api.CitiesApi
 import com.tfm.musiccommunityapp.data.api.PostsApi
 import com.tfm.musiccommunityapp.data.api.TagsApi
 import com.tfm.musiccommunityapp.data.api.UsersApi
 import com.tfm.musiccommunityapp.data.datasource.AdvertisementDatasource
 import com.tfm.musiccommunityapp.data.datasource.AuthDatasource
+import com.tfm.musiccommunityapp.data.datasource.CityDatasource
 import com.tfm.musiccommunityapp.data.datasource.DiscussionDatasource
 import com.tfm.musiccommunityapp.data.datasource.EventDatasource
 import com.tfm.musiccommunityapp.data.datasource.GenericPostDatasource
@@ -20,6 +22,7 @@ import com.tfm.musiccommunityapp.data.datasource.TagDatasource
 import com.tfm.musiccommunityapp.data.datasource.UserDatasource
 import com.tfm.musiccommunityapp.data.datasource.preferences.SharedPreferencesAuthImpl
 import com.tfm.musiccommunityapp.data.datasource.remote.AdvertisementRemoteDatasourceImpl
+import com.tfm.musiccommunityapp.data.datasource.remote.CityRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.datasource.remote.DiscussionRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.datasource.remote.EventRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.datasource.remote.GenericPostRemoteDatasourceImpl
@@ -30,6 +33,7 @@ import com.tfm.musiccommunityapp.data.datasource.remote.UserRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.network.di.NetworkDatasourceModule
 import com.tfm.musiccommunityapp.data.repository.AdvertisementRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.AuthRepositoryImpl
+import com.tfm.musiccommunityapp.data.repository.CityRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.CommonPostRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.DiscussionRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.EventRepositoryImpl
@@ -38,6 +42,7 @@ import com.tfm.musiccommunityapp.data.repository.TagRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.UserProfileRepositoryImpl
 import com.tfm.musiccommunityapp.domain.repository.AdvertisementRepository
 import com.tfm.musiccommunityapp.domain.repository.AuthRepository
+import com.tfm.musiccommunityapp.domain.repository.CityRepository
 import com.tfm.musiccommunityapp.domain.repository.CommonPostRepository
 import com.tfm.musiccommunityapp.domain.repository.DiscussionRepository
 import com.tfm.musiccommunityapp.domain.repository.EventRepository
@@ -71,6 +76,10 @@ val apiModules = module {
 
     single {
         get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(PostsApi::class.java)
+    }
+
+    single {
+        get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(CitiesApi::class.java)
     }
 
 }
@@ -124,6 +133,12 @@ val remoteDatasourceModules = module {
             opinionApi = get()
         )
     } bind OpinionDatasource::class
+
+    single {
+        CityRemoteDatasourceImpl(
+            cityApi = get()
+        )
+    } bind CityDatasource::class
 
 }
 
@@ -190,6 +205,11 @@ val repositoriesModule = module {
         )
     } bind OpinionRepository::class
 
+    single {
+        CityRepositoryImpl(
+            cityDatasource = get()
+        )
+    } bind CityRepository::class
 }
 
 val preferencesModule = module {

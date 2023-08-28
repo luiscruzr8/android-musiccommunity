@@ -1,5 +1,6 @@
 package com.tfm.musiccommunityapp.ui.di
 
+import com.tfm.musiccommunityapp.ui.community.CommunityViewModel
 import com.tfm.musiccommunityapp.ui.community.advertisements.AdvertisementsViewModel
 import com.tfm.musiccommunityapp.ui.community.advertisements.detail.AdvertisementDetailViewModel
 import com.tfm.musiccommunityapp.ui.community.discussions.DiscussionsViewModel
@@ -120,6 +121,16 @@ val viewModelModule = module {
             getCurrentUser = get(),
             updateOpinion = get(),
             deleteOpinion = get(),
+            dispatcher = get()
+        )
+    }
+
+    viewModel {
+        CommunityViewModel(
+            getCities = get(),
+            createEvent = get(),
+            createAdvertisement = get(),
+            createDiscussion = get(),
             dispatcher = get()
         )
     }
