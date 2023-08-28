@@ -133,6 +133,14 @@
 
     <!-- Community - Events screen -->
     <string name="community_events_no_events">No events found</string>
+    <string name="community_events_title">Title</string>
+    <string name="community_events_location">Location</string>
+    <string name="community_events_description">Description</string>
+    <string name="community_events_from_date">From date</string>
+    <string name="community_events_from_time">From time</string>
+    <string name="community_events_to_date">To date</string>
+    <string name="community_events_to_time">To time</string>
+    <string name="community_events_tags">Tags</string>
 
     <!-- Community - Events screen -->
     <string name="community_advertisements_no_advertisements">No advertisements found</string>
@@ -143,7 +151,7 @@
     <!-- Community - Discussions screen -->
     <string name="community_discussions_no_discussions">No discussions found</string>
 
-    
+
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Home</string>
     <string name="bottom_nav_menu_item_2">Profile</string>

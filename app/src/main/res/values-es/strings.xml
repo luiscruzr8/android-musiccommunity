@@ -134,6 +134,14 @@
 
     <!-- Community - Events screen -->
     <string name="community_events_no_events">No se han encontrado eventos</string>
+    <string name="community_events_title">Título</string>
+    <string name="community_events_location">Ubicación</string>
+    <string name="community_events_description">Descripción</string>
+    <string name="community_events_from_date">Del día</string>
+    <string name="community_events_from_time">Hora</string>
+    <string name="community_events_to_date">Al día</string>
+    <string name="community_events_to_time">Hora</string>
+    <string name="community_events_tags">Etiquetas</string>
 
     <!-- Community - Advertisements screen -->
     <string name="community_advertisements_no_advertisements">No se han encontrado anuncios</string>
