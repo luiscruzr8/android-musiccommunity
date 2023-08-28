@@ -9,6 +9,7 @@
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
     <string name="discard">Discard</string>
+    <string name="dismiss">Dismiss</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="user_alert">Alert</string>
@@ -34,6 +35,14 @@
     <string name="event">Event</string>
     <string name="discussion">Discussion</string>
     <string name="opinion">Opinion</string>
+    <string name="date">Date</string>
+    <string name="date_hint">Select date</string>
+    <string name="time">Time</string>
+    <string name="time_hint">Select time</string>
+    <string name="tags">Tags</string>
+    <string name="tags_hint">Tags (comma separated values)</string>
+    <string name="error_empty_field">Required value</string>
+    <string name="error_invalid_format_field">Incorrect format</string>
 
     <!-- PopUp option post menu -->
     <string name="popup_edit_option">Edit</string>
@@ -136,11 +145,10 @@
     <string name="community_events_title">Title</string>
     <string name="community_events_location">Location</string>
     <string name="community_events_description">Description</string>
-    <string name="community_events_from_date">From date</string>
-    <string name="community_events_from_time">From time</string>
-    <string name="community_events_to_date">To date</string>
-    <string name="community_events_to_time">To time</string>
-    <string name="community_events_tags">Tags</string>
+    <string name="community_events_from">From:</string>
+    <string name="community_events_to">To:</string>
+    <string name="community_events_create_title">New event</string>
+    <string name="community_events_edit_title">Edit event</string>
 
     <!-- Community - Events screen -->
     <string name="community_advertisements_no_advertisements">No advertisements found</string>

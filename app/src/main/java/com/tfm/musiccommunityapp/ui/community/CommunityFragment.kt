@@ -3,6 +3,7 @@ package com.tfm.musiccommunityapp.ui.community
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import com.tfm.musiccommunityapp.ui.community.discussions.DiscussionsFragment
 import com.tfm.musiccommunityapp.ui.community.events.EventsFragment
 import com.tfm.musiccommunityapp.ui.community.opinions.OpinionsFragment
 import com.tfm.musiccommunityapp.ui.community.users.UsersFragment
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditEventDialog
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -97,6 +99,7 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
             is EventsFragment -> {
                 fragment.restartViewPager(searchTerm)
                 binding.fabAddItem.isVisible = true
+                setCreateEventDialog()
             }
 
             is AdvertisementsFragment -> {
@@ -124,6 +127,14 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
     private fun observeCitiesResult() {
         viewModel.getCitiesLiveData().observe(viewLifecycleOwner) { cityList ->
             cities = cityList
+        }
+    }
+
+    private fun setCreateEventDialog() {
+        binding.fabAddItem.setOnClickListener {
+            CreateEditEventDialog(event = null) {
+                Log.e("CreateEditEventDialog", it.toString())
+            }.show(this.parentFragmentManager, CreateEditEventDialog::class.java.simpleName)
         }
     }
 

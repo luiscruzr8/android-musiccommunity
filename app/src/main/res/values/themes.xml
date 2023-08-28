@@ -62,4 +62,5 @@
         <item name="android:popupBackground">@color/secondaryColor</item>
         <item name="android:textColor">@color/onSecondaryColor</item>
     </style>
+
 </resources>
