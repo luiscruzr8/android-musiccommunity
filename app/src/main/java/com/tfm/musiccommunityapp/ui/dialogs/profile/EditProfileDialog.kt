@@ -16,7 +16,6 @@ import com.tfm.musiccommunityapp.domain.model.UserDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogTwoOptions
 import java.util.regex.Pattern
 
-
 class EditProfileDialog(
     private val userProfile: UserDomain,
     private val onSaveClicked: (UserDomain) -> Unit

@@ -10,6 +10,10 @@ import com.tfm.musiccommunityapp.domain.interactor.advertisement.GetAdvertisemen
 import com.tfm.musiccommunityapp.domain.interactor.advertisement.GetAdvertisementsUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.advertisement.UpdateAdvertisementUseCase
 import com.tfm.musiccommunityapp.domain.interactor.advertisement.UpdateAdvertisementUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesUseCase
+import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.city.GetClosestCitiesUseCase
+import com.tfm.musiccommunityapp.domain.interactor.city.GetClosestCitiesUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.comment.DeleteCommentUseCase
 import com.tfm.musiccommunityapp.domain.interactor.comment.DeleteCommentUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.comment.GetPostCommentsUseCase
@@ -391,6 +395,22 @@ val useCaseModule = module {
             opinionRepository = get()
         )
     } bind DeleteOpinionUseCase::class
+
+    //endregion
+
+    //region Cities
+
+    single {
+        GetCitiesUseCaseImpl(
+            cityRepository = get()
+        )
+    } bind GetCitiesUseCase::class
+
+    single {
+        GetClosestCitiesUseCaseImpl(
+            cityRepository = get()
+        )
+    } bind GetClosestCitiesUseCase::class
 
     //endregion
 
