@@ -2,33 +2,39 @@ package com.tfm.musiccommunityapp.data.utils
 
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
+import com.google.gson.stream.JsonToken
 import com.google.gson.stream.JsonWriter
 import java.io.IOException
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 internal class LocalDateTimeJsonAdapter : TypeAdapter<LocalDateTime>() {
 
-    private val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    private val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
-    override fun write(out: JsonWriter, value: LocalDateTime) {
-        try {
-            out.value(format.format(value))
-        } catch (e: IOException) {
-            e.printStackTrace()
+    @Throws(IOException::class)
+    override fun write(out: JsonWriter, value: LocalDateTime?) {
+        if (value == null) {
+            out.nullValue()
+        } else {
+            out.value(formatter.format(value))
         }
     }
 
-    override fun read(value: JsonReader?): LocalDateTime? {
-        return if (value != null) {
-            try {
-                LocalDateTime.parse(value.nextString())
-            } catch (e: ParseException) {
+    @Throws(IOException::class)
+    override fun read(input: JsonReader): LocalDateTime? {
+        return when (input.peek()) {
+            JsonToken.NULL -> {
+                input.nextNull()
+                null
+            }
+            else -> try {
+                LocalDateTime.parse(input.nextString(), formatter)
+        } catch (e: Exception) {
                 e.printStackTrace()
                 null
             }
-        } else null
+        }
     }
 
 }

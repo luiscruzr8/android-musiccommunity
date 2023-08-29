@@ -11,7 +11,10 @@ import com.bumptech.glide.Glide
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.EventDetailFragmentBinding
+import com.tfm.musiccommunityapp.domain.model.CityDomain
+import com.tfm.musiccommunityapp.domain.model.EventDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditEventDialog
 import com.tfm.musiccommunityapp.utils.formatDateTimeToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
@@ -23,6 +26,8 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
     private val binding by viewBinding(EventDetailFragmentBinding::bind)
     private val viewModel by viewModel<EventDetailViewModel>()
     private val args: EventDetailFragmentArgs by navArgs()
+
+    private var cities = emptyList<CityDomain>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,6 +41,7 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
         observeEventError()
         observeIsUserOwner()
         observeOperationSuccessful()
+        observeCitiesResult()
     }
 
     private fun observeLoader() {
@@ -58,7 +64,7 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
     }
 
     private fun observeEventResult() {
-        viewModel.getEventLiveData().observe(viewLifecycleOwner) { it ->
+        viewModel.getEventLiveData().observe(viewLifecycleOwner) {
             it?.let { event ->
                 binding.apply {
                     //Hidden by default
@@ -109,7 +115,7 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
 
                 popup.setOnMenuItemClickListener { item: MenuItem ->
                     when (item.itemId) {
-                        R.id.edit_option -> {}
+                        R.id.edit_option -> setEditEventDialog()
                         R.id.delete_option -> deleteEvent()
                         R.id.recommend_option -> {}
                     }
@@ -141,13 +147,30 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
                     EventDetailViewModel.EventOperationSuccess.DELETE ->
                         findNavController().popBackStack()
 
-                    EventDetailViewModel.EventOperationSuccess.UPDATE -> {}
+                    EventDetailViewModel.EventOperationSuccess.UPDATE ->
+                        viewModel.setUpEvent(args.id)
                 }
             }
+        }
+    }
+
+    private fun observeCitiesResult() {
+        viewModel.getCitiesLiveData().observe(viewLifecycleOwner) { cityList ->
+            cities = cityList
         }
     }
 
     private fun deleteEvent() {
         viewModel.sendDeleteEvent()
     }
+
+    private fun setEditEventDialog() {
+        CreateEditEventDialog(
+                event = viewModel.getEventLiveData().value,
+                cities = cities,
+        ) {
+            viewModel.sendUpdateEvent(it)
+        }.show(this.parentFragmentManager, CreateEditEventDialog::class.java.simpleName)
+    }
+
 }

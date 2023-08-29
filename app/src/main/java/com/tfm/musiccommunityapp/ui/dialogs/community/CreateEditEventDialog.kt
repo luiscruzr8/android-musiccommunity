@@ -12,10 +12,12 @@ import android.widget.EditText
 import android.widget.RelativeLayout
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.EditEventDialogBinding
+import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.EventDomain
 import com.tfm.musiccommunityapp.domain.model.TagDomain
 import com.tfm.musiccommunityapp.utils.formatDateToString
@@ -31,6 +33,7 @@ import java.util.regex.Pattern
 
 class CreateEditEventDialog(
     private val event: EventDomain?,
+    private val cities: List<CityDomain>,
     private val onSaveClicked: (EventDomain) -> Unit
 ) : DialogFragment() {
 
@@ -126,61 +129,67 @@ class CreateEditEventDialog(
     }
 
     private fun extractValues(): EventDomain {
-        val selectedFromDate = binding.eventFromDateEditText.text.toString().trim().localDateOf()
-        val selectedFromTime = binding.eventFromTimeEditText.text.toString().trim().localTimeOf()
-        val fromDateTime = LocalDateTime.of(selectedFromDate, selectedFromTime)
+        binding.apply {
+            val selectedFromDate = eventFromDateEditText.text.toString().trim().localDateOf()
+            val selectedFromTime = eventFromTimeEditText.text.toString().trim().localTimeOf()
+            val fromDateTime = LocalDateTime.of(selectedFromDate, selectedFromTime)
 
-        val selectedToDate = binding.eventToDateEditText.text.toString().trim().localDateOf()
-        val selectedToTime = binding.eventToTimeEditText.text.toString().trim().localTimeOf()
-        val toDateTime = LocalDateTime.of(selectedToDate, selectedToTime)
+            val selectedToDate = eventToDateEditText.text.toString().trim().localDateOf()
+            val selectedToTime = eventToTimeEditText.text.toString().trim().localTimeOf()
+            val toDateTime = LocalDateTime.of(selectedToDate, selectedToTime)
 
-        return event?.copy(
-            title = binding.postTitleEditText.text.toString().trim(),
-            cityName = "Valencia", //TODO
-            description = binding.postDescriptionEditText.text.toString().trim(),
-            from = fromDateTime,
-            to = toDateTime,
-            tags = binding.postTagsEditText.text.toString().trim().split(", ").map { TagDomain(it) },
-        ) ?: EventDomain(
-            id = 0L,
-            login = "",
-            title = binding.postTitleEditText.text.toString().trim(),
-            cityName = "Valencia", //TODO
-            description = binding.postDescriptionEditText.text.toString().trim(),
-            from = fromDateTime,
-            to = toDateTime,
-            tags = binding.postTagsEditText.text.toString().trim().split(", ").map { TagDomain(it) },
-            postType = getString(R.string.event),
-            createdOn = LocalDateTime.now()
-
-        )
+            return event?.copy(
+                title = postTitleEditText.text.toString().trim(),
+                cityName = postLocationEditText.text.toString().trim(),
+                description = postDescriptionEditText.text.toString().trim(),
+                from = fromDateTime,
+                to = toDateTime,
+                tags = postTagsEditText.text.toString().trim().split(", ").map { TagDomain(it) },
+            ) ?: EventDomain(
+                id = 0L,
+                login = "",
+                title = postTitleEditText.text.toString().trim(),
+                cityName = postLocationEditText.text.toString().trim(),
+                description = postDescriptionEditText.text.toString().trim(),
+                from = fromDateTime,
+                to = toDateTime,
+                tags = postTagsEditText.text.toString().trim().split(", ").map { TagDomain(it) },
+                postType = getString(R.string.event),
+                createdOn = LocalDateTime.now()
+            )
+        }
     }
 
     private fun setLayout(event: EventDomain?) {
-        binding.saveButton.setOnClickListener {
-            if(!validate()) {
-                return@setOnClickListener
+        binding.apply {
+            saveButton.setOnClickListener {
+                if(!validate()) {
+                    return@setOnClickListener
+                }
+                onSaveClicked(extractValues()).run {
+                    dismiss()
+                }
             }
-            onSaveClicked(extractValues()).run {
+            dismissButton.setOnClickListener {
                 dismiss()
             }
-        }
 
-        binding.apply {
             eventFromDateEditText.setOnClickListener { showDatePicker(eventFromDateEditText) }
             eventFromTimeEditText.setOnClickListener { showTimePicker(eventFromTimeEditText) }
             eventToDateEditText.setOnClickListener { showDatePicker(eventToDateEditText) }
             eventToTimeEditText.setOnClickListener { showTimePicker(eventToTimeEditText) }
+            (postLocationEditText as? MaterialAutoCompleteTextView)?.setSimpleItems(cities.map { it.cityName }.toTypedArray())
 
             event?.let {
                 dialogTitle.text = getString(R.string.community_events_edit_title)
                 postTitleEditText.setText(it.title)
                 postDescriptionEditText.setText(it.description)
+                postLocationEditText.setText(it.cityName, false)
                 eventFromDateEditText.setText(it.from.formatDateToString())
                 eventFromTimeEditText.setText(it.from.formatTimeToString())
-                eventToDateEditText.setText(it.from.formatDateToString())
-                eventToTimeEditText.setText(it.from.formatTimeToString())
-                postTagsEditText.setText(it.tags.joinToString(", "))
+                eventToDateEditText.setText(it.to.formatDateToString())
+                eventToTimeEditText.setText(it.to.formatTimeToString())
+                postTagsEditText.setText(it.tags.map { it2 -> it2.tagName }.joinToString(", "))
             }
         }
     }

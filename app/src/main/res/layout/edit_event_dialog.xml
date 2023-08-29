@@ -79,6 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/community_events_title"
+                android:maxLines="3"
                 android:inputType="text"
                 android:textColor="@color/primaryColor" />
 
@@ -99,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/community_events_description"
-                android:inputType="textEmailAddress"
+                android:maxLines="5"
                 android:textColor="@color/primaryColor" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -112,15 +113,17 @@
             android:labelFor="@string/community_events_location"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/postDescription">
+            app:layout_constraintTop_toBottomOf="@+id/postDescription"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:id="@+id/postLocationEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/community_events_location"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/primaryColor" />
+                android:inputType="none"
+                android:textColor="@color/primaryColor"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 

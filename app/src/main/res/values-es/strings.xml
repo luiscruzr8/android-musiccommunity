@@ -18,8 +18,8 @@
     <string name="username_tools">Nombre de usuario muy largo</string>
     <string name="post_title_tools">Este es un título muy muy muy muy largo para un post que quiero publicar en esta red social</string>
     <string name="post_location_tools">Esto es una ubicación</string>
-    <string name="post_start_end_tools">De 11/11/11 19:00/nA 12/12/12 20:00</string>
-    <string name="post_start_end_text">De %1$s/nA %2$s</string>
+    <string name="post_start_end_tools">De 11/11/11 19:00\nA 12/12/12 20:00</string>
+    <string name="post_start_end_text">De %1$s\nA %2$s</string>
     <string name="post_end_tools">Hasta 11/11/11</string>
     <string name="post_end_text">Hasta %1$s</string>
     <string name="default_id">#999</string>
@@ -150,6 +150,8 @@
     <string name="community_events_to">Al:</string>
     <string name="community_events_create_title">Nuevo evento</string>
     <string name="community_events_edit_title">Editar evento</string>
+    <string name="community_event_created_title">Evento creado satisfactoriamente</string>
+    <string name="community_event_created_message">Serás redirigido al nuevo evento creado</string>
 
     <!-- Community - Advertisements screen -->
     <string name="community_advertisements_no_advertisements">No se han encontrado anuncios</string>

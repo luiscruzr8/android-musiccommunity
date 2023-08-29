@@ -89,6 +89,7 @@ val viewModelModule = module {
             getCurrentUser = get(),
             updateEvent = get(),
             deleteEvent = get(),
+            getCities = get(),
             dispatcher = get()
         )
     }
