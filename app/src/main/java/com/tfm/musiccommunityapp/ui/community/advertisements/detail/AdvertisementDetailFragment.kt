@@ -147,6 +147,10 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
 
                     AdvertisementDetailViewModel.AdvertisementOperationSuccess.UPDATE ->
                         viewModel.setUpAdvertisement(args.id)
+
+                    AdvertisementDetailViewModel.AdvertisementOperationSuccess.RECOMMEND -> {
+                        //TODO
+                    }
                 }
             }
         }

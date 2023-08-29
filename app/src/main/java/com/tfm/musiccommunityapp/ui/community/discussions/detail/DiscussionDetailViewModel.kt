@@ -31,7 +31,7 @@ class DiscussionDetailViewModel(
     private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
-    enum class DiscussionOperationSuccess { UPDATE, DELETE }
+    enum class DiscussionOperationSuccess { UPDATE, DELETE, RECOMMEND }
 
     private val _discussion: MutableLiveData<DiscussionDomain?> = MutableLiveData()
     private val _discussionImageURL: SingleLiveEvent<String> = SingleLiveEvent()

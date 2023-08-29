@@ -96,6 +96,8 @@
     <!-- Profile screen -->
     <string name="profile_screen_title">Perfil</string>
     <string name="profile_screen_edit_button">Editar</string>
+    <string name="profile_screen_follow_button">Seguir</string>
+    <string name="profile_screen_unfollow_button">Dejar de seguir</string>
     <string name="profile_screen_logout_button">Cerrar sesión</string>
     <string name="profile_screen_image_description">Imagen de perfil</string>
     <string name="profile_screen_username_label">Perfil de %1$s</string>

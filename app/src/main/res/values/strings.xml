@@ -95,6 +95,8 @@
     <!-- Profile screen -->
     <string name="profile_screen_title">Profile</string>
     <string name="profile_screen_edit_button">Edit</string>
+    <string name="profile_screen_follow_button">Follow</string>
+    <string name="profile_screen_unfollow_button">Unfollow</string>
     <string name="profile_screen_logout_button">Logout</string>
     <string name="profile_screen_image_description">Profile image</string>
     <string name="profile_screen_username_label">%1$s\'s profile</string>
