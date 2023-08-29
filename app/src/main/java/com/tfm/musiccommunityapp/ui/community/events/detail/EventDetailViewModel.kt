@@ -32,7 +32,7 @@ class EventDetailViewModel(
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    enum class EventOperationSuccess { UPDATE, DELETE }
+    enum class EventOperationSuccess { UPDATE, DELETE, RECOMMEND }
 
     private val _event: MutableLiveData<EventDomain?> = MutableLiveData()
     private val _cities: MutableLiveData<List<CityDomain>> = MutableLiveData()

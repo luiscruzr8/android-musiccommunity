@@ -137,6 +137,10 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
 
                     DiscussionDetailViewModel.DiscussionOperationSuccess.UPDATE ->
                         viewModel.setUpDiscussion(args.id)
+
+                    DiscussionDetailViewModel.DiscussionOperationSuccess.RECOMMEND -> {
+                        //TODO
+                    }
                 }
             }
         }

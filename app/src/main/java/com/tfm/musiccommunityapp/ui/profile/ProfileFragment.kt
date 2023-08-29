@@ -37,23 +37,9 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         observeFollowing()
         observeProfileError()
         observeSignOutResult()
-
-        displayMyProfileButtons(userProfileLogin.isNullOrEmpty())
-
-        binding.signoutButton.setOnClickListener {
-            viewModel.signOut()
-        }
-
-    }
-
-
-    private fun displayMyProfileButtons(displayButtons: Boolean) {
-        binding.apply {
-            tvPhoneNumber.isVisible = displayButtons
-            signoutButton.isVisible = displayButtons
-            editProfileButton.isVisible = displayButtons
-            followingButton.isVisible = displayButtons
-        }
+        observeIsMyProfile()
+        observeOperationSuccessful()
+        observeIsUserFollower()
     }
 
     private fun observeLoader() {
@@ -204,6 +190,60 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
     private fun saveEditProfile(userDomain: UserDomain) {
         viewModel.sendUpdateProfile(userDomain)
+    }
+
+    private fun observeIsMyProfile() {
+        viewModel.isMyProfileLiveData().observe(viewLifecycleOwner) { isMyProfile ->
+
+            binding.apply {
+                tvPhoneNumber.isVisible = isMyProfile
+                signoutButton.isVisible = isMyProfile
+                followingButton.isVisible = isMyProfile
+                editProfileButton.isVisible = isMyProfile
+                followUnfollowButton.isVisible = !isMyProfile
+
+                if(isMyProfile) {
+                    signoutButton.setOnClickListener { viewModel.signOut() }
+                }
+            }
+        }
+    }
+
+    private fun observeIsUserFollower() {
+        viewModel.isUserFollowerLiveData().observe(viewLifecycleOwner) {isFollower ->
+            binding.apply {
+                followUnfollowButton.text = if(isFollower) {
+                    getString(R.string.profile_screen_unfollow_button)
+                } else {
+                    getString(R.string.profile_screen_follow_button)
+                }
+                followUnfollowButton.setOnClickListener {
+                    args.username?.let { username ->
+                        if(isFollower) {
+                            viewModel.sendUnfollowUser(username)
+                        } else {
+                            viewModel.sendFollowUser(username)
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    private fun observeOperationSuccessful() {
+        viewModel.isOperationSuccessfulLiveData().observe(viewLifecycleOwner) {
+            it?.let { type ->
+                when(type) {
+                    ProfileViewModel.UserOperationSuccess.FOLLOW -> {
+                        viewModel.setUp(args.username)
+                    }
+                    ProfileViewModel.UserOperationSuccess.UNFOLLOW -> {
+                        viewModel.setUp(args.username)
+                    }
+                }
+            }
+        }
     }
 
 }

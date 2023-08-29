@@ -10,15 +10,10 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.RelativeLayout
 import androidx.fragment.app.DialogFragment
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.databinding.EditAdvertisementDialogBinding
 import com.tfm.musiccommunityapp.databinding.EditDiscussionDialogBinding
-import com.tfm.musiccommunityapp.domain.model.AdvertisementDomain
 import com.tfm.musiccommunityapp.domain.model.DiscussionDomain
 import com.tfm.musiccommunityapp.domain.model.TagDomain
-import com.tfm.musiccommunityapp.utils.formatDateToString
-import com.tfm.musiccommunityapp.utils.localDateOf
 import java.time.LocalDateTime
 import java.util.regex.Pattern
 

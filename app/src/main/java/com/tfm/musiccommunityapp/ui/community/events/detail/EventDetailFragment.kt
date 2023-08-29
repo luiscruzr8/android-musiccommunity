@@ -150,6 +150,10 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
 
                     EventDetailViewModel.EventOperationSuccess.UPDATE ->
                         viewModel.setUpEvent(args.id)
+
+                    EventDetailViewModel.EventOperationSuccess.RECOMMEND -> {
+                        //TODO
+                    }
                 }
             }
         }

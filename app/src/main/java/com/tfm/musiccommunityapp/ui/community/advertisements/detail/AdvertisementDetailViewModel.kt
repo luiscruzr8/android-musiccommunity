@@ -32,7 +32,7 @@ class AdvertisementDetailViewModel(
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    enum class AdvertisementOperationSuccess { UPDATE, DELETE }
+    enum class AdvertisementOperationSuccess { UPDATE, DELETE, RECOMMEND }
 
     private val _advertisement: MutableLiveData<AdvertisementDomain?> = MutableLiveData()
     private val _cities: MutableLiveData<List<CityDomain>> = MutableLiveData()
