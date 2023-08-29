@@ -68,6 +68,20 @@ import com.tfm.musiccommunityapp.domain.interactor.post.GetUserPostsUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetUserPostsUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.post.UploadPostImageUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.UploadPostImageUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.DeleteRecommendationUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.DeleteRecommendationUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetRecommendationByIdUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetRecommendationByIdUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetRecommendationsUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetRecommendationsUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetUserRecommendationsUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetUserRecommendationsUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.RateRecommendationUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.RateRecommendationUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.UpdateRecommendationUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.UpdateRecommendationUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.search.GetPostsByTagUseCase
 import com.tfm.musiccommunityapp.domain.interactor.search.GetPostsByTagUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.search.GetUsersByTagUseCase
@@ -411,6 +425,52 @@ val useCaseModule = module {
             cityRepository = get()
         )
     } bind GetClosestCitiesUseCase::class
+
+    //endregion
+
+    //region Recommendations
+
+    single {
+        CreateRecommendationUseCaseImpl(
+            recommendationsRepository = get()
+        )
+    } bind CreateRecommendationUseCase::class
+
+    single {
+        DeleteRecommendationUseCaseImpl(
+            recommendationsRepository = get()
+        )
+    } bind DeleteRecommendationUseCase::class
+
+    single {
+        GetRecommendationByIdUseCaseImpl(
+            recommendationsRepository = get()
+        )
+    } bind GetRecommendationByIdUseCase::class
+
+    single {
+        GetRecommendationsUseCaseImpl(
+            recommendationsRepository = get()
+        )
+    } bind GetRecommendationsUseCase::class
+
+    single {
+        GetUserRecommendationsUseCaseImpl(
+                recommendationsRepository = get()
+        )
+    } bind GetUserRecommendationsUseCase::class
+
+    single {
+        RateRecommendationUseCaseImpl(
+            recommendationsRepository = get()
+        )
+    } bind RateRecommendationUseCase::class
+
+    single {
+        UpdateRecommendationUseCaseImpl(
+            recommendationsRepository = get()
+        )
+    } bind UpdateRecommendationUseCase::class
 
     //endregion
 
