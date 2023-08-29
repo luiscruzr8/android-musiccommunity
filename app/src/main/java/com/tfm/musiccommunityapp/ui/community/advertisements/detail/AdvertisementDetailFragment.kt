@@ -11,7 +11,9 @@ import com.bumptech.glide.Glide
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.AdvertisementDetailFragmentBinding
+import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDialog
 import com.tfm.musiccommunityapp.utils.formatDateTimeToString
 import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
@@ -25,6 +27,8 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
     private val viewModel by viewModel<AdvertisementDetailViewModel>()
     private val args: AdvertisementDetailFragmentArgs by navArgs()
 
+    private var cities = emptyList<CityDomain>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,6 +41,7 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
         observeAdvertisementError()
         observeIsUserOwner()
         observeOperationSuccessful()
+        observeCitiesResult()
     }
 
     private fun observeLoader() {
@@ -109,7 +114,7 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
 
                 popup.setOnMenuItemClickListener { item: MenuItem ->
                     when (item.itemId) {
-                        R.id.edit_option -> {}
+                        R.id.edit_option -> setEditAdvertisementDialog()
                         R.id.delete_option -> deleteAdvertisement()
                         R.id.recommend_option -> {}
                     }
@@ -147,7 +152,22 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
         }
     }
 
+    private fun observeCitiesResult() {
+        viewModel.getCitiesLiveData().observe(viewLifecycleOwner) { cityList ->
+            cities = cityList
+        }
+    }
+
     private fun deleteAdvertisement() {
         viewModel.sendDeleteAdvertisement()
+    }
+
+    private fun setEditAdvertisementDialog() {
+        CreateEditAdvertisementDialog(
+            advertisement = viewModel.getAdvertisementLiveData().value,
+            cities = cities,
+        ) {
+            viewModel.sendUpdateAdvertisement(it)
+        }.show(this.parentFragmentManager, CreateEditAdvertisementDialog::class.java.simpleName)
     }
 }

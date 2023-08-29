@@ -83,6 +83,7 @@ class CreateEditEventDialog(
         binding.apply {
             val title = postTitleEditText.text.toString()
             val description = postDescriptionEditText.text.toString()
+            val location = postLocationEditText.text.toString()
             val fromDate = eventFromDateEditText.text.toString()
             val fromTime = eventFromTimeEditText.text.toString()
             val toDate = eventToDateEditText.text.toString()
@@ -98,6 +99,11 @@ class CreateEditEventDialog(
                 postDescription.error = getString(R.string.error_empty_field)
                 isValid = false
             } else postDescription.error = null
+
+            if (location.isEmpty()) {
+                postLocation.error = getString(R.string.error_empty_field)
+                isValid = false
+            } else postLocation.error = null
 
             if (fromDate.isEmpty()) {
                 eventFromDate.error = getString(R.string.error_empty_field)
@@ -119,12 +125,11 @@ class CreateEditEventDialog(
                 isValid = false
             } else eventToTime.error = null
 
-            if (tags.isNotEmpty() &&!Pattern.matches("^[a-zA-Z0-9, ]*$", tags)) {
+            if (tags.isNotEmpty() && !Pattern.matches("^[a-zA-Z0-9, ]*$", tags)) {
                 postTags.error = getString(R.string.error_invalid_format_field)
                 isValid = false
             } else postTags.error = null
         }
-
         return isValid
     }
 

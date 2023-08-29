@@ -154,6 +154,15 @@
 
     <!-- Community - Events screen -->
     <string name="community_advertisements_no_advertisements">No advertisements found</string>
+    <string name="community_advertisements_title">Title</string>
+    <string name="community_advertisements_location">Location</string>
+    <string name="community_advertisements_description">Description</string>
+    <string name="community_advertisements_phone">Phone number</string>
+    <string name="community_advertisements_until">Until:</string>
+    <string name="community_advertisements_create_title">New advertisement</string>
+    <string name="community_advertisements_edit_title">Edit advertisement</string>
+    <string name="community_advertisement_created_title">Advertisement successfully created</string>
+    <string name="community_advertisement_created_message">You will be redirected to the new created advertisement</string>
 
     <!-- Community - Opinions screen -->
     <string name="community_opinions_no_opinions">No opinions found</string>

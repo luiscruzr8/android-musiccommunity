@@ -8,12 +8,16 @@ import com.tfm.musiccommunityapp.domain.interactor.advertisement.DeleteAdvertise
 import com.tfm.musiccommunityapp.domain.interactor.advertisement.DeleteAdvertisementUseCase
 import com.tfm.musiccommunityapp.domain.interactor.advertisement.GetAdvertisementByIdResult
 import com.tfm.musiccommunityapp.domain.interactor.advertisement.GetAdvertisementByIdUseCase
+import com.tfm.musiccommunityapp.domain.interactor.advertisement.UpdateAdvertisementResult
 import com.tfm.musiccommunityapp.domain.interactor.advertisement.UpdateAdvertisementUseCase
+import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesResult
+import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesUseCase
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageResult
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageUseCase
 import com.tfm.musiccommunityapp.domain.model.AdvertisementDomain
+import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -24,12 +28,14 @@ class AdvertisementDetailViewModel(
     private val getCurrentUser: GetCurrentUserUseCase,
     private val updateAdvertisement: UpdateAdvertisementUseCase,
     private val deleteAdvertisement: DeleteAdvertisementUseCase,
+    private val getCities: GetCitiesUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     enum class AdvertisementOperationSuccess { UPDATE, DELETE }
 
     private val _advertisement: MutableLiveData<AdvertisementDomain?> = MutableLiveData()
+    private val _cities: MutableLiveData<List<CityDomain>> = MutableLiveData()
     private val _advertisementImageURL: SingleLiveEvent<String> = SingleLiveEvent()
     private val _getAdvertisementByIdError: SingleLiveEvent<String> = SingleLiveEvent()
     private val _showAdvertisementLoader: MutableLiveData<Boolean> = MutableLiveData()
@@ -38,6 +44,7 @@ class AdvertisementDetailViewModel(
         SingleLiveEvent()
 
     fun getAdvertisementLiveData() = _advertisement as LiveData<AdvertisementDomain?>
+    fun getCitiesLiveData() = _cities as LiveData<List<CityDomain>>
     fun getPostImageLiveData() = _advertisementImageURL as LiveData<String>
     fun getAdvertisementByIdError() = _getAdvertisementByIdError as LiveData<String>
     fun isAdvertisementLoading() = _showAdvertisementLoader as LiveData<Boolean>
@@ -51,6 +58,7 @@ class AdvertisementDetailViewModel(
             handleGetAdvertisementByIdResult(getAdvertisementById(advertisementId))
             handleGetPostImageResult(getPostImageByPostId(advertisementId))
             handleGetCurrentUserResult(getCurrentUser())
+            handleGetCitiesResult(getCities(null))
         }
     }
 
@@ -84,6 +92,17 @@ class AdvertisementDetailViewModel(
         }
     }
 
+    private fun handleGetCitiesResult(result: GetCitiesResult) {
+        when (result) {
+            is GetCitiesResult.Success -> {
+                _cities.postValue(result.cities)
+            }
+            else -> {
+                _cities.postValue(emptyList())
+            }
+        }
+    }
+
     fun sendDeleteAdvertisement() {
         viewModelScope.launch(dispatcher) {
             _showAdvertisementLoader.postValue(true)
@@ -100,6 +119,26 @@ class AdvertisementDetailViewModel(
                 _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
 
             is DeleteAdvertisementResult.NetworkError ->
+                _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
+    }
+
+    fun sendUpdateAdvertisement(ad: AdvertisementDomain) {
+        viewModelScope.launch(dispatcher) {
+            _showAdvertisementLoader.postValue(true)
+            handleUpdateAdvertisementResult(updateAdvertisement(ad))
+        }
+    }
+
+    private fun handleUpdateAdvertisementResult(result: UpdateAdvertisementResult) {
+        when (result) {
+            is UpdateAdvertisementResult.Success ->
+                _isOperationSuccessful.postValue(AdvertisementOperationSuccess.DELETE)
+
+            is UpdateAdvertisementResult.GenericError ->
+                _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+
+            is UpdateAdvertisementResult.NetworkError ->
                 _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
         }
     }

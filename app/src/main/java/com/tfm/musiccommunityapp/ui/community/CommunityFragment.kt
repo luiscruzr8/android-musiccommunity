@@ -20,6 +20,7 @@ import com.tfm.musiccommunityapp.ui.community.events.EventsFragment
 import com.tfm.musiccommunityapp.ui.community.opinions.OpinionsFragment
 import com.tfm.musiccommunityapp.ui.community.users.UsersFragment
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditEventDialog
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -109,6 +110,7 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
             is AdvertisementsFragment -> {
                 fragment.restartViewPager(searchTerm)
                 binding.fabAddItem.isVisible = true
+                setCreateAdvertisementDialog()
             }
 
             is DiscussionsFragment -> {
@@ -150,7 +152,16 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
                     }
                 }
                 CommunityViewModel.OperationSuccess.CREATE_ADVERTISEMENT_SUCCESS -> {
-                    Log.d("CommunityFragment", "Advertisement created successfully")
+                    alertDialogOneOption(
+                            requireContext(),
+                            getString(R.string.community_advertisement_created_title),
+                            null,
+                            getString(R.string.community_advertisement_created_message),
+                            getString(R.string.ok)
+                    ) {
+                        val action = CommunityFragmentDirections.actionCommunityFragmentToEventDetailFragment(operation.second)
+                        navigateSafe(action)
+                    }
                 }
                 CommunityViewModel.OperationSuccess.CREATE_DISCUSSION_SUCCESS -> {
                     Log.d("CommunityFragment", "Discussion created successfully")
@@ -172,6 +183,17 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
                 cities = cities,
             ) {
                 viewModel.sendCreateEvent(it)
+            }.show(this.parentFragmentManager, CreateEditEventDialog::class.java.simpleName)
+        }
+    }
+
+    private fun setCreateAdvertisementDialog() {
+        binding.fabAddItem.setOnClickListener {
+            CreateEditAdvertisementDialog(
+                advertisement = null,
+                cities = cities,
+            ) {
+                viewModel.sendCreateAdvertisement(it)
             }.show(this.parentFragmentManager, CreateEditEventDialog::class.java.simpleName)
         }
     }

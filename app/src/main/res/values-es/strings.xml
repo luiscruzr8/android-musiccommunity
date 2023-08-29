@@ -155,6 +155,15 @@
 
     <!-- Community - Advertisements screen -->
     <string name="community_advertisements_no_advertisements">No se han encontrado anuncios</string>
+    <string name="community_advertisements_title">Título</string>
+    <string name="community_advertisements_location">Ubicación</string>
+    <string name="community_advertisements_description">Descripción</string>
+    <string name="community_advertisements_phone">Número de teléfono</string>
+    <string name="community_advertisements_until">Hasta:</string>
+    <string name="community_advertisements_create_title">Nuevo anuncio</string>
+    <string name="community_advertisements_edit_title">Editar anuncio</string>
+    <string name="community_advertisement_created_title">Anuncio creado satisfactoriamente</string>
+    <string name="community_advertisement_created_message">erás redirigido al nuevo evento anuncio</string>
 
     <!-- Community - Opinions screen -->
     <string name="community_opinions_no_opinions">No se han encontrado opiniones</string>

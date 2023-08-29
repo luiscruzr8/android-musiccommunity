@@ -101,6 +101,7 @@ val viewModelModule = module {
             getCurrentUser = get(),
             updateAdvertisement = get(),
             deleteAdvertisement = get(),
+            getCities = get(),
             dispatcher = get()
         )
     }
