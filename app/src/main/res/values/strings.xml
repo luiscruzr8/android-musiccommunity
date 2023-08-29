@@ -114,6 +114,8 @@
     <string name="edit_screen_phone_number_incorrect_format">Phone number must have between 6–9 digits</string>
     <string name="edit_screen_bio">Biography</string>
     <string name="edit_screen_bio_incorrect_format">Bio may not be longer than 500 characters</string>
+    <string name="edit_screen_interests">Interests</string>
+    <string name="edit_screen_interests_hint">Interests (comma separated values)</string>
     <string name="edit_screen_save_button">Save</string>
     <string name="edit_screen_save_dialog_title">Confirm save</string>
     <string name="edit_screen_save_dialog_message">Would you like to save your changes?</string>

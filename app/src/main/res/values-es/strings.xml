@@ -114,6 +114,8 @@
     <string name="edit_screen_phone_number_required">Número de teléfono requerido</string>
     <string name="edit_screen_phone_number_incorrect_format">Número de teléfono debe tener entre 6–9 dígitos</string>
     <string name="edit_screen_bio">Biografía</string>
+    <string name="edit_screen_interests">Intereses</string>
+    <string name="edit_screen_interests_hint">Intereses (valores separados por coma)</string>
     <string name="edit_screen_bio_incorrect_format">Biografía no debe exceder los 500 caracteres</string>
     <string name="edit_screen_save_button">Guardar</string>
     <string name="edit_screen_save_dialog_title">Confirmar guardado</string>
