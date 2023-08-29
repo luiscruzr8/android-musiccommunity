@@ -30,6 +30,16 @@ internal fun GenericPostResponse.toDomain() = GenericPostDomain(
     tags = tags.map { it.toDomain() }
 )
 
+internal fun GenericPostDomain.toResponse() = GenericPostResponse(
+    id = id,
+    title = title,
+    description = description,
+    login = login,
+    type = postType,
+    creationDateTime = createdOn,
+    tags = tags.map { it.toResponse() }
+)
+
 internal data class ImageRequest(
     val file: Multipart
 )
@@ -200,4 +210,44 @@ internal fun OpinionDomain.toRequest() = OpinionPostResponse(
     scoreDto = score.toResponse(),
     creationDateTime = createdOn,
     tags = tags.map { it.toResponse() }
+)
+
+internal fun EventDomain.toGenericDomain() = GenericPostDomain(
+    id = id,
+    title = title,
+    description = description,
+    login = login,
+    postType = postType,
+    createdOn = createdOn,
+    tags = tags
+)
+
+internal fun AdvertisementDomain.toGenericDomain() = GenericPostDomain(
+    id = id,
+    title = title,
+    description = description,
+    login = login,
+    postType = postType,
+    createdOn = createdOn,
+    tags = tags
+)
+
+internal fun DiscussionDomain.toGenericDomain() = GenericPostDomain(
+    id = id,
+    title = title,
+    description = description,
+    login = login,
+    postType = postType,
+    createdOn = createdOn,
+    tags = tags
+)
+
+internal fun OpinionDomain.toGenericDomain() = GenericPostDomain(
+    id = id,
+    title = title,
+    description = description,
+    login = login,
+    postType = postType,
+    createdOn = createdOn,
+    tags = tags
 )
