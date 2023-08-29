@@ -132,9 +132,8 @@ class EventDetailViewModel(
 
     private fun handleUpdateEventResult(result: UpdateEventResult) {
         when (result) {
-            is UpdateEventResult.Success -> {
+            is UpdateEventResult.Success ->
                 _isOperationSuccessful.postValue(EventOperationSuccess.UPDATE)
-            }
 
             is UpdateEventResult.GenericError ->
                 _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")

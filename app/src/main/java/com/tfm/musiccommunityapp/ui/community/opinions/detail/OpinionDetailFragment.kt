@@ -11,7 +11,7 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.OpinionDetailFragmentBinding
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
-import com.tfm.musiccommunityapp.utils.formatDateTimeToString
+import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
 import com.tfm.musiccommunityapp.utils.viewBinding
@@ -70,7 +70,7 @@ class OpinionDetailFragment: BaseFragment(R.layout.opinion_detail_fragment) {
                     )
 
                     tvPostTitle.text = opinion.title
-                    tvCreationDate.text = opinion.createdOn.formatDateTimeToString()
+                    tvCreationDate.text = opinion.createdOn.formatDateToString()
                     tvCreationUser.text = opinion.login
 
                     tvFileName.text = opinion.score.name

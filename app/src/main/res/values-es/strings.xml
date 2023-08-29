@@ -163,13 +163,19 @@
     <string name="community_advertisements_create_title">Nuevo anuncio</string>
     <string name="community_advertisements_edit_title">Editar anuncio</string>
     <string name="community_advertisement_created_title">Anuncio creado satisfactoriamente</string>
-    <string name="community_advertisement_created_message">erás redirigido al nuevo evento anuncio</string>
+    <string name="community_advertisement_created_message">Serás redirigido al nuevo anuncio</string>
 
     <!-- Community - Opinions screen -->
     <string name="community_opinions_no_opinions">No se han encontrado opiniones</string>
 
     <!-- Community - Discussions screen -->
     <string name="community_discussions_no_discussions">No se han encontrado discusiones</string>
+    <string name="community_discussions_title">Título</string>
+    <string name="community_discussions_description">Descripción</string>
+    <string name="community_discussions_create_title">Nueva discusión</string>
+    <string name="community_discussions_edit_title">Editar discusión</string>
+    <string name="community_discussion_created_title">Discusión creada satisfactoriamente</string>
+    <string name="community_discussion_created_message">Serás redirigido a la nueva discusión</string>
 
 
     <!-- Navigation menu -->

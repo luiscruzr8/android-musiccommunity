@@ -169,6 +169,12 @@
 
     <!-- Community - Discussions screen -->
     <string name="community_discussions_no_discussions">No discussions found</string>
+    <string name="community_discussions_title">Title</string>
+    <string name="community_discussions_description">Description</string>
+    <string name="community_discussions_create_title">New discussion</string>
+    <string name="community_discussions_edit_title">Edit discussion</string>
+    <string name="community_discussion_created_title">Discussion successfully created</string>
+    <string name="community_discussion_created_message">You will be redirected to the new created discussion</string>
 
 
     <!-- Navigation menu -->

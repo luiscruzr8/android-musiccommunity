@@ -8,7 +8,7 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.OpinionItemRowBinding
 import com.tfm.musiccommunityapp.domain.model.OpinionDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
-import com.tfm.musiccommunityapp.utils.formatDateTimeToString
+import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipLabel
 
 class OpinionsAdapter(
@@ -70,7 +70,7 @@ class OpinionsAdapter(
                     getChipLabel(item.postType, context)
                 )
                 tvOpinionTitle.text = item.title
-                tvCreationDate.text = item.createdOn.formatDateTimeToString()
+                tvCreationDate.text = item.createdOn.formatDateToString()
                 item.tags.let { tags ->
                     if (tags.isNotEmpty()) {
                         tvRelatedTags.isVisible = true

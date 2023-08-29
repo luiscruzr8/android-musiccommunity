@@ -21,6 +21,7 @@ import com.tfm.musiccommunityapp.ui.community.opinions.OpinionsFragment
 import com.tfm.musiccommunityapp.ui.community.users.UsersFragment
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDialog
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditDiscussionDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditEventDialog
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -116,6 +117,7 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
             is DiscussionsFragment -> {
                 fragment.restartViewPager(searchTerm)
                 binding.fabAddItem.isVisible = true
+                setCreateDiscussionDialog()
             }
 
             is OpinionsFragment -> {
@@ -153,18 +155,27 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
                 }
                 CommunityViewModel.OperationSuccess.CREATE_ADVERTISEMENT_SUCCESS -> {
                     alertDialogOneOption(
-                            requireContext(),
-                            getString(R.string.community_advertisement_created_title),
-                            null,
-                            getString(R.string.community_advertisement_created_message),
-                            getString(R.string.ok)
+                        requireContext(),
+                        getString(R.string.community_advertisement_created_title),
+                        null,
+                        getString(R.string.community_advertisement_created_message),
+                        getString(R.string.ok)
                     ) {
-                        val action = CommunityFragmentDirections.actionCommunityFragmentToEventDetailFragment(operation.second)
+                        val action = CommunityFragmentDirections.actionCommunityFragmentToAdvertisementDetailFragment(operation.second)
                         navigateSafe(action)
                     }
                 }
                 CommunityViewModel.OperationSuccess.CREATE_DISCUSSION_SUCCESS -> {
-                    Log.d("CommunityFragment", "Discussion created successfully")
+                    alertDialogOneOption(
+                        requireContext(),
+                        getString(R.string.community_discussion_created_title),
+                        null,
+                        getString(R.string.community_discussion_created_message),
+                        getString(R.string.ok)
+                    ) {
+                        val action = CommunityFragmentDirections.actionCommunityFragmentToDiscussionDetailFragment(operation.second)
+                        navigateSafe(action)
+                    }
                 }
             }
         }
@@ -194,7 +205,17 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
                 cities = cities,
             ) {
                 viewModel.sendCreateAdvertisement(it)
-            }.show(this.parentFragmentManager, CreateEditEventDialog::class.java.simpleName)
+            }.show(this.parentFragmentManager, CreateEditAdvertisementDialog::class.java.simpleName)
+        }
+    }
+
+    private fun setCreateDiscussionDialog() {
+        binding.fabAddItem.setOnClickListener {
+            CreateEditDiscussionDialog(
+                    discussion = null,
+            ) {
+                viewModel.sendCreateDiscussion(it)
+            }.show(this.parentFragmentManager, CreateEditDiscussionDialog::class.java.simpleName)
         }
     }
 

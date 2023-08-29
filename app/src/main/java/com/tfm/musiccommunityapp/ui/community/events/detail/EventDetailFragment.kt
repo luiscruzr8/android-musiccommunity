@@ -16,6 +16,7 @@ import com.tfm.musiccommunityapp.domain.model.EventDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditEventDialog
 import com.tfm.musiccommunityapp.utils.formatDateTimeToString
+import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
 import com.tfm.musiccommunityapp.utils.viewBinding
@@ -79,7 +80,7 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
                     )
 
                     tvPostTitle.text = event.title
-                    tvCreationDate.text = event.createdOn.formatDateTimeToString()
+                    tvCreationDate.text = event.createdOn.formatDateToString()
                     tvCreationUser.text = event.login
 
                     tvLocation.text = event.cityName
@@ -166,8 +167,8 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
 
     private fun setEditEventDialog() {
         CreateEditEventDialog(
-                event = viewModel.getEventLiveData().value,
-                cities = cities,
+            event = viewModel.getEventLiveData().value,
+            cities = cities,
         ) {
             viewModel.sendUpdateEvent(it)
         }.show(this.parentFragmentManager, CreateEditEventDialog::class.java.simpleName)

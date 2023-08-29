@@ -8,12 +8,16 @@ import com.tfm.musiccommunityapp.domain.interactor.discussion.DeleteDiscussionRe
 import com.tfm.musiccommunityapp.domain.interactor.discussion.DeleteDiscussionUseCase
 import com.tfm.musiccommunityapp.domain.interactor.discussion.GetDiscussionByIdResult
 import com.tfm.musiccommunityapp.domain.interactor.discussion.GetDiscussionByIdUseCase
+import com.tfm.musiccommunityapp.domain.interactor.discussion.UpdateDiscussionResult
 import com.tfm.musiccommunityapp.domain.interactor.discussion.UpdateDiscussionUseCase
+import com.tfm.musiccommunityapp.domain.interactor.event.UpdateEventResult
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageResult
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageUseCase
 import com.tfm.musiccommunityapp.domain.model.DiscussionDomain
+import com.tfm.musiccommunityapp.domain.model.EventDomain
+import com.tfm.musiccommunityapp.ui.community.events.detail.EventDetailViewModel
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -100,6 +104,26 @@ class DiscussionDetailViewModel(
                 _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
 
             is DeleteDiscussionResult.NetworkError ->
+                _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
+    }
+
+    fun sendUpdateDiscussion(discussion: DiscussionDomain) {
+        viewModelScope.launch(dispatcher) {
+            _showDiscussionLoader.postValue(true)
+            handleUpdateDiscussionResult(updateDiscussion(discussion))
+        }
+    }
+
+    private fun handleUpdateDiscussionResult(result: UpdateDiscussionResult) {
+        when (result) {
+            is UpdateDiscussionResult.Success ->
+                _isOperationSuccessful.postValue(DiscussionOperationSuccess.UPDATE)
+
+            is UpdateDiscussionResult.GenericError ->
+                _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+
+            is UpdateDiscussionResult.NetworkError ->
                 _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
         }
     }

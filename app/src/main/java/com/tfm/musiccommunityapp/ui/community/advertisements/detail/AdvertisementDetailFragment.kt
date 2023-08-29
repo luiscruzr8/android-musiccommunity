@@ -14,7 +14,6 @@ import com.tfm.musiccommunityapp.databinding.AdvertisementDetailFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDialog
-import com.tfm.musiccommunityapp.utils.formatDateTimeToString
 import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
@@ -79,7 +78,7 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
                     )
 
                     tvPostTitle.text = advertisement.title
-                    tvCreationDate.text = advertisement.createdOn.formatDateTimeToString()
+                    tvCreationDate.text = advertisement.createdOn.formatDateToString()
                     tvCreationUser.text = advertisement.login
 
                     tvLocation.text = advertisement.cityName
@@ -146,7 +145,8 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
                     AdvertisementDetailViewModel.AdvertisementOperationSuccess.DELETE ->
                         findNavController().popBackStack()
 
-                    AdvertisementDetailViewModel.AdvertisementOperationSuccess.UPDATE -> {}
+                    AdvertisementDetailViewModel.AdvertisementOperationSuccess.UPDATE ->
+                        viewModel.setUpAdvertisement(args.id)
                 }
             }
         }
