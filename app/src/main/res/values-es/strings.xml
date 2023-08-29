@@ -10,6 +10,7 @@
     <string name="accept">Aceptar</string>
     <string name="decline">Declinar</string>
     <string name="discard">Descartar</string>
+    <string name="dismiss">Cerrar</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="user_alert">Alerta</string>
@@ -17,8 +18,8 @@
     <string name="username_tools">Nombre de usuario muy largo</string>
     <string name="post_title_tools">Este es un título muy muy muy muy largo para un post que quiero publicar en esta red social</string>
     <string name="post_location_tools">Esto es una ubicación</string>
-    <string name="post_start_end_tools">De 11/11/11 19:00/nA 12/12/12 20:00</string>
-    <string name="post_start_end_text">De %1$s/nA %2$s</string>
+    <string name="post_start_end_tools">De 11/11/11 19:00\nA 12/12/12 20:00</string>
+    <string name="post_start_end_text">De %1$s\nA %2$s</string>
     <string name="post_end_tools">Hasta 11/11/11</string>
     <string name="post_end_text">Hasta %1$s</string>
     <string name="default_id">#999</string>
@@ -35,6 +36,14 @@
     <string name="event">Evento</string>
     <string name="discussion">Discusión</string>
     <string name="opinion">Opinión</string>
+    <string name="date">Fecha</string>
+    <string name="date_hint">Seleccione fecha</string>
+    <string name="time">Time</string>
+    <string name="time_hint">Seleccione hora</string>
+    <string name="tags">Tags</string>
+    <string name="tags_hint">Tags (valores separados por coma)</string>
+    <string name="error_empty_field">Valor requerido</string>
+    <string name="error_invalid_format_field">Formato incorrecto</string>
 
     <!-- PopUp option post menu -->
     <string name="popup_edit_option">Editar</string>
@@ -134,15 +143,39 @@
 
     <!-- Community - Events screen -->
     <string name="community_events_no_events">No se han encontrado eventos</string>
+    <string name="community_events_title">Título</string>
+    <string name="community_events_location">Ubicación</string>
+    <string name="community_events_description">Descripción</string>
+    <string name="community_events_from">Del:</string>
+    <string name="community_events_to">Al:</string>
+    <string name="community_events_create_title">Nuevo evento</string>
+    <string name="community_events_edit_title">Editar evento</string>
+    <string name="community_event_created_title">Evento creado satisfactoriamente</string>
+    <string name="community_event_created_message">Serás redirigido al nuevo evento creado</string>
 
     <!-- Community - Advertisements screen -->
     <string name="community_advertisements_no_advertisements">No se han encontrado anuncios</string>
+    <string name="community_advertisements_title">Título</string>
+    <string name="community_advertisements_location">Ubicación</string>
+    <string name="community_advertisements_description">Descripción</string>
+    <string name="community_advertisements_phone">Número de teléfono</string>
+    <string name="community_advertisements_until">Hasta:</string>
+    <string name="community_advertisements_create_title">Nuevo anuncio</string>
+    <string name="community_advertisements_edit_title">Editar anuncio</string>
+    <string name="community_advertisement_created_title">Anuncio creado satisfactoriamente</string>
+    <string name="community_advertisement_created_message">Serás redirigido al nuevo anuncio</string>
 
     <!-- Community - Opinions screen -->
     <string name="community_opinions_no_opinions">No se han encontrado opiniones</string>
 
     <!-- Community - Discussions screen -->
     <string name="community_discussions_no_discussions">No se han encontrado discusiones</string>
+    <string name="community_discussions_title">Título</string>
+    <string name="community_discussions_description">Descripción</string>
+    <string name="community_discussions_create_title">Nueva discusión</string>
+    <string name="community_discussions_edit_title">Editar discusión</string>
+    <string name="community_discussion_created_title">Discusión creada satisfactoriamente</string>
+    <string name="community_discussion_created_message">Serás redirigido a la nueva discusión</string>
 
 
     <!-- Navigation menu -->

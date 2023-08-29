@@ -8,7 +8,7 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.AdvertisementItemRowBinding
 import com.tfm.musiccommunityapp.domain.model.AdvertisementDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
-import com.tfm.musiccommunityapp.utils.formatDateTimeToString
+import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipLabel
 
 class AdvertisementsAdapter(
@@ -72,7 +72,7 @@ class AdvertisementsAdapter(
                 )
                 tvAdvertisementTitle.text = item.title
                 tvAdvertisementLocation.text = item.cityName
-                tvCreationDate.text = item.createdOn.formatDateTimeToString()
+                tvCreationDate.text = item.createdOn.formatDateToString()
                 item.tags.let { tags ->
                     if (tags.isNotEmpty()) {
                         tvRelatedTags.isVisible = true

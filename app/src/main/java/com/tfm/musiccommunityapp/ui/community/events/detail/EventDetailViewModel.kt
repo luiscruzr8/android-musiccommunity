@@ -4,15 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesResult
+import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesUseCase
 import com.tfm.musiccommunityapp.domain.interactor.event.DeleteEventResult
 import com.tfm.musiccommunityapp.domain.interactor.event.DeleteEventUseCase
 import com.tfm.musiccommunityapp.domain.interactor.event.GetEventByIdResult
 import com.tfm.musiccommunityapp.domain.interactor.event.GetEventByIdUseCase
+import com.tfm.musiccommunityapp.domain.interactor.event.UpdateEventResult
 import com.tfm.musiccommunityapp.domain.interactor.event.UpdateEventUseCase
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageResult
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageUseCase
+import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.EventDomain
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineDispatcher
@@ -24,12 +28,14 @@ class EventDetailViewModel(
     private val getCurrentUser: GetCurrentUserUseCase,
     private val updateEvent: UpdateEventUseCase,
     private val deleteEvent: DeleteEventUseCase,
+    private val getCities: GetCitiesUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     enum class EventOperationSuccess { UPDATE, DELETE }
 
     private val _event: MutableLiveData<EventDomain?> = MutableLiveData()
+    private val _cities: MutableLiveData<List<CityDomain>> = MutableLiveData()
     private val _eventImageURL: SingleLiveEvent<String> = SingleLiveEvent()
     private val _getEventByIdError: SingleLiveEvent<String> = SingleLiveEvent()
     private val _showEventLoader: MutableLiveData<Boolean> = MutableLiveData()
@@ -38,6 +44,7 @@ class EventDetailViewModel(
         SingleLiveEvent()
 
     fun getEventLiveData() = _event as LiveData<EventDomain?>
+    fun getCitiesLiveData() = _cities as LiveData<List<CityDomain>>
     fun getPostImageLiveData() = _eventImageURL as LiveData<String>
     fun getEventByIdError() = _getEventByIdError as LiveData<String>
     fun isEventLoading() = _showEventLoader as LiveData<Boolean>
@@ -51,6 +58,7 @@ class EventDetailViewModel(
             handleGetEventByIdResult(getEventById(eventId))
             handleGetPostImageResult(getPostImageByPostId(eventId))
             handleGetCurrentUserResult(getCurrentUser())
+            handleGetCitiesResult(getCities(null))
         }
     }
 
@@ -84,6 +92,17 @@ class EventDetailViewModel(
         }
     }
 
+    private fun handleGetCitiesResult(result: GetCitiesResult) {
+        when (result) {
+            is GetCitiesResult.Success -> {
+                _cities.postValue(result.cities)
+            }
+            else -> {
+                _cities.postValue(emptyList())
+            }
+        }
+    }
+
     fun sendDeleteEvent() {
         viewModelScope.launch(dispatcher) {
             _showEventLoader.postValue(true)
@@ -100,6 +119,26 @@ class EventDetailViewModel(
                 _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
 
             is DeleteEventResult.NetworkError ->
+                _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
+    }
+
+    fun sendUpdateEvent(event: EventDomain) {
+        viewModelScope.launch(dispatcher) {
+            _showEventLoader.postValue(true)
+            handleUpdateEventResult(updateEvent(event))
+        }
+    }
+
+    private fun handleUpdateEventResult(result: UpdateEventResult) {
+        when (result) {
+            is UpdateEventResult.Success ->
+                _isOperationSuccessful.postValue(EventOperationSuccess.UPDATE)
+
+            is UpdateEventResult.GenericError ->
+                _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+
+            is UpdateEventResult.NetworkError ->
                 _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
         }
     }

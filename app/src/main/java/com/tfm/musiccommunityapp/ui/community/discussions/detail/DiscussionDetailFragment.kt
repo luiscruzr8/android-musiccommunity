@@ -12,7 +12,8 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.DiscussionDetailFragmentBinding
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
-import com.tfm.musiccommunityapp.utils.formatDateTimeToString
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditDiscussionDialog
+import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
 import com.tfm.musiccommunityapp.utils.viewBinding
@@ -73,7 +74,7 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
                     )
 
                     tvPostTitle.text = discussion.title
-                    tvCreationDate.text = discussion.createdOn.formatDateTimeToString()
+                    tvCreationDate.text = discussion.createdOn.formatDateToString()
                     tvCreationUser.text = discussion.login
 
                     tvDescription.text = discussion.description
@@ -102,7 +103,7 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
 
                 popup.setOnMenuItemClickListener { item: MenuItem ->
                     when (item.itemId) {
-                        R.id.edit_option -> {}
+                        R.id.edit_option -> setEditDiscussionDialog()
                         R.id.delete_option -> deleteDiscussion()
                         R.id.recommend_option -> {}
                     }
@@ -134,7 +135,8 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
                     DiscussionDetailViewModel.DiscussionOperationSuccess.DELETE ->
                         findNavController().popBackStack()
 
-                    DiscussionDetailViewModel.DiscussionOperationSuccess.UPDATE -> {}
+                    DiscussionDetailViewModel.DiscussionOperationSuccess.UPDATE ->
+                        viewModel.setUpDiscussion(args.id)
                 }
             }
         }
@@ -142,6 +144,14 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
 
     private fun deleteDiscussion() {
         viewModel.sendDeleteDiscussion()
+    }
+
+    private fun setEditDiscussionDialog() {
+        CreateEditDiscussionDialog(
+            discussion = viewModel.getDiscussionLiveData().value
+        ) {
+            viewModel.sendUpdateDiscussion(it)
+        }.show(this.parentFragmentManager, CreateEditDiscussionDialog::class.java.simpleName)
     }
 
 }

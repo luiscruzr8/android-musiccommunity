@@ -3,7 +3,9 @@ package com.tfm.musiccommunityapp.ui.community
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -17,6 +19,10 @@ import com.tfm.musiccommunityapp.ui.community.discussions.DiscussionsFragment
 import com.tfm.musiccommunityapp.ui.community.events.EventsFragment
 import com.tfm.musiccommunityapp.ui.community.opinions.OpinionsFragment
 import com.tfm.musiccommunityapp.ui.community.users.UsersFragment
+import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDialog
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditDiscussionDialog
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditEventDialog
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,6 +44,8 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
 
         viewModel.setUpCities()
         observeCitiesResult()
+        observeOperationResult()
+        observeOperationErrors()
 
         val adapter = setUpAdapter()
         binding.communityViewPager.adapter = adapter
@@ -97,16 +105,19 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
             is EventsFragment -> {
                 fragment.restartViewPager(searchTerm)
                 binding.fabAddItem.isVisible = true
+                setCreateEventDialog()
             }
 
             is AdvertisementsFragment -> {
                 fragment.restartViewPager(searchTerm)
                 binding.fabAddItem.isVisible = true
+                setCreateAdvertisementDialog()
             }
 
             is DiscussionsFragment -> {
                 fragment.restartViewPager(searchTerm)
                 binding.fabAddItem.isVisible = true
+                setCreateDiscussionDialog()
             }
 
             is OpinionsFragment -> {
@@ -124,6 +135,87 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
     private fun observeCitiesResult() {
         viewModel.getCitiesLiveData().observe(viewLifecycleOwner) { cityList ->
             cities = cityList
+        }
+    }
+
+    private fun observeOperationResult() {
+        viewModel.getOperationResult().observe(viewLifecycleOwner) { operation ->
+            when (operation.first) {
+                CommunityViewModel.OperationSuccess.CREATE_EVENT_SUCCESS -> {
+                    alertDialogOneOption(
+                        requireContext(),
+                        getString(R.string.community_event_created_title),
+                        null,
+                        getString(R.string.community_event_created_message),
+                        getString(R.string.ok)
+                    ) {
+                        val action = CommunityFragmentDirections.actionCommunityFragmentToEventDetailFragment(operation.second)
+                        navigateSafe(action)
+                    }
+                }
+                CommunityViewModel.OperationSuccess.CREATE_ADVERTISEMENT_SUCCESS -> {
+                    alertDialogOneOption(
+                        requireContext(),
+                        getString(R.string.community_advertisement_created_title),
+                        null,
+                        getString(R.string.community_advertisement_created_message),
+                        getString(R.string.ok)
+                    ) {
+                        val action = CommunityFragmentDirections.actionCommunityFragmentToAdvertisementDetailFragment(operation.second)
+                        navigateSafe(action)
+                    }
+                }
+                CommunityViewModel.OperationSuccess.CREATE_DISCUSSION_SUCCESS -> {
+                    alertDialogOneOption(
+                        requireContext(),
+                        getString(R.string.community_discussion_created_title),
+                        null,
+                        getString(R.string.community_discussion_created_message),
+                        getString(R.string.ok)
+                    ) {
+                        val action = CommunityFragmentDirections.actionCommunityFragmentToDiscussionDetailFragment(operation.second)
+                        navigateSafe(action)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observeOperationErrors() {
+        viewModel.getCreateItemError().observe(viewLifecycleOwner) { error ->
+            Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun setCreateEventDialog() {
+        binding.fabAddItem.setOnClickListener {
+            CreateEditEventDialog(
+                event = null,
+                cities = cities,
+            ) {
+                viewModel.sendCreateEvent(it)
+            }.show(this.parentFragmentManager, CreateEditEventDialog::class.java.simpleName)
+        }
+    }
+
+    private fun setCreateAdvertisementDialog() {
+        binding.fabAddItem.setOnClickListener {
+            CreateEditAdvertisementDialog(
+                advertisement = null,
+                cities = cities,
+            ) {
+                viewModel.sendCreateAdvertisement(it)
+            }.show(this.parentFragmentManager, CreateEditAdvertisementDialog::class.java.simpleName)
+        }
+    }
+
+    private fun setCreateDiscussionDialog() {
+        binding.fabAddItem.setOnClickListener {
+            CreateEditDiscussionDialog(
+                    discussion = null,
+            ) {
+                viewModel.sendCreateDiscussion(it)
+            }.show(this.parentFragmentManager, CreateEditDiscussionDialog::class.java.simpleName)
         }
     }
 

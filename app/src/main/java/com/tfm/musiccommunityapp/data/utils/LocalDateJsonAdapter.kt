@@ -7,28 +7,20 @@ import java.io.IOException
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 internal class LocalDateJsonAdapter : TypeAdapter<LocalDate>() {
 
-    private val format = SimpleDateFormat("yyyy-MM-dd")
+    private val formatter = DateTimeFormatter.ISO_LOCAL_DATE
 
-    override fun write(out: JsonWriter, value: LocalDate) {
-        try {
-            out.value(format.format(value))
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+    @Throws(IOException::class)
+    override fun write(out: JsonWriter, value: LocalDate?) {
+        out.value(value?.format(formatter))
     }
 
-    override fun read(value: JsonReader?): LocalDate? {
-        return if (value != null) {
-            try {
-                LocalDate.parse(value.nextString())
-            } catch (e: ParseException) {
-                e.printStackTrace()
-                null
-            }
-        } else null
+    @Throws(IOException::class)
+    override fun read(input: JsonReader): LocalDate? {
+        return LocalDate.parse(input.nextString(), formatter)
     }
 
 }
