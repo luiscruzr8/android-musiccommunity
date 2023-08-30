@@ -15,44 +15,44 @@ class DiscussionsAdapter(
     private val onDiscussionClicked: (DiscussionDomain) -> Unit
 ) : RecyclerView.Adapter<DiscussionsAdapter.DiscussionViewHolder>() {
 
-        private val discussions: MutableList<DiscussionDomain> = mutableListOf()
+    private val discussions: MutableList<DiscussionDomain> = mutableListOf()
 
-        init {
-            setHasStableIds(false)
+    init {
+        setHasStableIds(false)
+    }
+
+    override fun getItemCount(): Int = discussions.size
+
+    override fun getItemId(position: Int): Long = discussions.getOrNull(position)?.id ?: 0
+
+    fun setDiscussions(discussionList: List<DiscussionDomain>) {
+        discussions.apply {
+            clear()
+            addAll(discussionList)
         }
+        notifyDataSetChanged()
+    }
 
-        override fun getItemCount(): Int = discussions.size
+    override fun onBindViewHolder(
+        holder: DiscussionsAdapter.DiscussionViewHolder,
+        position: Int
+    ) {
+        val context: Context = holder.itemView.context
+        holder.bind(discussions[position], context)
+    }
 
-        override fun getItemId(position: Int): Long = discussions.getOrNull(position)?.id ?: 0
-
-        fun setDiscussions(discussionList: List<DiscussionDomain>) {
-            discussions.apply {
-                clear()
-                addAll(discussionList)
-            }
-            notifyDataSetChanged()
-        }
-
-        override fun onBindViewHolder(
-            holder: DiscussionsAdapter.DiscussionViewHolder,
-            position: Int
-        ) {
-            val context: Context = holder.itemView.context
-            holder.bind(discussions[position], context)
-        }
-
-        override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int
-        ): DiscussionsAdapter.DiscussionViewHolder =
-            DiscussionViewHolder(
-                parent.bindingInflate(R.layout.discussion_item_row, false)
-            ) { onDiscussionClicked(it) }
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): DiscussionsAdapter.DiscussionViewHolder =
+        DiscussionViewHolder(
+            parent.bindingInflate(R.layout.discussion_item_row, false)
+        ) { onDiscussionClicked(it) }
 
     inner class DiscussionViewHolder(
         private val binding: DiscussionItemRowBinding,
         callback: (DiscussionDomain) -> Unit
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.root.setOnClickListener { callback(discussions[bindingAdapterPosition]) }

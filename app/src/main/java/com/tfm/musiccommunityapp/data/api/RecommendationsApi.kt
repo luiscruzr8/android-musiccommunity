@@ -14,7 +14,7 @@ import retrofit2.http.Query
 internal interface RecommendationsApi {
 
     companion object {
-        const val API_RECOMMENDATIONS_URL = BuildConfig.BACKEND_URL + "/recommendations"
+        const val API_RECOMMENDATIONS_URL = BuildConfig.BACKEND_URL + "recommendations"
     }
 
     @GET(API_RECOMMENDATIONS_URL)

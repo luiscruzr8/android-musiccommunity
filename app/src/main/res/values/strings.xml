@@ -29,6 +29,7 @@
     <string name="post_related_tags_label">Tags:</string>
     <string name="chip_post">#%1$d %2$s</string>
     <string name="chip_user">#%1$d</string>
+    <string name="chip_rating">%1$d / 10</string>
     <string name="user">User</string>
     <string name="recommendation">Recommendation</string>
     <string name="advertisement">Advertisement</string>
@@ -179,6 +180,10 @@
     <string name="community_discussions_edit_title">Edit discussion</string>
     <string name="community_discussion_created_title">Discussion successfully created</string>
     <string name="community_discussion_created_message">You will be redirected to the new created discussion</string>
+
+    <!-- Community - Recommendations screen -->
+    <string name="community_recommendations_no_recommendations">No recommendations found</string>
+    <string name="community_recommendations_is_top_10_checkbox">Show \'Top 10 recommendations\'</string>
 
 
     <!-- Navigation menu -->

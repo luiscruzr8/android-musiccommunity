@@ -3,9 +3,9 @@ package com.tfm.musiccommunityapp.ui.community
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -18,6 +18,7 @@ import com.tfm.musiccommunityapp.ui.community.advertisements.AdvertisementsFragm
 import com.tfm.musiccommunityapp.ui.community.discussions.DiscussionsFragment
 import com.tfm.musiccommunityapp.ui.community.events.EventsFragment
 import com.tfm.musiccommunityapp.ui.community.opinions.OpinionsFragment
+import com.tfm.musiccommunityapp.ui.community.recommendations.RecommendationsFragment
 import com.tfm.musiccommunityapp.ui.community.users.UsersFragment
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDialog
@@ -32,11 +33,13 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
     private val viewModel by viewModel<CommunityViewModel>()
 
     private var searchTerm = ""
+    private var isTop10Selected = false
     private var cities = emptyList<CityDomain>()
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putCharSequence(SEARCH_TERM, binding.searchEditText.text)
+        outState.putCharSequence(IS_TOP_TEN_SELECTED, binding.isTop10CheckBox.isChecked.toString())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +55,14 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
 
         if (savedInstanceState != null) {
             searchTerm = savedInstanceState.getCharSequence(SEARCH_TERM, "").toString()
+            isTop10Selected = savedInstanceState.getBoolean(IS_TOP_TEN_SELECTED, false)
             binding.searchEditText.setText(searchTerm)
+            binding.isTop10CheckBox.isChecked = isTop10Selected
+        }
+
+        binding.isTop10CheckBox.setOnCheckedChangeListener { _, isChecked ->
+            isTop10Selected = isChecked
+            setUpTab(adapter.getFragmentOnPosition(binding.communityViewPager.currentItem))
         }
 
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
@@ -65,7 +75,7 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
-        binding.materialButton.setOnClickListener {
+        binding.submitSearchButton.setOnClickListener {
             setUpTab(adapter.getFragmentOnPosition(binding.communityViewPager.currentItem))
         }
 
@@ -86,12 +96,36 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
 
     private fun setUpAdapter():ViewPagerAdapter {
         val adapter = ViewPagerAdapter(this)
-        adapter.addFragment(UsersFragment(), getString(R.string.community_tab_users), resources.getDrawable(R.drawable.ic_tab_users))
-        adapter.addFragment(AdvertisementsFragment(), getString(R.string.community_tab_advertisements), resources.getDrawable(R.drawable.ic_tab_advertisement))
-        adapter.addFragment(EventsFragment(), getString(R.string.community_tab_events), resources.getDrawable(R.drawable.ic_tab_events))
-        adapter.addFragment(DiscussionsFragment(), getString(R.string.community_tab_discussions), resources.getDrawable(R.drawable.ic_tab_discussions))
-        adapter.addFragment(OpinionsFragment(), getString(R.string.community_tab_opinions), resources.getDrawable(R.drawable.ic_tab_opinions))
-        //adapter.addFragment(RatingsFragment(), getString(R.string.community_tab_recommendations), resources.getDrawable(R.drawable.ic_tab_recommendations))
+        adapter.addFragment(
+            UsersFragment(),
+            getString(R.string.community_tab_users),
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_tab_users)
+        )
+        adapter.addFragment(
+            AdvertisementsFragment(),
+            getString(R.string.community_tab_advertisements),
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_tab_advertisement)
+        )
+        adapter.addFragment(
+            EventsFragment(),
+            getString(R.string.community_tab_events),
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_tab_events)
+        )
+        adapter.addFragment(
+            DiscussionsFragment(),
+            getString(R.string.community_tab_discussions),
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_tab_discussions)
+        )
+        adapter.addFragment(
+            OpinionsFragment(),
+            getString(R.string.community_tab_opinions),
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_tab_opinions)
+        )
+        adapter.addFragment(
+            RecommendationsFragment(),
+            getString(R.string.community_tab_recommendations),
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_tab_recommendations)
+        )
         return adapter
     }
 
@@ -100,34 +134,42 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
             is UsersFragment -> {
                 fragment.restartViewPager(searchTerm)
                 binding.fabAddItem.isVisible = false
+                binding.isTop10CheckBox.isVisible = false
             }
 
             is EventsFragment -> {
                 fragment.restartViewPager(searchTerm)
                 binding.fabAddItem.isVisible = true
+                binding.isTop10CheckBox.isVisible = false
                 setCreateEventDialog()
             }
 
             is AdvertisementsFragment -> {
                 fragment.restartViewPager(searchTerm)
                 binding.fabAddItem.isVisible = true
+                binding.isTop10CheckBox.isVisible = false
                 setCreateAdvertisementDialog()
             }
 
             is DiscussionsFragment -> {
                 fragment.restartViewPager(searchTerm)
                 binding.fabAddItem.isVisible = true
+                binding.isTop10CheckBox.isVisible = false
                 setCreateDiscussionDialog()
             }
 
             is OpinionsFragment -> {
                 fragment.restartViewPager(searchTerm)
                 binding.fabAddItem.isVisible = true
+                binding.isTop10CheckBox.isVisible = false
             }
-            /*is RatingsFragment -> {
-                fragment.restartViewPager(searchTerm)
-                binding.fabAddItem.isVisible = true
-            }*/
+
+            is RecommendationsFragment -> {
+                fragment.restartViewPager(isTop10Selected, searchTerm)
+                binding.fabAddItem.isVisible = false
+                binding.isTop10CheckBox.isVisible = true
+            }
+
             else -> {}
         }
     }
@@ -221,5 +263,6 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
 
     companion object {
         const val SEARCH_TERM = "searchTerm"
+        const val IS_TOP_TEN_SELECTED = "isTop10Selected"
     }
 }
