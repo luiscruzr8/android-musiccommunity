@@ -68,6 +68,30 @@ import com.tfm.musiccommunityapp.domain.interactor.post.GetUserPostsUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetUserPostsUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.post.UploadPostImageUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.UploadPostImageUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.DeleteRecommendationUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.DeleteRecommendationUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetRecommendationByIdUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetRecommendationByIdUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetRecommendationsUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetRecommendationsUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetUserRecommendationsUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetUserRecommendationsUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.RateRecommendationUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.RateRecommendationUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.UpdateRecommendationUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.UpdateRecommendationUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.score.DeleteScoreUseCase
+import com.tfm.musiccommunityapp.domain.interactor.score.DeleteScoreUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.score.GetScoreFileUseCase
+import com.tfm.musiccommunityapp.domain.interactor.score.GetScoreFileUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.score.GetScoreInfoByIdUseCase
+import com.tfm.musiccommunityapp.domain.interactor.score.GetScoreInfoByIdUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.score.GetUserScoresUseCase
+import com.tfm.musiccommunityapp.domain.interactor.score.GetUserScoresUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.score.UploadScoreUseCase
+import com.tfm.musiccommunityapp.domain.interactor.score.UploadScoreUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.search.GetPostsByTagUseCase
 import com.tfm.musiccommunityapp.domain.interactor.search.GetPostsByTagUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.search.GetUsersByTagUseCase
@@ -411,6 +435,86 @@ val useCaseModule = module {
             cityRepository = get()
         )
     } bind GetClosestCitiesUseCase::class
+
+    //endregion
+
+    //region Recommendations
+
+    single {
+        CreateRecommendationUseCaseImpl(
+            recommendationsRepository = get()
+        )
+    } bind CreateRecommendationUseCase::class
+
+    single {
+        DeleteRecommendationUseCaseImpl(
+            recommendationsRepository = get()
+        )
+    } bind DeleteRecommendationUseCase::class
+
+    single {
+        GetRecommendationByIdUseCaseImpl(
+            recommendationsRepository = get()
+        )
+    } bind GetRecommendationByIdUseCase::class
+
+    single {
+        GetRecommendationsUseCaseImpl(
+            recommendationsRepository = get()
+        )
+    } bind GetRecommendationsUseCase::class
+
+    single {
+        GetUserRecommendationsUseCaseImpl(
+                recommendationsRepository = get()
+        )
+    } bind GetUserRecommendationsUseCase::class
+
+    single {
+        RateRecommendationUseCaseImpl(
+            recommendationsRepository = get()
+        )
+    } bind RateRecommendationUseCase::class
+
+    single {
+        UpdateRecommendationUseCaseImpl(
+            recommendationsRepository = get()
+        )
+    } bind UpdateRecommendationUseCase::class
+
+    //endregion
+
+    //region Scores
+
+    single {
+        GetUserScoresUseCaseImpl(
+            scoreRepository = get()
+        )
+    } bind GetUserScoresUseCase::class
+
+    single {
+        GetScoreInfoByIdUseCaseImpl(
+            scoreRepository = get()
+        )
+    } bind GetScoreInfoByIdUseCase::class
+
+    single {
+        DeleteScoreUseCaseImpl(
+            scoreRepository = get()
+        )
+    } bind DeleteScoreUseCase::class
+
+    single {
+        UploadScoreUseCaseImpl(
+            scoreRepository = get()
+        )
+    } bind UploadScoreUseCase::class
+
+    single {
+        GetScoreFileUseCaseImpl(
+            scoreRepository = get()
+        )
+    } bind GetScoreFileUseCase::class
 
     //endregion
 
