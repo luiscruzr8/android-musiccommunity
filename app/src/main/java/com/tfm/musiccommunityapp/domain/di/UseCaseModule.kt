@@ -82,6 +82,16 @@ import com.tfm.musiccommunityapp.domain.interactor.recommendations.RateRecommend
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.RateRecommendationUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.UpdateRecommendationUseCase
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.UpdateRecommendationUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.score.DeleteScoreUseCase
+import com.tfm.musiccommunityapp.domain.interactor.score.DeleteScoreUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.score.GetScoreFileUseCase
+import com.tfm.musiccommunityapp.domain.interactor.score.GetScoreFileUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.score.GetScoreInfoByIdUseCase
+import com.tfm.musiccommunityapp.domain.interactor.score.GetScoreInfoByIdUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.score.GetUserScoresUseCase
+import com.tfm.musiccommunityapp.domain.interactor.score.GetUserScoresUseCaseImpl
+import com.tfm.musiccommunityapp.domain.interactor.score.UploadScoreUseCase
+import com.tfm.musiccommunityapp.domain.interactor.score.UploadScoreUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.search.GetPostsByTagUseCase
 import com.tfm.musiccommunityapp.domain.interactor.search.GetPostsByTagUseCaseImpl
 import com.tfm.musiccommunityapp.domain.interactor.search.GetUsersByTagUseCase
@@ -471,6 +481,40 @@ val useCaseModule = module {
             recommendationsRepository = get()
         )
     } bind UpdateRecommendationUseCase::class
+
+    //endregion
+
+    //region Scores
+
+    single {
+        GetUserScoresUseCaseImpl(
+            scoreRepository = get()
+        )
+    } bind GetUserScoresUseCase::class
+
+    single {
+        GetScoreInfoByIdUseCaseImpl(
+            scoreRepository = get()
+        )
+    } bind GetScoreInfoByIdUseCase::class
+
+    single {
+        DeleteScoreUseCaseImpl(
+            scoreRepository = get()
+        )
+    } bind DeleteScoreUseCase::class
+
+    single {
+        UploadScoreUseCaseImpl(
+            scoreRepository = get()
+        )
+    } bind UploadScoreUseCase::class
+
+    single {
+        GetScoreFileUseCaseImpl(
+            scoreRepository = get()
+        )
+    } bind GetScoreFileUseCase::class
 
     //endregion
 
