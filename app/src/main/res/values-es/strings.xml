@@ -50,6 +50,7 @@
     <string name="popup_edit_option">Editar</string>
     <string name="popup_delete_option">Eliminar</string>
     <string name="popup_recommend_option">Recomendar</string>
+    <string name="popup_rate_option">Puntuar</string>
 
     <!-- Home screen -->
     <string name="home_screen_title">Bienvenido a Music Community</string>
