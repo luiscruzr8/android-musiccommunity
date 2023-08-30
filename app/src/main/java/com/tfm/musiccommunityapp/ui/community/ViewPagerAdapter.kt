@@ -8,9 +8,9 @@ class ViewPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
 
     private val fragmentList = ArrayList<Fragment>()
     private val tabTitleList = ArrayList<String>()
-    private val tabIconList = ArrayList<Drawable>()
+    private val tabIconList = ArrayList<Drawable?>()
 
-    fun addFragment(fragment: Fragment, title: String, icon: Drawable) {
+    fun addFragment(fragment: Fragment, title: String, icon: Drawable?) {
         fragmentList.add(fragment)
         tabTitleList.add(title)
         tabIconList.add(icon)
@@ -22,7 +22,7 @@ class ViewPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
 
     fun getPageTitle(position: Int): CharSequence = tabTitleList[position]
 
-    fun getPageIcon(position: Int): Drawable = tabIconList[position]
+    fun getPageIcon(position: Int): Drawable? = tabIconList[position]
 
     fun getFragmentOnPosition(position: Int): Fragment = fragmentList[position]
 }

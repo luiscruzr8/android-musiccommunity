@@ -3,7 +3,6 @@ package com.tfm.musiccommunityapp.data.api
 import com.tfm.musiccommunityapp.BuildConfig
 import com.tfm.musiccommunityapp.data.api.model.ScoreResponse
 import okhttp3.MultipartBody
-import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -17,7 +16,7 @@ import java.io.File
 internal interface ScoresApi {
 
     companion object {
-        const val API_SCORES_URL = BuildConfig.BACKEND_URL + "/scores"
+        const val API_SCORES_URL = BuildConfig.BACKEND_URL + "scores"
     }
 
     @GET(API_SCORES_URL)
