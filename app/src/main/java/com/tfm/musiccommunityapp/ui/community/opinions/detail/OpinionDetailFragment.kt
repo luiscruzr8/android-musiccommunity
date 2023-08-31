@@ -9,8 +9,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
+import com.tfm.musiccommunityapp.data.api.model.toGenericDomain
 import com.tfm.musiccommunityapp.databinding.OpinionDetailFragmentBinding
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
 import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
@@ -103,7 +105,7 @@ class OpinionDetailFragment: BaseFragment(R.layout.opinion_detail_fragment) {
                     when (item.itemId) {
                         R.id.edit_option -> {}
                         R.id.delete_option -> deleteOpinion()
-                        R.id.recommend_option -> {}
+                        R.id.recommend_option -> setCreateRecommendationDialog()
                     }
                     true
                 }
@@ -134,6 +136,9 @@ class OpinionDetailFragment: BaseFragment(R.layout.opinion_detail_fragment) {
                         findNavController().popBackStack()
 
                     OpinionDetailViewModel.OpinionOperationSuccess.UPDATE -> {}
+
+                    OpinionDetailViewModel.OpinionOperationSuccess.RECOMMEND ->
+                        findNavController().popBackStack()
                 }
             }
         }
@@ -141,6 +146,17 @@ class OpinionDetailFragment: BaseFragment(R.layout.opinion_detail_fragment) {
 
     private fun deleteOpinion() {
         viewModel.sendDeleteOpinion()
+    }
+
+    private fun setCreateRecommendationDialog() {
+        viewModel.getOpinionLiveData().value?.toGenericDomain()?.let {
+            CreateEditRecommendationDialog(
+                    recommendation = null,
+                    post = it,
+            ) { recommendation ->
+                viewModel.sendCreateRecommendation(recommendation)
+            }.show(this.parentFragmentManager, CreateEditRecommendationDialog::class.java.simpleName)
+        }
     }
 
 }

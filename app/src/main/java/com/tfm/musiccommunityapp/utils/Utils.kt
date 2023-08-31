@@ -15,7 +15,8 @@ fun getChipLabel(text: String, context: Context): String =
         "Announcement" -> context.getString(R.string.advertisement)
         "Event" -> context.getString(R.string.event)
         "Discussion" -> context.getString(R.string.discussion)
-        else -> context.getString(R.string.opinion)
+        "Opinion" -> context.getString(R.string.opinion)
+        else -> text
     }
 
 fun getChipColor(text: String, context: Context): ColorStateList =

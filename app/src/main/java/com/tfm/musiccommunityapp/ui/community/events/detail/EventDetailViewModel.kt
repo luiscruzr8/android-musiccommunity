@@ -16,8 +16,12 @@ import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageResult
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationResult
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationUseCase
 import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.EventDomain
+import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
+import com.tfm.musiccommunityapp.ui.community.advertisements.detail.AdvertisementDetailViewModel
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -29,6 +33,7 @@ class EventDetailViewModel(
     private val updateEvent: UpdateEventUseCase,
     private val deleteEvent: DeleteEventUseCase,
     private val getCities: GetCitiesUseCase,
+    private val createRecommendation: CreateRecommendationUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -140,6 +145,27 @@ class EventDetailViewModel(
 
             is UpdateEventResult.NetworkError ->
                 _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
+    }
+
+    fun sendCreateRecommendation(recommendation: RecommendationDomain) {
+        viewModelScope.launch(dispatcher) {
+            _showEventLoader.postValue(true)
+            handleCreateRecommendationResult(createRecommendation(recommendation))
+        }
+    }
+
+    private fun handleCreateRecommendationResult(result: CreateRecommendationResult) {
+        when(result) {
+            is CreateRecommendationResult.Success -> {
+                _isOperationSuccessful.postValue(EventOperationSuccess.RECOMMEND)
+            }
+            is CreateRecommendationResult.GenericError -> {
+                _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+            is CreateRecommendationResult.NetworkError -> {
+                _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
         }
     }
 

@@ -104,7 +104,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add"
         tools:visibility="visible"
-        android:contentDescription="@string/community_fab_add" />
+        android:contentDescription="@string/community_fab_add"
+        style="@style/myFAB"/>
 
     <CheckBox
         android:id="@+id/isTop10CheckBox"

@@ -30,7 +30,7 @@
     <string name="post_related_tags_label">Etiquetas:</string>
     <string name="chip_post">#%1$d %2$s</string>
     <string name="chip_user">#%1$d</string>
-    <string name="chip_rating">%1$d / 10</string>
+    <string name="chip_rating">%1$.1f / 10</string>
     <string name="user">Usuario</string>
     <string name="recommendation">Recomendación</string>
     <string name="advertisement">Anuncio</string>
@@ -186,6 +186,14 @@
     <!-- Community - Recommendations screen -->
     <string name="community_recommendations_no_recommendations">No se han encontrado recomendaciones</string>
     <string name="community_recommendations_is_top_10_checkbox">Mostrar \'Top 10 recomendaciones\'</string>
+    <string name="community_recommendations_title">Título</string>
+    <string name="community_recommendations_message">Mensaje</string>
+    <string name="community_recommendations_create_title">Nueva recomendación</string>
+    <string name="community_recommendations_edit_title">Editar recomendación</string>
+    <string name="community_recommendations_created_title">Recomendación creada satisfactoriamente</string>
+    <string name="community_recommendations_created_message">Serás redirigido a la nueva recomendación</string>
+    <string name="community_recommendations_rating_dialog_title">Puntúa esta recomendación</string>
+    <string name="community_recommendations_rating_value">Tu puntuación es: %1$d / 10</string>
 
 
     <!-- Navigation menu -->

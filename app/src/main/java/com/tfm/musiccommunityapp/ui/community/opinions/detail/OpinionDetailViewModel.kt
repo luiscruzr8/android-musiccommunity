@@ -11,7 +11,11 @@ import com.tfm.musiccommunityapp.domain.interactor.opinion.DeleteOpinionUseCase
 import com.tfm.musiccommunityapp.domain.interactor.opinion.GetOpinionByIdResult
 import com.tfm.musiccommunityapp.domain.interactor.opinion.GetOpinionByIdUseCase
 import com.tfm.musiccommunityapp.domain.interactor.opinion.UpdateOpinionUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationResult
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationUseCase
 import com.tfm.musiccommunityapp.domain.model.OpinionDomain
+import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
+import com.tfm.musiccommunityapp.ui.community.discussions.detail.DiscussionDetailViewModel
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -22,10 +26,11 @@ class OpinionDetailViewModel(
     private val getCurrentUser: GetCurrentUserUseCase,
     private val updateOpinion: UpdateOpinionUseCase,
     private val deleteOpinion: DeleteOpinionUseCase,
+    private val createRecommendation: CreateRecommendationUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    enum class OpinionOperationSuccess { UPDATE, DELETE }
+    enum class OpinionOperationSuccess { UPDATE, DELETE, RECOMMEND }
 
     private val _opinion: MutableLiveData<OpinionDomain?> = MutableLiveData()
     private val _getOpinionByIdError: SingleLiveEvent<String> = SingleLiveEvent()
@@ -99,6 +104,27 @@ class OpinionDetailViewModel(
 
             is DeleteOpinionResult.NetworkError ->
                 _getOpinionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
+    }
+
+    fun sendCreateRecommendation(recommendation: RecommendationDomain) {
+        viewModelScope.launch(dispatcher) {
+            _showOpinionLoader.postValue(true)
+            handleCreateRecommendationResult(createRecommendation(recommendation))
+        }
+    }
+
+    private fun handleCreateRecommendationResult(result: CreateRecommendationResult) {
+        when(result) {
+            is CreateRecommendationResult.Success -> {
+                _isOperationSuccessful.postValue(OpinionOperationSuccess.RECOMMEND)
+            }
+            is CreateRecommendationResult.GenericError -> {
+                _getOpinionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+            is CreateRecommendationResult.NetworkError -> {
+                _getOpinionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
         }
     }
 }

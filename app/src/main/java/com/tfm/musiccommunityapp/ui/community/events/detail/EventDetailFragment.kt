@@ -10,11 +10,13 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
+import com.tfm.musiccommunityapp.data.api.model.toGenericDomain
 import com.tfm.musiccommunityapp.databinding.EventDetailFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.EventDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditEventDialog
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
 import com.tfm.musiccommunityapp.utils.formatDateTimeToString
 import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
@@ -118,7 +120,7 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
                     when (item.itemId) {
                         R.id.edit_option -> setEditEventDialog()
                         R.id.delete_option -> deleteEvent()
-                        R.id.recommend_option -> {}
+                        R.id.recommend_option -> setCreateRecommendationDialog()
                     }
                     true
                 }
@@ -151,9 +153,8 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
                     EventDetailViewModel.EventOperationSuccess.UPDATE ->
                         viewModel.setUpEvent(args.id)
 
-                    EventDetailViewModel.EventOperationSuccess.RECOMMEND -> {
-                        //TODO
-                    }
+                    EventDetailViewModel.EventOperationSuccess.RECOMMEND ->
+                        findNavController().popBackStack()
                 }
             }
         }
@@ -176,6 +177,17 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
         ) {
             viewModel.sendUpdateEvent(it)
         }.show(this.parentFragmentManager, CreateEditEventDialog::class.java.simpleName)
+    }
+
+    private fun setCreateRecommendationDialog() {
+        viewModel.getEventLiveData().value?.toGenericDomain()?.let {
+            CreateEditRecommendationDialog(
+                    recommendation = null,
+                    post = it,
+            ) { recommendation ->
+                viewModel.sendCreateRecommendation(recommendation)
+            }.show(this.parentFragmentManager, CreateEditRecommendationDialog::class.java.simpleName)
+        }
     }
 
 }

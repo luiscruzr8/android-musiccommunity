@@ -29,7 +29,7 @@
     <string name="post_related_tags_label">Tags:</string>
     <string name="chip_post">#%1$d %2$s</string>
     <string name="chip_user">#%1$d</string>
-    <string name="chip_rating">%1$d / 10</string>
+    <string name="chip_rating">%1$.1f / 10</string>
     <string name="user">User</string>
     <string name="recommendation">Recommendation</string>
     <string name="advertisement">Advertisement</string>
@@ -185,6 +185,14 @@
     <!-- Community - Recommendations screen -->
     <string name="community_recommendations_no_recommendations">No recommendations found</string>
     <string name="community_recommendations_is_top_10_checkbox">Show \'Top 10 recommendations\'</string>
+    <string name="community_recommendations_title">Title</string>
+    <string name="community_recommendations_message">Message</string>
+    <string name="community_recommendations_create_title">New discussion</string>
+    <string name="community_recommendations_edit_title">New discussion</string>
+    <string name="community_recommendations_created_title">Discussion successfully created</string>
+    <string name="community_recommendations_created_message">You will be redirected to the new created discussion</string>
+    <string name="community_recommendations_rating_dialog_title">Rate this recommendation</string>
+    <string name="community_recommendations_rating_value">Your rating is: %1$d / 10</string>
 
 
     <!-- Navigation menu -->

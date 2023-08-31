@@ -79,7 +79,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
-                android:backgroundTint="@color/discussionColor"
                 android:textAlignment="center"
                 android:textColor="@color/onPrimaryColor"
                 app:layout_constraintStart_toStartOf="parent"

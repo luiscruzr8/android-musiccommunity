@@ -56,11 +56,20 @@
         </item>
 
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
+
+        <item name="colorControlNormal">@color/semiTransparent</item>
+        <item name="colorControlActivated">@color/recommendationColor</item>
+
     </style>
 
     <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
         <item name="android:popupBackground">@color/secondaryColor</item>
         <item name="android:textColor">@color/onSecondaryColor</item>
+    </style>
+
+    <style name="myFAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/primaryColor</item>
+        <item name="tint">@color/onPrimaryColor</item>
     </style>
 
 </resources>

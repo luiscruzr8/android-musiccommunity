@@ -60,6 +60,11 @@ class RecommendationsAdapter (
 
         fun bind(item: RecommendationDomain, context: Context) {
             binding.apply {
+                tvRecommendationChip.text = String.format(
+                    context.getString(R.string.chip_post),
+                    item.id,
+                    getChipLabel(context.getString(R.string.recommendation), context)
+                )
                 tvRecommendationTitle.text = item.recommendationTitle
                 tvRecCreationDate.text = item.createdOn.formatDateToString()
                 tvRecommendationRating.text = String.format(context.getString(R.string.chip_rating), item.rating)

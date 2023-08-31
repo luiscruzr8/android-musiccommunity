@@ -12,6 +12,8 @@ import com.tfm.musiccommunityapp.domain.interactor.recommendations.DeleteRecomme
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.DeleteRecommendationUseCase
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetRecommendationByIdResult
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetRecommendationByIdUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.RateRecommendationResult
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.RateRecommendationUseCase
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.UpdateRecommendationResult
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.UpdateRecommendationUseCase
 import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
@@ -25,6 +27,7 @@ class RecommendationDetailViewModel(
     private val getCurrentUser: GetCurrentUserUseCase,
     private val updateRecommendation: UpdateRecommendationUseCase,
     private val deleteRecommendation: DeleteRecommendationUseCase,
+    private val rateRecommendation: RateRecommendationUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -135,6 +138,29 @@ class RecommendationDetailViewModel(
             }
 
             is UpdateRecommendationResult.GenericError -> {
+                _getRecommendationByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+        }
+    }
+
+    fun sendRateRecommendation(id: Long, rating: Int) {
+        viewModelScope.launch(dispatcher) {
+            _showRecommendationLoader.postValue(true)
+            handleRateRecommendationResult(rateRecommendation(id, rating))
+        }
+    }
+
+    private fun handleRateRecommendationResult(result: RateRecommendationResult) {
+        when (result) {
+            is RateRecommendationResult.Success -> {
+                _isOperationSuccessful.postValue(RecommendationOperationSuccess.RATE)
+            }
+
+            is RateRecommendationResult.NetworkError -> {
+                _getRecommendationByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+
+            is RateRecommendationResult.GenericError -> {
                 _getRecommendationByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
             }
         }
