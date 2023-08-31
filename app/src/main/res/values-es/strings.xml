@@ -29,6 +29,7 @@
     <string name="interest_tools">interesLarguisimo</string>
     <string name="post_related_tags_label">Etiquetas:</string>
     <string name="chip_post">#%1$d %2$s</string>
+    <string name="chip_comment_user">#%1$d %2$s</string>
     <string name="chip_user">#%1$d</string>
     <string name="chip_rating">%1$.1f / 10</string>
     <string name="user">Usuario</string>
@@ -45,6 +46,13 @@
     <string name="tags_hint">Tags (valores separados por coma)</string>
     <string name="error_empty_field">Valor requerido</string>
     <string name="error_invalid_format_field">Formato incorrecto</string>
+    <string name="commented_on">comentó el %1$s :</string>
+    <string name="responded_on">respondió el %1$s :</string>
+    <string name="comment_section">Comentarios:</string>
+    <string name="add_comment">Añadir comentario</string>
+    <string name="respond_comment">Responder</string>
+    <string name="no_comments">No hay comentarios aún. sé el primero en comentar!</string>
+    <string name="no_responses">No hay respuestas aún</string>
 
     <!-- PopUp option post menu -->
     <string name="popup_edit_option">Editar</string>

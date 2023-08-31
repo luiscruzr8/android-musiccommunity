@@ -110,6 +110,9 @@ val viewModelModule = module {
             deleteAdvertisement = get(),
             getCities = get(),
             createRecommendation = get(),
+            getPostComments = get(),
+            postOrRespondComment = get(),
+            deleteComment = get(),
             dispatcher = get()
         )
     }
