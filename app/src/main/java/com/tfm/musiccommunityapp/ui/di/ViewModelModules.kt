@@ -10,6 +10,7 @@ import com.tfm.musiccommunityapp.ui.community.events.detail.EventDetailViewModel
 import com.tfm.musiccommunityapp.ui.community.opinions.OpinionsViewModel
 import com.tfm.musiccommunityapp.ui.community.opinions.detail.OpinionDetailViewModel
 import com.tfm.musiccommunityapp.ui.community.recommendations.RecommendationsViewModel
+import com.tfm.musiccommunityapp.ui.community.recommendations.detail.RecommendationDetailViewModel
 import com.tfm.musiccommunityapp.ui.community.users.UsersViewModel
 import com.tfm.musiccommunityapp.ui.home.HomeScreenViewModel
 import com.tfm.musiccommunityapp.ui.login.LoginViewModel
@@ -145,6 +146,17 @@ val viewModelModule = module {
     viewModel {
         RecommendationsViewModel(
             getRecommendations = get(),
+            dispatcher = get()
+        )
+    }
+
+    viewModel {
+        RecommendationDetailViewModel(
+            getRecommendationById = get(),
+            getPostImageByPostId = get(),
+            getCurrentUser = get(),
+            updateRecommendation = get(),
+            deleteRecommendation = get(),
             dispatcher = get()
         )
     }
