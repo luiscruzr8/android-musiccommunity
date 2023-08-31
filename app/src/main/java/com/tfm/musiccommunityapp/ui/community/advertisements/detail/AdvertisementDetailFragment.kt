@@ -20,6 +20,7 @@ import com.tfm.musiccommunityapp.ui.community.comments.CommentsAdapter
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
+import com.tfm.musiccommunityapp.ui.dialogs.community.PostOrRespondCommentDialog
 import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
@@ -44,16 +45,6 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
 
         val advertisementId = args.id
         viewModel.setUpAdvertisement(advertisementId)
-
-        binding.rvComments.apply {
-            adapter = commentsAdapter
-            addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    DividerItemDecoration.VERTICAL
-                )
-            )
-        }
 
         observeLoader()
         observePostImageResult()
@@ -175,6 +166,8 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
                     AdvertisementDetailViewModel.AdvertisementOperationSuccess.RECOMMEND ->
                         findNavController().popBackStack()
 
+                    AdvertisementDetailViewModel.AdvertisementOperationSuccess.COMMENT ->
+                        viewModel.reloadPostComments(args.id)
                 }
             }
         }
@@ -192,7 +185,16 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
                 binding.noCommentsFound.isVisible = true
             } else {
                 binding.noCommentsFound.isVisible = false
-                commentsAdapter.setComments(commentList)
+                binding.rvComments.apply {
+                    commentsAdapter.setComments(commentList)
+                    adapter = commentsAdapter
+                    addItemDecoration(
+                            DividerItemDecoration(
+                                    requireContext(),
+                                    DividerItemDecoration.VERTICAL
+                            )
+                    )
+                }
             }
         }
     }
@@ -225,14 +227,18 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
     }
 
     private fun onAddComment() {
-        Log.e("AdvertisementDetail", "onAddCommentClicked")
+        PostOrRespondCommentDialog {
+            viewModel.sendPostComment(it)
+        }.show(this.parentFragmentManager, PostOrRespondCommentDialog::class.java.simpleName)
     }
 
     private fun onResponseComment(comment: CommentDomain) {
-        Log.e("AdvertisementDetail", "onResponseCommentClicked $comment")
+        PostOrRespondCommentDialog {
+            viewModel.sendResponseComment(comment.id, it)
+        }.show(this.parentFragmentManager, PostOrRespondCommentDialog::class.java.simpleName)
     }
 
     private fun onDeleteComment(comment: CommentDomain) {
-        Log.e("AdvertisementDetail", "onDeleteCommentClicked $comment")
+        viewModel.sendDeleteComment(comment)
     }
 }

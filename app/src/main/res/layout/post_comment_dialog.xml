@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surfaceBrightColor"
+        style="@style/Theme.MaterialComponents.BottomSheetDialog">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dismissButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:icon="@drawable/ic_clear"
+            style="@style/Widget.Material3.Button.TextButton.Dialog.Icon"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submitComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="@string/popup_rate_option"
+            app:icon="@drawable/ic_send_comment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Widget.Material3.Button.OutlinedButton"/>
+
+        <!-- form -->
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPostComment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:text="@string/comment_dialog_title"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textColor="@color/onSurfaceVariantColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/submitComment" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/commentText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:labelFor="@string/comment_hint"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPostComment">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/commentTextEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/comment_hint"
+                android:maxLines="5"
+                android:textColor="@color/primaryColor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -12,9 +12,11 @@ import com.tfm.musiccommunityapp.domain.interactor.advertisement.UpdateAdvertise
 import com.tfm.musiccommunityapp.domain.interactor.advertisement.UpdateAdvertisementUseCase
 import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesResult
 import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesUseCase
+import com.tfm.musiccommunityapp.domain.interactor.comment.DeleteCommentResult
 import com.tfm.musiccommunityapp.domain.interactor.comment.DeleteCommentUseCase
 import com.tfm.musiccommunityapp.domain.interactor.comment.GetPostCommentsResult
 import com.tfm.musiccommunityapp.domain.interactor.comment.GetPostCommentsUseCase
+import com.tfm.musiccommunityapp.domain.interactor.comment.PostOrRespondCommentResult
 import com.tfm.musiccommunityapp.domain.interactor.comment.PostOrRespondCommentUseCase
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCase
@@ -44,7 +46,7 @@ class AdvertisementDetailViewModel(
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    enum class AdvertisementOperationSuccess { UPDATE, DELETE, RECOMMEND }
+    enum class AdvertisementOperationSuccess { UPDATE, DELETE, RECOMMEND, COMMENT }
 
     private val _advertisement: MutableLiveData<AdvertisementDomain?> = MutableLiveData()
     private val _cities: MutableLiveData<List<CityDomain>> = MutableLiveData()
@@ -73,6 +75,12 @@ class AdvertisementDetailViewModel(
             handleGetPostImageResult(getPostImageByPostId(advertisementId))
             handleGetCurrentUserResult(getCurrentUser())
             handleGetCitiesResult(getCities(null))
+            handleGetCommentsResult(getPostComments(advertisementId))
+        }
+    }
+
+    fun reloadPostComments(advertisementId: Long) {
+        viewModelScope.launch(dispatcher) {
             handleGetCommentsResult(getPostComments(advertisementId))
         }
     }
@@ -191,5 +199,53 @@ class AdvertisementDetailViewModel(
             }
         }
     }
+
+    fun sendPostComment(comment: CommentDomain) {
+        viewModelScope.launch(dispatcher) {
+            handlePostCommentResult(postOrRespondComment(_advertisement.value?.id ?: 0, null, comment))
+        }
+    }
+
+    fun sendResponseComment(commentId: Long, comment: CommentDomain) {
+        viewModelScope.launch(dispatcher) {
+            handlePostCommentResult(postOrRespondComment(_advertisement.value?.id ?: 0, commentId, comment))
+        }
+    }
+
+    fun sendDeleteComment(comment: CommentDomain) {
+        viewModelScope.launch(dispatcher) {
+            handleDeleteComment(deleteComment(_advertisement.value?.id ?: 0, comment.id))
+        }
+    }
+
+    private fun handlePostCommentResult(result: PostOrRespondCommentResult) {
+        when(result) {
+            is PostOrRespondCommentResult.Success -> {
+                _isOperationSuccessful.postValue(AdvertisementOperationSuccess.COMMENT)
+            }
+            is PostOrRespondCommentResult.GenericError -> {
+                _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+            is PostOrRespondCommentResult.NetworkError -> {
+                _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+        }
+    }
+
+    private fun handleDeleteComment(result: DeleteCommentResult) {
+        when(result) {
+            is DeleteCommentResult.Success -> {
+                _isOperationSuccessful.postValue(AdvertisementOperationSuccess.COMMENT)
+            }
+            is DeleteCommentResult.GenericError -> {
+                _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+            is DeleteCommentResult.NetworkError -> {
+                _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+        }
+    }
+
+
 
 }

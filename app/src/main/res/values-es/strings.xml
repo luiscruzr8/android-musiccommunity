@@ -53,6 +53,9 @@
     <string name="respond_comment">Responder</string>
     <string name="no_comments">No hay comentarios aún. sé el primero en comentar!</string>
     <string name="no_responses">No hay respuestas aún</string>
+    <string name="comment_hint">Comentario</string>
+    <string name="comment_dialog_title">Deja tu comentario o respuesta</string>
+    <string name="comment_dialog_button">Enviar</string>
 
     <!-- PopUp option post menu -->
     <string name="popup_edit_option">Editar</string>

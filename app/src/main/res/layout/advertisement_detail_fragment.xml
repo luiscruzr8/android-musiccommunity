@@ -235,12 +235,12 @@
             android:id="@+id/noCommentsFound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_margin="16dp"
             android:text="@string/no_comments"
             android:textAppearance="?attr/textAppearanceBodyLarge"
             android:textColor="@color/onSurfaceVariantColor"
             android:visibility="gone"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -250,17 +250,16 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvComments"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="60dp"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_height="200dp"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

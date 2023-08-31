@@ -44,7 +44,7 @@ class ResponsesAdapter(
         viewType: Int
     ): ResponsesAdapter.ResponseViewHolder =
         ResponseViewHolder(
-            parent.bindingInflate(R.layout.comment_item_row, false)
+            parent.bindingInflate(R.layout.response_item_row, false)
         ) { onDeleteCommentClicked(it) }
 
     inner class ResponseViewHolder(
@@ -62,7 +62,7 @@ class ResponsesAdapter(
                     context.getString(R.string.chip_comment_user), item.id, item.login
                 )
                 tvCommentedOn.text = String.format(
-                    context.getString(R.string.commented_on),
+                    context.getString(R.string.responded_on),
                     item.commentedOn.formatDateTimeToString()
                 )
                 tvResponseText.text = item.text
