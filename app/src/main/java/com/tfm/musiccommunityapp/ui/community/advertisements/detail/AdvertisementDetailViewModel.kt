@@ -16,8 +16,12 @@ import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageResult
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationResult
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationUseCase
 import com.tfm.musiccommunityapp.domain.model.AdvertisementDomain
 import com.tfm.musiccommunityapp.domain.model.CityDomain
+import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
+import com.tfm.musiccommunityapp.ui.community.discussions.detail.DiscussionDetailViewModel
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -29,6 +33,7 @@ class AdvertisementDetailViewModel(
     private val updateAdvertisement: UpdateAdvertisementUseCase,
     private val deleteAdvertisement: DeleteAdvertisementUseCase,
     private val getCities: GetCitiesUseCase,
+    private val createRecommendation: CreateRecommendationUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -140,6 +145,27 @@ class AdvertisementDetailViewModel(
 
             is UpdateAdvertisementResult.NetworkError ->
                 _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
+    }
+
+    fun sendCreateRecommendation(recommendation: RecommendationDomain) {
+        viewModelScope.launch(dispatcher) {
+            _showAdvertisementLoader.postValue(true)
+            handleCreateRecommendationResult(createRecommendation(recommendation))
+        }
+    }
+
+    private fun handleCreateRecommendationResult(result: CreateRecommendationResult) {
+        when(result) {
+            is CreateRecommendationResult.Success -> {
+                _isOperationSuccessful.postValue(AdvertisementOperationSuccess.RECOMMEND)
+            }
+            is CreateRecommendationResult.GenericError -> {
+                _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+            is CreateRecommendationResult.NetworkError -> {
+                _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
         }
     }
 }

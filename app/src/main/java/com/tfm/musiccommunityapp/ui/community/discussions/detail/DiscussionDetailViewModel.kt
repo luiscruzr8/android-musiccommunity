@@ -15,8 +15,11 @@ import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageResult
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationResult
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationUseCase
 import com.tfm.musiccommunityapp.domain.model.DiscussionDomain
 import com.tfm.musiccommunityapp.domain.model.EventDomain
+import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
 import com.tfm.musiccommunityapp.ui.community.events.detail.EventDetailViewModel
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineDispatcher
@@ -28,6 +31,7 @@ class DiscussionDetailViewModel(
     private val getCurrentUser: GetCurrentUserUseCase,
     private val updateDiscussion: UpdateDiscussionUseCase,
     private val deleteDiscussion: DeleteDiscussionUseCase,
+    private val createRecommendation: CreateRecommendationUseCase,
     private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
@@ -127,4 +131,26 @@ class DiscussionDetailViewModel(
                 _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
         }
     }
+
+    fun sendCreateRecommendation(recommendation: RecommendationDomain) {
+        viewModelScope.launch(dispatcher) {
+            _showDiscussionLoader.postValue(true)
+            handleCreateRecommendationResult(createRecommendation(recommendation))
+        }
+    }
+
+    private fun handleCreateRecommendationResult(result: CreateRecommendationResult) {
+        when(result) {
+            is CreateRecommendationResult.Success -> {
+                _isOperationSuccessful.postValue(DiscussionOperationSuccess.RECOMMEND)
+            }
+            is CreateRecommendationResult.GenericError -> {
+                _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+            is CreateRecommendationResult.NetworkError -> {
+                _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+        }
+    }
+
 }

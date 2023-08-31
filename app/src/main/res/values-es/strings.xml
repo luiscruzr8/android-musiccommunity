@@ -186,6 +186,12 @@
     <!-- Community - Recommendations screen -->
     <string name="community_recommendations_no_recommendations">No se han encontrado recomendaciones</string>
     <string name="community_recommendations_is_top_10_checkbox">Mostrar \'Top 10 recomendaciones\'</string>
+    <string name="community_recommendations_title">Título</string>
+    <string name="community_recommendations_message">Mensaje</string>
+    <string name="community_recommendations_create_title">Nueva recomendación</string>
+    <string name="community_recommendations_edit_title">Editar recomendación</string>
+    <string name="community_recommendations_created_title">Recomendación creada satisfactoriamente</string>
+    <string name="community_recommendations_created_message">Serás redirigido a la nueva recomendación</string>
 
 
     <!-- Navigation menu -->

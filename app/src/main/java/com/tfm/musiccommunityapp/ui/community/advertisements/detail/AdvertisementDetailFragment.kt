@@ -10,10 +10,12 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
+import com.tfm.musiccommunityapp.data.api.model.toGenericDomain
 import com.tfm.musiccommunityapp.databinding.AdvertisementDetailFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDialog
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
 import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
@@ -115,7 +117,7 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
                     when (item.itemId) {
                         R.id.edit_option -> setEditAdvertisementDialog()
                         R.id.delete_option -> deleteAdvertisement()
-                        R.id.recommend_option -> {}
+                        R.id.recommend_option -> setCreateRecommendationDialog()
                     }
                     true
                 }
@@ -148,9 +150,9 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
                     AdvertisementDetailViewModel.AdvertisementOperationSuccess.UPDATE ->
                         viewModel.setUpAdvertisement(args.id)
 
-                    AdvertisementDetailViewModel.AdvertisementOperationSuccess.RECOMMEND -> {
-                        //TODO
-                    }
+                    AdvertisementDetailViewModel.AdvertisementOperationSuccess.RECOMMEND ->
+                        findNavController().popBackStack()
+
                 }
             }
         }
@@ -173,5 +175,16 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
         ) {
             viewModel.sendUpdateAdvertisement(it)
         }.show(this.parentFragmentManager, CreateEditAdvertisementDialog::class.java.simpleName)
+    }
+
+    private fun setCreateRecommendationDialog() {
+        viewModel.getAdvertisementLiveData().value?.toGenericDomain()?.let {
+            CreateEditRecommendationDialog(
+                    recommendation = null,
+                    post = it,
+            ) { recommendation ->
+                viewModel.sendCreateRecommendation(recommendation)
+            }.show(this.parentFragmentManager, CreateEditRecommendationDialog::class.java.simpleName)
+        }
     }
 }
