@@ -56,6 +56,10 @@
         </item>
 
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
+
+        <item name="colorControlNormal">@color/semiTransparent</item>
+        <item name="colorControlActivated">@color/recommendationColor</item>
+
     </style>
 
     <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">

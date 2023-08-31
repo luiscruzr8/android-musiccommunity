@@ -191,6 +191,8 @@
     <string name="community_recommendations_edit_title">New discussion</string>
     <string name="community_recommendations_created_title">Discussion successfully created</string>
     <string name="community_recommendations_created_message">You will be redirected to the new created discussion</string>
+    <string name="community_recommendations_rating_dialog_title">Rate this recommendation</string>
+    <string name="community_recommendations_rating_value">Your rating is: %1$d / 10</string>
 
 
     <!-- Navigation menu -->

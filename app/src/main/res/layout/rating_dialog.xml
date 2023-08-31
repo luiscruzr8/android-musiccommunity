@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surfaceBrightColor"
+        style="@style/Theme.MaterialComponents.BottomSheetDialog">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dismissButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:icon="@drawable/ic_clear"
+            style="@style/Widget.Material3.Button.TextButton.Dialog.Icon"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submitRateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:text="@string/popup_rate_option"
+            app:icon="@drawable/ic_rating_recommendation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Widget.Material3.Button.OutlinedButton"/>
+
+        <!-- form -->
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/rateTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:gravity="center"
+            android:text="@string/community_recommendations_rating_dialog_title"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textColor="@color/onSurfaceVariantColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/submitRateButton" />
+
+        <RatingBar
+            android:id="@+id/recommendationRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:numStars="10"
+            android:rating="0"
+            android:stepSize="1"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/rateTitle"
+            app:layout_constraintStart_toStartOf="@+id/rateTitle"
+            app:layout_constraintTop_toBottomOf="@+id/rateTitle"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/ratingTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textColor="@color/onSurfaceVariantColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/rateTitle"
+            app:layout_constraintStart_toStartOf="@+id/rateTitle"
+            app:layout_constraintTop_toBottomOf="@+id/recommendationRatingBar"
+            tools:text="@string/community_recommendations_rating_value" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

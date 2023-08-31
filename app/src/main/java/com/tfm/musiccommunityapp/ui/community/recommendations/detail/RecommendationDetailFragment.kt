@@ -10,10 +10,10 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
-import com.tfm.musiccommunityapp.data.api.model.toGenericDomain
 import com.tfm.musiccommunityapp.databinding.RecommendationDetailFragmentBinding
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
+import com.tfm.musiccommunityapp.ui.dialogs.rating.RatingDialog
 import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
@@ -114,7 +114,7 @@ class RecommendationDetailFragment: BaseFragment(R.layout.recommendation_detail_
                     when (item.itemId) {
                         R.id.recommendation_edit_option -> setEditRecommendationDialog()
                         R.id.recommendation_delete_option -> deleteRecommendation()
-                        R.id.recommendation_rate_option -> {}
+                        R.id.recommendation_rate_option -> setRatingDialog()
                     }
                     true
                 }
@@ -159,11 +159,25 @@ class RecommendationDetailFragment: BaseFragment(R.layout.recommendation_detail_
     private fun setEditRecommendationDialog() {
         viewModel.getRecommendationLiveData().value?.let {
             CreateEditRecommendationDialog(
-                    recommendation = it,
-                    post = it.post,
+                recommendation = it,
+                post = it.post,
             ) { recommendation ->
                 viewModel.sendUpdateRecommendation(recommendation)
-            }.show(this.parentFragmentManager, CreateEditRecommendationDialog::class.java.simpleName)
+            }.show(
+                this.parentFragmentManager,
+                CreateEditRecommendationDialog::class.java.simpleName
+            )
+        }
+    }
+
+    private fun setRatingDialog() {
+        viewModel.getRecommendationLiveData().value?.let {
+            RatingDialog(
+                recommendationId = it.id,
+                onSaveClicked = { id, rating ->
+                    viewModel.sendRateRecommendation(id, rating)
+                }
+            ).show(this.parentFragmentManager, RatingDialog::class.java.simpleName)
         }
     }
 

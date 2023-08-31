@@ -192,6 +192,8 @@
     <string name="community_recommendations_edit_title">Editar recomendación</string>
     <string name="community_recommendations_created_title">Recomendación creada satisfactoriamente</string>
     <string name="community_recommendations_created_message">Serás redirigido a la nueva recomendación</string>
+    <string name="community_recommendations_rating_dialog_title">Puntúa esta recomendación</string>
+    <string name="community_recommendations_rating_value">Tu puntuación es: %1$d / 10</string>
 
 
     <!-- Navigation menu -->

@@ -161,6 +161,7 @@ val viewModelModule = module {
             getCurrentUser = get(),
             updateRecommendation = get(),
             deleteRecommendation = get(),
+            rateRecommendation = get(),
             dispatcher = get()
         )
     }
