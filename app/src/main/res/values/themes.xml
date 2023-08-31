@@ -63,4 +63,9 @@
         <item name="android:textColor">@color/onSecondaryColor</item>
     </style>
 
+    <style name="myFAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/primaryColor</item>
+        <item name="tint">@color/onPrimaryColor</item>
+    </style>
+
 </resources>

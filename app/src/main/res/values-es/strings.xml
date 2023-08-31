@@ -30,7 +30,7 @@
     <string name="post_related_tags_label">Etiquetas:</string>
     <string name="chip_post">#%1$d %2$s</string>
     <string name="chip_user">#%1$d</string>
-    <string name="chip_rating">%1$d / 10</string>
+    <string name="chip_rating">%1$.1f / 10</string>
     <string name="user">Usuario</string>
     <string name="recommendation">Recomendación</string>
     <string name="advertisement">Anuncio</string>

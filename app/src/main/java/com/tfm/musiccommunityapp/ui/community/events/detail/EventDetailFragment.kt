@@ -120,7 +120,7 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
                     when (item.itemId) {
                         R.id.edit_option -> setEditEventDialog()
                         R.id.delete_option -> deleteEvent()
-                        R.id.recommend_option -> {}
+                        R.id.recommend_option -> setCreateRecommendationDialog()
                     }
                     true
                 }

@@ -10,8 +10,10 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
+import com.tfm.musiccommunityapp.data.api.model.toGenericDomain
 import com.tfm.musiccommunityapp.databinding.RecommendationDetailFragmentBinding
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
 import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
@@ -60,6 +62,11 @@ class RecommendationDetailFragment: BaseFragment(R.layout.recommendation_detail_
         viewModel.getRecommendationLiveData().observe(viewLifecycleOwner) {
             it?.let { recommendation ->
                 binding.apply {
+                    tvRecommendationChip.text = String.format(
+                        getString(R.string.chip_post),
+                        recommendation.id,
+                        getChipLabel(getString(R.string.recommendation), requireContext())
+                    )
                     tvRecommendationTitle.text = recommendation.recommendationTitle
                     tvRecMessage.text = recommendation.recommendationMessage
                     tvRecCreationUser.text = recommendation.login
@@ -105,9 +112,9 @@ class RecommendationDetailFragment: BaseFragment(R.layout.recommendation_detail_
 
                 popup.setOnMenuItemClickListener { item: MenuItem ->
                     when (item.itemId) {
-                        R.id.edit_option -> {}
-                        R.id.delete_option -> {}
-                        R.id.recommend_option -> {}
+                        R.id.recommendation_edit_option -> setEditRecommendationDialog()
+                        R.id.recommendation_delete_option -> deleteRecommendation()
+                        R.id.recommendation_rate_option -> {}
                     }
                     true
                 }
@@ -134,9 +141,12 @@ class RecommendationDetailFragment: BaseFragment(R.layout.recommendation_detail_
         viewModel.getOperationSuccessfulLiveData().observe(viewLifecycleOwner) { type ->
             type?.let {
                 when (type) {
-                    RecommendationDetailViewModel.RecommendationOperationSuccess.DELETE -> {}
-                    RecommendationDetailViewModel.RecommendationOperationSuccess.UPDATE -> {}
-                    RecommendationDetailViewModel.RecommendationOperationSuccess.RATE -> {}
+                    RecommendationDetailViewModel.RecommendationOperationSuccess.DELETE ->
+                        findNavController().popBackStack()
+                    RecommendationDetailViewModel.RecommendationOperationSuccess.UPDATE ->
+                        viewModel.setUpRecommendation(args.id)
+                    RecommendationDetailViewModel.RecommendationOperationSuccess.RATE ->
+                        viewModel.setUpRecommendation(args.id)
                 }
             }
         }
@@ -147,7 +157,14 @@ class RecommendationDetailFragment: BaseFragment(R.layout.recommendation_detail_
     }
 
     private fun setEditRecommendationDialog() {
-        //TODO
+        viewModel.getRecommendationLiveData().value?.let {
+            CreateEditRecommendationDialog(
+                    recommendation = it,
+                    post = it.post,
+            ) { recommendation ->
+                viewModel.sendUpdateRecommendation(recommendation)
+            }.show(this.parentFragmentManager, CreateEditRecommendationDialog::class.java.simpleName)
+        }
     }
 
 }
