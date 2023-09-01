@@ -24,6 +24,7 @@
             android:id="@+id/tvDiscussionTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
@@ -31,10 +32,22 @@
             android:maxLines="2"
             android:textAppearance="?attr/textAppearanceTitleMedium"
             android:textColor="@color/onSurfaceColor"
+            app:layout_constraintBottom_toTopOf="@+id/divider2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDiscussionChip"
             tools:text="@string/post_title_tools" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:backgroundTint="@color/surfaceColor"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDiscussionTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiscussionTitle" />
 
         <TextView
             android:id="@+id/tvCreationDate"
@@ -58,7 +71,7 @@
             android:textColor="@color/onSurfaceVariantColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvDiscussionTitle"
-            app:layout_constraintTop_toBottomOf="@+id/tvDiscussionTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
         <com.tfm.musiccommunityapp.ui.custom.HorizontalTagsLayout
             android:id="@+id/relatedTagsLayout"
