@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,6 +15,7 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.ScoresFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.ScoreDomain
+import com.tfm.musiccommunityapp.utils.uriToFile
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,19 +35,27 @@ class ScoresFragment: BaseFragment(R.layout.scores_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (savedInstanceState != null) {
+            searchTerm = savedInstanceState.getCharSequence(SEARCH_TERM, "").toString()
+            binding.searchEditText.setText(searchTerm)
+        }
+
         viewModel.setUpScores(searchTerm)
 
         observeLoader()
         observeScoresResult()
         observeScoresError()
+        observeOperationSuccess()
+        observeUploadError()
 
+        setLayout()
+    }
 
-        //viewModel.setUpScores(getCurrentUserLogin(), null)
-
+    private fun setLayout() {
         binding.rvMyScores.apply {
             layoutManager = GridLayoutManager(
                 context,
-                1//2
+                1//2 seems to be really tight
             )
             adapter = scoresAdapter
             addItemDecoration(
@@ -53,6 +64,20 @@ class ScoresFragment: BaseFragment(R.layout.scores_fragment) {
                     DividerItemDecoration.VERTICAL
                 )
             )
+        }
+
+        binding.searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                searchTerm = s.toString()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        binding.submitSearchButton.setOnClickListener {
+            searchTerm = binding.searchEditText.text.toString()
+            viewModel.setUpScores(searchTerm)
         }
 
         binding.fabAddItem.setOnClickListener {
@@ -95,15 +120,36 @@ class ScoresFragment: BaseFragment(R.layout.scores_fragment) {
             if (result.resultCode == Activity.RESULT_OK) {
                 val uri: Uri? = result.data?.data
                 if (uri != null) {
-                    // TODO: Handle the selected PDF file
-                    Toast.makeText(
-                        requireContext(),
-                        "Selected pdf ${uri.path}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    viewModel.sendUploadScore(uriToFile(uri, requireContext()))
                 }
             }
         }
+
+    private fun observeOperationSuccess() {
+        viewModel.isOperationSuccessfulLiveData().observe(viewLifecycleOwner) {
+            it?.let { type ->
+                when (type) {
+                    ScoresViewModel.ScoreOperationSuccess.UPLOAD -> {
+                        viewModel.setUpScores(searchTerm)
+                        Toast.makeText(
+                            requireContext(),
+                            "Score uploaded",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    ScoresViewModel.ScoreOperationSuccess.DELETE ->
+                        viewModel.setUpScores(searchTerm)
+                }
+            }
+        }
+    }
+
+    private fun observeUploadError() {
+        viewModel.getScoreUploadError().observe(viewLifecycleOwner) { error ->
+            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     companion object {
         const val SEARCH_TERM = "searchTerm"

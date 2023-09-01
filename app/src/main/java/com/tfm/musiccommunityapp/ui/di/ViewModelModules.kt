@@ -183,6 +183,7 @@ val viewModelModule = module {
         ScoresViewModel(
             getCurrentUser = get(),
             getPrivateUserScores = get(),
+            uploadScore = get(),
             dispatcher = get()
         )
     }

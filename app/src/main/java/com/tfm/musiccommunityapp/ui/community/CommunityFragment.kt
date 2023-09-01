@@ -67,7 +67,6 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
 
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                // Search logic here.
                 searchTerm = s.toString()
             }
 

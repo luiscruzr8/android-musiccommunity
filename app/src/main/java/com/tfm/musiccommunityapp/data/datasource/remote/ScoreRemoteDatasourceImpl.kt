@@ -29,7 +29,7 @@ internal class ScoreRemoteDatasourceImpl(
     override suspend fun uploadScore(score: File): Either<DomainError, Long> =
         eitherOf(
             request = {
-                val requestFile = score.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                val requestFile = score.asRequestBody("application/pdf".toMediaTypeOrNull())
                 val scoreBody = MultipartBody.Part.createFormData("score", score.name, requestFile)
                 scoresApi.uploadScore(scoreBody)
             },
