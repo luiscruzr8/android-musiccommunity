@@ -42,11 +42,11 @@
             app:layout_constraintBottom_toBottomOf="@+id/chipUserComment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/chipUserComment"
-            style="@style/Widget.Material3.Button.IconButton.Outlined" />
+            style="@style/Widget.Material3.Button.IconButton" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/ivRespondButton"
-            style="@style/Widget.Material3.Button.IconButton.Outlined"
+            style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_respond"

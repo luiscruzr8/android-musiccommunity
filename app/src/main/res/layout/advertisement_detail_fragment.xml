@@ -220,28 +220,28 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvCommentSection"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvCommentSection"
-        style="@style/Widget.Material3.Button.OutlinedButton" />
+        style="@style/Widget.Material3.Button.ElevatedButton" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCommentSection">
+        app:layout_constraintTop_toBottomOf="@+id/ivAddCommentButton">
 
         <TextView
             android:id="@+id/noCommentsFound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:gravity="center"
             android:text="@string/no_comments"
             android:textAppearance="?attr/textAppearanceBodyLarge"
             android:textColor="@color/onSurfaceVariantColor"
             android:visibility="gone"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
