@@ -139,6 +139,9 @@ val viewModelModule = module {
             updateOpinion = get(),
             deleteOpinion = get(),
             createRecommendation = get(),
+            getPostComments = get(),
+            postOrRespondComment = get(),
+            deleteComment = get(),
             dispatcher = get()
         )
     }
