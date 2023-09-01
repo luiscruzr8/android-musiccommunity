@@ -206,9 +206,18 @@
     <string name="community_recommendations_rating_dialog_title">Puntúa esta recomendación</string>
     <string name="community_recommendations_rating_value">Tu puntuación es: %1$d / 10</string>
 
+    <!-- Scores screen -->
+    <string name="scores_screen_title">Mis partituras</string>
+    <string name="scores_screen_tbd">Página en construcción…</string>
+
+    <!-- Search screen -->
+    <string name="search_screen_title">Búsqueda</string>
+    <string name="search_screen_tbd">Página en construcción…</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Inicio</string>
-    <string name="bottom_nav_menu_item_2">Perfil</string>
-    <string name="bottom_nav_menu_item_3">Comunidad</string>
+    <string name="bottom_nav_menu_item_2">Comunidad</string>
+    <string name="bottom_nav_menu_item_3">Partituras</string>
+    <string name="bottom_nav_menu_item_4">Búsqueda</string>
+    <string name="bottom_nav_menu_item_5">Perfil</string>
 </resources>

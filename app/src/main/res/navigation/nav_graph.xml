@@ -227,6 +227,20 @@
             app:argType="long" />
     </fragment>
 
+    <fragment
+        android:id="@+id/scoresFragment"
+        android:name="com.tfm.musiccommunityapp.ui.scores.ScoresFragment"
+        android:label="ScoresFragment">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.tfm.musiccommunityapp.ui.search.SearchFragment"
+        android:label="SearchFragment">
+
+    </fragment>
+
     <!--Global actions-->
     <action
         android:id="@+id/action_global_homeScreenFragmentAfterSignOut"

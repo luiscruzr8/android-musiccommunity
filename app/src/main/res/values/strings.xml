@@ -205,10 +205,19 @@
     <string name="community_recommendations_rating_dialog_title">Rate this recommendation</string>
     <string name="community_recommendations_rating_value">Your rating is: %1$d / 10</string>
 
+    <!-- Scores screen -->
+    <string name="scores_screen_title">My scores</string>
+    <string name="scores_screen_tbd">Scores Screen in construction…</string>
+
+    <!-- Search screen -->
+    <string name="search_screen_title">Search</string>
+    <string name="search_screen_tbd">Search screen in construction…</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Home</string>
-    <string name="bottom_nav_menu_item_2">Profile</string>
-    <string name="bottom_nav_menu_item_3">Community</string>
+    <string name="bottom_nav_menu_item_2">Community</string>
+    <string name="bottom_nav_menu_item_3">Scores</string>
+    <string name="bottom_nav_menu_item_4">Search</string>
+    <string name="bottom_nav_menu_item_5">Profile</string>
 
 </resources>

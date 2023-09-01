@@ -33,15 +33,26 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
+                R.id.communityFragment -> {
+                    binding.navHostFragment.findNavController().navigate(R.id.communityFragment)
+                    true
+                }
+
+                R.id.scoresFragment -> {
+                    binding.navHostFragment.findNavController().navigate(R.id.scoresFragment)
+                    true
+                }
+
+                R.id.searchFragment -> {
+                    binding.navHostFragment.findNavController().navigate(R.id.searchFragment)
+                    true
+                }
+
                 R.id.profileFragment -> {
                     binding.navHostFragment.findNavController().navigate(R.id.profileFragment)
                     true
                 }
 
-                R.id.communityFragment -> {
-                    binding.navHostFragment.findNavController().navigate(R.id.communityFragment)
-                    true
-                }
 
                 else -> false
             }
@@ -67,33 +78,57 @@ class MainActivity : AppCompatActivity() {
 
     fun setUpNotLoggedInBottomNavigation() {
         binding.apply {
-            if (bottomNavigation.menu.findItem(R.id.profileFragment) != null) {
-                bottomNavigation.menu.removeItem(R.id.profileFragment)
-            }
+
             if (bottomNavigation.menu.findItem(R.id.communityFragment) != null) {
                 bottomNavigation.menu.removeItem(R.id.communityFragment)
+            }
+            if (bottomNavigation.menu.findItem(R.id.scoresFragment) != null) {
+                bottomNavigation.menu.removeItem(R.id.scoresFragment)
+            }
+            if (bottomNavigation.menu.findItem(R.id.searchFragment) != null) {
+                bottomNavigation.menu.removeItem(R.id.searchFragment)
+            }
+            if (bottomNavigation.menu.findItem(R.id.profileFragment) != null) {
+                bottomNavigation.menu.removeItem(R.id.profileFragment)
             }
         }
     }
 
     fun setUpLoggedInBottomNavigation() {
         binding.apply {
-            if (bottomNavigation.menu.findItem(R.id.profileFragment) == null) {
-                bottomNavigation.menu.add(
-                    R.id.profileFragment,
-                    R.id.profileFragment,
-                    1,
-                    getString(R.string.bottom_nav_menu_item_2)
-                ).setIcon(R.drawable.bottom_nav_profile_selector)
-            }
             if (bottomNavigation.menu.findItem(R.id.communityFragment) == null) {
                 bottomNavigation.menu.add(
                     R.id.communityFragment,
                     R.id.communityFragment,
-                    2,
-                    getString(R.string.bottom_nav_menu_item_3)
+                    1,
+                    getString(R.string.bottom_nav_menu_item_2)
                 ).setIcon(R.drawable.bottom_nav_community_selector)
             }
+            if (bottomNavigation.menu.findItem(R.id.scoresFragment) == null) {
+                bottomNavigation.menu.add(
+                    R.id.scoresFragment,
+                    R.id.scoresFragment,
+                    2,
+                    getString(R.string.bottom_nav_menu_item_3)
+                ).setIcon(R.drawable.bottom_nav_scores_selector)
+            }
+            if (bottomNavigation.menu.findItem(R.id.searchFragment) == null) {
+                bottomNavigation.menu.add(
+                    R.id.searchFragment,
+                    R.id.searchFragment,
+                    3,
+                    getString(R.string.bottom_nav_menu_item_4)
+                ).setIcon(R.drawable.bottom_nav_search_selector)
+            }
+            if (bottomNavigation.menu.findItem(R.id.profileFragment) == null) {
+                bottomNavigation.menu.add(
+                    R.id.profileFragment,
+                    R.id.profileFragment,
+                    4,
+                    getString(R.string.bottom_nav_menu_item_5)
+                ).setIcon(R.drawable.bottom_nav_profile_selector)
+            }
+
         }
     }
 
