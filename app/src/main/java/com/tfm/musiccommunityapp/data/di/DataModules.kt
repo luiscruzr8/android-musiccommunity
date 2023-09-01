@@ -96,6 +96,10 @@ val apiModules = module {
         get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(RecommendationsApi::class.java)
     }
 
+    single {
+        get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(ScoresApi::class.java)
+    }
+
 }
 
 val remoteDatasourceModules = module {
@@ -247,8 +251,7 @@ val repositoriesModule = module {
             scoreDatasource = get()
         )
     } bind ScoreRepository::class
-
-
+    
 }
 
 val preferencesModule = module {

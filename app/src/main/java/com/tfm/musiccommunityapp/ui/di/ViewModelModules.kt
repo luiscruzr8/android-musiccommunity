@@ -15,6 +15,7 @@ import com.tfm.musiccommunityapp.ui.community.users.UsersViewModel
 import com.tfm.musiccommunityapp.ui.home.HomeScreenViewModel
 import com.tfm.musiccommunityapp.ui.login.LoginViewModel
 import com.tfm.musiccommunityapp.ui.profile.ProfileViewModel
+import com.tfm.musiccommunityapp.ui.scores.ScoresViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -174,6 +175,14 @@ val viewModelModule = module {
             updateRecommendation = get(),
             deleteRecommendation = get(),
             rateRecommendation = get(),
+            dispatcher = get()
+        )
+    }
+
+    viewModel {
+        ScoresViewModel(
+            getCurrentUser = get(),
+            getPrivateUserScores = get(),
             dispatcher = get()
         )
     }

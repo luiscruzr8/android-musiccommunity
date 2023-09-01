@@ -207,7 +207,10 @@
 
     <!-- Scores screen -->
     <string name="scores_screen_title">My scores</string>
-    <string name="scores_screen_tbd">Scores Screen in construction…</string>
+    <string name="scores_screen_no_scores">No scores found</string>
+    <string name="scores_screen_created_by_on">Created by %1$s on %2$s</string>
+    <string name="chip_score">#%1$d Score</string>
+    <string name="score_img_description">Card image description</string>
 
     <!-- Search screen -->
     <string name="search_screen_title">Search</string>

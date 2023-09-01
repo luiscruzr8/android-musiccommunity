@@ -45,5 +45,6 @@
     <color name="opinionColor">#d93749</color>
     <color name="recommendationColor">#fd9827</color>
     <color name="userColor">#8f43ff</color>
+    <color name="scoreColor">#002021</color>
 
 </resources>
