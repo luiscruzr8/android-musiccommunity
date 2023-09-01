@@ -6,6 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesResult
 import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesUseCase
+import com.tfm.musiccommunityapp.domain.interactor.comment.DeleteCommentResult
+import com.tfm.musiccommunityapp.domain.interactor.comment.DeleteCommentUseCase
+import com.tfm.musiccommunityapp.domain.interactor.comment.GetPostCommentsResult
+import com.tfm.musiccommunityapp.domain.interactor.comment.GetPostCommentsUseCase
+import com.tfm.musiccommunityapp.domain.interactor.comment.PostOrRespondCommentResult
+import com.tfm.musiccommunityapp.domain.interactor.comment.PostOrRespondCommentUseCase
 import com.tfm.musiccommunityapp.domain.interactor.event.DeleteEventResult
 import com.tfm.musiccommunityapp.domain.interactor.event.DeleteEventUseCase
 import com.tfm.musiccommunityapp.domain.interactor.event.GetEventByIdResult
@@ -19,9 +25,9 @@ import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageUseCase
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationResult
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationUseCase
 import com.tfm.musiccommunityapp.domain.model.CityDomain
+import com.tfm.musiccommunityapp.domain.model.CommentDomain
 import com.tfm.musiccommunityapp.domain.model.EventDomain
 import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
-import com.tfm.musiccommunityapp.ui.community.advertisements.detail.AdvertisementDetailViewModel
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -34,13 +40,17 @@ class EventDetailViewModel(
     private val deleteEvent: DeleteEventUseCase,
     private val getCities: GetCitiesUseCase,
     private val createRecommendation: CreateRecommendationUseCase,
+    private val getPostComments: GetPostCommentsUseCase,
+    private val postOrRespondComment: PostOrRespondCommentUseCase,
+    private val deleteComment: DeleteCommentUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    enum class EventOperationSuccess { UPDATE, DELETE, RECOMMEND }
+    enum class EventOperationSuccess { UPDATE, DELETE, RECOMMEND, COMMENT }
 
     private val _event: MutableLiveData<EventDomain?> = MutableLiveData()
     private val _cities: MutableLiveData<List<CityDomain>> = MutableLiveData()
+    private val _comments: MutableLiveData<List<CommentDomain>> = MutableLiveData()
     private val _eventImageURL: SingleLiveEvent<String> = SingleLiveEvent()
     private val _getEventByIdError: SingleLiveEvent<String> = SingleLiveEvent()
     private val _showEventLoader: MutableLiveData<Boolean> = MutableLiveData()
@@ -50,6 +60,7 @@ class EventDetailViewModel(
 
     fun getEventLiveData() = _event as LiveData<EventDomain?>
     fun getCitiesLiveData() = _cities as LiveData<List<CityDomain>>
+    fun getCommentsLiveData() = _comments as LiveData<List<CommentDomain>>
     fun getPostImageLiveData() = _eventImageURL as LiveData<String>
     fun getEventByIdError() = _getEventByIdError as LiveData<String>
     fun isEventLoading() = _showEventLoader as LiveData<Boolean>
@@ -64,6 +75,13 @@ class EventDetailViewModel(
             handleGetPostImageResult(getPostImageByPostId(eventId))
             handleGetCurrentUserResult(getCurrentUser())
             handleGetCitiesResult(getCities(null))
+            handleGetCommentsResult(getPostComments(eventId))
+        }
+    }
+
+    fun reloadPostComments(eventId: Long) {
+        viewModelScope.launch(dispatcher) {
+            handleGetCommentsResult(getPostComments(eventId))
         }
     }
 
@@ -97,11 +115,24 @@ class EventDetailViewModel(
         }
     }
 
+    private fun handleGetCommentsResult(result: GetPostCommentsResult) {
+        when (result) {
+            is GetPostCommentsResult.Success -> {
+                _comments.postValue(result.comments)
+            }
+
+            else -> {
+                _comments.postValue(emptyList())
+            }
+        }
+    }
+
     private fun handleGetCitiesResult(result: GetCitiesResult) {
         when (result) {
             is GetCitiesResult.Success -> {
                 _cities.postValue(result.cities)
             }
+
             else -> {
                 _cities.postValue(emptyList())
             }
@@ -160,10 +191,68 @@ class EventDetailViewModel(
             is CreateRecommendationResult.Success -> {
                 _isOperationSuccessful.postValue(EventOperationSuccess.RECOMMEND)
             }
+
             is CreateRecommendationResult.GenericError -> {
                 _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
             }
+
             is CreateRecommendationResult.NetworkError -> {
+                _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+        }
+    }
+
+    fun sendPostComment(comment: CommentDomain) {
+        viewModelScope.launch(dispatcher) {
+            handlePostCommentResult(postOrRespondComment(_event.value?.id ?: 0, null, comment))
+        }
+    }
+
+    fun sendResponseComment(commentId: Long, comment: CommentDomain) {
+        viewModelScope.launch(dispatcher) {
+            handlePostCommentResult(
+                postOrRespondComment(
+                    _event.value?.id ?: 0,
+                    commentId,
+                    comment
+                )
+            )
+        }
+    }
+
+    fun sendDeleteComment(comment: CommentDomain) {
+        viewModelScope.launch(dispatcher) {
+            handleDeleteComment(deleteComment(_event.value?.id ?: 0, comment.id))
+        }
+    }
+
+    private fun handlePostCommentResult(result: PostOrRespondCommentResult) {
+        when (result) {
+            is PostOrRespondCommentResult.Success -> {
+                _isOperationSuccessful.postValue(EventOperationSuccess.COMMENT)
+            }
+
+            is PostOrRespondCommentResult.GenericError -> {
+                _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+
+            is PostOrRespondCommentResult.NetworkError -> {
+                _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+        }
+    }
+
+    private fun handleDeleteComment(result: DeleteCommentResult) {
+        when (result) {
+            is DeleteCommentResult.Success -> {
+                _isOperationSuccessful.postValue(EventOperationSuccess.COMMENT)
+            }
+
+            is DeleteCommentResult.GenericError -> {
+                _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+
+            is DeleteCommentResult.NetworkError -> {
                 _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
             }
         }

@@ -97,6 +97,9 @@ val viewModelModule = module {
             deleteEvent = get(),
             getCities = get(),
             createRecommendation = get(),
+            getPostComments = get(),
+            postOrRespondComment = get(),
+            deleteComment = get(),
             dispatcher = get()
         )
     }
@@ -110,6 +113,9 @@ val viewModelModule = module {
             deleteAdvertisement = get(),
             getCities = get(),
             createRecommendation = get(),
+            getPostComments = get(),
+            postOrRespondComment = get(),
+            deleteComment = get(),
             dispatcher = get()
         )
     }
@@ -122,6 +128,9 @@ val viewModelModule = module {
             updateDiscussion = get(),
             deleteDiscussion = get(),
             createRecommendation = get(),
+            getPostComments = get(),
+            postOrRespondComment = get(),
+            deleteComment = get(),
             dispatcher = get()
         )
     }
@@ -133,6 +142,9 @@ val viewModelModule = module {
             updateOpinion = get(),
             deleteOpinion = get(),
             createRecommendation = get(),
+            getPostComments = get(),
+            postOrRespondComment = get(),
+            deleteComment = get(),
             dispatcher = get()
         )
     }

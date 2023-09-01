@@ -28,6 +28,7 @@
     <string name="interest_tools">longInterest</string>
     <string name="post_related_tags_label">Tags:</string>
     <string name="chip_post">#%1$d %2$s</string>
+    <string name="chip_comment_user">#%1$d %2$s</string>
     <string name="chip_user">#%1$d</string>
     <string name="chip_rating">%1$.1f / 10</string>
     <string name="user">User</string>
@@ -44,6 +45,16 @@
     <string name="tags_hint">Tags (comma separated values)</string>
     <string name="error_empty_field">Required value</string>
     <string name="error_invalid_format_field">Incorrect format</string>
+    <string name="commented_on">commented on %1$s :</string>
+    <string name="responded_on">responded on %1$s :</string>
+    <string name="comment_section">Comments:</string>
+    <string name="add_comment">Add comment</string>
+    <string name="respond_comment">Respond</string>
+    <string name="no_comments">No comments yet. Be the first to comment!</string>
+    <string name="no_responses">No responses yet</string>
+    <string name="comment_hint">Comment</string>
+    <string name="comment_dialog_title">Leave a comment or response</string>
+    <string name="comment_dialog_button">Submit</string>
 
     <!-- PopUp option post menu -->
     <string name="popup_edit_option">Edit</string>

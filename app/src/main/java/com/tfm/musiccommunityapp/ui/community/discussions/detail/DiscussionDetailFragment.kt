@@ -7,14 +7,18 @@ import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.bumptech.glide.Glide
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.data.api.model.toGenericDomain
 import com.tfm.musiccommunityapp.databinding.DiscussionDetailFragmentBinding
+import com.tfm.musiccommunityapp.domain.model.CommentDomain
+import com.tfm.musiccommunityapp.ui.community.comments.CommentsAdapter
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditDiscussionDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
+import com.tfm.musiccommunityapp.ui.dialogs.community.PostOrRespondCommentDialog
 import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
@@ -26,6 +30,11 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
     private val binding by viewBinding(DiscussionDetailFragmentBinding::bind)
     private val viewModel by viewModel<DiscussionDetailViewModel>()
     private val args: DiscussionDetailFragmentArgs by navArgs()
+
+    private val commentsAdapter = CommentsAdapter(
+        ::onResponseComment,
+        ::onDeleteComment
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,6 +48,7 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
         observeDiscussionError()
         observeIsUserOwner()
         observeOperationSuccessful()
+        observeCommentsResult()
     }
 
     private fun observeLoader() {
@@ -85,6 +95,8 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
                         relatedTagsLayout.isVisible = true
                         relatedTagsLayout.setTagList(discussion.tags.map { it2 -> it2.tagName })
                     }
+
+                    ivAddCommentButton.setOnClickListener { onAddComment() }
                 }
             }
         }
@@ -142,6 +154,29 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
 
                     DiscussionDetailViewModel.DiscussionOperationSuccess.RECOMMEND ->
                         findNavController().popBackStack()
+
+                    DiscussionDetailViewModel.DiscussionOperationSuccess.COMMENT ->
+                        viewModel.reloadPostComments(args.id)
+                }
+            }
+        }
+    }
+
+    private fun observeCommentsResult() {
+        viewModel.getCommentsLiveData().observe(viewLifecycleOwner) { commentList ->
+            if (commentList.isNullOrEmpty()) {
+                binding.noCommentsFound.isVisible = true
+            } else {
+                binding.noCommentsFound.isVisible = false
+                binding.rvComments.apply {
+                    commentsAdapter.setComments(commentList)
+                    adapter = commentsAdapter
+                    addItemDecoration(
+                        DividerItemDecoration(
+                            requireContext(),
+                            DividerItemDecoration.VERTICAL
+                        )
+                    )
                 }
             }
         }
@@ -166,8 +201,27 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
                 post = it,
             ) { recommendation ->
                 viewModel.sendCreateRecommendation(recommendation)
-            }.show(this.parentFragmentManager, CreateEditRecommendationDialog::class.java.simpleName)
+            }.show(
+                this.parentFragmentManager,
+                CreateEditRecommendationDialog::class.java.simpleName
+            )
         }
+    }
+
+    private fun onAddComment() {
+        PostOrRespondCommentDialog {
+            viewModel.sendPostComment(it)
+        }.show(this.parentFragmentManager, PostOrRespondCommentDialog::class.java.simpleName)
+    }
+
+    private fun onResponseComment(comment: CommentDomain) {
+        PostOrRespondCommentDialog {
+            viewModel.sendResponseComment(comment.id, it)
+        }.show(this.parentFragmentManager, PostOrRespondCommentDialog::class.java.simpleName)
+    }
+
+    private fun onDeleteComment(comment: CommentDomain) {
+        viewModel.sendDeleteComment(comment)
     }
 
 }

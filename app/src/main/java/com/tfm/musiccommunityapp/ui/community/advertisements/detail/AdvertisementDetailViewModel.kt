@@ -12,6 +12,12 @@ import com.tfm.musiccommunityapp.domain.interactor.advertisement.UpdateAdvertise
 import com.tfm.musiccommunityapp.domain.interactor.advertisement.UpdateAdvertisementUseCase
 import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesResult
 import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesUseCase
+import com.tfm.musiccommunityapp.domain.interactor.comment.DeleteCommentResult
+import com.tfm.musiccommunityapp.domain.interactor.comment.DeleteCommentUseCase
+import com.tfm.musiccommunityapp.domain.interactor.comment.GetPostCommentsResult
+import com.tfm.musiccommunityapp.domain.interactor.comment.GetPostCommentsUseCase
+import com.tfm.musiccommunityapp.domain.interactor.comment.PostOrRespondCommentResult
+import com.tfm.musiccommunityapp.domain.interactor.comment.PostOrRespondCommentUseCase
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.domain.interactor.post.GetPostImageResult
@@ -20,8 +26,8 @@ import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecomme
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationUseCase
 import com.tfm.musiccommunityapp.domain.model.AdvertisementDomain
 import com.tfm.musiccommunityapp.domain.model.CityDomain
+import com.tfm.musiccommunityapp.domain.model.CommentDomain
 import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
-import com.tfm.musiccommunityapp.ui.community.discussions.detail.DiscussionDetailViewModel
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -34,13 +40,17 @@ class AdvertisementDetailViewModel(
     private val deleteAdvertisement: DeleteAdvertisementUseCase,
     private val getCities: GetCitiesUseCase,
     private val createRecommendation: CreateRecommendationUseCase,
+    private val getPostComments: GetPostCommentsUseCase,
+    private val postOrRespondComment: PostOrRespondCommentUseCase,
+    private val deleteComment: DeleteCommentUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    enum class AdvertisementOperationSuccess { UPDATE, DELETE, RECOMMEND }
+    enum class AdvertisementOperationSuccess { UPDATE, DELETE, RECOMMEND, COMMENT }
 
     private val _advertisement: MutableLiveData<AdvertisementDomain?> = MutableLiveData()
     private val _cities: MutableLiveData<List<CityDomain>> = MutableLiveData()
+    private val _comments: MutableLiveData<List<CommentDomain>> = MutableLiveData()
     private val _advertisementImageURL: SingleLiveEvent<String> = SingleLiveEvent()
     private val _getAdvertisementByIdError: SingleLiveEvent<String> = SingleLiveEvent()
     private val _showAdvertisementLoader: MutableLiveData<Boolean> = MutableLiveData()
@@ -50,6 +60,7 @@ class AdvertisementDetailViewModel(
 
     fun getAdvertisementLiveData() = _advertisement as LiveData<AdvertisementDomain?>
     fun getCitiesLiveData() = _cities as LiveData<List<CityDomain>>
+    fun getCommentsLiveData() = _comments as LiveData<List<CommentDomain>>
     fun getPostImageLiveData() = _advertisementImageURL as LiveData<String>
     fun getAdvertisementByIdError() = _getAdvertisementByIdError as LiveData<String>
     fun isAdvertisementLoading() = _showAdvertisementLoader as LiveData<Boolean>
@@ -64,6 +75,13 @@ class AdvertisementDetailViewModel(
             handleGetPostImageResult(getPostImageByPostId(advertisementId))
             handleGetCurrentUserResult(getCurrentUser())
             handleGetCitiesResult(getCities(null))
+            handleGetCommentsResult(getPostComments(advertisementId))
+        }
+    }
+
+    fun reloadPostComments(advertisementId: Long) {
+        viewModelScope.launch(dispatcher) {
+            handleGetCommentsResult(getPostComments(advertisementId))
         }
     }
 
@@ -102,8 +120,21 @@ class AdvertisementDetailViewModel(
             is GetCitiesResult.Success -> {
                 _cities.postValue(result.cities)
             }
+
             else -> {
                 _cities.postValue(emptyList())
+            }
+        }
+    }
+
+    private fun handleGetCommentsResult(result: GetPostCommentsResult) {
+        when (result) {
+            is GetPostCommentsResult.Success -> {
+                _comments.postValue(result.comments)
+            }
+
+            else -> {
+                _comments.postValue(emptyList())
             }
         }
     }
@@ -168,4 +199,51 @@ class AdvertisementDetailViewModel(
             }
         }
     }
+
+    fun sendPostComment(comment: CommentDomain) {
+        viewModelScope.launch(dispatcher) {
+            handlePostCommentResult(postOrRespondComment(_advertisement.value?.id ?: 0, null, comment))
+        }
+    }
+
+    fun sendResponseComment(commentId: Long, comment: CommentDomain) {
+        viewModelScope.launch(dispatcher) {
+            handlePostCommentResult(postOrRespondComment(_advertisement.value?.id ?: 0, commentId, comment))
+        }
+    }
+
+    fun sendDeleteComment(comment: CommentDomain) {
+        viewModelScope.launch(dispatcher) {
+            handleDeleteComment(deleteComment(_advertisement.value?.id ?: 0, comment.id))
+        }
+    }
+
+    private fun handlePostCommentResult(result: PostOrRespondCommentResult) {
+        when(result) {
+            is PostOrRespondCommentResult.Success -> {
+                _isOperationSuccessful.postValue(AdvertisementOperationSuccess.COMMENT)
+            }
+            is PostOrRespondCommentResult.GenericError -> {
+                _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+            is PostOrRespondCommentResult.NetworkError -> {
+                _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+        }
+    }
+
+    private fun handleDeleteComment(result: DeleteCommentResult) {
+        when(result) {
+            is DeleteCommentResult.Success -> {
+                _isOperationSuccessful.postValue(AdvertisementOperationSuccess.COMMENT)
+            }
+            is DeleteCommentResult.GenericError -> {
+                _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+            is DeleteCommentResult.NetworkError -> {
+                _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            }
+        }
+    }
+
 }

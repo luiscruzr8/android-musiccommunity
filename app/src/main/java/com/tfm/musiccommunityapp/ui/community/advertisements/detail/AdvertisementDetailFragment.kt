@@ -1,21 +1,26 @@
 package com.tfm.musiccommunityapp.ui.community.advertisements.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.bumptech.glide.Glide
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.data.api.model.toGenericDomain
 import com.tfm.musiccommunityapp.databinding.AdvertisementDetailFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.CityDomain
+import com.tfm.musiccommunityapp.domain.model.CommentDomain
+import com.tfm.musiccommunityapp.ui.community.comments.CommentsAdapter
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
+import com.tfm.musiccommunityapp.ui.dialogs.community.PostOrRespondCommentDialog
 import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
@@ -27,6 +32,11 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
     private val binding by viewBinding(AdvertisementDetailFragmentBinding::bind)
     private val viewModel by viewModel<AdvertisementDetailViewModel>()
     private val args: AdvertisementDetailFragmentArgs by navArgs()
+
+    private val commentsAdapter = CommentsAdapter(
+        ::onResponseComment,
+        ::onDeleteComment
+    )
 
     private var cities = emptyList<CityDomain>()
 
@@ -43,6 +53,7 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
         observeIsUserOwner()
         observeOperationSuccessful()
         observeCitiesResult()
+        observeCommentsResult()
     }
 
     private fun observeLoader() {
@@ -95,6 +106,8 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
                         relatedTagsLayout.isVisible = true
                         relatedTagsLayout.setTagList(advertisement.tags.map { it2 -> it2.tagName })
                     }
+
+                    ivAddCommentButton.setOnClickListener { onAddComment() }
                 }
             }
         }
@@ -153,6 +166,8 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
                     AdvertisementDetailViewModel.AdvertisementOperationSuccess.RECOMMEND ->
                         findNavController().popBackStack()
 
+                    AdvertisementDetailViewModel.AdvertisementOperationSuccess.COMMENT ->
+                        viewModel.reloadPostComments(args.id)
                 }
             }
         }
@@ -161,6 +176,26 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
     private fun observeCitiesResult() {
         viewModel.getCitiesLiveData().observe(viewLifecycleOwner) { cityList ->
             cities = cityList
+        }
+    }
+
+    private fun observeCommentsResult() {
+        viewModel.getCommentsLiveData().observe(viewLifecycleOwner) { commentList ->
+            if (commentList.isNullOrEmpty()) {
+                binding.noCommentsFound.isVisible = true
+            } else {
+                binding.noCommentsFound.isVisible = false
+                binding.rvComments.apply {
+                    commentsAdapter.setComments(commentList)
+                    adapter = commentsAdapter
+                    addItemDecoration(
+                            DividerItemDecoration(
+                                    requireContext(),
+                                    DividerItemDecoration.VERTICAL
+                            )
+                    )
+                }
+            }
         }
     }
 
@@ -180,11 +215,30 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
     private fun setCreateRecommendationDialog() {
         viewModel.getAdvertisementLiveData().value?.toGenericDomain()?.let {
             CreateEditRecommendationDialog(
-                    recommendation = null,
-                    post = it,
+                recommendation = null,
+                post = it,
             ) { recommendation ->
                 viewModel.sendCreateRecommendation(recommendation)
-            }.show(this.parentFragmentManager, CreateEditRecommendationDialog::class.java.simpleName)
+            }.show(
+                this.parentFragmentManager,
+                CreateEditRecommendationDialog::class.java.simpleName
+            )
         }
+    }
+
+    private fun onAddComment() {
+        PostOrRespondCommentDialog {
+            viewModel.sendPostComment(it)
+        }.show(this.parentFragmentManager, PostOrRespondCommentDialog::class.java.simpleName)
+    }
+
+    private fun onResponseComment(comment: CommentDomain) {
+        PostOrRespondCommentDialog {
+            viewModel.sendResponseComment(comment.id, it)
+        }.show(this.parentFragmentManager, PostOrRespondCommentDialog::class.java.simpleName)
+    }
+
+    private fun onDeleteComment(comment: CommentDomain) {
+        viewModel.sendDeleteComment(comment)
     }
 }
