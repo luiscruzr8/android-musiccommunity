@@ -45,6 +45,7 @@ val viewModelModule = module {
             getUserInfo = get(),
             getUserFollowers = get(),
             getUserFollowing = get(),
+            getUserPosts = get(),
             updateProfile = get(),
             getCurrentUser = get(),
             isUserFollower = get(),

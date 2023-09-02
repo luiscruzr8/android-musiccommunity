@@ -4,6 +4,7 @@
     <string name="version">Version %1$s</string>
     <!-- Common -->
     <string name="app_name">Music Community</string>
+    <string name="all">Todos</string>
     <string name="or">O</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancelar</string>
@@ -127,6 +128,9 @@
     <string name="profile_screen_following_button">%1$d siguiendo</string>
     <string name="profile_screen_following">Siguiendo</string>
     <string name="profile_screen_no_following">Este usuario no esta siguiendo a nadie</string>
+    <string name="profile_screen_title_user_posts">Publicaciones de %1$s</string>
+    <string name="profile_screen_no_posts">No se han encontrado publicaciones</string>
+    <string name="profile_screen_post_type">Tipo de publicación</string>
 
     <!-- Edit profile dialog -->
     <string name="edit_screen_title">Editar perfil</string>
