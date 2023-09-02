@@ -130,6 +130,7 @@
     <string name="profile_screen_title_user_posts">%1$s\'s posts</string>
     <string name="profile_screen_no_posts">No posts found</string>
     <string name="profile_screen_post_type">Post type</string>
+    <string name="profile_screen_title_user_recommendations">%1$s\'s recommendations</string>
 
     <!-- Edit profile dialog -->
     <string name="edit_screen_title">Edit profile</string>
@@ -223,6 +224,7 @@
     <string name="community_recommendations_created_message">You will be redirected to the new created discussion</string>
     <string name="community_recommendations_rating_dialog_title">Rate this recommendation</string>
     <string name="community_recommendations_rating_value">Your rating is: %1$d / 10</string>
+    <string name="community_recommendations_navigate_to_post_message">You will be redirected to the post details. Would you like to continue?</string>
 
     <!-- Scores screen -->
     <string name="scores_screen_title_mine">My scores</string>
@@ -242,5 +244,4 @@
     <string name="bottom_nav_menu_item_3">Scores</string>
     <string name="bottom_nav_menu_item_4">Search</string>
     <string name="bottom_nav_menu_item_5">Profile</string>
-
 </resources>

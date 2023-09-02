@@ -131,6 +131,12 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                             .actionProfileFragmentToUserPostsFragment(it.login)
                         navigateSafe(action)
                     }
+
+                    userRecommendationsButton.setOnClickListener { _ ->
+                        val action = ProfileFragmentDirections
+                            .actionProfileFragmentToUserRecommendationsFragment(it.login)
+                        navigateSafe(action)
+                    }
                 }
             }
         }

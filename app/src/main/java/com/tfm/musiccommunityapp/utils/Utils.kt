@@ -7,6 +7,7 @@ import android.net.Uri
 import android.provider.OpenableColumns
 import androidx.navigation.NavDirections
 import com.tfm.musiccommunityapp.R
+import com.tfm.musiccommunityapp.ui.community.recommendations.detail.RecommendationDetailFragmentDirections
 import com.tfm.musiccommunityapp.ui.profile.posts.UserPostsFragmentDirections
 import java.io.File
 import java.io.FileOutputStream
@@ -58,7 +59,11 @@ fun getPostType(posType: Int): String =
         else -> ""
     }
 
-fun navigateOnPostType(posType: String, postId: Long, navigation: (NavDirections) -> Unit) =
+fun navigateFromUserPostsOnPostType(
+    posType: String,
+    postId: Long,
+    navigation: (NavDirections) -> Unit
+) =
     when (posType) {
         "Announcement" ->
             navigation(
@@ -84,6 +89,43 @@ fun navigateOnPostType(posType: String, postId: Long, navigation: (NavDirections
         "Opinion" ->
             navigation(
                 UserPostsFragmentDirections.actionUserPostsFragmentToOpinionDetailFragment(
+                    postId
+                )
+            )
+
+        else -> {}
+    }
+
+fun navigateFromRecommendationOnPostType(
+    posType: String,
+    postId: Long,
+    navigation: (NavDirections) -> Unit
+) =
+    when (posType) {
+        "Announcement" ->
+            navigation(
+                RecommendationDetailFragmentDirections.actionRecommendationDetailFragmentToAdvertisementDetailFragment(
+                    postId
+                )
+            )
+
+        "Event" ->
+            navigation(
+                RecommendationDetailFragmentDirections.actionRecommendationDetailFragmentToEventDetailFragment(
+                    postId
+                )
+            )
+
+        "Discussion" ->
+            navigation(
+                RecommendationDetailFragmentDirections.actionRecommendationDetailFragmentToDiscussionDetailFragment(
+                    postId
+                )
+            )
+
+        "Opinion" ->
+            navigation(
+                RecommendationDetailFragmentDirections.actionRecommendationDetailFragmentToOpinionDetailFragment(
                     postId
                 )
             )

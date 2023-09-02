@@ -10,6 +10,8 @@ import com.tfm.musiccommunityapp.domain.interactor.login.SignOutUseCase
 import com.tfm.musiccommunityapp.domain.interactor.login.SignOutUseCaseResult
 import com.tfm.musiccommunityapp.domain.interactor.post.GetUserPostsResult
 import com.tfm.musiccommunityapp.domain.interactor.post.GetUserPostsUseCase
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetUserRecommendationsResult
+import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetUserRecommendationsUseCase
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.FollowUserUseCase
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.FollowUserUseCaseResult
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.GetFollowersUseCase
@@ -25,6 +27,7 @@ import com.tfm.musiccommunityapp.domain.interactor.userprofile.UnfollowUserUseCa
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.UpdateUserProfileUseCase
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.UpdateUserProfileUseCaseResult
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
+import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
 import com.tfm.musiccommunityapp.domain.model.ShortUserDomain
 import com.tfm.musiccommunityapp.domain.model.UserDomain
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
@@ -36,6 +39,7 @@ class ProfileViewModel(
     private val getUserFollowers: GetFollowersUseCase,
     private val getUserFollowing: GetFollowingUseCase,
     private val getUserPosts: GetUserPostsUseCase,
+    private val getOnlyUserRecommendations: GetUserRecommendationsUseCase,
     private val updateProfile: UpdateUserProfileUseCase,
     private val getCurrentUser: GetCurrentUserUseCase,
     private val isUserFollower: IsUserFollowerOfUseCase,
@@ -52,6 +56,8 @@ class ProfileViewModel(
     private val _following: MutableLiveData<List<ShortUserDomain>> = MutableLiveData()
     private val _posts: MutableLiveData<List<GenericPostDomain>> = MutableLiveData()
     private val _postsErrors: SingleLiveEvent<String> = SingleLiveEvent()
+    private val _recommendations: MutableLiveData<List<RecommendationDomain>> = MutableLiveData()
+    private val _recommendationsErrors: SingleLiveEvent<String> = SingleLiveEvent()
     private val _errorProfile: MutableLiveData<String> = MutableLiveData()
     private val _signOutSuccess: SingleLiveEvent<Unit> = SingleLiveEvent()
     private val _isMyProfile: SingleLiveEvent<Boolean> = SingleLiveEvent()
@@ -64,6 +70,8 @@ class ProfileViewModel(
     fun getFollowing() = _following as LiveData<List<ShortUserDomain>>
     fun getUserPosts() = _posts as LiveData<List<GenericPostDomain>>
     fun getUserPostsError() = _postsErrors as LiveData<String>
+    fun getUserRecommendations() = _recommendations as LiveData<List<RecommendationDomain>>
+    fun getUserRecommendationsError() = _recommendationsErrors as LiveData<String>
     fun getSignOutSuccess() = _signOutSuccess as LiveData<Unit>
     fun getErrorProfile() = _errorProfile as LiveData<String>
     fun isMyProfileLiveData() = _isMyProfile as LiveData<Boolean>
@@ -90,9 +98,24 @@ class ProfileViewModel(
         }
     }
 
+    fun setUpRecommendations(username: String, getTop10: Boolean, searchTerm: String) {
+        viewModelScope.launch(dispatcher) {
+            showLoader.postValue(true)
+            handleGetRecommendationsResult(
+                getOnlyUserRecommendations(
+                    username,
+                    getTop10,
+                    searchTerm
+                )
+            )
+            showLoader.postValue(false)
+        }
+    }
+
     private suspend fun isNotMyUser(username: String?) {
         _isMyProfile.postValue(false)
         handleGetUserInfoResult(getUserInfo(username))
+        handleGetFollowersResult(getUserFollowers(username))
         username?.let { handleIsUserFollower(isUserFollower(it)) }
     }
 
@@ -281,8 +304,16 @@ class ProfileViewModel(
         }
     }
 
-    fun onPostClicked(post: GenericPostDomain) {
+    private fun handleGetRecommendationsResult(result: GetUserRecommendationsResult) {
+        when (result) {
+            is GetUserRecommendationsResult.Success ->
+                _recommendations.postValue(result.recommendations)
 
+            is GetUserRecommendationsResult.GenericError ->
+                _recommendationsErrors.postValue("Error code: ${result.error.code} - ${result.error.message}")
+
+            is GetUserRecommendationsResult.NetworkError ->
+                _recommendationsErrors.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
     }
-
 }

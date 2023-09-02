@@ -15,7 +15,7 @@ import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.profile.ProfileViewModel
 import com.tfm.musiccommunityapp.utils.getPostType
-import com.tfm.musiccommunityapp.utils.navigateOnPostType
+import com.tfm.musiccommunityapp.utils.navigateFromRecommendationOnPostType
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,8 +37,6 @@ class UserPostsFragment: BaseFragment(R.layout.user_posts_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
         binding.postTypeEditText.setText(postType)
 
@@ -93,6 +91,7 @@ class UserPostsFragment: BaseFragment(R.layout.user_posts_fragment) {
                 postType = types.first { it.second == selected }.first
             }
 
+        binding.tvPostsTitle.text = getString(R.string.profile_screen_title_user_posts, args.login)
         binding.submitSearchButton.setOnClickListener {
             viewModel.setUpPosts(
                 args.login,
@@ -132,7 +131,7 @@ class UserPostsFragment: BaseFragment(R.layout.user_posts_fragment) {
     }
 
     private fun onPostClicked(post: GenericPostDomain) {
-        navigateOnPostType(post.postType, post.id, ::navigateSafe)
+        navigateFromRecommendationOnPostType(post.postType, post.id, ::navigateSafe)
     }
 
     companion object {

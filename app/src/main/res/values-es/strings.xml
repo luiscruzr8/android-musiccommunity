@@ -131,6 +131,7 @@
     <string name="profile_screen_title_user_posts">Publicaciones de %1$s</string>
     <string name="profile_screen_no_posts">No se han encontrado publicaciones</string>
     <string name="profile_screen_post_type">Tipo de publicación</string>
+    <string name="profile_screen_title_user_recommendations">Recomendaciones de %1$s</string>
 
     <!-- Edit profile dialog -->
     <string name="edit_screen_title">Editar perfil</string>
@@ -204,7 +205,6 @@
     <string name="community_opinion_created_message">Serás redirigido a la nueva opinion</string>
     <string name="create_opinion_confirmation">Al aceptar, proporcionas acceso a todos los usuarios a esta partitura. Si cancelas, la publicación no se creará.\n¿Quieres crear la publicación de todos modos?</string>
 
-
     <!-- Community - Discussions screen -->
     <string name="community_discussions_no_discussions">No se han encontrado discusiones</string>
     <string name="community_discussions_title">Título</string>
@@ -225,6 +225,7 @@
     <string name="community_recommendations_created_message">Serás redirigido a la nueva recomendación</string>
     <string name="community_recommendations_rating_dialog_title">Puntúa esta recomendación</string>
     <string name="community_recommendations_rating_value">Tu puntuación es: %1$d / 10</string>
+    <string name="community_recommendations_navigate_to_post_message">Serás redirigido al detalle de la publicación. ¿Te gustaría continuar?</string>
 
     <!-- Scores screen -->
     <string name="scores_screen_title_mine">Mis partituras</string>
