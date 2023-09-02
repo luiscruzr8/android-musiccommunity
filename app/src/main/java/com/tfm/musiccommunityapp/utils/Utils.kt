@@ -5,7 +5,9 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
 import android.provider.OpenableColumns
+import androidx.navigation.NavDirections
 import com.tfm.musiccommunityapp.R
+import com.tfm.musiccommunityapp.ui.profile.posts.UserPostsFragmentDirections
 import java.io.File
 import java.io.FileOutputStream
 import kotlin.random.Random
@@ -46,3 +48,45 @@ fun uriToFile(uri: Uri, context: Context): File {
     outputStream.close()
     return file
 }
+
+fun getPostType(posType: Int): String =
+    when (posType) {
+        R.string.advertisement -> "Announcement"
+        R.string.event -> "Event"
+        R.string.discussion -> "Discussion"
+        R.string.opinion -> "Opinion"
+        else -> ""
+    }
+
+fun navigateOnPostType(posType: String, postId: Long, navigation: (NavDirections) -> Unit) =
+    when (posType) {
+        "Announcement" ->
+            navigation(
+                UserPostsFragmentDirections.actionUserPostsFragmentToAdvertisementDetailFragment(
+                    postId
+                )
+            )
+
+        "Event" ->
+            navigation(
+                UserPostsFragmentDirections.actionUserPostsFragmentToEventDetailFragment(
+                    postId
+                )
+            )
+
+        "Discussion" ->
+            navigation(
+                UserPostsFragmentDirections.actionUserPostsFragmentToDiscussionDetailFragment(
+                    postId
+                )
+            )
+
+        "Opinion" ->
+            navigation(
+                UserPostsFragmentDirections.actionUserPostsFragmentToOpinionDetailFragment(
+                    postId
+                )
+            )
+
+        else -> {}
+    }

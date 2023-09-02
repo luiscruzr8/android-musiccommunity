@@ -125,6 +125,12 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                             profileTagsLayout.setTagList(interests.map { it2 -> it2.tagName })
                         }
                     }
+
+                    userPostsButton.setOnClickListener { _ ->
+                        val action = ProfileFragmentDirections
+                            .actionProfileFragmentToUserPostsFragment(it.login)
+                        navigateSafe(action)
+                    }
                 }
             }
         }

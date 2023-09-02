@@ -8,6 +8,8 @@ import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.domain.interactor.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.domain.interactor.login.SignOutUseCase
 import com.tfm.musiccommunityapp.domain.interactor.login.SignOutUseCaseResult
+import com.tfm.musiccommunityapp.domain.interactor.post.GetUserPostsResult
+import com.tfm.musiccommunityapp.domain.interactor.post.GetUserPostsUseCase
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.FollowUserUseCase
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.FollowUserUseCaseResult
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.GetFollowersUseCase
@@ -22,6 +24,7 @@ import com.tfm.musiccommunityapp.domain.interactor.userprofile.UnfollowUserUseCa
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.UnfollowUserUseCaseResult
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.UpdateUserProfileUseCase
 import com.tfm.musiccommunityapp.domain.interactor.userprofile.UpdateUserProfileUseCaseResult
+import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
 import com.tfm.musiccommunityapp.domain.model.ShortUserDomain
 import com.tfm.musiccommunityapp.domain.model.UserDomain
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
@@ -32,6 +35,7 @@ class ProfileViewModel(
     private val getUserInfo: GetUserProfileUseCase,
     private val getUserFollowers: GetFollowersUseCase,
     private val getUserFollowing: GetFollowingUseCase,
+    private val getUserPosts: GetUserPostsUseCase,
     private val updateProfile: UpdateUserProfileUseCase,
     private val getCurrentUser: GetCurrentUserUseCase,
     private val isUserFollower: IsUserFollowerOfUseCase,
@@ -46,6 +50,8 @@ class ProfileViewModel(
     private val _userInfo: MutableLiveData<UserDomain?> = MutableLiveData()
     private val _followers: MutableLiveData<List<ShortUserDomain>> = MutableLiveData()
     private val _following: MutableLiveData<List<ShortUserDomain>> = MutableLiveData()
+    private val _posts: MutableLiveData<List<GenericPostDomain>> = MutableLiveData()
+    private val _postsErrors: SingleLiveEvent<String> = SingleLiveEvent()
     private val _errorProfile: MutableLiveData<String> = MutableLiveData()
     private val _signOutSuccess: SingleLiveEvent<Unit> = SingleLiveEvent()
     private val _isMyProfile: SingleLiveEvent<Boolean> = SingleLiveEvent()
@@ -56,6 +62,8 @@ class ProfileViewModel(
     fun getUserInfo() = _userInfo as LiveData<UserDomain?>
     fun getFollowers() = _followers as LiveData<List<ShortUserDomain>>
     fun getFollowing() = _following as LiveData<List<ShortUserDomain>>
+    fun getUserPosts() = _posts as LiveData<List<GenericPostDomain>>
+    fun getUserPostsError() = _postsErrors as LiveData<String>
     fun getSignOutSuccess() = _signOutSuccess as LiveData<Unit>
     fun getErrorProfile() = _errorProfile as LiveData<String>
     fun isMyProfileLiveData() = _isMyProfile as LiveData<Boolean>
@@ -70,6 +78,14 @@ class ProfileViewModel(
         viewModelScope.launch(dispatcher) {
             showLoader.postValue(true)
             handleGetCurrentUserResult(getCurrentUser(), username)
+            showLoader.postValue(false)
+        }
+    }
+
+    fun setUpPosts(username: String, postType: String, searchTerm: String) {
+        viewModelScope.launch(dispatcher) {
+            showLoader.postValue(true)
+            handleGetPostsResult(getUserPosts(username, postType, searchTerm))
             showLoader.postValue(false)
         }
     }
@@ -251,4 +267,22 @@ class ProfileViewModel(
             handleUnfollowUserResult(unfollowUser(username))
         }
     }
+
+    private fun handleGetPostsResult(result: GetUserPostsResult) {
+        when (result) {
+            is GetUserPostsResult.Success ->
+                _posts.postValue(result.posts)
+
+            is GetUserPostsResult.GenericError ->
+                _postsErrors.postValue("Error code: ${result.error.code} - ${result.error.message}")
+
+            is GetUserPostsResult.NetworkError ->
+                _postsErrors.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
+    }
+
+    fun onPostClicked(post: GenericPostDomain) {
+
+    }
+
 }
