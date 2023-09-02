@@ -89,7 +89,7 @@ class ScoreDetailFragment: BaseFragment(R.layout.score_detail_fragment) {
     }
 
     private fun observeScoreFileError() {
-        viewModel.getScoreInfoError().observe(viewLifecycleOwner) { errorMessage ->
+        viewModel.getScoreFileError().observe(viewLifecycleOwner) { errorMessage ->
             errorMessage?.let {
                 alertDialogOneOption(
                     requireContext(),

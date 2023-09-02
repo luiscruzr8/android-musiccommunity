@@ -197,7 +197,7 @@
     <string name="community_opinion_edit_title">Edit opinion</string>
     <string name="community_opinion_created_title">Opinion successfully created</string>
     <string name="community_opinion_created_message">You will be redirected to the new created opinion</string>
-    <string name="create_opinion_confirmation">By accepting, you are providing access to this score to all the users. If you cancel the post would not be created.\n Do you agree and want to create the post anyway?</string>
+    <string name="create_opinion_confirmation">By accepting, you are providing access to this score to all the users. If you cancel the post would not be created.\nWould you like to create the post anyway?</string>
 
     <!-- Community - Discussions screen -->
     <string name="community_discussions_no_discussions">No discussions found</string>

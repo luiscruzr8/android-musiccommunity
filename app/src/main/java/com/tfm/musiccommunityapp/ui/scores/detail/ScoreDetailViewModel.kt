@@ -23,7 +23,7 @@ import java.io.File
 class ScoreDetailViewModel(
     private val getCurrentUser: GetCurrentUserUseCase,
     private val getScoreInfoById: GetScoreInfoByIdUseCase,
-    private val getScoreFile: GetScoreFileUseCase,
+    private val getScoreFileById: GetScoreFileUseCase,
     private val deleteScore: DeleteScoreUseCase,
     private val createOpinion: CreateOpinionUseCase,
     private val dispatcher: CoroutineDispatcher
@@ -61,7 +61,7 @@ class ScoreDetailViewModel(
         when (result) {
             is GetScoreInfoByIdResult.Success -> {
                 _scoreInfo.postValue(result.score)
-                handleGetScoreFileResult(getScoreFile(scoreId))
+                handleGetScoreFileResult(getScoreFileById(scoreId))
             }
 
             is GetScoreInfoByIdResult.NoScore ->

@@ -2,6 +2,7 @@ package com.tfm.musiccommunityapp.ui.profile
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -221,14 +222,18 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
     private fun observeIsUserFollower() {
         viewModel.isUserFollowerLiveData().observe(viewLifecycleOwner) {isFollower ->
             binding.apply {
-                followUnfollowButton.text = if(isFollower) {
-                    getString(R.string.profile_screen_unfollow_button)
-                } else {
-                    getString(R.string.profile_screen_follow_button)
-                }
+                followUnfollowButton.text = getString(
+                    if (isFollower) R.string.profile_screen_unfollow_button else R.string.profile_screen_follow_button
+                )
+
+                followUnfollowButton.icon = getDrawable(
+                    requireContext(),
+                    if (isFollower) R.drawable.ic_unfollow else R.drawable.ic_follow
+                )
+
                 followUnfollowButton.setOnClickListener {
                     args.username?.let { username ->
-                        if(isFollower) {
+                        if (isFollower) {
                             viewModel.sendUnfollowUser(username)
                         } else {
                             viewModel.sendFollowUser(username)

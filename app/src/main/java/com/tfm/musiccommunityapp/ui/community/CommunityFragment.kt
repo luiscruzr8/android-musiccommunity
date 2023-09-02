@@ -311,7 +311,17 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
                 opinion = null,
                 scores = scores,
             ) {
-                viewModel.sendCreateOpinion(it)
+                alertDialogTwoOptions(
+                    requireContext(),
+                    getString(R.string.user_alert),
+                    null,
+                    getString(R.string.create_opinion_confirmation),
+                    getString(R.string.accept),
+                    {
+                        viewModel.sendCreateOpinion(it)
+                    },
+                    getString(R.string.cancel)
+                ) { }
             }.show(this.parentFragmentManager, CreateEditOpinionDialog::class.java.simpleName)
         }
     }

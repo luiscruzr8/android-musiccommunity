@@ -139,8 +139,9 @@ val viewModelModule = module {
 
     viewModel {
         OpinionDetailViewModel(
-            getOpinionById = get(),
             getCurrentUser = get(),
+            getOpinionById = get(),
+            getScoreFileById = get(),
             updateOpinion = get(),
             deleteOpinion = get(),
             createRecommendation = get(),
@@ -196,7 +197,7 @@ val viewModelModule = module {
         ScoreDetailViewModel(
             getCurrentUser = get(),
             getScoreInfoById = get(),
-            getScoreFile = get(),
+            getScoreFileById = get(),
             deleteScore = get(),
             createOpinion = get(),
             dispatcher = get()

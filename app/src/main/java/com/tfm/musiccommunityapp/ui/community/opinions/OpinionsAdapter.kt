@@ -70,6 +70,7 @@ class OpinionsAdapter(
                     getChipLabel(item.postType, context)
                 )
                 tvOpinionTitle.text = item.title
+                tvFileName.text = item.score.name
                 tvCreationDate.text = item.createdOn.formatDateToString()
                 item.tags.let { tags ->
                     if (tags.isNotEmpty()) {
