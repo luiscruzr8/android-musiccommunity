@@ -208,7 +208,10 @@
 
     <!-- Scores screen -->
     <string name="scores_screen_title">Mis partituras</string>
-    <string name="scores_screen_tbd">Página en construcción…</string>
+    <string name="scores_screen_no_scores">No se encontraron partituras</string>
+    <string name="scores_screen_created_by_on">Creada por %1$s el %2$s</string>
+    <string name="chip_score">#%1$d Partitura</string>
+    <string name="score_img_description">Descripción de image de partitura</string>
 
     <!-- Search screen -->
     <string name="search_screen_title">Búsqueda</string>

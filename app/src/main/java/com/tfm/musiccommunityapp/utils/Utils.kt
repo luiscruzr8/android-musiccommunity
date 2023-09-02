@@ -3,7 +3,11 @@ package com.tfm.musiccommunityapp.utils
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.net.Uri
+import android.provider.OpenableColumns
 import com.tfm.musiccommunityapp.R
+import java.io.File
+import java.io.FileOutputStream
 import kotlin.random.Random
 
 fun getRandomColor(): Int {
@@ -26,3 +30,19 @@ fun getChipColor(text: String, context: Context): ColorStateList =
         "Discussion" -> ColorStateList.valueOf(context.getColor(R.color.discussionColor))
         else -> ColorStateList.valueOf(context.getColor(R.color.opinionColor))
     }
+
+fun uriToFile(uri: Uri, context: Context): File {
+    val inputStream = context.contentResolver.openInputStream(uri)
+    val cursor = context.contentResolver.query(uri, null, null, null, null)
+    val nameIndex = cursor?.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+    cursor?.moveToFirst()
+    val name = cursor?.getString(nameIndex ?: 0)
+    cursor?.close()
+    val dir = context.cacheDir
+    val file = File(dir, name)
+    val outputStream = FileOutputStream(file)
+    inputStream?.copyTo(outputStream)
+    inputStream?.close()
+    outputStream.close()
+    return file
+}

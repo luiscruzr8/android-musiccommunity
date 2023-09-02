@@ -59,14 +59,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/submitSearchButton"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:text="@string/community_search_label"
-        android:textColor="@color/onPrimaryColor"
         app:layout_constraintBottom_toBottomOf="@+id/communitySearchInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/communitySearchInputLayout">
+        app:layout_constraintTop_toTopOf="@+id/communitySearchInputLayout"
+        style="@style/Widget.Material3.Button.TonalButton">
 
     </com.google.android.material.button.MaterialButton>
 
