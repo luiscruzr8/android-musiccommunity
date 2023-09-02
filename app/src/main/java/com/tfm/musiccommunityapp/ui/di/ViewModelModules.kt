@@ -154,9 +154,11 @@ val viewModelModule = module {
     viewModel {
         CommunityViewModel(
             getCities = get(),
+            getMyScores = get(),
             createEvent = get(),
             createAdvertisement = get(),
             createDiscussion = get(),
+            createOpinion = get(),
             dispatcher = get()
         )
     }
