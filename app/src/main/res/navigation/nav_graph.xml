@@ -38,9 +38,9 @@
         android:label="LoginScreenFragment">
 
         <action
-            android:id="@+id/action_loginFragment_to_profileFragment"
-            app:destination="@id/profileFragment"
-            app:popUpTo="@id/loginFragment"
+            android:id="@+id/action_loginFragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment"
+            app:popUpTo="@id/homeScreenFragment"
             app:popUpToInclusive="true" />
     </fragment>
 

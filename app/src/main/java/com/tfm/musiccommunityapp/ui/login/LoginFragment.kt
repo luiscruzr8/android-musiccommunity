@@ -90,7 +90,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun navigateToUserProfile() {
-        val direction = LoginFragmentDirections.actionLoginFragmentToProfileFragment(null)
+        val direction = LoginFragmentDirections.actionLoginFragmentToHomeScreenFragment()
         navigateSafe(direction)
     }
 
