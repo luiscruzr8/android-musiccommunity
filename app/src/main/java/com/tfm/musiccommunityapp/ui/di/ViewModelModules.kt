@@ -16,6 +16,7 @@ import com.tfm.musiccommunityapp.ui.home.HomeScreenViewModel
 import com.tfm.musiccommunityapp.ui.login.LoginViewModel
 import com.tfm.musiccommunityapp.ui.profile.ProfileViewModel
 import com.tfm.musiccommunityapp.ui.scores.ScoresViewModel
+import com.tfm.musiccommunityapp.ui.scores.detail.ScoreDetailViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -185,6 +186,17 @@ val viewModelModule = module {
             getPrivateUserScores = get(),
             getPublicUserScores = get(),
             uploadScore = get(),
+            dispatcher = get()
+        )
+    }
+
+    viewModel {
+        ScoreDetailViewModel(
+            getCurrentUser = get(),
+            getScoreInfoById = get(),
+            getScoreFile = get(),
+            deleteScore = get(),
+            createOpinion = get(),
             dispatcher = get()
         )
     }

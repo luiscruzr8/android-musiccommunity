@@ -123,7 +123,7 @@ class EditProfileDialog(
         }
         //Interests validation
         val interests = binding.userInterestsEditText.text.toString()
-        if (interests.isNotEmpty() && !Pattern.matches("^[a-zA-Z0-9, ]*$", interests)) {
+        if (interests.isNotEmpty() && !Pattern.matches("^[a-zA-Z0-9, áéíóúÁÉÍÓÚüÜñÑ]*\$", interests)) {
             binding.userInterestsInputLayout.error = getString(R.string.error_invalid_format_field)
             isValid = false
         } else {

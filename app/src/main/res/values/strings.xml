@@ -55,12 +55,14 @@
     <string name="comment_hint">Comment</string>
     <string name="comment_dialog_title">Leave a comment or response</string>
     <string name="comment_dialog_button">Submit</string>
+    <string name="not_now_button">Not now</string>
 
     <!-- PopUp option post menu -->
     <string name="popup_edit_option">Edit</string>
     <string name="popup_delete_option">Delete</string>
     <string name="popup_recommend_option">Recommend</string>
     <string name="popup_rate_option">Rate</string>
+    <string name="popup_opinion_option">Create opinion</string>
 
     <!-- Home screen -->
     <string name="home_screen_title">Welcome to Music Community</string>
@@ -188,6 +190,13 @@
 
     <!-- Community - Opinions screen -->
     <string name="community_opinions_no_opinions">No opinions found</string>
+    <string name="community_opinions_title">Title</string>
+    <string name="community_opinions_score">Score</string>
+    <string name="community_opinions_description">Description</string>
+    <string name="community_opinion_create_title">New opinion</string>
+    <string name="community_opinion_edit_title">Edit opinion</string>
+    <string name="community_opinion_created_title">Opinion successfully created</string>
+    <string name="community_opinion_created_message">You will be redirected to the new created opinion</string>
 
     <!-- Community - Discussions screen -->
     <string name="community_discussions_no_discussions">No discussions found</string>

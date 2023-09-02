@@ -249,6 +249,28 @@
             app:nullable="true"
             app:argType="string" />
 
+        <action
+            android:id="@+id/action_scoresFragment_to_scoreDetailFragment"
+            app:destination="@id/scoreDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/scoreDetailFragment"
+        android:name="com.tfm.musiccommunityapp.ui.scores.detail.ScoreDetailFragment"
+        android:label="ScoreDetailFragment">
+
+        <argument
+            android:name="id"
+            app:nullable="false"
+            app:argType="long" />
+
     </fragment>
 
     <fragment

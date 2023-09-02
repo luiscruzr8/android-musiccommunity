@@ -10,19 +10,22 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.RelativeLayout
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.databinding.EditDiscussionDialogBinding
-import com.tfm.musiccommunityapp.domain.model.DiscussionDomain
+import com.tfm.musiccommunityapp.databinding.EditOpinionDialogBinding
+import com.tfm.musiccommunityapp.domain.model.OpinionDomain
+import com.tfm.musiccommunityapp.domain.model.ScoreDomain
 import com.tfm.musiccommunityapp.domain.model.TagDomain
 import java.time.LocalDateTime
 import java.util.regex.Pattern
 
-class CreateEditDiscussionDialog(
-    private val discussion: DiscussionDomain?,
-    private val onSaveClicked: (DiscussionDomain) -> Unit
-) : DialogFragment(){
+class CreateEditOpinionDialog(
+    private val opinion: OpinionDomain?,
+    private val scores: List<ScoreDomain>,
+    private val onSaveClicked: (OpinionDomain) -> Unit
+) : DialogFragment() {
 
-    private var _binding: EditDiscussionDialogBinding? = null
+    private var _binding: EditOpinionDialogBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,10 +33,10 @@ class CreateEditDiscussionDialog(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val dialogLayout = inflater.inflate(R.layout.edit_discussion_dialog, container, false)
-        _binding = EditDiscussionDialogBinding.bind(dialogLayout)
+        val dialogLayout = inflater.inflate(R.layout.edit_opinion_dialog, container, false)
+        _binding = EditOpinionDialogBinding.bind(dialogLayout)
 
-        setLayout(discussion)
+        setLayout(opinion)
 
         return dialogLayout
     }
@@ -66,9 +69,10 @@ class CreateEditDiscussionDialog(
     private fun validate(): Boolean {
         var isValid = true
         binding.apply {
-            val title = postTitleEditText.text.toString()
-            val description = postDescriptionEditText.text.toString()
-            val tags = postTagsEditText.text.toString()
+            val title = postTitleEditText.text.toString().trim()
+            val description = postDescriptionEditText.text.toString().trim()
+            val score = opinionScoreEditText.text.toString().trim()
+            val tags = postTagsEditText.text.toString().trim()
 
             if (title.isEmpty()) {
                 postTitle.error = getString(R.string.error_empty_field)
@@ -80,6 +84,11 @@ class CreateEditDiscussionDialog(
                 isValid = false
             } else postDescription.error = null
 
+            if (score.isEmpty()) {
+                opinionScore.error = getString(R.string.error_empty_field)
+                isValid = false
+            } else opinionScore.error = null
+
             if (tags.isNotEmpty() && !Pattern.matches("^[a-zA-Z0-9, áéíóúÁÉÍÓÚüÜñÑ]*\$", tags)) {
                 postTags.error = getString(R.string.error_invalid_format_field)
                 isValid = false
@@ -88,25 +97,36 @@ class CreateEditDiscussionDialog(
         return isValid
     }
 
-    private fun extractValues(): DiscussionDomain {
+    private fun extractValues(): OpinionDomain {
         binding.apply {
-            return discussion?.copy(
+            val selectedScore = scores.firstOrNull {
+                it.name == opinionScoreEditText.text.toString().trim()
+            } ?: ScoreDomain(
+                0L,
+                opinionScoreEditText.text.toString().trim(),
+                "",
+                LocalDateTime.now()
+            )
+
+            return opinion?.copy(
                 title = postTitleEditText.text.toString().trim(),
                 description = postDescriptionEditText.text.toString().trim(),
                 tags = postTagsEditText.text.toString().trim().split(", ").map { TagDomain(it) },
-            ) ?: DiscussionDomain(
+            ) ?: OpinionDomain(
                 id = 0L,
                 login = "",
                 title = postTitleEditText.text.toString().trim(),
+                scoreId = selectedScore.id,
+                score = selectedScore,
                 description = postDescriptionEditText.text.toString().trim(),
                 tags = postTagsEditText.text.toString().trim().split(", ").map { TagDomain(it) },
-                postType = getString(R.string.advertisement),
+                postType = getString(R.string.event),
                 createdOn = LocalDateTime.now()
             )
         }
     }
 
-    private fun setLayout(discussion: DiscussionDomain?) {
+    private fun setLayout(opinion: OpinionDomain?) {
         binding.apply {
             saveButton.setOnClickListener {
                 if(!validate()) {
@@ -120,11 +140,13 @@ class CreateEditDiscussionDialog(
                 dismiss()
             }
 
-            discussion?.let {
-                dialogTitle.text = getString(R.string.community_advertisements_edit_title)
+            (opinionScoreEditText as? MaterialAutoCompleteTextView)?.setSimpleItems(scores.map { it.name }.toTypedArray())
+            opinion?.let {
+                dialogTitle.text = getString(R.string.community_opinion_edit_title)
                 postTitleEditText.setText(it.title)
                 postDescriptionEditText.setText(it.description)
-                postTagsEditText.setText(it.tags.map { it2 -> it2.tagName }.joinToString(", "))
+                opinionScoreEditText.setText(it.score.name, false)
+                postTagsEditText.setText(it.tags.map{ tag -> tag.tagName }.joinToString(", ") )
             }
         }
     }

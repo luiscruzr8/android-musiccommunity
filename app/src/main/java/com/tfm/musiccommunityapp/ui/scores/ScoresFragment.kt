@@ -115,7 +115,8 @@ class ScoresFragment: BaseFragment(R.layout.scores_fragment) {
     }
 
     private fun onScoreClicked(score: ScoreDomain) {
-        Toast.makeText(requireContext(), "Score clicked ${score.id}", Toast.LENGTH_SHORT).show()
+        val action = ScoresFragmentDirections.actionScoresFragmentToScoreDetailFragment(score.id)
+        navigateSafe(action)
     }
 
     private fun openFilePicker() {

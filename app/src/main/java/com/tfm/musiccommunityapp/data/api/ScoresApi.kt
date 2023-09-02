@@ -3,6 +3,7 @@ package com.tfm.musiccommunityapp.data.api
 import com.tfm.musiccommunityapp.BuildConfig
 import com.tfm.musiccommunityapp.data.api.model.ScoreResponse
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -11,7 +12,6 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
-import java.io.File
 
 internal interface ScoresApi {
 
@@ -38,7 +38,7 @@ internal interface ScoresApi {
     ): Response<ScoreResponse>
 
     @GET("${API_SCORES_URL}/score/{scoreId}")
-    suspend fun getScoreFile(@Path("scoreId") scoreId: Long): Response<File>
+    suspend fun getScoreFile(@Path("scoreId") scoreId: Long): Response<ResponseBody>
 
     @DELETE("${API_SCORES_URL}/score/{scoreId}")
     suspend fun deleteScore(@Path("scoreId") scoreId: Long): Response<Unit>

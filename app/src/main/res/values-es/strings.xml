@@ -56,12 +56,14 @@
     <string name="comment_hint">Comentario</string>
     <string name="comment_dialog_title">Deja tu comentario o respuesta</string>
     <string name="comment_dialog_button">Enviar</string>
+    <string name="not_now_button">Ahora no</string>
 
     <!-- PopUp option post menu -->
     <string name="popup_edit_option">Editar</string>
     <string name="popup_delete_option">Eliminar</string>
     <string name="popup_recommend_option">Recomendar</string>
     <string name="popup_rate_option">Puntuar</string>
+    <string name="popup_opinion_option">Crear opinión</string>
 
     <!-- Home screen -->
     <string name="home_screen_title">Bienvenido a Music Community</string>
@@ -189,6 +191,13 @@
 
     <!-- Community - Opinions screen -->
     <string name="community_opinions_no_opinions">No se han encontrado opiniones</string>
+    <string name="community_opinions_title">Título</string>
+    <string name="community_opinions_score">Partitura</string>
+    <string name="community_opinions_description">Descripción</string>
+    <string name="community_opinion_create_title">Nueva opinión</string>
+    <string name="community_opinion_edit_title">Editar opinión</string>
+    <string name="community_opinion_created_title">Opinión creada satisfactoriament</string>
+    <string name="community_opinion_created_message">Serás redirigido a la nueva opinion</string>
 
     <!-- Community - Discussions screen -->
     <string name="community_discussions_no_discussions">No se han encontrado discusiones</string>

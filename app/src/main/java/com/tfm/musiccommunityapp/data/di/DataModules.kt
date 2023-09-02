@@ -166,7 +166,8 @@ val remoteDatasourceModules = module {
 
     single {
         ScoreRemoteDatasourceImpl(
-            scoresApi = get()
+            scoresApi = get(),
+            fileHelper = get()
         )
     } bind ScoreDatasource::class
 }
