@@ -12,11 +12,11 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:gravity="center_horizontal"
-        android:text="@string/scores_screen_title"
         android:textAppearance="?attr/textAppearanceDisplaySmall"
         android:textColor="@color/onSurfaceColor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/scores_screen_title_mine" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/communitySearchInputLayout"

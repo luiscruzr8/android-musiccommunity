@@ -19,6 +19,7 @@ import java.io.File
 class ScoresViewModel(
     private val getCurrentUser: GetCurrentUserUseCase,
     private val getPrivateUserScores: GetUserScoresUseCase,
+    private val getPublicUserScores: GetUserScoresUseCase,
     private val uploadScore: UploadScoreUseCase,
     private val dispatcher: CoroutineDispatcher
 ): ViewModel() {
@@ -37,34 +38,56 @@ class ScoresViewModel(
     fun isScoresLoading() = _showScoresLoader as LiveData<Boolean>
     fun isOperationSuccessfulLiveData() = _isOperationSuccessful as LiveData<ScoreOperationSuccess>
 
-    fun setUpScores(searchTerm: String?) {
+    fun setUpScores(searchTerm: String?, login: String? = null) {
         viewModelScope.launch(dispatcher) {
             _showScoresLoader.postValue(true)
-            handleCurrentUser(searchTerm, getCurrentUser())
+            login?.let {
+                handleGetUserScoresResult(getPublicUserScores(login, searchTerm, true))
+            } ?: run {
+                handleCurrentUser(searchTerm, getCurrentUser())
+            }
         }
     }
 
     private suspend fun handleCurrentUser(searchTerm: String?, result: GetCurrentUserResult) {
         when (result) {
-            is GetCurrentUserResult.Success -> {
-                handleGetScoresResult(getPrivateUserScores(result.user?.login, searchTerm, false))
-            }
+            is GetCurrentUserResult.Success ->
+                handleGetMyScoresResult(getPrivateUserScores(result.user?.login, searchTerm, false))
 
-            is GetCurrentUserResult.NoUser -> {
-                sendScoresError(404, "User not found")
-            }
+            is GetCurrentUserResult.NoUser -> sendScoresError(404, "User not found")
         }
     }
 
-    private fun handleGetScoresResult(result: GetUserScoresResult) {
+    private fun handleGetMyScoresResult(result: GetUserScoresResult) {
         when (result) {
             is GetUserScoresResult.Success -> {
                 _scores.postValue(result.scores)
             }
+
             is GetUserScoresResult.NetworkError -> {
                 _scores.postValue(emptyList())
                 sendScoresError(result.error.code, result.error.message)
             }
+
+            is GetUserScoresResult.GenericError -> {
+                _scores.postValue(emptyList())
+                sendScoresError(result.error.code, result.error.message)
+            }
+        }
+        _showScoresLoader.postValue(false)
+    }
+
+    private fun handleGetUserScoresResult(result: GetUserScoresResult) {
+        when (result) {
+            is GetUserScoresResult.Success -> {
+                _scores.postValue(result.scores)
+            }
+
+            is GetUserScoresResult.NetworkError -> {
+                _scores.postValue(emptyList())
+                sendScoresError(result.error.code, result.error.message)
+            }
+
             is GetUserScoresResult.GenericError -> {
                 _scores.postValue(emptyList())
                 sendScoresError(result.error.code, result.error.message)

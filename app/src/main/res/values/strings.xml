@@ -116,8 +116,13 @@
     <string name="profile_screen_bio_label">My bio:</string>
     <string name="profile_screen_interests_label">My interests:</string>
     <string name="profile_screen_followers_button">%1$d followers</string>
+    <string name="profile_screen_followers">Followers</string>
+    <string name="profile_screen_public_scores_button">Public scores</string>
+    <string name="profile_screen_posts_button">User posts</string>
+    <string name="profile_screen_recommendations_button">User recommendations</string>
     <string name="profile_screen_no_followers">This user does not have followers</string>
     <string name="profile_screen_following_button">%1$d following</string>
+    <string name="profile_screen_following">Following</string>
     <string name="profile_screen_no_following">This user is not following anyone</string>
 
     <!-- Edit profile dialog -->
@@ -206,7 +211,8 @@
     <string name="community_recommendations_rating_value">Your rating is: %1$d / 10</string>
 
     <!-- Scores screen -->
-    <string name="scores_screen_title">My scores</string>
+    <string name="scores_screen_title_mine">My scores</string>
+    <string name="scores_screen_title_user">%1$s\'s scores</string>
     <string name="scores_screen_no_scores">No scores found</string>
     <string name="scores_screen_created_by_on">Created by %1$s on %2$s</string>
     <string name="chip_score">#%1$d Score</string>

@@ -9,6 +9,8 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tfm.musiccommunityapp.R
@@ -24,7 +26,7 @@ class ScoresFragment: BaseFragment(R.layout.scores_fragment) {
     private val binding by viewBinding(ScoresFragmentBinding::bind)
     private val viewModel by viewModel<ScoresViewModel>()
     private val scoresAdapter = ScoresAdapter(::onScoreClicked)
-
+    private val args by navArgs<ScoresFragmentArgs>()
     private var searchTerm = ""
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -40,7 +42,7 @@ class ScoresFragment: BaseFragment(R.layout.scores_fragment) {
             binding.searchEditText.setText(searchTerm)
         }
 
-        viewModel.setUpScores(searchTerm)
+        viewModel.setUpScores(searchTerm, args.login)
 
         observeLoader()
         observeScoresResult()
@@ -48,10 +50,10 @@ class ScoresFragment: BaseFragment(R.layout.scores_fragment) {
         observeOperationSuccess()
         observeUploadError()
 
-        setLayout()
+        setLayout(args.login)
     }
 
-    private fun setLayout() {
+    private fun setLayout(username: String? = null) {
         binding.rvMyScores.apply {
             layoutManager = GridLayoutManager(
                 context,
@@ -66,6 +68,14 @@ class ScoresFragment: BaseFragment(R.layout.scores_fragment) {
             )
         }
 
+        username?.let {
+            binding.fabAddItem.isVisible = false
+            binding.tvScoresTitle.text = getString(R.string.scores_screen_title_user, username)
+        } ?: run {
+            binding.fabAddItem.isVisible = true
+            binding.tvScoresTitle.text = getString(R.string.scores_screen_title_mine)
+        }
+
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 searchTerm = s.toString()
@@ -77,7 +87,7 @@ class ScoresFragment: BaseFragment(R.layout.scores_fragment) {
 
         binding.submitSearchButton.setOnClickListener {
             searchTerm = binding.searchEditText.text.toString()
-            viewModel.setUpScores(searchTerm)
+            viewModel.setUpScores(searchTerm, args.login)
         }
 
         binding.fabAddItem.setOnClickListener {
@@ -130,16 +140,16 @@ class ScoresFragment: BaseFragment(R.layout.scores_fragment) {
             it?.let { type ->
                 when (type) {
                     ScoresViewModel.ScoreOperationSuccess.UPLOAD -> {
-                        viewModel.setUpScores(searchTerm)
+                        viewModel.setUpScores(searchTerm, args.login)
                         Toast.makeText(
                             requireContext(),
                             "Score uploaded",
                             Toast.LENGTH_SHORT
-                        ).show()
+                        ).show() //TODO: Redirect to newly created?
                     }
 
                     ScoresViewModel.ScoreOperationSuccess.DELETE ->
-                        viewModel.setUpScores(searchTerm)
+                        viewModel.setUpScores(searchTerm, args.login)
                 }
             }
         }

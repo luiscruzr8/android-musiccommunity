@@ -197,13 +197,22 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
             binding.apply {
                 tvPhoneNumber.isVisible = isMyProfile
-                signoutButton.isVisible = isMyProfile
+                signOutButton.isVisible = isMyProfile
                 followingButton.isVisible = isMyProfile
                 editProfileButton.isVisible = isMyProfile
                 followUnfollowButton.isVisible = !isMyProfile
+                publicScoresButton.isVisible = !isMyProfile
 
-                if(isMyProfile) {
-                    signoutButton.setOnClickListener { viewModel.signOut() }
+                if (isMyProfile) {
+                    signOutButton.setOnClickListener { viewModel.signOut() }
+                } else {
+                    publicScoresButton.setOnClickListener {
+                        viewModel.getUserInfo().value?.login?.let { loginUsername ->
+                            val action = ProfileFragmentDirections
+                                .actionProfileFragmentToScoresFragment(loginUsername)
+                            navigateSafe(action)
+                        }
+                    }
                 }
             }
         }

@@ -117,8 +117,13 @@
     <string name="profile_screen_bio_label">Mi biografía:</string>
     <string name="profile_screen_interests_label">Mis intereses:</string>
     <string name="profile_screen_followers_button">%1$d seguidores</string>
+    <string name="profile_screen_followers">Seguidores</string>
+    <string name="profile_screen_public_scores_button">Partituras públicas</string>
+    <string name="profile_screen_posts_button">Publicaciones del usuario</string>
+    <string name="profile_screen_recommendations_button">Recomendaciones del usuario</string>
     <string name="profile_screen_no_followers">Este usuario no tiene seguidores aún</string>
     <string name="profile_screen_following_button">%1$d siguiendo</string>
+    <string name="profile_screen_following">Siguiendo</string>
     <string name="profile_screen_no_following">Este usuario no esta siguiendo a nadie</string>
 
     <!-- Edit profile dialog -->
@@ -207,7 +212,8 @@
     <string name="community_recommendations_rating_value">Tu puntuación es: %1$d / 10</string>
 
     <!-- Scores screen -->
-    <string name="scores_screen_title">Mis partituras</string>
+    <string name="scores_screen_title_mine">Mis partituras</string>
+    <string name="scores_screen_title_user">Partituras de %1$s</string>
     <string name="scores_screen_no_scores">No se encontraron partituras</string>
     <string name="scores_screen_created_by_on">Creada por %1$s el %2$s</string>
     <string name="chip_score">#%1$d Partitura</string>
