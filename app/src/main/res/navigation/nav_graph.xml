@@ -94,6 +94,17 @@
 
         </action>
 
+        <action
+            android:id="@+id/action_profileFragment_to_userRecommendationsFragment"
+            app:destination="@id/userRecommendationsFragment">
+
+            <argument
+                android:name="login"
+                app:nullable="false"
+                app:argType="string" />
+
+        </action>
+
     </fragment>
 
     <fragment
@@ -248,6 +259,47 @@
             android:name="id"
             app:nullable="false"
             app:argType="long" />
+
+        <action
+            android:id="@+id/action_recommendationDetailFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_recommendationDetailFragment_to_advertisementDetailFragment"
+            app:destination="@id/advertisementDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_recommendationDetailFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_recommendationDetailFragment_to_opinionDetailFragment"
+            app:destination="@id/opinionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
     </fragment>
 
     <fragment
@@ -345,6 +397,28 @@
         <action
             android:id="@+id/action_userPostsFragment_to_opinionDetailFragment"
             app:destination="@id/opinionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/userRecommendationsFragment"
+        android:name="com.tfm.musiccommunityapp.ui.profile.recommendations.UserRecommendationsFragment"
+        android:label="UserRecommendationsFragment">
+
+        <argument
+            android:name="login"
+            app:nullable="false"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_userRecommendationsFragment_to_recommendationDetailFragment"
+            app:destination="@id/recommendationDetailFragment">
 
             <argument
                 android:name="id"

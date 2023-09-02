@@ -1,4 +1,4 @@
-package com.tfm.musiccommunityapp.ui.profile.posts
+package com.tfm.musiccommunityapp.ui.profile.recommendations
 
 import android.os.Bundle
 import android.text.Editable
@@ -7,64 +7,70 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
-import com.tfm.musiccommunityapp.databinding.UserPostsFragmentBinding
-import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
+import com.tfm.musiccommunityapp.databinding.UserRecommendationsFragmentBinding
+import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
+import com.tfm.musiccommunityapp.ui.community.recommendations.RecommendationsAdapter
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.profile.ProfileViewModel
-import com.tfm.musiccommunityapp.utils.getPostType
-import com.tfm.musiccommunityapp.utils.navigateFromRecommendationOnPostType
+import com.tfm.musiccommunityapp.ui.profile.posts.UserPostsFragment
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class UserPostsFragment: BaseFragment(R.layout.user_posts_fragment) {
+class UserRecommendationsFragment: BaseFragment(R.layout.user_recommendations_fragment) {
 
-    private val binding by viewBinding(UserPostsFragmentBinding::bind)
+    private val binding by viewBinding(UserRecommendationsFragmentBinding::bind)
     private val viewModel by viewModel<ProfileViewModel>()
-    private val args by navArgs<UserPostsFragmentArgs>()
-    private val postsAdapter = UserPostsAdapter(::onPostClicked)
+    private val args by navArgs<UserRecommendationsFragmentArgs>()
+    private val recommendationsAdapter = RecommendationsAdapter(::onRecommendationClicked)
 
     private var searchTerm = ""
-    private var postType = R.string.all
+    private var getTop10 = false
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putCharSequence(SEARCH_TERM, binding.searchEditText.text)
-        outState.putInt(POST_TYPE, postType)
+        outState.putCharSequence(UserPostsFragment.SEARCH_TERM, searchTerm)
+        outState.putBoolean(UserPostsFragment.POST_TYPE, getTop10)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.postTypeEditText.setText(postType)
-
         if (savedInstanceState != null) {
             searchTerm = savedInstanceState.getCharSequence(SEARCH_TERM, "").toString()
-            postType = savedInstanceState.getInt(POST_TYPE, R.string.all)
+            getTop10 = savedInstanceState.getBoolean(GET_TOP_10, false)
             binding.searchEditText.setText(searchTerm)
-            binding.postTypeEditText.setText(postType)
+            binding.isTop10CheckBox.isChecked = getTop10
         }
 
         observeLoader()
-        observePostsResult()
-        observePostsError()
+        observeRecommendationsResult()
+        observeRecommendationsError()
 
-        viewModel.setUpPosts(
+        viewModel.setUpRecommendations(
             args.login,
-            getPostType(postType),
+            getTop10,
             searchTerm
         )
 
-        binding.rvMyPosts.apply {
-            adapter = postsAdapter
+        binding.rvUserRecommendations.apply {
+            adapter = recommendationsAdapter
             addItemDecoration(
                 DividerItemDecoration(
                     requireContext(),
                     DividerItemDecoration.VERTICAL
                 )
             )
+        }
+
+        binding.tvRecommendationsTitle.text = getString(
+            R.string.profile_screen_title_user_recommendations,
+            args.login
+        )
+
+        binding.isTop10CheckBox.setOnCheckedChangeListener { _, isChecked ->
+            getTop10 = isChecked
         }
 
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
@@ -76,26 +82,10 @@ class UserPostsFragment: BaseFragment(R.layout.user_posts_fragment) {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
-        val types = arrayOf(
-            R.string.all to getString(R.string.all),
-            R.string.advertisement to getString(R.string.advertisement),
-            R.string.discussion to getString(R.string.discussion),
-            R.string.event to getString(R.string.event),
-            R.string.opinion to getString(R.string.opinion)
-        )
-
-        (binding.postTypeEditText as? MaterialAutoCompleteTextView)?.setSimpleItems(types.map { it.second }.toTypedArray())
-        (binding.postTypeEditText as? MaterialAutoCompleteTextView)
-            ?.setOnItemClickListener  { parent, _, position, _ ->
-                val selected = parent.getItemAtPosition(position) as String
-                postType = types.first { it.second == selected }.first
-            }
-
-        binding.tvPostsTitle.text = getString(R.string.profile_screen_title_user_posts, args.login)
         binding.submitSearchButton.setOnClickListener {
-            viewModel.setUpPosts(
+            viewModel.setUpRecommendations(
                 args.login,
-                getPostType(postType),
+                getTop10,
                 searchTerm
             )
         }
@@ -107,16 +97,16 @@ class UserPostsFragment: BaseFragment(R.layout.user_posts_fragment) {
         }
     }
 
-    private fun observePostsResult() {
-        viewModel.getUserPosts().observe(viewLifecycleOwner) { posts ->
-            binding.noPostsFound.isVisible = posts.isNullOrEmpty()
-            posts?.let {
-                postsAdapter.setPosts(it)
+    private fun observeRecommendationsResult() {
+        viewModel.getUserRecommendations().observe(viewLifecycleOwner) { recommendations ->
+            binding.noRecommendationsFound.isVisible = recommendations.isNullOrEmpty()
+            recommendations?.let {
+                recommendationsAdapter.setRecommendations(it)
             }
         }
     }
 
-    private fun observePostsError() {
+    private fun observeRecommendationsError() {
         viewModel.getUserPostsError().observe(viewLifecycleOwner) { error ->
             error?.let {
                 alertDialogOneOption(
@@ -130,12 +120,14 @@ class UserPostsFragment: BaseFragment(R.layout.user_posts_fragment) {
         }
     }
 
-    private fun onPostClicked(post: GenericPostDomain) {
-        navigateFromRecommendationOnPostType(post.postType, post.id, ::navigateSafe)
+    private fun onRecommendationClicked(recommendation: RecommendationDomain) {
+        val action = UserRecommendationsFragmentDirections
+            .actionUserRecommendationsFragmentToRecommendationDetailFragment(recommendation.id)
+        navigateSafe(action)
     }
 
     companion object {
         const val SEARCH_TERM = "searchTerm"
-        const val POST_TYPE = "postType"
+        const val GET_TOP_10 = "getTop10"
     }
 }

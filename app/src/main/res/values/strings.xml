@@ -130,6 +130,7 @@
     <string name="profile_screen_title_user_posts">%1$s\'s posts</string>
     <string name="profile_screen_no_posts">No posts found</string>
     <string name="profile_screen_post_type">Post type</string>
+    <string name="profile_screen_title_user_recommendations">%1$s\'s recommendations</string>
 
     <!-- Edit profile dialog -->
     <string name="edit_screen_title">Edit profile</string>

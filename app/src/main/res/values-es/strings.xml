@@ -131,6 +131,7 @@
     <string name="profile_screen_title_user_posts">Publicaciones de %1$s</string>
     <string name="profile_screen_no_posts">No se han encontrado publicaciones</string>
     <string name="profile_screen_post_type">Tipo de publicación</string>
+    <string name="profile_screen_title_user_recommendations">Recomendaciones de %1$s</string>
 
     <!-- Edit profile dialog -->
     <string name="edit_screen_title">Editar perfil</string>

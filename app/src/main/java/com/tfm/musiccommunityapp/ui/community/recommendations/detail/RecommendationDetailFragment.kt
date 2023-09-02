@@ -11,12 +11,14 @@ import com.bumptech.glide.Glide
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.RecommendationDetailFragmentBinding
+import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
 import com.tfm.musiccommunityapp.ui.dialogs.rating.RatingDialog
 import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.getChipColor
 import com.tfm.musiccommunityapp.utils.getChipLabel
+import com.tfm.musiccommunityapp.utils.navigateFromRecommendationOnPostType
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -91,6 +93,9 @@ class RecommendationDetailFragment: BaseFragment(R.layout.recommendation_detail_
                         tvTagsLabel.isVisible = true
                         relatedTagsLayout.isVisible = true
                         relatedTagsLayout.setTagList(recommendation.post.tags.map { it2 -> it2.tagName })
+                    }
+                    clPost.setOnClickListener {
+                        onPostClicked(recommendation.post)
                     }
                 }
             }
@@ -179,6 +184,10 @@ class RecommendationDetailFragment: BaseFragment(R.layout.recommendation_detail_
                 }
             ).show(this.parentFragmentManager, RatingDialog::class.java.simpleName)
         }
+    }
+
+    private fun onPostClicked(post: GenericPostDomain) {
+        navigateFromRecommendationOnPostType(post.postType, post.id, ::navigateSafe)
     }
 
 }
