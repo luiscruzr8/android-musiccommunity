@@ -13,6 +13,7 @@ import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.RecommendationDetailFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
+import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogTwoOptions
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
 import com.tfm.musiccommunityapp.ui.dialogs.rating.RatingDialog
 import com.tfm.musiccommunityapp.utils.formatDateToString
@@ -187,7 +188,17 @@ class RecommendationDetailFragment: BaseFragment(R.layout.recommendation_detail_
     }
 
     private fun onPostClicked(post: GenericPostDomain) {
-        navigateFromRecommendationOnPostType(post.postType, post.id, ::navigateSafe)
+        alertDialogTwoOptions(
+            requireContext(),
+            getString(R.string.user_alert),
+            null,
+            getString(R.string.community_recommendations_navigate_to_post_message),
+            getString(R.string.ok),
+            {
+                navigateFromRecommendationOnPostType(post.postType, post.id, ::navigateSafe)
+            },
+            getString(R.string.not_now_button)
+        ) { }
     }
 
 }

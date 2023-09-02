@@ -107,7 +107,7 @@ class UserRecommendationsFragment: BaseFragment(R.layout.user_recommendations_fr
     }
 
     private fun observeRecommendationsError() {
-        viewModel.getUserPostsError().observe(viewLifecycleOwner) { error ->
+        viewModel.getUserRecommendationsError().observe(viewLifecycleOwner) { error ->
             error?.let {
                 alertDialogOneOption(
                     requireContext(),
@@ -115,7 +115,7 @@ class UserRecommendationsFragment: BaseFragment(R.layout.user_recommendations_fr
                     null,
                     error,
                     getString(R.string.ok),
-                ) {  }
+                ) { }
             }
         }
     }

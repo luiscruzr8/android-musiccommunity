@@ -115,6 +115,7 @@ class ProfileViewModel(
     private suspend fun isNotMyUser(username: String?) {
         _isMyProfile.postValue(false)
         handleGetUserInfoResult(getUserInfo(username))
+        handleGetFollowersResult(getUserFollowers(username))
         username?.let { handleIsUserFollower(isUserFollower(it)) }
     }
 
