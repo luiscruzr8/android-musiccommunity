@@ -108,7 +108,7 @@ class CreateEditAdvertisementDialog(
                 isValid = false
             } else advertisementUntilDate.error = null
 
-            if (tags.isNotEmpty() && !Pattern.matches("^[a-zA-Z0-9, ]*$", tags)) {
+            if (tags.isNotEmpty() && !Pattern.matches("^[a-zA-Z0-9, áéíóúÁÉÍÓÚüÜñÑ]*\$", tags)) {
                 postTags.error = getString(R.string.error_invalid_format_field)
                 isValid = false
             } else postTags.error = null

@@ -69,26 +69,37 @@ class ProfileViewModel(
     fun setUp(username: String?) {
         viewModelScope.launch(dispatcher) {
             showLoader.postValue(true)
-
-            handleGetUserInfoResult(getUserInfo(username)).run {
-                handleGetCurrentUserResult(getCurrentUser())
-            }
-            username?.let { handleIsUserFollower(isUserFollower(it)) }
-            handleGetFollowersResult(getUserFollowers(username))
-            handleGetFollowingResult(getUserFollowing())
-
+            handleGetCurrentUserResult(getCurrentUser(), username)
             showLoader.postValue(false)
         }
     }
 
-    private fun handleGetCurrentUserResult(result: GetCurrentUserResult) {
+    private suspend fun isNotMyUser(username: String?) {
+        _isMyProfile.postValue(false)
+        handleGetUserInfoResult(getUserInfo(username))
+        username?.let { handleIsUserFollower(isUserFollower(it)) }
+    }
+
+    private suspend fun handleGetCurrentUserResult(
+        result: GetCurrentUserResult,
+        username: String?
+    ) {
         when (result) {
             is GetCurrentUserResult.Success -> {
-                _isMyProfile.postValue(result.user?.let {
-                    _userInfo.value?.login == it.login
-                } ?: false)
+                val user = result.user
+                if (username != null && user != null && user.login == username
+                    || username == null && user != null
+                ) {
+                    _isMyProfile.postValue(true)
+                    _userInfo.postValue(user)
+                    handleGetFollowersResult(getUserFollowers(username))
+                    handleGetFollowingResult(getUserFollowing())
+                } else {
+                    isNotMyUser(username)
+                }
             }
-            GetCurrentUserResult.NoUser -> _isMyProfile.postValue(false)
+
+            GetCurrentUserResult.NoUser -> isNotMyUser(username)
         }
     }
 

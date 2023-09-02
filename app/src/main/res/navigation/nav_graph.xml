@@ -71,6 +71,17 @@
                 app:argType="string" />
 
         </action>
+
+        <action
+            android:id="@+id/action_profileFragment_to_scoresFragment"
+            app:destination="@id/scoresFragment">
+
+            <argument
+                android:name="login"
+                app:nullable="false"
+                app:argType="string" />
+
+        </action>
     </fragment>
 
     <fragment
@@ -231,6 +242,34 @@
         android:id="@+id/scoresFragment"
         android:name="com.tfm.musiccommunityapp.ui.scores.ScoresFragment"
         android:label="ScoresFragment">
+
+        <argument
+            android:name="login"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_scoresFragment_to_scoreDetailFragment"
+            app:destination="@id/scoreDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/scoreDetailFragment"
+        android:name="com.tfm.musiccommunityapp.ui.scores.detail.ScoreDetailFragment"
+        android:label="ScoreDetailFragment">
+
+        <argument
+            android:name="id"
+            app:nullable="false"
+            app:argType="long" />
 
     </fragment>
 

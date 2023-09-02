@@ -8,6 +8,7 @@ import com.tfm.musiccommunityapp.data.di.preferencesModule
 import com.tfm.musiccommunityapp.data.di.remoteDatasourceModules
 import com.tfm.musiccommunityapp.data.di.repositoriesModule
 import com.tfm.musiccommunityapp.domain.di.useCaseModule
+import com.tfm.musiccommunityapp.ui.di.uiModule
 import com.tfm.musiccommunityapp.ui.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -30,6 +31,7 @@ class MusicCommunityApp : Application() {
                     repositoriesModule,
                     useCaseModule,
                     viewModelModule,
+                    uiModule,
                     preferencesModule
                 )
             )

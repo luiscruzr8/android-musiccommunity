@@ -8,13 +8,15 @@ import com.tfm.musiccommunityapp.data.datasource.ScoreDatasource
 import com.tfm.musiccommunityapp.data.extensions.eitherOf
 import com.tfm.musiccommunityapp.domain.model.DomainError
 import com.tfm.musiccommunityapp.domain.model.ScoreDomain
+import com.tfm.musiccommunityapp.domain.utils.FileHelper
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 internal class ScoreRemoteDatasourceImpl(
-    private val scoresApi: ScoresApi
+    private val scoresApi: ScoresApi,
+    private val fileHelper: FileHelper
 ) : ScoreDatasource {
 
     override suspend fun getUserScores(
@@ -44,13 +46,20 @@ internal class ScoreRemoteDatasourceImpl(
 
     override suspend fun getScoreFile(scoreId: Long): Either<DomainError, File?> =
         eitherOf(
-            response = scoresApi.getScoreFile(scoreId),
-            mapper = { it }
-        ) { it.toErrorResponse().toDomain() }
+            request = { scoresApi.getScoreFile(scoreId) },
+            mapper = { responseBody ->
+                responseBody?.let {
+                    val file = fileHelper.createFileFromResponseBody(it)
+                    file
+                }
+            },
+            errorMapper = { it.toErrorResponse().toDomain() }
+        )
 
     override suspend fun deleteScore(scoreId: Long): Either<DomainError, Unit> =
         eitherOf(
             response = scoresApi.deleteScore(scoreId),
             mapper = { }
         ) { it.toErrorResponse().toDomain() }
+
 }
