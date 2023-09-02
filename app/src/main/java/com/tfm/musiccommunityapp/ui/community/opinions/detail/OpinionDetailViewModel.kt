@@ -16,20 +16,24 @@ import com.tfm.musiccommunityapp.domain.interactor.opinion.DeleteOpinionResult
 import com.tfm.musiccommunityapp.domain.interactor.opinion.DeleteOpinionUseCase
 import com.tfm.musiccommunityapp.domain.interactor.opinion.GetOpinionByIdResult
 import com.tfm.musiccommunityapp.domain.interactor.opinion.GetOpinionByIdUseCase
+import com.tfm.musiccommunityapp.domain.interactor.opinion.UpdateOpinionResult
 import com.tfm.musiccommunityapp.domain.interactor.opinion.UpdateOpinionUseCase
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationResult
 import com.tfm.musiccommunityapp.domain.interactor.recommendations.CreateRecommendationUseCase
+import com.tfm.musiccommunityapp.domain.interactor.score.GetScoreFileResult
+import com.tfm.musiccommunityapp.domain.interactor.score.GetScoreFileUseCase
 import com.tfm.musiccommunityapp.domain.model.CommentDomain
 import com.tfm.musiccommunityapp.domain.model.OpinionDomain
 import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
 import com.tfm.musiccommunityapp.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import java.io.File
 
 class OpinionDetailViewModel(
-    private val getOpinionById: GetOpinionByIdUseCase,
-    //private val getScoreById: GetScoreByIdUseCase,
     private val getCurrentUser: GetCurrentUserUseCase,
+    private val getOpinionById: GetOpinionByIdUseCase,
+    private val getScoreFileById: GetScoreFileUseCase,
     private val updateOpinion: UpdateOpinionUseCase,
     private val deleteOpinion: DeleteOpinionUseCase,
     private val createRecommendation: CreateRecommendationUseCase,
@@ -46,6 +50,8 @@ class OpinionDetailViewModel(
     private val _getOpinionByIdError: SingleLiveEvent<String> = SingleLiveEvent()
     private val _showOpinionLoader: MutableLiveData<Boolean> = MutableLiveData()
     private val _isOwnerUser: SingleLiveEvent<Boolean> = SingleLiveEvent()
+    private val _scoreFile: SingleLiveEvent<File?> = SingleLiveEvent()
+    private val _scoreFileError: SingleLiveEvent<String> = SingleLiveEvent()
     private val _isOperationSuccessful: SingleLiveEvent<OpinionOperationSuccess> = SingleLiveEvent()
 
     fun getOpinionLiveData() = _opinion as LiveData<OpinionDomain?>
@@ -53,6 +59,8 @@ class OpinionDetailViewModel(
     fun getOpinionByIdError() = _getOpinionByIdError as LiveData<String>
     fun isOpinionLoading() = _showOpinionLoader as LiveData<Boolean>
     fun isUserOwnerLiveData() = _isOwnerUser as LiveData<Boolean>
+    fun getScoreFileLiveData() = _scoreFile as LiveData<File?>
+    fun getScoreFileError() = _scoreFileError as LiveData<String>
     fun isOperationSuccessfulLiveData() =
         _isOperationSuccessful as LiveData<OpinionOperationSuccess>
 
@@ -61,11 +69,7 @@ class OpinionDetailViewModel(
             _showOpinionLoader.postValue(true)
             handleGetOpinionByIdResult(getOpinionById(opinionId))
             handleGetCurrentUserResult(getCurrentUser())
-
             handleGetCommentsResult(getPostComments(opinionId))
-
-            //TODO: replace when scores are implemented
-            handleGetScoreResult("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf")
         }
     }
 
@@ -75,7 +79,7 @@ class OpinionDetailViewModel(
         }
     }
 
-    private fun handleGetOpinionByIdResult(result: GetOpinionByIdResult) {
+    private suspend fun handleGetOpinionByIdResult(result: GetOpinionByIdResult) {
         when (result) {
             GetOpinionByIdResult.NoOpinion -> {
                 _getOpinionByIdError.postValue("Error code: 404 - Opinion not found")
@@ -83,7 +87,20 @@ class OpinionDetailViewModel(
 
             is GetOpinionByIdResult.Success -> {
                 _opinion.postValue(result.opinion)
+                handleGetScoreFileResult(getScoreFileById(result.opinion?.scoreId ?: 0L))
             }
+        }
+    }
+
+    private fun handleGetScoreFileResult(result: GetScoreFileResult) {
+        when (result) {
+            is GetScoreFileResult.Success -> _scoreFile.postValue(result.scoreFile)
+
+            is GetScoreFileResult.GenericError ->
+                _scoreFileError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+
+            is GetScoreFileResult.NetworkError ->
+                _scoreFileError.postValue("Error code: ${result.error.code} - ${result.error.message}")
         }
         _showOpinionLoader.postValue(false)
     }
@@ -111,11 +128,25 @@ class OpinionDetailViewModel(
         }
     }
 
-    //TODO: replace when scores are implemented
-    private val _score: SingleLiveEvent<String> = SingleLiveEvent()
-    fun getScoreLiveData() = _score as LiveData<String>
-    private fun handleGetScoreResult(result: String) {
-        _score.postValue(result)
+    fun sendUpdateOpinion(opinion: OpinionDomain) {
+        viewModelScope.launch(dispatcher) {
+            _showOpinionLoader.postValue(true)
+            handleUpdateOpinionResult(updateOpinion(opinion))
+        }
+    }
+
+    private fun handleUpdateOpinionResult(result: UpdateOpinionResult) {
+        when (result) {
+            is UpdateOpinionResult.Success -> {
+                _isOperationSuccessful.postValue(OpinionOperationSuccess.UPDATE)
+            }
+
+            is UpdateOpinionResult.GenericError ->
+                _getOpinionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+
+            is UpdateOpinionResult.NetworkError ->
+                _getOpinionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
     }
 
     fun sendDeleteOpinion() {

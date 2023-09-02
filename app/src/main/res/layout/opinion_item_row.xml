@@ -22,39 +22,59 @@
 
         <TextView
             android:id="@+id/tvOpinionTitle"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:textAppearance="?attr/textAppearanceTitleMedium"
             android:textColor="@color/onSurfaceColor"
-            app:layout_constraintBottom_toTopOf="@+id/divider2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvOpinionChip"
             tools:text="@string/post_title_tools" />
 
+        <ImageView
+            android:id="@+id/ivFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/tvOpinionTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvOpinionTitle"
+            app:srcCompat="@drawable/ic_score" />
+
+        <TextView
+            android:id="@+id/tvFileName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="@color/onSurfaceColor"
+            app:layout_constraintBottom_toBottomOf="@+id/ivFile"
+            app:layout_constraintEnd_toEndOf="@+id/tvOpinionTitle"
+            app:layout_constraintStart_toEndOf="@+id/ivFile"
+            app:layout_constraintTop_toTopOf="@+id/ivFile"
+            tools:text="@string/post_location_tools" />
+
         <View
             android:id="@+id/divider2"
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:layout_marginTop="12dp"
             android:background="?android:attr/listDivider"
             android:backgroundTint="@color/surfaceColor"
-            app:layout_constraintBottom_toBottomOf="@+id/tvOpinionTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvOpinionTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/ivFile" />
 
         <TextView
             android:id="@+id/tvCreationDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
-            android:layout_marginBottom="22dp"
             android:textAppearance="?attr/textAppearanceBodySmall"
             android:textColor="@color/onSurfaceColor"
             app:layout_constraintBottom_toBottomOf="@+id/tvOpinionChip"

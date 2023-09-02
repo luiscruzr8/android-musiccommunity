@@ -14,16 +14,18 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.CommunityFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.CityDomain
+import com.tfm.musiccommunityapp.domain.model.ScoreDomain
 import com.tfm.musiccommunityapp.ui.community.advertisements.AdvertisementsFragment
 import com.tfm.musiccommunityapp.ui.community.discussions.DiscussionsFragment
 import com.tfm.musiccommunityapp.ui.community.events.EventsFragment
 import com.tfm.musiccommunityapp.ui.community.opinions.OpinionsFragment
 import com.tfm.musiccommunityapp.ui.community.recommendations.RecommendationsFragment
 import com.tfm.musiccommunityapp.ui.community.users.UsersFragment
-import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
+import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogTwoOptions
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditDiscussionDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditEventDialog
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditOpinionDialog
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -35,6 +37,7 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
     private var searchTerm = ""
     private var isTop10Selected = false
     private var cities = emptyList<CityDomain>()
+    private var scores = emptyList<ScoreDomain>()
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -47,6 +50,7 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
 
         viewModel.setUpCities()
         observeCitiesResult()
+        observeScoresResult()
         observeOperationResult()
         observeOperationErrors()
 
@@ -90,7 +94,7 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
                 setUpTab(f)
             }
         }, false)
-        
+
     }
 
     private fun setUpAdapter():ViewPagerAdapter {
@@ -161,6 +165,7 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
                 fragment.restartViewPager(searchTerm)
                 binding.fabAddItem.isVisible = true
                 binding.isTop10CheckBox.isVisible = false
+                setCreateOpinionDialog()
             }
 
             is RecommendationsFragment -> {
@@ -179,44 +184,84 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
         }
     }
 
+    private fun observeScoresResult() {
+        viewModel.getMyScoresLiveData().observe(viewLifecycleOwner) { scoreList ->
+            scores = scoreList
+        }
+    }
+
     private fun observeOperationResult() {
         viewModel.getOperationResult().observe(viewLifecycleOwner) { operation ->
             when (operation.first) {
                 CommunityViewModel.OperationSuccess.CREATE_EVENT_SUCCESS -> {
-                    alertDialogOneOption(
+                    alertDialogTwoOptions(
                         requireContext(),
                         getString(R.string.community_event_created_title),
                         null,
                         getString(R.string.community_event_created_message),
-                        getString(R.string.ok)
-                    ) {
-                        val action = CommunityFragmentDirections.actionCommunityFragmentToEventDetailFragment(operation.second)
-                        navigateSafe(action)
-                    }
+                        getString(R.string.ok),
+                        {
+                            val action =
+                                CommunityFragmentDirections.actionCommunityFragmentToEventDetailFragment(
+                                    operation.second
+                                )
+                            navigateSafe(action)
+                        },
+                        getString(R.string.not_now_button)
+                    ) { }
                 }
                 CommunityViewModel.OperationSuccess.CREATE_ADVERTISEMENT_SUCCESS -> {
-                    alertDialogOneOption(
+                    alertDialogTwoOptions(
                         requireContext(),
                         getString(R.string.community_advertisement_created_title),
                         null,
                         getString(R.string.community_advertisement_created_message),
-                        getString(R.string.ok)
-                    ) {
-                        val action = CommunityFragmentDirections.actionCommunityFragmentToAdvertisementDetailFragment(operation.second)
-                        navigateSafe(action)
-                    }
+                        getString(R.string.ok),
+                        {
+                            val action =
+                                CommunityFragmentDirections.actionCommunityFragmentToAdvertisementDetailFragment(
+                                    operation.second
+                                )
+                            navigateSafe(action)
+                        },
+                        getString(R.string.not_now_button)
+                    ) { }
                 }
+
                 CommunityViewModel.OperationSuccess.CREATE_DISCUSSION_SUCCESS -> {
-                    alertDialogOneOption(
+                    alertDialogTwoOptions(
                         requireContext(),
                         getString(R.string.community_discussion_created_title),
                         null,
                         getString(R.string.community_discussion_created_message),
-                        getString(R.string.ok)
-                    ) {
-                        val action = CommunityFragmentDirections.actionCommunityFragmentToDiscussionDetailFragment(operation.second)
-                        navigateSafe(action)
-                    }
+                        getString(R.string.ok),
+                        {
+                            val action =
+                                CommunityFragmentDirections.actionCommunityFragmentToDiscussionDetailFragment(
+                                    operation.second
+                                )
+                            navigateSafe(action)
+                        },
+                        getString(R.string.not_now_button)
+                    ) { }
+                }
+
+                CommunityViewModel.OperationSuccess.CREATE_OPINION_SUCCESS -> {
+                    alertDialogTwoOptions(
+                        requireContext(),
+                        getString(R.string.community_opinion_created_title),
+                        null,
+                        getString(R.string.community_opinion_created_message),
+                        getString(R.string.ok),
+                        {
+                            val action =
+                                CommunityFragmentDirections.actionCommunityFragmentToOpinionDetailFragment(
+                                    operation.second
+                                )
+                            navigateSafe(action)
+                        },
+                        getString(R.string.not_now_button)
+                    ) { }
                 }
             }
         }
@@ -253,10 +298,31 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
     private fun setCreateDiscussionDialog() {
         binding.fabAddItem.setOnClickListener {
             CreateEditDiscussionDialog(
-                    discussion = null,
+                discussion = null,
             ) {
                 viewModel.sendCreateDiscussion(it)
             }.show(this.parentFragmentManager, CreateEditDiscussionDialog::class.java.simpleName)
+        }
+    }
+
+    private fun setCreateOpinionDialog() {
+        binding.fabAddItem.setOnClickListener {
+            CreateEditOpinionDialog(
+                opinion = null,
+                scores = scores,
+            ) {
+                alertDialogTwoOptions(
+                    requireContext(),
+                    getString(R.string.user_alert),
+                    null,
+                    getString(R.string.create_opinion_confirmation),
+                    getString(R.string.accept),
+                    {
+                        viewModel.sendCreateOpinion(it)
+                    },
+                    getString(R.string.cancel)
+                ) { }
+            }.show(this.parentFragmentManager, CreateEditOpinionDialog::class.java.simpleName)
         }
     }
 

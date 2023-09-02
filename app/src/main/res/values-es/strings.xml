@@ -198,6 +198,8 @@
     <string name="community_opinion_edit_title">Editar opinión</string>
     <string name="community_opinion_created_title">Opinión creada satisfactoriament</string>
     <string name="community_opinion_created_message">Serás redirigido a la nueva opinion</string>
+    <string name="create_opinion_confirmation">Al aceptar, proporcionas acceso a todos los usuarios a esta partitura. Si cancelas, la publicación no se creará.\n¿Quieres crear la publicación de todos modos?</string>
+
 
     <!-- Community - Discussions screen -->
     <string name="community_discussions_no_discussions">No se han encontrado discusiones</string>

@@ -1,7 +1,6 @@
 package com.tfm.musiccommunityapp.ui.scores.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -11,6 +10,8 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.ScoreDetailFragmentBinding
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
+import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogTwoOptions
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditOpinionDialog
 import com.tfm.musiccommunityapp.utils.formatDateToString
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -88,7 +89,7 @@ class ScoreDetailFragment: BaseFragment(R.layout.score_detail_fragment) {
     }
 
     private fun observeScoreFileError() {
-        viewModel.getScoreInfoError().observe(viewLifecycleOwner) { errorMessage ->
+        viewModel.getScoreFileError().observe(viewLifecycleOwner) { errorMessage ->
             errorMessage?.let {
                 alertDialogOneOption(
                     requireContext(),
@@ -104,11 +105,26 @@ class ScoreDetailFragment: BaseFragment(R.layout.score_detail_fragment) {
     private fun observeOperationSuccessful() {
         viewModel.isOperationSuccessfulLiveData().observe(viewLifecycleOwner) {
             it?.let { type ->
-                when (type) {
+                when (type.first) {
                     ScoreDetailViewModel.ScoreOperationSuccess.DELETE ->
                         findNavController().popBackStack()
 
-                    ScoreDetailViewModel.ScoreOperationSuccess.OPINION -> TODO()
+                    ScoreDetailViewModel.ScoreOperationSuccess.OPINION ->
+                        alertDialogTwoOptions(
+                            requireContext(),
+                            getString(R.string.community_opinion_created_title),
+                            null,
+                            getString(R.string.community_opinion_created_message),
+                            getString(R.string.ok),
+                            {
+                                val action = ScoreDetailFragmentDirections
+                                    .actionScoreDetailFragmentToOpinionDetailFragment(
+                                        type.second
+                                    )
+                                navigateSafe(action)
+                            },
+                            getString(R.string.not_now_button)
+                        ) { }
                 }
             }
         }
@@ -127,7 +143,7 @@ class ScoreDetailFragment: BaseFragment(R.layout.score_detail_fragment) {
                 }
                 ivCreateOpinion.setOnClickListener {
                     if (isOwner) {
-                        createOpinion()
+                        setCreateOpinionDialog()
                     }
                 }
             }
@@ -138,8 +154,28 @@ class ScoreDetailFragment: BaseFragment(R.layout.score_detail_fragment) {
         viewModel.sendDeleteScore()
     }
 
-    private fun createOpinion() {
-        Log.e("ScoreDetailFragment", "createOpinionClicked")
+    private fun setCreateOpinionDialog() {
+        viewModel.getScoreInfoLiveData().value?.let { scoreInfo ->
+            CreateEditOpinionDialog(
+                null,
+                listOf(scoreInfo)
+            ) { opinion ->
+                alertDialogTwoOptions(
+                    requireContext(),
+                    getString(R.string.user_alert),
+                    null,
+                    getString(R.string.create_opinion_confirmation),
+                    getString(R.string.accept),
+                    {
+                        viewModel.sendCreateOpinion(opinion)
+                    },
+                    getString(R.string.cancel)
+                ) { }
+            }.show(
+                this.parentFragmentManager,
+                CreateEditOpinionDialog::class.java.simpleName
+            )
+        }
     }
 
 }

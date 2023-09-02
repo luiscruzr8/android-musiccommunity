@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.github.barteksc.pdfviewer.util.FitPolicy
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.data.api.model.toGenericDomain
@@ -15,6 +16,7 @@ import com.tfm.musiccommunityapp.databinding.OpinionDetailFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.CommentDomain
 import com.tfm.musiccommunityapp.ui.community.comments.CommentsAdapter
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
+import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditOpinionDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.PostOrRespondCommentDialog
 import com.tfm.musiccommunityapp.utils.formatDateToString
@@ -42,8 +44,9 @@ class OpinionDetailFragment: BaseFragment(R.layout.opinion_detail_fragment) {
 
         observeLoader()
         observeOpinionResult()
-        observeScoreResult()
         observeOpinionError()
+        observeScoreFileResult()
+        observeScoreFileError()
         observeIsUserOwner()
         observeOperationSuccessful()
         observeCommentsResult()
@@ -52,16 +55,6 @@ class OpinionDetailFragment: BaseFragment(R.layout.opinion_detail_fragment) {
     private fun observeLoader() {
         viewModel.isOpinionLoading().observe(viewLifecycleOwner) { showLoader ->
             if (showLoader) showLoader() else hideLoader()
-        }
-    }
-
-    private fun observeScoreResult() {
-        viewModel.getScoreLiveData().observe(viewLifecycleOwner) { score ->
-            score?.let {
-                //TODO review after score implementation
-                binding.pdfWebView.settings.javaScriptEnabled = true
-                binding.pdfWebView.loadUrl("https://docs.google.com/gview?embedded=true&url=$score")
-            }
         }
     }
 
@@ -115,7 +108,7 @@ class OpinionDetailFragment: BaseFragment(R.layout.opinion_detail_fragment) {
 
                 popup.setOnMenuItemClickListener { item: MenuItem ->
                     when (item.itemId) {
-                        R.id.edit_option -> {}
+                        R.id.edit_option -> setEditOpinionDialog()
                         R.id.delete_option -> deleteOpinion()
                         R.id.recommend_option -> setCreateRecommendationDialog()
                     }
@@ -140,6 +133,37 @@ class OpinionDetailFragment: BaseFragment(R.layout.opinion_detail_fragment) {
         }
     }
 
+    private fun observeScoreFileResult() {
+        viewModel.getScoreFileLiveData().observe(viewLifecycleOwner) { scoreFile ->
+            scoreFile?.let {
+                binding.scoreFilePdfView
+                    .fromFile(it)
+                    .enableSwipe(true)
+                    .swipeHorizontal(true)
+                    .enableAntialiasing(true)
+                    .pageSnap(true)
+                    .autoSpacing(true)
+                    .pageFitPolicy(FitPolicy.BOTH)
+                    .pageFling(true)
+                    .load()
+            }
+        }
+    }
+
+    private fun observeScoreFileError() {
+        viewModel.getScoreFileError().observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                alertDialogOneOption(
+                    requireContext(),
+                    it,
+                    null,
+                    errorMessage,
+                    getString(R.string.accept)
+                ) { }
+            }
+        }
+    }
+
     private fun observeOperationSuccessful() {
         viewModel.isOperationSuccessfulLiveData().observe(viewLifecycleOwner) { type ->
             type?.let {
@@ -147,7 +171,8 @@ class OpinionDetailFragment: BaseFragment(R.layout.opinion_detail_fragment) {
                     OpinionDetailViewModel.OpinionOperationSuccess.DELETE ->
                         findNavController().popBackStack()
 
-                    OpinionDetailViewModel.OpinionOperationSuccess.UPDATE -> {}
+                    OpinionDetailViewModel.OpinionOperationSuccess.UPDATE ->
+                        viewModel.setUpOpinion(args.id)
 
                     OpinionDetailViewModel.OpinionOperationSuccess.RECOMMEND ->
                         findNavController().popBackStack()
@@ -181,6 +206,18 @@ class OpinionDetailFragment: BaseFragment(R.layout.opinion_detail_fragment) {
 
     private fun deleteOpinion() {
         viewModel.sendDeleteOpinion()
+    }
+
+    private fun setEditOpinionDialog() {
+        CreateEditOpinionDialog(
+            opinion = viewModel.getOpinionLiveData().value,
+            scores = viewModel.getOpinionLiveData().value?.score?.let { listOf(it) } ?: emptyList(),
+        ) { opinion ->
+            viewModel.sendUpdateOpinion(opinion)
+        }.show(
+            this.parentFragmentManager,
+            CreateEditOpinionDialog::class.java.simpleName
+        )
     }
 
     private fun setCreateRecommendationDialog() {

@@ -23,7 +23,7 @@ import java.io.File
 class ScoreDetailViewModel(
     private val getCurrentUser: GetCurrentUserUseCase,
     private val getScoreInfoById: GetScoreInfoByIdUseCase,
-    private val getScoreFile: GetScoreFileUseCase,
+    private val getScoreFileById: GetScoreFileUseCase,
     private val deleteScore: DeleteScoreUseCase,
     private val createOpinion: CreateOpinionUseCase,
     private val dispatcher: CoroutineDispatcher
@@ -37,7 +37,8 @@ class ScoreDetailViewModel(
     private val _showScoreLoader: SingleLiveEvent<Boolean> = SingleLiveEvent()
     private val _scoreInfoError: SingleLiveEvent<String> = SingleLiveEvent()
     private val _scoreFileError: SingleLiveEvent<String> = SingleLiveEvent()
-    private val _isOperationSuccessful: SingleLiveEvent<ScoreOperationSuccess> = SingleLiveEvent()
+    private val _isOperationSuccessful: SingleLiveEvent<Pair<ScoreOperationSuccess, Long>> =
+        SingleLiveEvent()
 
     fun getScoreInfoLiveData() = _scoreInfo as LiveData<ScoreDomain?>
     fun getScoreFileLiveData() = _scoreFile as LiveData<File?>
@@ -45,7 +46,8 @@ class ScoreDetailViewModel(
     fun isScoreLoading() = _showScoreLoader as LiveData<Boolean>
     fun getScoreInfoError() = _scoreInfoError as LiveData<String>
     fun getScoreFileError() = _scoreFileError as LiveData<String>
-    fun isOperationSuccessfulLiveData() = _isOperationSuccessful as LiveData<ScoreOperationSuccess>
+    fun isOperationSuccessfulLiveData() =
+        _isOperationSuccessful as LiveData<Pair<ScoreOperationSuccess, Long>>
 
     fun setUpScore(scoreId: Long) {
         viewModelScope.launch(dispatcher) {
@@ -59,7 +61,7 @@ class ScoreDetailViewModel(
         when (result) {
             is GetScoreInfoByIdResult.Success -> {
                 _scoreInfo.postValue(result.score)
-                handleGetScoreFileResult(getScoreFile(scoreId))
+                handleGetScoreFileResult(getScoreFileById(scoreId))
             }
 
             is GetScoreInfoByIdResult.NoScore ->
@@ -101,7 +103,7 @@ class ScoreDetailViewModel(
     private fun handleDeleteScoreResult(result: DeleteScoreResult) {
         when (result) {
             is DeleteScoreResult.Success -> {
-                _isOperationSuccessful.postValue(ScoreOperationSuccess.DELETE)
+                _isOperationSuccessful.postValue(ScoreOperationSuccess.DELETE to 0L)
             }
 
             is DeleteScoreResult.NetworkError ->
@@ -113,7 +115,7 @@ class ScoreDetailViewModel(
         _showScoreLoader.postValue(false)
     }
 
-    private fun sendCreateOpinion(opinion: OpinionDomain) {
+    fun sendCreateOpinion(opinion: OpinionDomain) {
         viewModelScope.launch(dispatcher) {
             _showScoreLoader.postValue(true)
             handleCreateOpinionResult(createOpinion(opinion))
@@ -123,7 +125,7 @@ class ScoreDetailViewModel(
     private fun handleCreateOpinionResult(result: CreateOpinionResult) {
         when (result) {
             is CreateOpinionResult.Success -> {
-                _isOperationSuccessful.postValue(ScoreOperationSuccess.OPINION)
+                _isOperationSuccessful.postValue(ScoreOperationSuccess.OPINION to result.id)
             }
 
             is CreateOpinionResult.NetworkError ->
