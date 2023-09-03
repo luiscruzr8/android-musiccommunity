@@ -247,6 +247,10 @@
     <string name="search_posts_by_coordinates">Publicaciones cerca de mi</string>
     <string name="search_posts_by_city">Publicaciones por ciudad</string>
     <string name="city_hint">Ciudad</string>
+    <string name="your_coordinates">Tus coordenadas</string>
+    <string name="latitude">Latitud: %1$.4f</string>
+    <string name="longitude">Longitud: %1$.4f</string>
+    <string name="search_closest">Buscar en la ciudad más cercana</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Inicio</string>

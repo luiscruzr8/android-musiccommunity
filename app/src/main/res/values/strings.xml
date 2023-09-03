@@ -246,6 +246,10 @@
     <string name="search_posts_by_coordinates">Posts close to me</string>
     <string name="search_posts_by_city">Posts by city</string>
     <string name="city_hint">City</string>
+    <string name="your_coordinates">Your coordinates</string>
+    <string name="latitude">Latitude: %1$.4f</string>
+    <string name="longitude">Longitude: %1$.4f</string>
+    <string name="search_closest">Search on closest city</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Home</string>

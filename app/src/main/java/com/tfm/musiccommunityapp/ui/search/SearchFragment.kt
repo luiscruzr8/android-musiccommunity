@@ -1,12 +1,16 @@
 package com.tfm.musiccommunityapp.ui.search
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.SearchFragmentBinding
-import com.tfm.musiccommunityapp.ui.search.city.SearchByCityFragmentDirections
 import com.tfm.musiccommunityapp.utils.viewBinding
 
 class SearchFragment: BaseFragment(R.layout.search_fragment) {
@@ -42,6 +46,16 @@ class SearchFragment: BaseFragment(R.layout.search_fragment) {
                 changeCityButtonsVisibility(true)
             }
             searchPostsByCoordinatesButton.setOnClickListener {
+                if (ContextCompat.checkSelfPermission(
+                            requireContext(),
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    val action = SearchFragmentDirections.actionSearchFragmentToSearchByCoordinatesFragment()
+                    navigateSafe(action)
+                } else {
+                    requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+                }
 
             }
             searchPostsByCityNameButton.setOnClickListener {
@@ -74,4 +88,18 @@ class SearchFragment: BaseFragment(R.layout.search_fragment) {
             searchPostsByCoordinatesButton.isVisible = isVisible
         }
     }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                val action = SearchFragmentDirections.actionSearchFragmentToSearchByCoordinatesFragment()
+                navigateSafe(action)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Permission denied, you need to provide permissions to use this feature.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 }
