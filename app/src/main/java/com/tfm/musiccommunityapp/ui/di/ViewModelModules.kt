@@ -17,6 +17,7 @@ import com.tfm.musiccommunityapp.ui.login.LoginViewModel
 import com.tfm.musiccommunityapp.ui.profile.ProfileViewModel
 import com.tfm.musiccommunityapp.ui.scores.ScoresViewModel
 import com.tfm.musiccommunityapp.ui.scores.detail.ScoreDetailViewModel
+import com.tfm.musiccommunityapp.ui.search.city.SearchByCityViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -202,6 +203,14 @@ val viewModelModule = module {
             getScoreFileById = get(),
             deleteScore = get(),
             createOpinion = get(),
+            dispatcher = get()
+        )
+    }
+
+    viewModel {
+        SearchByCityViewModel(
+            searchPostsByCityName = get(),
+            searchPostsByCoordinates = get(),
             dispatcher = get()
         )
     }

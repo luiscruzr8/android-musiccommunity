@@ -238,6 +238,14 @@
     <!-- Search screen -->
     <string name="search_screen_title">Búsqueda</string>
     <string name="search_screen_tbd">Página en construcción…</string>
+    <string name="search_screen_choose_search_type">Elige tu tipo de búsqueda</string>
+    <string name="search_screen_change_search_type">Cambia tu búsqueda</string>
+    <string name="search_by_tag">Búsqueda por etiquetas</string>
+    <string name="search_posts_by_tag">Publicaciones por etiquetas</string>
+    <string name="search_users_by_interest">Usuarios por intereses</string>
+    <string name="search_by_city">Búsquedas por ciudad</string>
+    <string name="search_posts_by_coordinates">Publicaciones cerca de mi</string>
+    <string name="search_posts_by_city">Publicaciones por ciudad</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Inicio</string>
