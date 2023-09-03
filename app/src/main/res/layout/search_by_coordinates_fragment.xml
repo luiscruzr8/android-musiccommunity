@@ -1,68 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
-        android:id="@+id/tvPostsTitle"
+        android:id="@+id/tvSearchByCoordinatesTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
-        android:text="@string/profile_screen_title_user_posts"
+        android:text="@string/search_posts_by_coordinates"
         android:textAppearance="?attr/textAppearanceDisplaySmall"
         android:textColor="@color/onSurfaceColor"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/postTypeInputLayout"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:labelFor="@string/profile_screen_post_type"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostsTitle">
-
-        <AutoCompleteTextView
-            android:id="@+id/postTypeEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/profile_screen_post_type"
-            android:inputType="none"
-            android:textColor="@color/primaryColor" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/postsSearchInputText"
+    <TextView
+        android:id="@+id/tvYourCoordinatesTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:labelFor="@string/community_search_label"
-        app:endIconMode="clear_text"
+        android:layout_marginTop="8dp"
+        android:text="@string/your_coordinates"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="@color/onSurfaceColor"
         app:layout_constraintEnd_toStartOf="@+id/submitSearchButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postTypeInputLayout"
-        app:startIconDrawable="@drawable/ic_search">
+        app:layout_constraintTop_toBottomOf="@+id/tvSearchByCoordinatesTitle" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/searchEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/community_search_hint"
-            android:inputType="text"
-            android:textColor="@color/primaryColor" />
+    <TextView
+        android:id="@+id/tvLatitude"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/latitude"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="@color/onSurfaceColor"
+        app:layout_constraintEnd_toStartOf="@+id/submitSearchButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvYourCoordinatesTitle" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/tvLongitude"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/longitude"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="@color/onSurfaceColor"
+        app:layout_constraintEnd_toStartOf="@+id/submitSearchButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLatitude" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/submitSearchButton"
@@ -71,27 +65,39 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:text="@string/community_search_label"
-        app:layout_constraintBottom_toBottomOf="@+id/postsSearchInputText"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLongitude"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/postsSearchInputText">
+        app:layout_constraintTop_toTopOf="@+id/tvLatitude">
 
     </com.google.android.material.button.MaterialButton>
+
+    <CheckBox
+        android:id="@+id/searchClosestCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/search_closest"
+        android:textColor="@color/primaryColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLongitude" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/postsSearchInputText" />
+        app:layout_constraintTop_toBottomOf="@+id/searchClosestCheckBox" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMyPosts"
+        android:id="@+id/rvPosts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="60dp"
         android:orientation="vertical"
-        android:paddingTop="16dp"
-        android:paddingBottom="60dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +115,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postsSearchInputText"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

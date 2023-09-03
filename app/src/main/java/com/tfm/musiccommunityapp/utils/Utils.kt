@@ -9,6 +9,9 @@ import androidx.navigation.NavDirections
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.ui.community.recommendations.detail.RecommendationDetailFragmentDirections
 import com.tfm.musiccommunityapp.ui.profile.posts.UserPostsFragmentDirections
+import com.tfm.musiccommunityapp.ui.search.city.SearchByCityFragment
+import com.tfm.musiccommunityapp.ui.search.city.SearchByCityFragmentDirections
+import com.tfm.musiccommunityapp.ui.search.city.SearchByCoordinatesFragmentDirections
 import java.io.File
 import java.io.FileOutputStream
 import kotlin.random.Random
@@ -126,6 +129,80 @@ fun navigateFromRecommendationOnPostType(
         "Opinion" ->
             navigation(
                 RecommendationDetailFragmentDirections.actionRecommendationDetailFragmentToOpinionDetailFragment(
+                    postId
+                )
+            )
+
+        else -> {}
+    }
+
+fun navigateFromCityNameSearchOnPostType(
+    posType: String,
+    postId: Long,
+    navigation: (NavDirections) -> Unit
+) =
+    when (posType) {
+        "Announcement" ->
+            navigation(
+                SearchByCityFragmentDirections.actionSearchByCityFragmentToAdvertisementDetailFragment(
+                    postId
+                )
+            )
+
+        "Event" ->
+            navigation(
+                    SearchByCityFragmentDirections.actionSearchByCityFragmentToEventDetailFragment(
+                    postId
+                )
+            )
+
+        "Discussion" ->
+            navigation(
+                    SearchByCityFragmentDirections.actionSearchByCityFragmentToDiscussionDetailFragment(
+                    postId
+                )
+            )
+
+        "Opinion" ->
+            navigation(
+                    SearchByCityFragmentDirections.actionSearchByCityFragmentToOpinionDetailFragment(
+                    postId
+                )
+            )
+
+        else -> {}
+    }
+
+fun navigateFromCoordinatesSearchOnPostType(
+    posType: String,
+    postId: Long,
+    navigation: (NavDirections) -> Unit
+) =
+    when (posType) {
+        "Announcement" ->
+            navigation(
+                SearchByCoordinatesFragmentDirections.actionSearchByCoordinatesFragmentToAdvertisementDetailFragment(
+                    postId
+                )
+            )
+
+        "Event" ->
+            navigation(
+                    SearchByCoordinatesFragmentDirections.actionSearchByCoordinatesFragmentToEventDetailFragment(
+                    postId
+                )
+            )
+
+        "Discussion" ->
+            navigation(
+                    SearchByCoordinatesFragmentDirections.actionSearchByCoordinatesFragmentToDiscussionDetailFragment(
+                    postId
+                )
+            )
+
+        "Opinion" ->
+            navigation(
+                    SearchByCoordinatesFragmentDirections.actionSearchByCoordinatesFragmentToOpinionDetailFragment(
                     postId
                 )
             )

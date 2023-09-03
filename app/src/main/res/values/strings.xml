@@ -237,6 +237,19 @@
     <!-- Search screen -->
     <string name="search_screen_title">Search</string>
     <string name="search_screen_tbd">Search screen in construction…</string>
+    <string name="search_screen_choose_search_type">Choose the search type</string>
+    <string name="search_screen_change_search_type">Change your search</string>
+    <string name="search_by_tag">Search by tags</string>
+    <string name="search_posts_by_tag">Posts by tags</string>
+    <string name="search_users_by_interest">User by interests</string>
+    <string name="search_by_city">Search by city</string>
+    <string name="search_posts_by_coordinates">Posts close to me</string>
+    <string name="search_posts_by_city">Posts by city</string>
+    <string name="city_hint">City</string>
+    <string name="your_coordinates">Your coordinates</string>
+    <string name="latitude">Latitude: %1$.4f</string>
+    <string name="longitude">Longitude: %1$.4f</string>
+    <string name="search_closest">Search on closest city</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Home</string>
