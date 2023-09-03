@@ -246,6 +246,7 @@
     <string name="search_by_city">Búsquedas por ciudad</string>
     <string name="search_posts_by_coordinates">Publicaciones cerca de mi</string>
     <string name="search_posts_by_city">Publicaciones por ciudad</string>
+    <string name="city_hint">Ciudad</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Inicio</string>

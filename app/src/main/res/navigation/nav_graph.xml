@@ -352,6 +352,14 @@
         android:name="com.tfm.musiccommunityapp.ui.search.SearchFragment"
         android:label="SearchFragment">
 
+        <action
+            android:id="@+id/action_searchFragment_to_searchByCityFragment"
+            app:destination="@id/searchByCityFragment"/>
+
+        <action
+            android:id="@+id/action_searchFragment_to_searchByCoordinatesFragment"
+            app:destination="@id/searchByCoordinatesFragment"/>
+
     </fragment>
 
     <fragment
@@ -419,6 +427,100 @@
         <action
             android:id="@+id/action_userRecommendationsFragment_to_recommendationDetailFragment"
             app:destination="@id/recommendationDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchByCityFragment"
+        android:name="com.tfm.musiccommunityapp.ui.search.city.SearchByCityFragment"
+        android:label="SearchByCityFragment">
+
+        <action
+            android:id="@+id/action_searchByCityFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchByCityFragment_to_advertisementDetailFragment"
+            app:destination="@id/advertisementDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchByCityFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchByCityFragment_to_opinionDetailFragment"
+            app:destination="@id/opinionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchByCoordinatesFragment"
+        android:name="com.tfm.musiccommunityapp.ui.search.city.SearchByCoordinatesFragment"
+        android:label="SearchByCoordinatesFragment">
+
+        <action
+            android:id="@+id/action_searchByCoordinatesFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchByCoordinatesFragment_to_advertisementDetailFragment"
+            app:destination="@id/advertisementDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchByCoordinatesFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchByCoordinatesFragment_to_opinionDetailFragment"
+            app:destination="@id/opinionDetailFragment">
 
             <argument
                 android:name="id"

@@ -33,19 +33,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSearchTitle" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
+    <View
+        android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="76dp"
+        android:background="@color/surfaceDimColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvChooseSearchType"
-        style="@style/Widget.Material3.CardView.Filled" />
+        app:layout_constraintTop_toBottomOf="@+id/tvChooseSearchType" />
 
     <TextView
         android:id="@+id/tvChooseDifferentSearchType"
@@ -55,15 +55,15 @@
         android:textAppearance="?attr/textAppearanceBodyLarge"
         android:textColor="@color/onSurfaceVariantColor"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/dismissButton"
+        app:layout_constraintBottom_toBottomOf="@+id/restartButton"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/dismissButton"
-        app:layout_constraintEnd_toEndOf="@+id/card"
-        app:layout_constraintTop_toTopOf="@+id/dismissButton"
+        app:layout_constraintStart_toEndOf="@+id/restartButton"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/restartButton"
         tools:visibility="visible" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/dismissButton"
+        android:id="@+id/restartButton"
         style="@style/Widget.Material3.Button.TextButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,8 +72,8 @@
         android:contentDescription="@string/accept"
         android:visibility="gone"
         app:icon="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="@+id/card"
-        app:layout_constraintTop_toTopOf="@+id/card"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
         tools:visibility="visible" />
 
 

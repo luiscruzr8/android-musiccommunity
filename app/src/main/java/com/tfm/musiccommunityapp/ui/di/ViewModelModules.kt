@@ -209,6 +209,7 @@ val viewModelModule = module {
 
     viewModel {
         SearchByCityViewModel(
+            getCities = get(),
             searchPostsByCityName = get(),
             searchPostsByCoordinates = get(),
             dispatcher = get()

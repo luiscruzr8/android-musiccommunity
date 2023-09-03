@@ -245,6 +245,7 @@
     <string name="search_by_city">Search by city</string>
     <string name="search_posts_by_coordinates">Posts close to me</string>
     <string name="search_posts_by_city">Posts by city</string>
+    <string name="city_hint">City</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Home</string>
