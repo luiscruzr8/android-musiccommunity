@@ -16,6 +16,7 @@ import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.CommentDomain
 import com.tfm.musiccommunityapp.ui.base.BaseFragment
 import com.tfm.musiccommunityapp.ui.community.comments.CommentsAdapter
+import com.tfm.musiccommunityapp.ui.di.GlideApp
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
@@ -65,7 +66,7 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
         viewModel.getPostImageLiveData().observe(viewLifecycleOwner) { imageURL ->
             imageURL?.let {
                 //TODO: Check why interceptor is not getting the right headers
-                Glide.with(requireContext())
+                GlideApp.with(requireContext())
                     .load(imageURL)
                     .fitCenter()
                     .into(binding.ivPostImage)

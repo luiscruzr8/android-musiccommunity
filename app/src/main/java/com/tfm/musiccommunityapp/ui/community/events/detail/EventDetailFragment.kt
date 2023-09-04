@@ -16,6 +16,7 @@ import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.CommentDomain
 import com.tfm.musiccommunityapp.ui.base.BaseFragment
 import com.tfm.musiccommunityapp.ui.community.comments.CommentsAdapter
+import com.tfm.musiccommunityapp.ui.di.GlideApp
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditEventDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
@@ -68,7 +69,7 @@ class EventDetailFragment: BaseFragment(R.layout.event_detail_fragment) {
             imageURL?.let {
 
                 //TODO: Check why interceptor is not getting the right headers
-                Glide.with(requireContext())
+                GlideApp.with(requireContext())
                     .load(imageURL)
                     .fitCenter()
                     .into(binding.ivPostImage)

@@ -63,7 +63,7 @@ internal class BackendInterceptor(private val localAuth: AuthDatasource): Interc
 
     private fun handleRequest(chain: Interceptor.Chain): Response {
         val requestBuilder = chain.request().newBuilder()
-            .addHeader(
+            .header(
                 HEADER_AUTH,
                 localAuth.bearerToken
             )
