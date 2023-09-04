@@ -34,10 +34,12 @@ class SearchFragment: BaseFragment(R.layout.search_fragment) {
                 changeTagButtonsVisibility(true)
             }
             searchPostsByTagButton.setOnClickListener {
-                //search
+                val action = SearchFragmentDirections.actionSearchFragmentToSearchPostsByTagFragment()
+                navigateSafe(action)
             }
             searchByUserInterestButton.setOnClickListener {
-                //search
+                val action = SearchFragmentDirections.actionSearchFragmentToSearchUsersByInterestFragment()
+                navigateSafe(action)
             }
 
             // Search by City

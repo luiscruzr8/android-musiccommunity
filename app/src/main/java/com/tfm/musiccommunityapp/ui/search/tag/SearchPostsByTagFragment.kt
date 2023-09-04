@@ -1,4 +1,4 @@
-package com.tfm.musiccommunityapp.ui.search.city
+package com.tfm.musiccommunityapp.ui.search.tag
 
 import android.os.Bundle
 import android.view.View
@@ -7,55 +7,54 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.base.BaseFragment
-import com.tfm.musiccommunityapp.databinding.SearchByCityFragmentBinding
+import com.tfm.musiccommunityapp.databinding.SearchPostsByTagFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.profile.posts.UserPostsAdapter
-import com.tfm.musiccommunityapp.ui.profile.posts.UserPostsFragment
-import com.tfm.musiccommunityapp.utils.navigateFromCityNameSearchOnPostType
+import com.tfm.musiccommunityapp.utils.navigateFromTagSearchOnPostType
 import com.tfm.musiccommunityapp.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchByCityFragment: BaseFragment(R.layout.search_by_city_fragment) {
+class SearchPostsByTagFragment: BaseFragment(R.layout.search_posts_by_tag_fragment) {
 
-    private val binding by viewBinding(SearchByCityFragmentBinding::bind)
-    private val viewModel by viewModel<SearchByCityViewModel>()
+    private val binding by viewBinding(SearchPostsByTagFragmentBinding::bind)
+    private val viewModel by viewModel<SearchByTagViewModel>()
     private val postsAdapter = UserPostsAdapter(::onPostClicked)
 
-    private var cityNameSearch = ""
+    private var tagNameSearch = ""
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putCharSequence(CITY_SEARCH, cityNameSearch)
+        outState.putCharSequence(TAG_NAME_SEARCH, tagNameSearch)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         if (savedInstanceState != null) {
-            cityNameSearch = savedInstanceState.getCharSequence(CITY_SEARCH, "").toString()
-            binding.cityNameEditText.setText(cityNameSearch)
+            tagNameSearch = savedInstanceState.getCharSequence(TAG_NAME_SEARCH, "").toString()
+            binding.tagNameEditText.setText(tagNameSearch)
         }
 
         observeLoader()
-        observeCitiesResult()
-        observeCitiesError()
+        observeTagsResult()
+        observeTagsError()
         observePostsResult()
         observePostsError()
 
-        viewModel.setUpSearchByCityName(cityNameSearch)
+        viewModel.setUpSearchByTag(tagNameSearch)
         binding.rvPosts.apply {
             adapter = postsAdapter
             addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         }
 
-        (binding.cityNameEditText as? MaterialAutoCompleteTextView)
+        (binding.tagNameEditText as? MaterialAutoCompleteTextView)
             ?.setOnItemClickListener  { parent, _, position, _ ->
-                cityNameSearch= parent.getItemAtPosition(position) as String
+                tagNameSearch = parent.getItemAtPosition(position) as String
             }
 
         binding.submitSearchButton.setOnClickListener {
-            viewModel.setUpSearchByCityName(cityNameSearch)
+            viewModel.setUpSearchByTag(tagNameSearch)
         }
     }
 
@@ -65,17 +64,17 @@ class SearchByCityFragment: BaseFragment(R.layout.search_by_city_fragment) {
         }
     }
 
-    private fun observeCitiesResult() {
-        viewModel.getCitiesResult().observe(viewLifecycleOwner) { cities ->
-            cities?.let {
-                (binding.cityNameEditText as? MaterialAutoCompleteTextView)
-                    ?.setSimpleItems(cities.map { it.cityName }.toTypedArray())
+    private fun observeTagsResult() {
+        viewModel.getTagsOrInterestsResult().observe(viewLifecycleOwner) { tags ->
+            tags?.let {
+                (binding.tagNameEditText as? MaterialAutoCompleteTextView)
+                    ?.setSimpleItems(tags.map { it.tagName }.toTypedArray())
             }
         }
     }
 
-    private fun observeCitiesError() {
-        viewModel.getCitiesErrors().observe(viewLifecycleOwner) { error ->
+    private fun observeTagsError() {
+        viewModel.getTagsOrInterestsErrors().observe(viewLifecycleOwner) { error ->
             error?.let {
                 alertDialogOneOption(
                     requireContext(),
@@ -112,10 +111,10 @@ class SearchByCityFragment: BaseFragment(R.layout.search_by_city_fragment) {
     }
 
     private fun onPostClicked(post: GenericPostDomain) {
-        navigateFromCityNameSearchOnPostType(post.postType, post.id, ::navigateSafe)
+        navigateFromTagSearchOnPostType(post.postType, post.id, ::navigateSafe)
     }
 
     companion object {
-        const val CITY_SEARCH = "citySearch"
+        const val TAG_NAME_SEARCH = "tagNameSearch"
     }
 }

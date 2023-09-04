@@ -360,6 +360,14 @@
             android:id="@+id/action_searchFragment_to_searchByCoordinatesFragment"
             app:destination="@id/searchByCoordinatesFragment"/>
 
+        <action
+            android:id="@+id/action_searchFragment_to_searchPostsByTagFragment"
+            app:destination="@id/searchPostsByTagFragment"/>
+
+        <action
+            android:id="@+id/action_searchFragment_to_searchUsersByInterestFragment"
+            app:destination="@id/searchUsersByInterestFragment"/>
+
     </fragment>
 
     <fragment
@@ -526,6 +534,70 @@
                 android:name="id"
                 app:nullable="false"
                 app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchPostsByTagFragment"
+        android:name="com.tfm.musiccommunityapp.ui.search.tag.SearchPostsByTagFragment"
+        android:label="SearchPostsByTagFragment">
+
+        <action
+            android:id="@+id/action_searchPostsByTagFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchPostsByTagFragment_to_advertisementDetailFragment"
+            app:destination="@id/advertisementDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchPostsByTagFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchPostsByTagFragment_to_opinionDetailFragment"
+            app:destination="@id/opinionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchUsersByInterestFragment"
+        android:name="com.tfm.musiccommunityapp.ui.search.tag.SearchUsersByInterestFragment"
+        android:label="SearchUsersByInterestFragment">
+
+        <action
+            android:id="@+id/action_searchUsersByInterestFragment_to_profileFragment"
+            app:destination="@id/profileFragment">
+
+            <argument
+                android:name="username"
+                app:nullable="false"
+                app:argType="string" />
         </action>
 
     </fragment>
