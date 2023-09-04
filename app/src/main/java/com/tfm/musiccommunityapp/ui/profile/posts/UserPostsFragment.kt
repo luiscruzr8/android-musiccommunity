@@ -9,14 +9,14 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.UserPostsFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.profile.ProfileViewModel
-import com.tfm.musiccommunityapp.utils.getPostType
-import com.tfm.musiccommunityapp.utils.navigateFromRecommendationOnPostType
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.utils.getPostType
+import com.tfm.musiccommunityapp.ui.utils.navigateFromRecommendationOnPostType
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserPostsFragment: BaseFragment(R.layout.user_posts_fragment) {
@@ -31,7 +31,7 @@ class UserPostsFragment: BaseFragment(R.layout.user_posts_fragment) {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putCharSequence(SEARCH_TERM, binding.searchEditText.text)
+        outState.putCharSequence(SEARCH_TERM, searchTerm)
         outState.putInt(POST_TYPE, postType)
     }
 

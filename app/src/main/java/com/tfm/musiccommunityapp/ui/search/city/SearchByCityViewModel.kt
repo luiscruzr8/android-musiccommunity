@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesResult
-import com.tfm.musiccommunityapp.domain.interactor.city.GetCitiesUseCase
-import com.tfm.musiccommunityapp.domain.interactor.post.GetPostByCityResult
-import com.tfm.musiccommunityapp.domain.interactor.post.GetPostsByCityUseCase
-import com.tfm.musiccommunityapp.domain.interactor.post.GetPostsByCoordinatesResult
-import com.tfm.musiccommunityapp.domain.interactor.post.GetPostsByCoordinatesUseCase
 import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
-import com.tfm.musiccommunityapp.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.ui.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.usecase.city.GetCitiesResult
+import com.tfm.musiccommunityapp.usecase.city.GetCitiesUseCase
+import com.tfm.musiccommunityapp.usecase.post.GetPostByCityResult
+import com.tfm.musiccommunityapp.usecase.post.GetPostsByCityUseCase
+import com.tfm.musiccommunityapp.usecase.post.GetPostsByCoordinatesResult
+import com.tfm.musiccommunityapp.usecase.post.GetPostsByCoordinatesUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 

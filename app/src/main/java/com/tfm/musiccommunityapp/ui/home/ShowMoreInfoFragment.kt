@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.View
 import com.tfm.musiccommunityapp.BuildConfig
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.ShowMoreInfoFragmentBinding
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
 
 class ShowMoreInfoFragment: BaseFragment(R.layout.show_more_info_fragment) {
 

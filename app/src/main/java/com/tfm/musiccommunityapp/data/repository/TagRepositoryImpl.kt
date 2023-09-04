@@ -6,7 +6,7 @@ import com.tfm.musiccommunityapp.domain.model.DomainError
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
 import com.tfm.musiccommunityapp.domain.model.ShortUserDomain
 import com.tfm.musiccommunityapp.domain.model.TagDomain
-import com.tfm.musiccommunityapp.domain.repository.TagRepository
+import com.tfm.musiccommunityapp.usecase.repository.TagRepository
 
 class TagRepositoryImpl(
     private val tagDatasource: TagDatasource

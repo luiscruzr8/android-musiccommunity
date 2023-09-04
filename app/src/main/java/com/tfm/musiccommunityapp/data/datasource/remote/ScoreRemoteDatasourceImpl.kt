@@ -1,14 +1,14 @@
 package com.tfm.musiccommunityapp.data.datasource.remote
 
 import arrow.core.Either
-import com.tfm.musiccommunityapp.data.api.ScoresApi
-import com.tfm.musiccommunityapp.data.api.extensions.toErrorResponse
-import com.tfm.musiccommunityapp.data.api.model.toDomain
+import com.tfm.musiccommunityapp.api.ScoresApi
+import com.tfm.musiccommunityapp.api.extensions.toErrorResponse
+import com.tfm.musiccommunityapp.api.model.toDomain
 import com.tfm.musiccommunityapp.data.datasource.ScoreDatasource
 import com.tfm.musiccommunityapp.data.extensions.eitherOf
 import com.tfm.musiccommunityapp.domain.model.DomainError
 import com.tfm.musiccommunityapp.domain.model.ScoreDomain
-import com.tfm.musiccommunityapp.domain.utils.FileHelper
+import com.tfm.musiccommunityapp.usecase.utils.FileHelper
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody

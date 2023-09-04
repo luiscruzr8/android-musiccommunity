@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.CommunityFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.ScoreDomain
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
 import com.tfm.musiccommunityapp.ui.community.advertisements.AdvertisementsFragment
 import com.tfm.musiccommunityapp.ui.community.discussions.DiscussionsFragment
 import com.tfm.musiccommunityapp.ui.community.events.EventsFragment
@@ -26,7 +26,7 @@ import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDia
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditDiscussionDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditEventDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditOpinionDialog
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CommunityFragment : BaseFragment(R.layout.community_fragment) {
@@ -41,8 +41,8 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putCharSequence(SEARCH_TERM, binding.searchEditText.text)
-        outState.putBoolean(IS_TOP_TEN_SELECTED, binding.isTop10CheckBox.isChecked)
+        outState.putCharSequence(SEARCH_TERM, searchTerm)
+        outState.putBoolean(IS_TOP_TEN_SELECTED, isTop10Selected)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

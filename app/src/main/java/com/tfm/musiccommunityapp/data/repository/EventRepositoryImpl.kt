@@ -2,7 +2,7 @@ package com.tfm.musiccommunityapp.data.repository
 
 import com.tfm.musiccommunityapp.data.datasource.EventDatasource
 import com.tfm.musiccommunityapp.domain.model.EventDomain
-import com.tfm.musiccommunityapp.domain.repository.EventRepository
+import com.tfm.musiccommunityapp.usecase.repository.EventRepository
 
 class EventRepositoryImpl(
     private val eventDatasource: EventDatasource

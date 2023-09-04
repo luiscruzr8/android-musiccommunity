@@ -3,10 +3,10 @@ package com.tfm.musiccommunityapp.ui.home
 import android.os.Bundle
 import android.view.View
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
-import com.tfm.musiccommunityapp.base.MainActivity
 import com.tfm.musiccommunityapp.databinding.HomeScreenFragmentBinding
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
+import com.tfm.musiccommunityapp.ui.base.MainActivity
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeScreenFragment : BaseFragment(R.layout.home_screen_fragment) {

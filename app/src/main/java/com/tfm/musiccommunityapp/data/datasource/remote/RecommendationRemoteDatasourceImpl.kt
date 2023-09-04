@@ -1,10 +1,10 @@
 package com.tfm.musiccommunityapp.data.datasource.remote
 
 import arrow.core.Either
-import com.tfm.musiccommunityapp.data.api.RecommendationsApi
-import com.tfm.musiccommunityapp.data.api.extensions.toErrorResponse
-import com.tfm.musiccommunityapp.data.api.model.toDomain
-import com.tfm.musiccommunityapp.data.api.model.toResponse
+import com.tfm.musiccommunityapp.api.RecommendationsApi
+import com.tfm.musiccommunityapp.api.extensions.toErrorResponse
+import com.tfm.musiccommunityapp.api.model.toDomain
+import com.tfm.musiccommunityapp.api.model.toResponse
 import com.tfm.musiccommunityapp.data.datasource.RecommendationDatasource
 import com.tfm.musiccommunityapp.data.extensions.eitherOf
 import com.tfm.musiccommunityapp.domain.model.DomainError

@@ -2,10 +2,10 @@ package com.tfm.musiccommunityapp.data.datasource.remote
 
 import arrow.core.Either
 import arrow.core.right
-import com.tfm.musiccommunityapp.data.api.PostsApi
-import com.tfm.musiccommunityapp.data.api.extensions.toErrorResponse
-import com.tfm.musiccommunityapp.data.api.model.toDomain
-import com.tfm.musiccommunityapp.data.api.model.toResponse
+import com.tfm.musiccommunityapp.api.PostsApi
+import com.tfm.musiccommunityapp.api.extensions.toErrorResponse
+import com.tfm.musiccommunityapp.api.model.toDomain
+import com.tfm.musiccommunityapp.api.model.toResponse
 import com.tfm.musiccommunityapp.data.datasource.GenericPostDatasource
 import com.tfm.musiccommunityapp.data.extensions.eitherOf
 import com.tfm.musiccommunityapp.domain.model.CommentDomain

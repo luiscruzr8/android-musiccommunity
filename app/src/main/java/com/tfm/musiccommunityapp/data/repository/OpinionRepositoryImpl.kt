@@ -5,7 +5,7 @@ import com.tfm.musiccommunityapp.data.datasource.OpinionDatasource
 import com.tfm.musiccommunityapp.domain.model.DiscussionDomain
 import com.tfm.musiccommunityapp.domain.model.DomainError
 import com.tfm.musiccommunityapp.domain.model.OpinionDomain
-import com.tfm.musiccommunityapp.domain.repository.OpinionRepository
+import com.tfm.musiccommunityapp.usecase.repository.OpinionRepository
 
 class OpinionRepositoryImpl(
     private val opinionDatasource: OpinionDatasource

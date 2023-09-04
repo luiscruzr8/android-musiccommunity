@@ -4,7 +4,7 @@ import arrow.core.Either
 import com.tfm.musiccommunityapp.data.datasource.ScoreDatasource
 import com.tfm.musiccommunityapp.domain.model.DomainError
 import com.tfm.musiccommunityapp.domain.model.ScoreDomain
-import com.tfm.musiccommunityapp.domain.repository.ScoreRepository
+import com.tfm.musiccommunityapp.usecase.repository.ScoreRepository
 import okhttp3.MultipartBody
 import java.io.File
 

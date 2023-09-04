@@ -8,9 +8,9 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.UserPostItemBinding
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
-import com.tfm.musiccommunityapp.utils.formatDateToString
-import com.tfm.musiccommunityapp.utils.getChipColor
-import com.tfm.musiccommunityapp.utils.getChipLabel
+import com.tfm.musiccommunityapp.ui.utils.formatDateToString
+import com.tfm.musiccommunityapp.ui.utils.getChipColor
+import com.tfm.musiccommunityapp.ui.utils.getChipLabel
 
 class UserPostsAdapter(
     private val onPostClicked: (GenericPostDomain) -> Unit

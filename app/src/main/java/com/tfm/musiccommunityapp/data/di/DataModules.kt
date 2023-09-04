@@ -4,14 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-import com.tfm.musiccommunityapp.BuildConfig
-import com.tfm.musiccommunityapp.data.api.AuthApi
-import com.tfm.musiccommunityapp.data.api.CitiesApi
-import com.tfm.musiccommunityapp.data.api.PostsApi
-import com.tfm.musiccommunityapp.data.api.RecommendationsApi
-import com.tfm.musiccommunityapp.data.api.ScoresApi
-import com.tfm.musiccommunityapp.data.api.TagsApi
-import com.tfm.musiccommunityapp.data.api.UsersApi
 import com.tfm.musiccommunityapp.data.datasource.AdvertisementDatasource
 import com.tfm.musiccommunityapp.data.datasource.AuthDatasource
 import com.tfm.musiccommunityapp.data.datasource.CityDatasource
@@ -36,7 +28,6 @@ import com.tfm.musiccommunityapp.data.datasource.remote.RecommendationRemoteData
 import com.tfm.musiccommunityapp.data.datasource.remote.ScoreRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.datasource.remote.TagRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.datasource.remote.UserRemoteDatasourceImpl
-import com.tfm.musiccommunityapp.data.network.di.NetworkDatasourceModule
 import com.tfm.musiccommunityapp.data.repository.AdvertisementRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.AuthRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.CityRepositoryImpl
@@ -48,59 +39,20 @@ import com.tfm.musiccommunityapp.data.repository.RecommendationRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.ScoreRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.TagRepositoryImpl
 import com.tfm.musiccommunityapp.data.repository.UserProfileRepositoryImpl
-import com.tfm.musiccommunityapp.domain.repository.AdvertisementRepository
-import com.tfm.musiccommunityapp.domain.repository.AuthRepository
-import com.tfm.musiccommunityapp.domain.repository.CityRepository
-import com.tfm.musiccommunityapp.domain.repository.CommonPostRepository
-import com.tfm.musiccommunityapp.domain.repository.DiscussionRepository
-import com.tfm.musiccommunityapp.domain.repository.EventRepository
-import com.tfm.musiccommunityapp.domain.repository.OpinionRepository
-import com.tfm.musiccommunityapp.domain.repository.RecommendationRepository
-import com.tfm.musiccommunityapp.domain.repository.ScoreRepository
-import com.tfm.musiccommunityapp.domain.repository.TagRepository
-import com.tfm.musiccommunityapp.domain.repository.UserProfileRepository
+import com.tfm.musiccommunityapp.usecase.repository.AdvertisementRepository
+import com.tfm.musiccommunityapp.usecase.repository.AuthRepository
+import com.tfm.musiccommunityapp.usecase.repository.CityRepository
+import com.tfm.musiccommunityapp.usecase.repository.CommonPostRepository
+import com.tfm.musiccommunityapp.usecase.repository.DiscussionRepository
+import com.tfm.musiccommunityapp.usecase.repository.EventRepository
+import com.tfm.musiccommunityapp.usecase.repository.OpinionRepository
+import com.tfm.musiccommunityapp.usecase.repository.RecommendationRepository
+import com.tfm.musiccommunityapp.usecase.repository.ScoreRepository
+import com.tfm.musiccommunityapp.usecase.repository.TagRepository
+import com.tfm.musiccommunityapp.usecase.repository.UserProfileRepository
 import org.koin.android.ext.koin.androidContext
-import org.koin.core.qualifier.named
 import org.koin.dsl.bind
 import org.koin.dsl.module
-import retrofit2.Retrofit
-
-val networkDatasourceModule = NetworkDatasourceModule(
-    apiServiceUrl = BuildConfig.BACKEND_URL,
-    isForTesting = false
-).networkModule
-
-val apiModules = module {
-
-    single {
-        get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(AuthApi::class.java)
-    }
-
-    single {
-        get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(UsersApi::class.java)
-    }
-
-    single {
-        get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(TagsApi::class.java)
-    }
-
-    single {
-        get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(PostsApi::class.java)
-    }
-
-    single {
-        get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(CitiesApi::class.java)
-    }
-
-    single {
-        get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(RecommendationsApi::class.java)
-    }
-
-    single {
-        get<Retrofit>(named(NetworkDatasourceModule.SERVICE_RETROFIT)).create(ScoresApi::class.java)
-    }
-
-}
 
 val remoteDatasourceModules = module {
 

@@ -5,7 +5,7 @@ import com.tfm.musiccommunityapp.data.datasource.GenericPostDatasource
 import com.tfm.musiccommunityapp.domain.model.CommentDomain
 import com.tfm.musiccommunityapp.domain.model.DomainError
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
-import com.tfm.musiccommunityapp.domain.repository.CommonPostRepository
+import com.tfm.musiccommunityapp.usecase.repository.CommonPostRepository
 import java.io.File
 
 class CommonPostRepositoryImpl(

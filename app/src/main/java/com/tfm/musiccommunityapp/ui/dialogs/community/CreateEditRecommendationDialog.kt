@@ -15,9 +15,9 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.EditRecommendationDialogBinding
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
 import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
-import com.tfm.musiccommunityapp.utils.formatDateToString
-import com.tfm.musiccommunityapp.utils.getChipColor
-import com.tfm.musiccommunityapp.utils.getChipLabel
+import com.tfm.musiccommunityapp.ui.utils.formatDateToString
+import com.tfm.musiccommunityapp.ui.utils.getChipColor
+import com.tfm.musiccommunityapp.ui.utils.getChipLabel
 import java.time.LocalDateTime
 
 class CreateEditRecommendationDialog (

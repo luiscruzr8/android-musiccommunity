@@ -1,6 +1,6 @@
 package com.tfm.musiccommunityapp.data.model
 
-import com.tfm.musiccommunityapp.data.api.model.TagResponse
+import com.tfm.musiccommunityapp.api.model.TagResponse
 
 object TagResponseBuilder {
     internal val default = TagResponse("tag1")

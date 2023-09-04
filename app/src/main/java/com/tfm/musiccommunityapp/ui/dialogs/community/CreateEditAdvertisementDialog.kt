@@ -18,8 +18,8 @@ import com.tfm.musiccommunityapp.databinding.EditAdvertisementDialogBinding
 import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.AdvertisementDomain
 import com.tfm.musiccommunityapp.domain.model.TagDomain
-import com.tfm.musiccommunityapp.utils.formatDateToString
-import com.tfm.musiccommunityapp.utils.localDateOf
+import com.tfm.musiccommunityapp.ui.utils.formatDateToString
+import com.tfm.musiccommunityapp.ui.utils.localDateOf
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId

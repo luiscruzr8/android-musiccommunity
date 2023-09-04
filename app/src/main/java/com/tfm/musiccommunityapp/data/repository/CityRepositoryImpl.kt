@@ -1,7 +1,7 @@
 package com.tfm.musiccommunityapp.data.repository
 
 import com.tfm.musiccommunityapp.data.datasource.CityDatasource
-import com.tfm.musiccommunityapp.domain.repository.CityRepository
+import com.tfm.musiccommunityapp.usecase.repository.CityRepository
 
 class CityRepositoryImpl(
         private val cityDatasource: CityDatasource

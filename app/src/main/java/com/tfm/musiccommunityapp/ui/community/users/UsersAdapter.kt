@@ -9,7 +9,7 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.FollowerItemRowBinding
 import com.tfm.musiccommunityapp.domain.model.ShortUserDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
-import com.tfm.musiccommunityapp.utils.getRandomColor
+import com.tfm.musiccommunityapp.ui.utils.getRandomColor
 
 class UsersAdapter (
     private val onItemClicked: (ShortUserDomain) -> Unit
