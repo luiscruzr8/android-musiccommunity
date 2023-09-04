@@ -31,7 +31,7 @@ class ScoresFragment: BaseFragment(R.layout.scores_fragment) {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putCharSequence(SEARCH_TERM, binding.searchEditText.text)
+        outState.putCharSequence(SEARCH_TERM, searchTerm)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

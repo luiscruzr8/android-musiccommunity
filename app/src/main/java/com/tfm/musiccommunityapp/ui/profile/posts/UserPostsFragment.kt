@@ -31,7 +31,7 @@ class UserPostsFragment: BaseFragment(R.layout.user_posts_fragment) {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putCharSequence(SEARCH_TERM, binding.searchEditText.text)
+        outState.putCharSequence(SEARCH_TERM, searchTerm)
         outState.putInt(POST_TYPE, postType)
     }
 

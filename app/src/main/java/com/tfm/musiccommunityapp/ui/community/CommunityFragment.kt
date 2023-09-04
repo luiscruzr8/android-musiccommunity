@@ -41,8 +41,8 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putCharSequence(SEARCH_TERM, binding.searchEditText.text)
-        outState.putBoolean(IS_TOP_TEN_SELECTED, binding.isTop10CheckBox.isChecked)
+        outState.putCharSequence(SEARCH_TERM, searchTerm)
+        outState.putBoolean(IS_TOP_TEN_SELECTED, isTop10Selected)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

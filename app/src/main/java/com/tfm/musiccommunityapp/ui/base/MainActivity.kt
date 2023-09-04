@@ -28,38 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         val navigator = binding.navHostFragment.findNavController()
         binding.bottomNavigation.setupWithNavController(navigator)
-
-        /*binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.homeScreenFragment -> {
-                    binding.navHostFragment.findNavController().navigate(R.id.homeScreenFragment)
-                    true
-                }
-
-                R.id.communityFragment -> {
-                    binding.navHostFragment.findNavController().navigate(R.id.communityFragment)
-                    true
-                }
-
-                R.id.scoresFragment -> {
-                    binding.navHostFragment.findNavController().navigate(R.id.scoresFragment)
-                    true
-                }
-
-                R.id.searchFragment -> {
-                    binding.navHostFragment.findNavController().navigate(R.id.searchFragment)
-                    true
-                }
-
-                R.id.profileFragment -> {
-                    binding.navHostFragment.findNavController().navigate(R.id.profileFragment)
-                    true
-                }
-
-
-                else -> false
-            }
-        }*/
     }
 
     fun showLoader() {
