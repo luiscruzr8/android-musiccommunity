@@ -12,6 +12,7 @@ import com.tfm.musiccommunityapp.ui.profile.posts.UserPostsFragmentDirections
 import com.tfm.musiccommunityapp.ui.search.city.SearchByCityFragment
 import com.tfm.musiccommunityapp.ui.search.city.SearchByCityFragmentDirections
 import com.tfm.musiccommunityapp.ui.search.city.SearchByCoordinatesFragmentDirections
+import com.tfm.musiccommunityapp.ui.search.tag.SearchPostsByTagFragmentDirections
 import java.io.File
 import java.io.FileOutputStream
 import kotlin.random.Random
@@ -203,6 +204,43 @@ fun navigateFromCoordinatesSearchOnPostType(
         "Opinion" ->
             navigation(
                     SearchByCoordinatesFragmentDirections.actionSearchByCoordinatesFragmentToOpinionDetailFragment(
+                    postId
+                )
+            )
+
+        else -> {}
+    }
+
+fun navigateFromTagSearchOnPostType(
+    posType: String,
+    postId: Long,
+    navigation: (NavDirections) -> Unit
+) =
+    when (posType) {
+        "Announcement" ->
+            navigation(
+                SearchPostsByTagFragmentDirections.actionSearchPostsByTagFragmentToAdvertisementDetailFragment(
+                    postId
+                )
+            )
+
+        "Event" ->
+            navigation(
+                SearchPostsByTagFragmentDirections.actionSearchPostsByTagFragmentToEventDetailFragment(
+                    postId
+                )
+            )
+
+        "Discussion" ->
+            navigation(
+                SearchPostsByTagFragmentDirections.actionSearchPostsByTagFragmentToDiscussionDetailFragment(
+                    postId
+                )
+            )
+
+        "Opinion" ->
+            navigation(
+                SearchPostsByTagFragmentDirections.actionSearchPostsByTagFragmentToOpinionDetailFragment(
                     postId
                 )
             )

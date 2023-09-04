@@ -250,6 +250,8 @@
     <string name="latitude">Latitude: %1$.4f</string>
     <string name="longitude">Longitude: %1$.4f</string>
     <string name="search_closest">Search on closest city</string>
+    <string name="tag_hint">Tag</string>
+    <string name="interest_hint">Interest</string>
 
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Home</string>
