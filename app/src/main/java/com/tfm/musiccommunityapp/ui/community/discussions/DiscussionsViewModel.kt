@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tfm.musiccommunityapp.domain.interactor.discussion.GetDiscussionsResult
-import com.tfm.musiccommunityapp.domain.interactor.discussion.GetDiscussionsUseCase
 import com.tfm.musiccommunityapp.domain.model.DiscussionDomain
-import com.tfm.musiccommunityapp.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.ui.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.usecase.discussion.GetDiscussionsResult
+import com.tfm.musiccommunityapp.usecase.discussion.GetDiscussionsUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 

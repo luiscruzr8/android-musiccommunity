@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tfm.musiccommunityapp.domain.interactor.advertisement.GetAdvertisementsResult
-import com.tfm.musiccommunityapp.domain.interactor.advertisement.GetAdvertisementsUseCase
 import com.tfm.musiccommunityapp.domain.model.AdvertisementDomain
-import com.tfm.musiccommunityapp.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.ui.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.usecase.advertisement.GetAdvertisementsResult
+import com.tfm.musiccommunityapp.usecase.advertisement.GetAdvertisementsUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 

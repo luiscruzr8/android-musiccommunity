@@ -11,7 +11,7 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestOptions
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.data.network.di.NetworkDatasourceModule
+import com.tfm.musiccommunityapp.api.network.NetworkDatasourceModule
 import okhttp3.OkHttpClient
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

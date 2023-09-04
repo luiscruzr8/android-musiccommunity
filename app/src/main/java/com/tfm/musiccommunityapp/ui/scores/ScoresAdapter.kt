@@ -8,7 +8,7 @@ import com.tfm.musiccommunityapp.databinding.ItemScoreCardBinding
 import com.tfm.musiccommunityapp.domain.model.ScoreDomain
 import com.tfm.musiccommunityapp.domain.model.ShortUserDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
-import com.tfm.musiccommunityapp.utils.formatDateToString
+import com.tfm.musiccommunityapp.ui.utils.formatDateToString
 
 class ScoresAdapter (
     private val onItemClicked: (ScoreDomain) -> Unit

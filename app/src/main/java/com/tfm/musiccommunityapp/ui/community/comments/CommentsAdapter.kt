@@ -8,7 +8,7 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.CommentItemRowBinding
 import com.tfm.musiccommunityapp.domain.model.CommentDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
-import com.tfm.musiccommunityapp.utils.formatDateTimeToString
+import com.tfm.musiccommunityapp.ui.utils.formatDateTimeToString
 
 class CommentsAdapter(
     private val onAddResponseClick: (CommentDomain) -> Unit,

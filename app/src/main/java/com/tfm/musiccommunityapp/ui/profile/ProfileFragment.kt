@@ -8,14 +8,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
-import com.tfm.musiccommunityapp.base.MainActivity
 import com.tfm.musiccommunityapp.databinding.ProfileFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.UserDomain
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
+import com.tfm.musiccommunityapp.ui.base.MainActivity
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.profile.EditProfileDialog
-import com.tfm.musiccommunityapp.utils.getRandomColor
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.utils.getRandomColor
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment(R.layout.profile_fragment) {

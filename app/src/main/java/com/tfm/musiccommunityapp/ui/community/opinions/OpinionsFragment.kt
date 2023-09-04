@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.OpinionsFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.OpinionDomain
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
 import com.tfm.musiccommunityapp.ui.community.CommunityFragmentDirections
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OpinionsFragment: BaseFragment(R.layout.opinions_fragment) {

@@ -3,11 +3,11 @@ package com.tfm.musiccommunityapp.ui.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tfm.musiccommunityapp.domain.interactor.login.SignInUseCase
-import com.tfm.musiccommunityapp.domain.interactor.login.SignInUseCaseResult
-import com.tfm.musiccommunityapp.domain.interactor.login.SignUpUseCase
-import com.tfm.musiccommunityapp.domain.interactor.login.SignUpUseCaseResult
-import com.tfm.musiccommunityapp.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.ui.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.usecase.login.SignInUseCase
+import com.tfm.musiccommunityapp.usecase.login.SignInUseCaseResult
+import com.tfm.musiccommunityapp.usecase.login.SignUpUseCase
+import com.tfm.musiccommunityapp.usecase.login.SignUpUseCaseResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 

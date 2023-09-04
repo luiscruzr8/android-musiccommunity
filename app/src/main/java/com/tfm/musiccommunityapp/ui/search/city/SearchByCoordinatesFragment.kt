@@ -6,25 +6,20 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.SearchByCoordinatesFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.profile.posts.UserPostsAdapter
-import com.tfm.musiccommunityapp.ui.search.SearchFragmentDirections
-import com.tfm.musiccommunityapp.utils.navigateFromCoordinatesSearchOnPostType
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.utils.navigateFromCoordinatesSearchOnPostType
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchByCoordinatesFragment : BaseFragment(R.layout.search_by_coordinates_fragment) {

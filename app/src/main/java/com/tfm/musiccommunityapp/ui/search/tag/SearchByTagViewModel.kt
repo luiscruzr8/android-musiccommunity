@@ -4,18 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tfm.musiccommunityapp.domain.interactor.post.GetPostByCityResult
-import com.tfm.musiccommunityapp.domain.interactor.search.GetPostsByTagUseCase
-import com.tfm.musiccommunityapp.domain.interactor.search.GetPostsByTagUseCaseResult
-import com.tfm.musiccommunityapp.domain.interactor.search.GetUsersByTagUseCase
-import com.tfm.musiccommunityapp.domain.interactor.search.GetUsersByTagUseCaseResult
-import com.tfm.musiccommunityapp.domain.interactor.tag.GetTagsUseCase
-import com.tfm.musiccommunityapp.domain.interactor.tag.GetTagsUseCaseResult
-import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
 import com.tfm.musiccommunityapp.domain.model.ShortUserDomain
 import com.tfm.musiccommunityapp.domain.model.TagDomain
-import com.tfm.musiccommunityapp.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.ui.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.usecase.search.GetPostsByTagUseCase
+import com.tfm.musiccommunityapp.usecase.search.GetPostsByTagUseCaseResult
+import com.tfm.musiccommunityapp.usecase.search.GetUsersByTagUseCase
+import com.tfm.musiccommunityapp.usecase.search.GetUsersByTagUseCaseResult
+import com.tfm.musiccommunityapp.usecase.tag.GetTagsUseCase
+import com.tfm.musiccommunityapp.usecase.tag.GetTagsUseCaseResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 

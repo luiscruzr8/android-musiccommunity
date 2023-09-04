@@ -8,8 +8,8 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.AdvertisementItemRowBinding
 import com.tfm.musiccommunityapp.domain.model.AdvertisementDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
-import com.tfm.musiccommunityapp.utils.formatDateToString
-import com.tfm.musiccommunityapp.utils.getChipLabel
+import com.tfm.musiccommunityapp.ui.utils.formatDateToString
+import com.tfm.musiccommunityapp.ui.utils.getChipLabel
 
 class AdvertisementsAdapter(
     private val onItemClicked: (AdvertisementDomain) -> Unit

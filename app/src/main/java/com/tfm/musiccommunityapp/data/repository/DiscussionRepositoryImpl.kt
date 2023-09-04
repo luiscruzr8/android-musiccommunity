@@ -4,7 +4,7 @@ import arrow.core.Either
 import com.tfm.musiccommunityapp.data.datasource.DiscussionDatasource
 import com.tfm.musiccommunityapp.domain.model.DiscussionDomain
 import com.tfm.musiccommunityapp.domain.model.DomainError
-import com.tfm.musiccommunityapp.domain.repository.DiscussionRepository
+import com.tfm.musiccommunityapp.usecase.repository.DiscussionRepository
 
 class DiscussionRepositoryImpl(
     private val discussionDatasource: DiscussionDatasource

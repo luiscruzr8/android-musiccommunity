@@ -8,8 +8,8 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.OpinionItemRowBinding
 import com.tfm.musiccommunityapp.domain.model.OpinionDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
-import com.tfm.musiccommunityapp.utils.formatDateToString
-import com.tfm.musiccommunityapp.utils.getChipLabel
+import com.tfm.musiccommunityapp.ui.utils.formatDateToString
+import com.tfm.musiccommunityapp.ui.utils.getChipLabel
 
 class OpinionsAdapter(
     private val onOpinionClicked: (OpinionDomain) -> Unit

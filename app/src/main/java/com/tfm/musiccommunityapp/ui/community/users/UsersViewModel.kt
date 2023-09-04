@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tfm.musiccommunityapp.domain.interactor.userprofile.GetUsersUseCase
-import com.tfm.musiccommunityapp.domain.interactor.userprofile.GetUsersUseCaseResult
 import com.tfm.musiccommunityapp.domain.model.ShortUserDomain
-import com.tfm.musiccommunityapp.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.ui.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.usecase.userprofile.GetUsersUseCase
+import com.tfm.musiccommunityapp.usecase.userprofile.GetUsersUseCaseResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 

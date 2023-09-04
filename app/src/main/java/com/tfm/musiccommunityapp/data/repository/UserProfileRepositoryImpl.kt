@@ -5,7 +5,7 @@ import com.tfm.musiccommunityapp.data.datasource.UserDatasource
 import com.tfm.musiccommunityapp.domain.model.DomainError
 import com.tfm.musiccommunityapp.domain.model.ShortUserDomain
 import com.tfm.musiccommunityapp.domain.model.UserDomain
-import com.tfm.musiccommunityapp.domain.repository.UserProfileRepository
+import com.tfm.musiccommunityapp.usecase.repository.UserProfileRepository
 
 class UserProfileRepositoryImpl(
     private val userDatasource: UserDatasource

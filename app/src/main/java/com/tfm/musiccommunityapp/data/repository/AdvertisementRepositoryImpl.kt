@@ -4,7 +4,7 @@ import arrow.core.Either
 import com.tfm.musiccommunityapp.data.datasource.AdvertisementDatasource
 import com.tfm.musiccommunityapp.domain.model.AdvertisementDomain
 import com.tfm.musiccommunityapp.domain.model.DomainError
-import com.tfm.musiccommunityapp.domain.repository.AdvertisementRepository
+import com.tfm.musiccommunityapp.usecase.repository.AdvertisementRepository
 
 class AdvertisementRepositoryImpl(
     private val advertisementDatasource: AdvertisementDatasource

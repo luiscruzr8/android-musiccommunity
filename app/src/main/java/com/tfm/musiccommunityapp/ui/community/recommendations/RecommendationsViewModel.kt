@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetRecommendationsResult
-import com.tfm.musiccommunityapp.domain.interactor.recommendations.GetRecommendationsUseCase
 import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
-import com.tfm.musiccommunityapp.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.ui.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.usecase.recommendations.GetRecommendationsResult
+import com.tfm.musiccommunityapp.usecase.recommendations.GetRecommendationsUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 

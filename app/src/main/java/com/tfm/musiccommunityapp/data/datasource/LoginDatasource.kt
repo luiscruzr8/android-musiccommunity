@@ -1,10 +1,9 @@
 package com.tfm.musiccommunityapp.data.datasource
 
 import arrow.core.Either
-import com.tfm.musiccommunityapp.data.api.model.SignInResponse
-import com.tfm.musiccommunityapp.data.api.model.SignUpResponse
+import com.tfm.musiccommunityapp.api.model.SignInResponse
+import com.tfm.musiccommunityapp.api.model.SignUpResponse
 import com.tfm.musiccommunityapp.domain.model.DomainError
-import retrofit2.Response
 
 interface LoginDatasource {
 

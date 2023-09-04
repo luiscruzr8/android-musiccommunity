@@ -6,13 +6,13 @@ import androidx.core.view.isVisible
 import com.google.android.material.progressindicator.CircularProgressIndicatorSpec
 import com.google.android.material.progressindicator.IndeterminateDrawable
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
-import com.tfm.musiccommunityapp.base.MainActivity
 import com.tfm.musiccommunityapp.databinding.LoginFragmentBinding
-import com.tfm.musiccommunityapp.domain.interactor.login.SignInUseCaseResult
-import com.tfm.musiccommunityapp.domain.interactor.login.SignUpUseCaseResult
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
+import com.tfm.musiccommunityapp.ui.base.MainActivity
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
+import com.tfm.musiccommunityapp.usecase.login.SignInUseCaseResult
+import com.tfm.musiccommunityapp.usecase.login.SignUpUseCaseResult
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.regex.Pattern
 

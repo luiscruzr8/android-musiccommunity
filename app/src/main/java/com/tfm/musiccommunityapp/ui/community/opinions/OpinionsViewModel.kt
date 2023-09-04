@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tfm.musiccommunityapp.domain.interactor.opinion.GetOpinionsResult
-import com.tfm.musiccommunityapp.domain.interactor.opinion.GetOpinionsUseCase
 import com.tfm.musiccommunityapp.domain.model.OpinionDomain
-import com.tfm.musiccommunityapp.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.ui.utils.SingleLiveEvent
+import com.tfm.musiccommunityapp.usecase.opinion.GetOpinionsResult
+import com.tfm.musiccommunityapp.usecase.opinion.GetOpinionsUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 

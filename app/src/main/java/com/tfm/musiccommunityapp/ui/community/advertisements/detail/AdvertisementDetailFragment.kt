@@ -1,7 +1,6 @@
 package com.tfm.musiccommunityapp.ui.community.advertisements.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
@@ -11,20 +10,20 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.bumptech.glide.Glide
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
-import com.tfm.musiccommunityapp.data.api.model.toGenericDomain
+import com.tfm.musiccommunityapp.api.model.toGenericDomain
 import com.tfm.musiccommunityapp.databinding.AdvertisementDetailFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.CommentDomain
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
 import com.tfm.musiccommunityapp.ui.community.comments.CommentsAdapter
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditAdvertisementDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.PostOrRespondCommentDialog
-import com.tfm.musiccommunityapp.utils.formatDateToString
-import com.tfm.musiccommunityapp.utils.getChipColor
-import com.tfm.musiccommunityapp.utils.getChipLabel
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.utils.formatDateToString
+import com.tfm.musiccommunityapp.ui.utils.getChipColor
+import com.tfm.musiccommunityapp.ui.utils.getChipLabel
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fragment) {

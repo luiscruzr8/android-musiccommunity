@@ -8,14 +8,14 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.UserRecommendationsFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
 import com.tfm.musiccommunityapp.ui.community.recommendations.RecommendationsAdapter
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.profile.ProfileViewModel
 import com.tfm.musiccommunityapp.ui.profile.posts.UserPostsFragment
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserRecommendationsFragment: BaseFragment(R.layout.user_recommendations_fragment) {

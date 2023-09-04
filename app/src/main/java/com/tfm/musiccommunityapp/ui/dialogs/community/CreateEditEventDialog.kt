@@ -20,10 +20,10 @@ import com.tfm.musiccommunityapp.databinding.EditEventDialogBinding
 import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.EventDomain
 import com.tfm.musiccommunityapp.domain.model.TagDomain
-import com.tfm.musiccommunityapp.utils.formatDateToString
-import com.tfm.musiccommunityapp.utils.formatTimeToString
-import com.tfm.musiccommunityapp.utils.localDateOf
-import com.tfm.musiccommunityapp.utils.localTimeOf
+import com.tfm.musiccommunityapp.ui.utils.formatDateToString
+import com.tfm.musiccommunityapp.ui.utils.formatTimeToString
+import com.tfm.musiccommunityapp.ui.utils.localDateOf
+import com.tfm.musiccommunityapp.ui.utils.localTimeOf
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.LocalTime

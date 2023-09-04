@@ -1,7 +1,7 @@
 package com.tfm.musiccommunityapp.ui.di
 
-import com.tfm.musiccommunityapp.domain.utils.FileHelper
-import com.tfm.musiccommunityapp.utils.FileHelperImplementation
+import com.tfm.musiccommunityapp.ui.utils.FileHelperImplementation
+import com.tfm.musiccommunityapp.usecase.utils.FileHelper
 import org.koin.dsl.bind
 import org.koin.dsl.module
 

@@ -1,7 +1,7 @@
 package com.tfm.musiccommunityapp.data.repository
 
 import android.util.Log
-import com.tfm.musiccommunityapp.data.api.model.SignInResponse
+import com.tfm.musiccommunityapp.api.model.SignInResponse
 import com.tfm.musiccommunityapp.data.datasource.AuthDatasource
 import com.tfm.musiccommunityapp.data.datasource.LoginDatasource
 import com.tfm.musiccommunityapp.domain.model.AuthError
@@ -9,10 +9,10 @@ import com.tfm.musiccommunityapp.domain.model.NetworkError
 import com.tfm.musiccommunityapp.domain.model.NotFoundError
 import com.tfm.musiccommunityapp.domain.model.ServerError
 import com.tfm.musiccommunityapp.domain.model.ValidationError
-import com.tfm.musiccommunityapp.domain.repository.AuthRepository
-import com.tfm.musiccommunityapp.domain.repository.SignInStatus
-import com.tfm.musiccommunityapp.domain.repository.SignOutStatus
-import com.tfm.musiccommunityapp.domain.repository.SignUpStatus
+import com.tfm.musiccommunityapp.usecase.repository.AuthRepository
+import com.tfm.musiccommunityapp.usecase.repository.SignInStatus
+import com.tfm.musiccommunityapp.usecase.repository.SignOutStatus
+import com.tfm.musiccommunityapp.usecase.repository.SignUpStatus
 import okhttp3.Cache
 
 class AuthRepositoryImpl(
@@ -22,7 +22,7 @@ class AuthRepositoryImpl(
 ): AuthRepository {
     override fun isSignedIn(): Boolean = authDatasource.accessToken.isNotEmpty()
 
-    override suspend fun refreshLogin(): SignInStatus  {
+    override suspend fun refreshLogin(): SignInStatus {
         TODO("Not yet implemented")
     }
 

@@ -1,13 +1,13 @@
 package com.tfm.musiccommunityapp.data.datasource
 
-import com.tfm.musiccommunityapp.data.api.UsersApi
-import com.tfm.musiccommunityapp.data.api.extensions.DEFAULT_ERROR_400_MESSAGE
-import com.tfm.musiccommunityapp.data.api.extensions.DEFAULT_ERROR_404_MESSAGE
-import com.tfm.musiccommunityapp.data.api.extensions.DEFAULT_ERROR_500_MESSAGE
-import com.tfm.musiccommunityapp.data.api.model.ErrorResponse
-import com.tfm.musiccommunityapp.data.api.model.FollowerResponse
-import com.tfm.musiccommunityapp.data.api.model.UserResponse
-import com.tfm.musiccommunityapp.data.api.model.toDomain
+import com.tfm.musiccommunityapp.api.UsersApi
+import com.tfm.musiccommunityapp.api.extensions.DEFAULT_ERROR_400_MESSAGE
+import com.tfm.musiccommunityapp.api.extensions.DEFAULT_ERROR_404_MESSAGE
+import com.tfm.musiccommunityapp.api.extensions.DEFAULT_ERROR_500_MESSAGE
+import com.tfm.musiccommunityapp.api.model.ErrorResponse
+import com.tfm.musiccommunityapp.api.model.FollowerResponse
+import com.tfm.musiccommunityapp.api.model.UserResponse
+import com.tfm.musiccommunityapp.api.model.toDomain
 import com.tfm.musiccommunityapp.data.datasource.remote.UserRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.model.FollowerResponseBuilder
 import com.tfm.musiccommunityapp.data.model.UserResponseBuilder

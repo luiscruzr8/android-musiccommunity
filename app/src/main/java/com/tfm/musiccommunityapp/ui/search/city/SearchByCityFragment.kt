@@ -6,14 +6,13 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.SearchByCityFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.profile.posts.UserPostsAdapter
-import com.tfm.musiccommunityapp.ui.profile.posts.UserPostsFragment
-import com.tfm.musiccommunityapp.utils.navigateFromCityNameSearchOnPostType
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.utils.navigateFromCityNameSearchOnPostType
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchByCityFragment: BaseFragment(R.layout.search_by_city_fragment) {

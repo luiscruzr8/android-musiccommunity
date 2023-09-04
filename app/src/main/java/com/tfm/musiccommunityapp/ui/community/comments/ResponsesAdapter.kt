@@ -7,7 +7,7 @@ import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.ResponseItemRowBinding
 import com.tfm.musiccommunityapp.domain.model.CommentDomain
 import com.tfm.musiccommunityapp.ui.extensions.bindingInflate
-import com.tfm.musiccommunityapp.utils.formatDateTimeToString
+import com.tfm.musiccommunityapp.ui.utils.formatDateTimeToString
 
 class ResponsesAdapter(
     private val onDeleteCommentClicked: (CommentDomain) -> Unit

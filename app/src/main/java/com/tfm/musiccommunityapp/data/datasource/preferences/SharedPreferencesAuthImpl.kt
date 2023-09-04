@@ -2,8 +2,8 @@ package com.tfm.musiccommunityapp.data.datasource.preferences
 
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
-import com.tfm.musiccommunityapp.base.string
 import com.tfm.musiccommunityapp.data.datasource.AuthDatasource
+import com.tfm.musiccommunityapp.ui.base.string
 
 class SharedPreferencesAuthImpl(
     sharedPreferences: SharedPreferences,

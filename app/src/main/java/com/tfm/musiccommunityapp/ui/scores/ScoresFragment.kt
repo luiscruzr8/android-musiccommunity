@@ -14,11 +14,11 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.ScoresFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.ScoreDomain
-import com.tfm.musiccommunityapp.utils.uriToFile
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
+import com.tfm.musiccommunityapp.ui.utils.uriToFile
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScoresFragment: BaseFragment(R.layout.scores_fragment) {

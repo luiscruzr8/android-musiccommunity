@@ -4,7 +4,7 @@ import arrow.core.Either
 import com.tfm.musiccommunityapp.data.datasource.RecommendationDatasource
 import com.tfm.musiccommunityapp.domain.model.DomainError
 import com.tfm.musiccommunityapp.domain.model.RecommendationDomain
-import com.tfm.musiccommunityapp.domain.repository.RecommendationRepository
+import com.tfm.musiccommunityapp.usecase.repository.RecommendationRepository
 
 internal class RecommendationRepositoryImpl(
     private val recommendationDatasource: RecommendationDatasource
