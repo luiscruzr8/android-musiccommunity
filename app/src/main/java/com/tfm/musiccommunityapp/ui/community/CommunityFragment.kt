@@ -56,6 +56,7 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
 
         val adapter = setUpAdapter()
         binding.communityViewPager.adapter = adapter
+        binding.communityViewPager.offscreenPageLimit = adapter.itemCount
 
         if (savedInstanceState != null) {
             searchTerm = savedInstanceState.getCharSequence(SEARCH_TERM, "").toString()
