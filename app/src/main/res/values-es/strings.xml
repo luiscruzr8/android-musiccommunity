@@ -64,6 +64,7 @@
     <string name="popup_delete_option">Eliminar</string>
     <string name="popup_recommend_option">Recomendar</string>
     <string name="popup_rate_option">Puntuar</string>
+    <string name="send_comment">Enviar</string>
     <string name="popup_opinion_option">Crear opinión</string>
 
     <!-- Home screen -->

@@ -15,7 +15,7 @@ import com.tfm.musiccommunityapp.ui.base.BaseFragment
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.profile.ProfileViewModel
 import com.tfm.musiccommunityapp.ui.utils.getPostType
-import com.tfm.musiccommunityapp.ui.utils.navigateFromRecommendationOnPostType
+import com.tfm.musiccommunityapp.ui.utils.navigateFromUserPostsOnPostType
 import com.tfm.musiccommunityapp.ui.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -131,7 +131,7 @@ class UserPostsFragment: BaseFragment(R.layout.user_posts_fragment) {
     }
 
     private fun onPostClicked(post: GenericPostDomain) {
-        navigateFromRecommendationOnPostType(post.postType, post.id, ::navigateSafe)
+        navigateFromUserPostsOnPostType(post.postType, post.id, ::navigateSafe)
     }
 
     companion object {

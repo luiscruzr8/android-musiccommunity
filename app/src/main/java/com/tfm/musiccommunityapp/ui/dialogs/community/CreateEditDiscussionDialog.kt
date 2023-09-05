@@ -121,7 +121,7 @@ class CreateEditDiscussionDialog(
             }
 
             discussion?.let {
-                dialogTitle.text = getString(R.string.community_advertisements_edit_title)
+                dialogTitle.text = getString(R.string.community_discussions_edit_title)
                 postTitleEditText.setText(it.title)
                 postDescriptionEditText.setText(it.description)
                 postTagsEditText.setText(it.tags.map { it2 -> it2.tagName }.joinToString(", "))
