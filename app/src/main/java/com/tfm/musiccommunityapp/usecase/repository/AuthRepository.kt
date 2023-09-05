@@ -27,9 +27,15 @@ interface AuthRepository {
 
     suspend fun refreshLogin(): SignInStatus
 
-    suspend fun signIn(username: String, password: String): SignInStatus
+    suspend fun signIn(username: String, password: String, firebaseToken: String): SignInStatus
 
-    suspend fun signUp(username: String, password: String, email: String, phoneNumber: String): SignUpStatus
+    suspend fun signUp(
+        username: String,
+        password: String,
+        email: String,
+        phoneNumber: String,
+        firebaseToken: String
+    ): SignUpStatus
 
     suspend fun logout(): SignOutStatus
 }

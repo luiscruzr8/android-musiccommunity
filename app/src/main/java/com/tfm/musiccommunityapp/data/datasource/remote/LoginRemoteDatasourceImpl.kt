@@ -17,8 +17,12 @@ import retrofit2.HttpException
 class LoginRemoteDatasourceImpl(private val authApi: AuthApi): LoginDatasource {
 
     @Throws(HttpException::class)
-    override suspend fun signIn(username: String, password: String): Either<DomainError, SignInResponse> {
-        val signInBody = SignInBody(username, password)
+    override suspend fun signIn(
+        username: String,
+        password: String,
+        firebaseToken: String
+    ): Either<DomainError, SignInResponse> {
+        val signInBody = SignInBody(username, password, firebaseToken)
         authApi.signIn(signInBody).let { result ->
             return when {
                 !result.isSuccessful -> result.toErrorResponse().toDomain().left()
@@ -27,8 +31,14 @@ class LoginRemoteDatasourceImpl(private val authApi: AuthApi): LoginDatasource {
         }
     }
 
-    override suspend fun signUp(username: String, password: String, email: String, phone: String) : Either<DomainError, SignUpResponse> {
-        val signUpBody = SignUpBody(username, email, password, phone)
+    override suspend fun signUp(
+        username: String,
+        password: String,
+        email: String,
+        phone: String,
+        firebaseToken: String
+    ): Either<DomainError, SignUpResponse> {
+        val signUpBody = SignUpBody(username, email, password, phone, firebaseToken)
         authApi.signUp(signUpBody).let { result ->
             return when {
                 !result.isSuccessful -> result.toErrorResponse().toDomain().left()

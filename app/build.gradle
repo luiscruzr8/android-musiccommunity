@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.devtools.ksp'
+    // Add the Google services Gradle plugin
+    id 'com.google.gms.google-services'
 }
 
 apply plugin: 'androidx.navigation.safeargs.kotlin'
@@ -149,4 +151,11 @@ dependencies {
 
     //PDF viewer
     implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.1'
+
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:32.2.3')
+    //Firebase Cloud Messaging
+    implementation 'com.google.firebase:firebase-common-ktx:20.3.3'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.2.1'
+
 }

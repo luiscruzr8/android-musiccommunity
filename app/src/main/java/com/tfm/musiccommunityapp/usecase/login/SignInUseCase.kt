@@ -5,14 +5,22 @@ import com.tfm.musiccommunityapp.usecase.repository.SignInStatus
 import com.tfm.musiccommunityapp.domain.model.GenericError as DomainGenericError
 
 interface SignInUseCase {
-    suspend operator fun invoke(username: String, password: String): SignInUseCaseResult
+    suspend operator fun invoke(
+        username: String,
+        password: String,
+        firebaseToken: String
+    ): SignInUseCaseResult
 }
 
 class SignInUseCaseImpl(
     private val authRepository: AuthRepository
 ) : SignInUseCase {
-    override suspend fun invoke(username: String, password: String): SignInUseCaseResult {
-        return when (authRepository.signIn(username, password)) {
+    override suspend fun invoke(
+        username: String,
+        password: String,
+        firebaseToken: String
+    ): SignInUseCaseResult {
+        return when (authRepository.signIn(username, password, firebaseToken)) {
             SignInStatus.SUCCESS -> SignInUseCaseResult.Success
             SignInStatus.AUTH_ERROR -> SignInUseCaseResult.GenericError(
                 DomainGenericError(

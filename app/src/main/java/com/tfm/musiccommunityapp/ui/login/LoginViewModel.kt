@@ -25,18 +25,24 @@ class LoginViewModel(
     fun getSignInResult() = _signInResult as LiveData<SignInUseCaseResult?>
     fun getSignUpResult() = _signUpResult as LiveData<SignUpUseCaseResult?>
 
-    fun performSignIn(username: String, password: String) {
+    fun performSignIn(username: String, password: String, firebaseToken: String) {
         showLoader.postValue(true)
         viewModelScope.launch(dispatcher) {
-            _signInResult.postValue(signInUseCase(username, password))
+            _signInResult.postValue(signInUseCase(username, password, firebaseToken))
             showLoader.postValue(false)
         }
     }
 
-    fun performSignUp(username: String, password: String, email: String, phone: String) {
+    fun performSignUp(
+        username: String,
+        password: String,
+        email: String,
+        phone: String,
+        firebaseToken: String
+    ) {
         showLoader.postValue(true)
         viewModelScope.launch(dispatcher) {
-            _signUpResult.postValue(signUpUseCase(username, password, email, phone))
+            _signUpResult.postValue(signUpUseCase(username, password, email, phone, firebaseToken))
             showLoader.postValue(false)
         }
     }
