@@ -18,16 +18,49 @@ facilitar el mantenimiento de las referencias.
 ***************************************
 
 \section{Motivación}
+\label{sec:motivación}
 
 Hoxe en día, existen diferentes comunidades en gremios, así como acontece co conxuntos dos músicos: un grupo nicho dentro da sociedade que buscan desenvolverse neste ámbito pero moitas veces resulta difícil debido á ampla cantidade de información que circula polas redes sociais e distintos foros. Aínda que cada vez esta información sexa personalizada, sigue habendo datos que pode pasar desapercibidos para certos colectivos, como pode ser o caso dos músicos, que poder perder información debido ao gran volume de datos na actualidade.
 
 Tras consultar e compartir pensamentos con varios músicos e expertos no tema, analizouse que clase de información eles considerarían de relevancia e virían necesaria nunha proposta de aplicación enfocada e destinada ó colectivo de músicos, ou persoas interesadas en seguir eventos  musicais de todo tipo. Houbo concenso xeral na necesidade de dar a coñecer eventos locais ou pequenos, ou anuncios buscando xente para tocar en concertos que moitas veces pasaban desapercibidos en outras redes sociais máis grandes. Entre outras ideas, tamen mencionaban a necesidade de poder discutir en foros de discusións nos que expoñer e comentar o seu traballo, con outra xente de experiencia similar a eles, que calquera crítica constructiva lle sería de utilidade xa que existen moitos foros nos que persoas alleas ou pouco expertos no tema tenden a participar en debates sen fundamentos ou xustificacións non válidas.
 En moitos casos, os encuestados compartían unha opinón xeral de ter un lugar no que almacenar todas as súas partituras e que foran accesibles desde calquer lugar. 
 
-Polo tanto xurde así a idea desta aplicación: \textbf{\textit{Music Community}}. Partirase dun sistema xa establecido, que consta dun servicio REST e unha aplicaicón web, pero para o desenvolvemento deste traballo realizarase unha transformación ao entorno móbil. Xa que as tendencias cambian no tempo, e debemos adaptarnos as novas tecnoloxías. Isto representa un novo desafío a nivel académico e persoal, no que asentar os coñecementos obtidos no mestrado, realizando a transformación dunha aplicación legacy nun proxecto actualizado.
+Polo tanto xurde así a idea desta aplicación: \textbf{\textit{Music Community}}, que foi desenvolvido durante o meu proxecto fin de grao. Polo que, para o deselvovemento deste proxecto fin de máster, levarase a cabo a transformación de dito proxecto, no seu momento unha plataforma web, a un entorno móbil.  Partirase así dun sistema xa establecido, que consta dun servicio REST e unha aplicaicón web, que non se verán afectados polo desenvolvemento deste proxecto salvo unha modificación que se fará para os dispositivos móbiles: as notificacións push. Decidiuse actualizalo proxecto xa que as tendencias cambian no tempo, e debemos adaptarnos as novas tecnoloxías. Isto representa un novo desafío a nivel académico e persoal, no que asentar os coñecementos obtidos no mestrado, realizando a transformación dunha aplicación legacy nun proxecto actualizado.
 
 \section{Estado do arte}
+\label{sec:estado-arte}
 
+No meu proxecto de grao, fixérase unha comparativa con diferentes aplicacións no ámbito web. Para este proxecto avaliaránse, por consecuente, aplicacións no ámbito móbil que compartan funcionalidades similares ás des critas previamente para este proxecto. Se ben, moitas das apps citadas neste apartado, cumpren a funcionalidade recollida no proxecto, moitas delas son de pago ou tipo \textit{freemium} , para as que fai falta realizar algún tipo de pago para usalas ao completo. Entre estas podemos destacar:
+
+\begin{itemize}
+	\item \textbf{\textit{MuseScore: partitura}} 
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.3]{imaxes/intro/musescore-app}
+		\caption{Logo 'MuseScore: partitura' (\url{https://play.google.com/store/apps/details?id=com.musescore.playerlite&hl=es&pli=1})}
+	\end{figure}
+	
+	Esta é unha app Android que permite a xestión, visualización e reproducción de partituras. Este exemplo non profundiza no apartado social da app, ademáis de ser unha app  \textit{freemium}, moitos usuarios gratuitos queixanse bastante do funcionamento xeral da versión gratuita.
+	A principal ventaxa desta app é o seu catálogo e a variedade de partituras, e a principal desventaxa é o baixo rendemento da súa versión gratuita, empeorando a experiencia do usuarios básicos. 
+
+\end{itemize}
+
+Por outro lado, temos aplicacións que cumplen no ámbito social, pero que chegan a ser de temática tan xeral que non cubren as necesidades que neste proxecto se van levar a cabo.
+
+\begin{itemize}
+	\item \textbf{\textit{Facebook}} 
+	
+	A opción máis coñecida, que é capaz de cumplir con todos os puntos explicados anteriormente. Ademáis permite iniciar  debates nas publicacións, compartir eventos de interés, publicar anuncios\dots 
+	Independientemente, esta app ten moitísimas funcionalidades extra que ensombrecen a experencia de usuario para determinados colectivos.
+	
+	\item \textbf{\textit{X (antigamente coñecida como Twitter)}} 
+	
+	Outra opción bastante coñecida  polos usuarios á hora de manter fíos de discusión e compartir novedades de forma rápida, moi similar ao boca a boca. En calquer caso, esta app tamén empeorou a súa experiencia de usuario coa reciente integración de publicidade e cambio de dirección.
+	
+\end{itemize}
+
+Con todo, dentro das alternativas mencionadas non se atoparon exemplos que cubran as funcionalidades descritas previamente: unha app móbil que lle permita aos músicos unha forma de darse a conocer e recibir \textit{retroalimentación} das súas obras e incluso que lles permita estar enterados de eventos, anuncios ou discusións de actualidade.
 
 \section{Objetivos}
 \label{sec:objetivos}
