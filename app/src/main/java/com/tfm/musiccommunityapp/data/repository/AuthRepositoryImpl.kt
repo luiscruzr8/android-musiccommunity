@@ -26,9 +26,13 @@ class AuthRepositoryImpl(
         TODO("Not yet implemented")
     }
 
-    override suspend fun signIn(username: String, password: String): SignInStatus {
+    override suspend fun signIn(
+        username: String,
+        password: String,
+        firebaseToken: String
+    ): SignInStatus {
         try {
-            loginRemoteDatasource.signIn(username, password).let { result ->
+            loginRemoteDatasource.signIn(username, password, firebaseToken).let { result ->
                 return result.fold(
                     ifLeft = {
                         when (it) {
@@ -49,24 +53,31 @@ class AuthRepositoryImpl(
         }
     }
 
-    override suspend fun signUp(username: String, password: String, email: String, phoneNumber: String): SignUpStatus {
+    override suspend fun signUp(
+        username: String,
+        password: String,
+        email: String,
+        phoneNumber: String,
+        firebaseToken: String
+    ): SignUpStatus {
         try {
-            loginRemoteDatasource.signUp(username, password, email, phoneNumber).let { result ->
-                return result.fold(
-                    ifLeft = {
-                        when (it) {
-                            is AuthError, is NotFoundError -> SignUpStatus.AUTH_ERROR
-                            is ValidationError -> SignUpStatus.BAD_REQUEST
-                            is NetworkError -> SignUpStatus.NETWORK_ERROR
-                            is ServerError -> SignUpStatus.SERVER_ERROR
-                            else -> SignUpStatus.UNKNOWN_ERROR
+            loginRemoteDatasource.signUp(username, password, email, phoneNumber, firebaseToken)
+                .let { result ->
+                    return result.fold(
+                        ifLeft = {
+                            when (it) {
+                                is AuthError, is NotFoundError -> SignUpStatus.AUTH_ERROR
+                                is ValidationError -> SignUpStatus.BAD_REQUEST
+                                is NetworkError -> SignUpStatus.NETWORK_ERROR
+                                is ServerError -> SignUpStatus.SERVER_ERROR
+                                else -> SignUpStatus.UNKNOWN_ERROR
+                            }
+                        },
+                        ifRight = {
+                            SignUpStatus.SUCCESS
                         }
-                    },
-                    ifRight = {
-                        SignUpStatus.SUCCESS
-                    }
-                )
-            }
+                    )
+                }
         } catch (Exception: Exception) {
             Log.e("AuthRepositoryImpl", "Error signing up: ${Exception.message}")
             return SignUpStatus.UNKNOWN_ERROR

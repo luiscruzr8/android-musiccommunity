@@ -1,5 +1,8 @@
 package com.tfm.musiccommunityapp.ui.base
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.IdRes
@@ -21,6 +24,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.bottomNavigation.labelVisibilityMode = LABEL_VISIBILITY_LABELED
+
+        createNotificationChannel()
+    }
+
+    private fun createNotificationChannel() {
+        val name = getString(R.string.notification_channel_name)
+        val descriptionText = getString(R.string.notification_channel_description)
+        val importance = NotificationManager.IMPORTANCE_HIGH
+        val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+            description = descriptionText
+        }
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
     }
 
     override fun onStart() {
@@ -59,6 +76,10 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigation.menu.clear()
             binding.bottomNavigation.inflateMenu(R.menu.bottom_navigation_logged_in_menu)
         }
+    }
+
+    companion object {
+        const val CHANNEL_ID = "com.tfm.musiccommunityapp.urgent"
     }
 
 }

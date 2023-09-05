@@ -9,7 +9,8 @@ interface SignUpUseCase {
         username: String,
         password: String,
         email: String,
-        phone: String
+        phone: String,
+        firebaseToken: String
     ): SignUpUseCaseResult
 }
 
@@ -20,9 +21,10 @@ class SignUpUseCaseImpl(
         username: String,
         password: String,
         email: String,
-        phone: String
+        phone: String,
+        firebaseToken: String
     ): SignUpUseCaseResult {
-        return when (authRepository.signUp(username, password, email, phone)) {
+        return when (authRepository.signUp(username, password, email, phone, firebaseToken)) {
             SignUpStatus.SUCCESS -> SignUpUseCaseResult.Success
             SignUpStatus.AUTH_ERROR -> SignUpUseCaseResult.GenericError(
                 DomainGenericError(
@@ -31,6 +33,7 @@ class SignUpUseCaseImpl(
                     401
                 )
             )
+
             SignUpStatus.BAD_REQUEST -> SignUpUseCaseResult.GenericError(
                 DomainGenericError(
                     "Bad request error",

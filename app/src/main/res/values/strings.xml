@@ -263,4 +263,9 @@
     <string name="bottom_nav_menu_item_3">Scores</string>
     <string name="bottom_nav_menu_item_4">Search</string>
     <string name="bottom_nav_menu_item_5">Profile</string>
+
+    <!-- Notification channel -->
+    <string name="notification_channel_id">com.tfm.musiccommunityapp.urgent</string>
+    <string name="notification_channel_name">General notifications</string>
+    <string name="notification_channel_description">All the received notificationsfrom the app</string>
 </resources>

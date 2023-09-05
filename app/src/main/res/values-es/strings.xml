@@ -265,4 +265,9 @@
     <string name="bottom_nav_menu_item_3">Partituras</string>
     <string name="bottom_nav_menu_item_4">Búsqueda</string>
     <string name="bottom_nav_menu_item_5">Perfil</string>
+
+    <!-- Notification channel -->
+    <string name="notification_channel_id">com.tfm.musiccommunityapp.urgent</string>
+    <string name="notification_channel_name">Notificaciones generales</string>
+    <string name="notification_channel_description">Todas las notificaciones recibidas de la app</string>
 </resources>
