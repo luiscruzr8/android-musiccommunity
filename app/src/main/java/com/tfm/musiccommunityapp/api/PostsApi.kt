@@ -50,8 +50,8 @@ internal interface PostsApi {
     @Multipart
     @POST("$API_POSTS_URL/{id}/img")
     suspend fun uploadPostImage(
-        @Path("id") id: String,
-        @Part("img") image: MultipartBody.Part,
+        @Path("id") id: Long,
+        @Part image: MultipartBody.Part,
     ): Response<Long>
 
     //endregion

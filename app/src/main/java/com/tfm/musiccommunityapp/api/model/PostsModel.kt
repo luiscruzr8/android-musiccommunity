@@ -91,7 +91,8 @@ internal fun EventPostResponse.toDomain() = EventDomain(
     createdOn = creationDateTime,
     from = startDateTime,
     to = endDateTime,
-    tags = tags.map { it.toDomain() }
+    tags = tags.map { it.toDomain() },
+    image = null
 )
 
 internal fun EventDomain.toRequest() = EventPostResponse(
@@ -130,7 +131,8 @@ internal fun AdvertisementPostResponse.toDomain() = AdvertisementDomain(
     phone = contactPhone,
     createdOn = creationDateTime,
     until = endDate,
-    tags = tags.map { it.toDomain() }
+    tags = tags.map { it.toDomain() },
+    image = null
 )
 
 internal fun AdvertisementDomain.toRequest() = AdvertisementPostResponse(
@@ -163,7 +165,8 @@ internal fun DiscussionPostResponse.toDomain() = DiscussionDomain(
     login = login,
     postType = type,
     createdOn = creationDateTime,
-    tags = tags.map { it.toDomain() }
+    tags = tags.map { it.toDomain() },
+    image = null
 )
 
 internal fun DiscussionDomain.toRequest() = DiscussionPostResponse(

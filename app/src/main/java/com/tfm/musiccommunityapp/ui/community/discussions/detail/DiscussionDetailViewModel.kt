@@ -24,10 +24,13 @@ import com.tfm.musiccommunityapp.usecase.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.usecase.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.usecase.post.GetPostImageResult
 import com.tfm.musiccommunityapp.usecase.post.GetPostImageUseCase
+import com.tfm.musiccommunityapp.usecase.post.UploadPostImageResult
+import com.tfm.musiccommunityapp.usecase.post.UploadPostImageUseCase
 import com.tfm.musiccommunityapp.usecase.recommendations.CreateRecommendationResult
 import com.tfm.musiccommunityapp.usecase.recommendations.CreateRecommendationUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import java.io.File
 
 class DiscussionDetailViewModel(
     private val getDiscussionById: GetDiscussionByIdUseCase,
@@ -39,10 +42,11 @@ class DiscussionDetailViewModel(
     private val getPostComments: GetPostCommentsUseCase,
     private val postOrRespondComment: PostOrRespondCommentUseCase,
     private val deleteComment: DeleteCommentUseCase,
+    private val uploadImagePost: UploadPostImageUseCase,
     private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
-    enum class DiscussionOperationSuccess { UPDATE, DELETE, RECOMMEND, COMMENT }
+    enum class DiscussionOperationSuccess { UPDATE, DELETE, RECOMMEND, COMMENT, IMAGE_UPLOAD }
 
     private val _discussion: MutableLiveData<DiscussionDomain?> = MutableLiveData()
     private val _comments: MutableLiveData<List<CommentDomain>> = MutableLiveData()
@@ -143,20 +147,50 @@ class DiscussionDetailViewModel(
     fun sendUpdateDiscussion(discussion: DiscussionDomain) {
         viewModelScope.launch(dispatcher) {
             _showDiscussionLoader.postValue(true)
-            handleUpdateDiscussionResult(updateDiscussion(discussion))
+            handleUpdateDiscussionResult(
+                updateDiscussion(discussion),
+                discussion.image
+            )
         }
     }
 
-    private fun handleUpdateDiscussionResult(result: UpdateDiscussionResult) {
+    private suspend fun handleUpdateDiscussionResult(
+        result: UpdateDiscussionResult,
+        image: File?
+    ) {
         when (result) {
             is UpdateDiscussionResult.Success ->
-                _isOperationSuccessful.postValue(DiscussionOperationSuccess.UPDATE)
+                if (image != null) {
+                    handleUploadImageToPost(
+                        uploadImagePost(result.id, image),
+                        DiscussionOperationSuccess.UPDATE
+                    )
+                } else {
+                    _isOperationSuccessful.postValue(DiscussionOperationSuccess.UPDATE)
+                }
 
             is UpdateDiscussionResult.GenericError ->
                 _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
 
             is UpdateDiscussionResult.NetworkError ->
                 _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
+    }
+
+    private fun handleUploadImageToPost(
+        result: UploadPostImageResult,
+        operation: DiscussionOperationSuccess
+    ) {
+        when (result) {
+            is UploadPostImageResult.Success -> {
+                _isOperationSuccessful.postValue(DiscussionOperationSuccess.IMAGE_UPLOAD)
+                _isOperationSuccessful.postValue(operation)
+            }
+
+            is UploadPostImageResult.GenericError -> _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            is UploadPostImageResult.NetworkError -> _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            is UploadPostImageResult.NotFoundError -> _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            is UploadPostImageResult.ValidationError -> _getDiscussionByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
         }
     }
 
@@ -168,7 +202,7 @@ class DiscussionDetailViewModel(
     }
 
     private fun handleCreateRecommendationResult(result: CreateRecommendationResult) {
-        when(result) {
+        when (result) {
             is CreateRecommendationResult.Success -> {
                 _isOperationSuccessful.postValue(DiscussionOperationSuccess.RECOMMEND)
             }

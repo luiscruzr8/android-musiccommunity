@@ -58,12 +58,17 @@
     <string name="comment_dialog_title">Deja tu comentario o respuesta</string>
     <string name="comment_dialog_button">Enviar</string>
     <string name="not_now_button">Ahora no</string>
+    <string name="select_image">Eligir imagen…</string>
+    <string name="image_uploaded_successfully">¡Imagen subida correctamente a la publicación!</string>
+    <string name="image_updatedd_successfully">Image actualizada successfully to the post!</string>
+
 
     <!-- PopUp option post menu -->
     <string name="popup_edit_option">Editar</string>
     <string name="popup_delete_option">Eliminar</string>
     <string name="popup_recommend_option">Recomendar</string>
     <string name="popup_rate_option">Puntuar</string>
+    <string name="send_comment">Enviar</string>
     <string name="popup_opinion_option">Crear opinión</string>
 
     <!-- Home screen -->
@@ -201,7 +206,7 @@
     <string name="community_opinions_description">Descripción</string>
     <string name="community_opinion_create_title">Nueva opinión</string>
     <string name="community_opinion_edit_title">Editar opinión</string>
-    <string name="community_opinion_created_title">Opinión creada satisfactoriament</string>
+    <string name="community_opinion_created_title">Opinión creada satisfactoriamente</string>
     <string name="community_opinion_created_message">Serás redirigido a la nueva opinion</string>
     <string name="create_opinion_confirmation">Al aceptar, proporcionas acceso a todos los usuarios a esta partitura. Si cancelas, la publicación no se creará.\n¿Quieres crear la publicación de todos modos?</string>
 

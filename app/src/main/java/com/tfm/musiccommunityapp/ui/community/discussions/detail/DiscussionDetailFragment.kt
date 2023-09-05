@@ -4,17 +4,19 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.api.model.toGenericDomain
 import com.tfm.musiccommunityapp.databinding.DiscussionDetailFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.CommentDomain
 import com.tfm.musiccommunityapp.ui.base.BaseFragment
 import com.tfm.musiccommunityapp.ui.community.comments.CommentsAdapter
+import com.tfm.musiccommunityapp.ui.di.GlideApp
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditDiscussionDialog
 import com.tfm.musiccommunityapp.ui.dialogs.community.CreateEditRecommendationDialog
@@ -61,9 +63,11 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
         viewModel.getPostImageLiveData().observe(viewLifecycleOwner) { imageURL ->
             imageURL?.let {
                 //TODO: Check why interceptor is not getting the right headers
-                Glide.with(requireContext())
+                GlideApp.with(requireContext())
                     .load(imageURL)
                     .fitCenter()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
                     .into(binding.ivPostImage)
             }
         }
@@ -157,6 +161,13 @@ class DiscussionDetailFragment : BaseFragment(R.layout.discussion_detail_fragmen
 
                     DiscussionDetailViewModel.DiscussionOperationSuccess.COMMENT ->
                         viewModel.reloadPostComments(args.id)
+
+                    DiscussionDetailViewModel.DiscussionOperationSuccess.IMAGE_UPLOAD ->
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.image_uploaded_successfully),
+                            Toast.LENGTH_LONG
+                        ).show()
                 }
             }
         }

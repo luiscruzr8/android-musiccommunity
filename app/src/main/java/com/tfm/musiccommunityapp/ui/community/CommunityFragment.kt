@@ -53,9 +53,12 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
         observeScoresResult()
         observeOperationResult()
         observeOperationErrors()
+        observeUploadImage()
+        observeUploadImageErrors()
 
         val adapter = setUpAdapter()
         binding.communityViewPager.adapter = adapter
+        binding.communityViewPager.offscreenPageLimit = adapter.itemCount
 
         if (savedInstanceState != null) {
             searchTerm = savedInstanceState.getCharSequence(SEARCH_TERM, "").toString()
@@ -263,12 +266,40 @@ class CommunityFragment : BaseFragment(R.layout.community_fragment) {
                         getString(R.string.not_now_button)
                     ) { }
                 }
+
+                CommunityViewModel.OperationSuccess.IMAGE_UPLOAD_SUCCESS -> {}
             }
         }
     }
 
     private fun observeOperationErrors() {
         viewModel.getCreateItemError().observe(viewLifecycleOwner) { error ->
+            Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun observeUploadImage() {
+        viewModel.getImageResult().observe(viewLifecycleOwner) { it ->
+            it?.let { type ->
+                when (type) {
+                    CommunityViewModel.OperationSuccess.IMAGE_UPLOAD_SUCCESS -> Toast.makeText(
+                        requireContext(),
+                        getString(R.string.image_uploaded_successfully),
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    CommunityViewModel.OperationSuccess.CREATE_EVENT_SUCCESS,
+                    CommunityViewModel.OperationSuccess.CREATE_ADVERTISEMENT_SUCCESS,
+                    CommunityViewModel.OperationSuccess.CREATE_DISCUSSION_SUCCESS,
+                    CommunityViewModel.OperationSuccess.CREATE_OPINION_SUCCESS -> {
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observeUploadImageErrors() {
+        viewModel.getImageUploadError().observe(viewLifecycleOwner) { error ->
             Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
         }
     }

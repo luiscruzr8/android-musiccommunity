@@ -57,12 +57,16 @@
     <string name="comment_dialog_title">Leave a comment or response</string>
     <string name="comment_dialog_button">Submit</string>
     <string name="not_now_button">Not now</string>
+    <string name="select_image">Select image…</string>
+    <string name="image_uploaded_successfully">Image uploaded successfully to the post!</string>
+    <string name="image_updatedd_successfully">Image updated successfully to the post!</string>
 
     <!-- PopUp option post menu -->
     <string name="popup_edit_option">Edit</string>
     <string name="popup_delete_option">Delete</string>
     <string name="popup_recommend_option">Recommend</string>
     <string name="popup_rate_option">Rate</string>
+    <string name="send_comment">Send</string>
     <string name="popup_opinion_option">Create opinion</string>
 
     <!-- Home screen -->

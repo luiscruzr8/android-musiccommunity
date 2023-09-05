@@ -27,10 +27,13 @@ import com.tfm.musiccommunityapp.usecase.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.usecase.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.usecase.post.GetPostImageResult
 import com.tfm.musiccommunityapp.usecase.post.GetPostImageUseCase
+import com.tfm.musiccommunityapp.usecase.post.UploadPostImageResult
+import com.tfm.musiccommunityapp.usecase.post.UploadPostImageUseCase
 import com.tfm.musiccommunityapp.usecase.recommendations.CreateRecommendationResult
 import com.tfm.musiccommunityapp.usecase.recommendations.CreateRecommendationUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import java.io.File
 
 class AdvertisementDetailViewModel(
     private val getAdvertisementById: GetAdvertisementByIdUseCase,
@@ -43,10 +46,11 @@ class AdvertisementDetailViewModel(
     private val getPostComments: GetPostCommentsUseCase,
     private val postOrRespondComment: PostOrRespondCommentUseCase,
     private val deleteComment: DeleteCommentUseCase,
+    private val uploadImagePost: UploadPostImageUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    enum class AdvertisementOperationSuccess { UPDATE, DELETE, RECOMMEND, COMMENT }
+    enum class AdvertisementOperationSuccess { UPDATE, DELETE, RECOMMEND, COMMENT, IMAGE_UPLOAD }
 
     private val _advertisement: MutableLiveData<AdvertisementDomain?> = MutableLiveData()
     private val _cities: MutableLiveData<List<CityDomain>> = MutableLiveData()
@@ -162,20 +166,50 @@ class AdvertisementDetailViewModel(
     fun sendUpdateAdvertisement(ad: AdvertisementDomain) {
         viewModelScope.launch(dispatcher) {
             _showAdvertisementLoader.postValue(true)
-            handleUpdateAdvertisementResult(updateAdvertisement(ad))
+            handleUpdateAdvertisementResult(
+                updateAdvertisement(ad),
+                ad.image
+            )
         }
     }
 
-    private fun handleUpdateAdvertisementResult(result: UpdateAdvertisementResult) {
+    private suspend fun handleUpdateAdvertisementResult(
+        result: UpdateAdvertisementResult,
+        image: File?
+    ) {
         when (result) {
             is UpdateAdvertisementResult.Success ->
-                _isOperationSuccessful.postValue(AdvertisementOperationSuccess.DELETE)
+                if (image != null) {
+                    handleUploadImageToPost(
+                        uploadImagePost(result.id, image),
+                        AdvertisementOperationSuccess.UPDATE
+                    )
+                } else {
+                    _isOperationSuccessful.postValue(AdvertisementOperationSuccess.UPDATE)
+                }
 
             is UpdateAdvertisementResult.GenericError ->
                 _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
 
             is UpdateAdvertisementResult.NetworkError ->
                 _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
+    }
+
+    private fun handleUploadImageToPost(
+        result: UploadPostImageResult,
+        operation: AdvertisementOperationSuccess
+    ) {
+        when (result) {
+            is UploadPostImageResult.Success -> {
+                _isOperationSuccessful.postValue(AdvertisementOperationSuccess.IMAGE_UPLOAD)
+                _isOperationSuccessful.postValue(operation)
+            }
+
+            is UploadPostImageResult.GenericError -> _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            is UploadPostImageResult.NetworkError -> _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            is UploadPostImageResult.NotFoundError -> _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            is UploadPostImageResult.ValidationError -> _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
         }
     }
 
@@ -187,13 +221,15 @@ class AdvertisementDetailViewModel(
     }
 
     private fun handleCreateRecommendationResult(result: CreateRecommendationResult) {
-        when(result) {
+        when (result) {
             is CreateRecommendationResult.Success -> {
                 _isOperationSuccessful.postValue(AdvertisementOperationSuccess.RECOMMEND)
             }
+
             is CreateRecommendationResult.GenericError -> {
                 _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
             }
+
             is CreateRecommendationResult.NetworkError -> {
                 _getAdvertisementByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
             }

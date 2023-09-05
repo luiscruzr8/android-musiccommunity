@@ -27,10 +27,13 @@ import com.tfm.musiccommunityapp.usecase.login.GetCurrentUserResult
 import com.tfm.musiccommunityapp.usecase.login.GetCurrentUserUseCase
 import com.tfm.musiccommunityapp.usecase.post.GetPostImageResult
 import com.tfm.musiccommunityapp.usecase.post.GetPostImageUseCase
+import com.tfm.musiccommunityapp.usecase.post.UploadPostImageResult
+import com.tfm.musiccommunityapp.usecase.post.UploadPostImageUseCase
 import com.tfm.musiccommunityapp.usecase.recommendations.CreateRecommendationResult
 import com.tfm.musiccommunityapp.usecase.recommendations.CreateRecommendationUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import java.io.File
 
 class EventDetailViewModel(
     private val getEventById: GetEventByIdUseCase,
@@ -43,10 +46,11 @@ class EventDetailViewModel(
     private val getPostComments: GetPostCommentsUseCase,
     private val postOrRespondComment: PostOrRespondCommentUseCase,
     private val deleteComment: DeleteCommentUseCase,
+    private val uploadImagePost: UploadPostImageUseCase,
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    enum class EventOperationSuccess { UPDATE, DELETE, RECOMMEND, COMMENT }
+    enum class EventOperationSuccess { UPDATE, DELETE, RECOMMEND, COMMENT, IMAGE_UPLOAD }
 
     private val _event: MutableLiveData<EventDomain?> = MutableLiveData()
     private val _cities: MutableLiveData<List<CityDomain>> = MutableLiveData()
@@ -162,20 +166,50 @@ class EventDetailViewModel(
     fun sendUpdateEvent(event: EventDomain) {
         viewModelScope.launch(dispatcher) {
             _showEventLoader.postValue(true)
-            handleUpdateEventResult(updateEvent(event))
+            handleUpdateEventResult(
+                updateEvent(event),
+                event.image
+            )
         }
     }
 
-    private fun handleUpdateEventResult(result: UpdateEventResult) {
+    private suspend fun handleUpdateEventResult(
+        result: UpdateEventResult,
+        image: File?
+    ) {
         when (result) {
             is UpdateEventResult.Success ->
-                _isOperationSuccessful.postValue(EventOperationSuccess.UPDATE)
+                if (image != null) {
+                    handleUploadImageToPost(
+                        uploadImagePost(result.id, image),
+                        EventOperationSuccess.UPDATE
+                    )
+                } else {
+                    _isOperationSuccessful.postValue(EventOperationSuccess.UPDATE)
+                }
 
             is UpdateEventResult.GenericError ->
                 _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
 
             is UpdateEventResult.NetworkError ->
                 _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+        }
+    }
+
+    private fun handleUploadImageToPost(
+        result: UploadPostImageResult,
+        operation: EventOperationSuccess
+    ) {
+        when (result) {
+            is UploadPostImageResult.Success -> {
+                _isOperationSuccessful.postValue(EventOperationSuccess.IMAGE_UPLOAD)
+                _isOperationSuccessful.postValue(operation)
+            }
+
+            is UploadPostImageResult.GenericError -> _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            is UploadPostImageResult.NetworkError -> _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            is UploadPostImageResult.NotFoundError -> _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
+            is UploadPostImageResult.ValidationError -> _getEventByIdError.postValue("Error code: ${result.error.code} - ${result.error.message}")
         }
     }
 
@@ -187,7 +221,7 @@ class EventDetailViewModel(
     }
 
     private fun handleCreateRecommendationResult(result: CreateRecommendationResult) {
-        when(result) {
+        when (result) {
             is CreateRecommendationResult.Success -> {
                 _isOperationSuccessful.postValue(EventOperationSuccess.RECOMMEND)
             }

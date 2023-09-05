@@ -1,8 +1,11 @@
 package com.tfm.musiccommunityapp.ui.dialogs.community
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +13,18 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.EditText
 import android.widget.RelativeLayout
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.EditAdvertisementDialogBinding
-import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.AdvertisementDomain
+import com.tfm.musiccommunityapp.domain.model.CityDomain
 import com.tfm.musiccommunityapp.domain.model.TagDomain
 import com.tfm.musiccommunityapp.ui.utils.formatDateToString
 import com.tfm.musiccommunityapp.ui.utils.localDateOf
+import com.tfm.musiccommunityapp.ui.utils.uriToFile
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -34,6 +39,7 @@ class CreateEditAdvertisementDialog(
 
     private var _binding: EditAdvertisementDialogBinding? = null
     private val binding get() = _binding!!
+    private var selectedImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -118,7 +124,9 @@ class CreateEditAdvertisementDialog(
 
     private fun extractValues(): AdvertisementDomain {
         binding.apply {
-            val selectedUntilDate = advertisementUntilDateEditText.text.toString().trim().localDateOf()
+            val selectedUntilDate =
+                advertisementUntilDateEditText.text.toString().trim().localDateOf()
+            val currentUri = selectedImageUri
 
             return advertisement?.copy(
                 title = postTitleEditText.text.toString().trim(),
@@ -127,6 +135,7 @@ class CreateEditAdvertisementDialog(
                 phone = advertisementPhoneNumberEditText.text.toString().trim(),
                 until = selectedUntilDate,
                 tags = postTagsEditText.text.toString().trim().split(", ").map { TagDomain(it) },
+                image = if (currentUri != null) uriToFile(currentUri, requireContext()) else null
             ) ?: AdvertisementDomain(
                 id = 0L,
                 login = "",
@@ -137,7 +146,8 @@ class CreateEditAdvertisementDialog(
                 until = selectedUntilDate,
                 tags = postTagsEditText.text.toString().trim().split(", ").map { TagDomain(it) },
                 postType = getString(R.string.advertisement),
-                createdOn = LocalDateTime.now()
+                createdOn = LocalDateTime.now(),
+                image = if (currentUri != null) uriToFile(currentUri, requireContext()) else null
             )
         }
     }
@@ -156,8 +166,17 @@ class CreateEditAdvertisementDialog(
                 dismiss()
             }
 
-            advertisementUntilDateEditText.setOnClickListener { showDatePicker(advertisementUntilDateEditText) }
-            (postLocationEditText as? MaterialAutoCompleteTextView)?.setSimpleItems(cities.map { it.cityName }.toTypedArray())
+            advertisementUntilDateEditText.setOnClickListener {
+                showDatePicker(advertisementUntilDateEditText)
+            }
+            (postLocationEditText as? MaterialAutoCompleteTextView)
+                ?.setSimpleItems(cities.map { it.cityName }.toTypedArray())
+
+            selectImageButton.setOnClickListener {
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.type = "image/*"
+                selectImageForResult.launch(intent)
+            }
 
             advertisement?.let {
                 dialogTitle.text = getString(R.string.community_advertisements_edit_title)
@@ -190,4 +209,11 @@ class CreateEditAdvertisementDialog(
         datePicker.show(parentFragmentManager, "DatePicker")
     }
 
+    private val selectImageForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                selectedImageUri = result.data?.data
+                binding.imagePreview.setImageURI(selectedImageUri)
+            }
+        }
 }
