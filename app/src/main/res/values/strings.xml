@@ -57,6 +57,8 @@
     <string name="comment_dialog_title">Leave a comment or response</string>
     <string name="comment_dialog_button">Submit</string>
     <string name="not_now_button">Not now</string>
+    <string name="select_image">Select image…</string>
+    <string name="image_uploaded_successfully">Image uploaded successfully to the post!</string>
 
     <!-- PopUp option post menu -->
     <string name="popup_edit_option">Edit</string>

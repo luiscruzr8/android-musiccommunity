@@ -1,8 +1,11 @@
 package com.tfm.musiccommunityapp.ui.dialogs.community
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +13,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.EditText
 import android.widget.RelativeLayout
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -24,6 +28,7 @@ import com.tfm.musiccommunityapp.ui.utils.formatDateToString
 import com.tfm.musiccommunityapp.ui.utils.formatTimeToString
 import com.tfm.musiccommunityapp.ui.utils.localDateOf
 import com.tfm.musiccommunityapp.ui.utils.localTimeOf
+import com.tfm.musiccommunityapp.ui.utils.uriToFile
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -39,6 +44,7 @@ class CreateEditEventDialog(
 
     private var _binding: EditEventDialogBinding? = null
     private val binding get() = _binding!!
+    private var selectedImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -134,6 +140,8 @@ class CreateEditEventDialog(
     }
 
     private fun extractValues(): EventDomain {
+        val currentUri = selectedImageUri
+        
         binding.apply {
             val selectedFromDate = eventFromDateEditText.text.toString().trim().localDateOf()
             val selectedFromTime = eventFromTimeEditText.text.toString().trim().localTimeOf()
@@ -150,6 +158,7 @@ class CreateEditEventDialog(
                 from = fromDateTime,
                 to = toDateTime,
                 tags = postTagsEditText.text.toString().trim().split(", ").map { TagDomain(it) },
+                image = if (currentUri != null) uriToFile(currentUri, requireContext()) else null
             ) ?: EventDomain(
                 id = 0L,
                 login = "",
@@ -160,7 +169,8 @@ class CreateEditEventDialog(
                 to = toDateTime,
                 tags = postTagsEditText.text.toString().trim().split(", ").map { TagDomain(it) },
                 postType = getString(R.string.event),
-                createdOn = LocalDateTime.now()
+                createdOn = LocalDateTime.now(),
+                image = if (currentUri != null) uriToFile(currentUri, requireContext()) else null
             )
         }
     }
@@ -183,7 +193,14 @@ class CreateEditEventDialog(
             eventFromTimeEditText.setOnClickListener { showTimePicker(eventFromTimeEditText) }
             eventToDateEditText.setOnClickListener { showDatePicker(eventToDateEditText) }
             eventToTimeEditText.setOnClickListener { showTimePicker(eventToTimeEditText) }
-            (postLocationEditText as? MaterialAutoCompleteTextView)?.setSimpleItems(cities.map { it.cityName }.toTypedArray())
+            (postLocationEditText as? MaterialAutoCompleteTextView)?.setSimpleItems(cities.map { it.cityName }
+                .toTypedArray())
+
+            selectImageButton.setOnClickListener {
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.type = "image/*"
+                selectImageForResult.launch(intent)
+            }
 
             event?.let {
                 dialogTitle.text = getString(R.string.community_events_edit_title)
@@ -236,5 +253,13 @@ class CreateEditEventDialog(
 
         timePicker.show(parentFragmentManager, "TimePicker")
     }
+
+    private val selectImageForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                selectedImageUri = result.data?.data
+                binding.imagePreview.setImageURI(selectedImageUri)
+            }
+        }
 
 }

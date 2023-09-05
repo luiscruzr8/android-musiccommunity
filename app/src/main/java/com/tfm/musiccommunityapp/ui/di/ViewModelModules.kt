@@ -164,6 +164,7 @@ val viewModelModule = module {
             createAdvertisement = get(),
             createDiscussion = get(),
             createOpinion = get(),
+            uploadImagePost = get(),
             dispatcher = get()
         )
     }

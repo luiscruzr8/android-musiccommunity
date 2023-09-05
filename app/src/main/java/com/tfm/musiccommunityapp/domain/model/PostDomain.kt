@@ -1,5 +1,6 @@
 package com.tfm.musiccommunityapp.domain.model
 
+import java.io.File
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -31,7 +32,8 @@ data class EventDomain(
     val createdOn: LocalDateTime,
     val from: LocalDateTime,
     val to: LocalDateTime,
-    val tags: List<TagDomain>
+    val tags: List<TagDomain>,
+    val image: File?
 )
 
 data class AdvertisementDomain(
@@ -44,7 +46,8 @@ data class AdvertisementDomain(
     val phone: String,
     val createdOn: LocalDateTime,
     val until: LocalDate,
-    val tags: List<TagDomain>
+    val tags: List<TagDomain>,
+    val image: File?
 )
 
 data class DiscussionDomain(
@@ -54,7 +57,8 @@ data class DiscussionDomain(
     val login: String,
     val postType: String,
     val createdOn: LocalDateTime,
-    val tags: List<TagDomain>
+    val tags: List<TagDomain>,
+    val image: File?
 )
 
 data class OpinionDomain(

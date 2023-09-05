@@ -10,7 +10,6 @@ import com.tfm.musiccommunityapp.data.datasource.GenericPostDatasource
 import com.tfm.musiccommunityapp.data.extensions.eitherOf
 import com.tfm.musiccommunityapp.domain.model.CommentDomain
 import com.tfm.musiccommunityapp.domain.model.DomainError
-import com.tfm.musiccommunityapp.domain.model.GenericError
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -52,26 +51,16 @@ internal class GenericPostRemoteDatasourceImpl(
     override suspend fun getPostImage(postId: Long): Either<DomainError, String> =
         String.format(PostsApi.POST_IMAGE, postId).right()
 
-    override suspend fun uploadPostImage(postId: Long, image: File): Either<DomainError, Long> {
-        return try {
-            val requestFile = image.asRequestBody("image/*".toMediaTypeOrNull())
-            val imagePart = MultipartBody.Part.createFormData("img", image.name, requestFile)
-
-            eitherOf(
-                response = postsApi.uploadPostImage(postId.toString(), imagePart),
-                mapper = { it ?: -1L }
-            ) { error -> error.toErrorResponse().toDomain() }
-        } catch (e: Exception) {
-            Either.Left(
-                GenericError(
-                    "Converting image error",
-                    e.message ?: "Error trying to convert image while sending it",
-                    888,
-                    e
-                )
-            )
-        }
-    }
+    override suspend fun uploadPostImage(postId: Long, image: File): Either<DomainError, Long> =
+        eitherOf(
+            request = {
+                val requestFile = image.asRequestBody("image/jpg".toMediaTypeOrNull())
+                val imageBody = MultipartBody.Part.createFormData("img", image.name, requestFile)
+                postsApi.uploadPostImage(postId, imageBody)
+            },
+            mapper = { it ?: -1L },
+            errorMapper = { it.toErrorResponse().toDomain() }
+        )
 
     //endregion
 
