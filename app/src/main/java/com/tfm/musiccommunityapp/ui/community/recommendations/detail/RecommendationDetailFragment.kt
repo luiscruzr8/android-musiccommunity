@@ -7,7 +7,7 @@ import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.RecommendationDetailFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.GenericPostDomain
@@ -57,6 +57,8 @@ class RecommendationDetailFragment: BaseFragment(R.layout.recommendation_detail_
                 GlideApp.with(requireContext())
                     .load(imageURL)
                     .fitCenter()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
                     .into(binding.ivPostImage)
             }
         }

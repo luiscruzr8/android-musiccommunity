@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.api.model.toGenericDomain
 import com.tfm.musiccommunityapp.databinding.AdvertisementDetailFragmentBinding
@@ -69,6 +70,8 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
                 GlideApp.with(requireContext())
                     .load(imageURL)
                     .fitCenter()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
                     .into(binding.ivPostImage)
             }
         }
@@ -168,6 +171,13 @@ class AdvertisementDetailFragment: BaseFragment(R.layout.advertisement_detail_fr
 
                     AdvertisementDetailViewModel.AdvertisementOperationSuccess.COMMENT ->
                         viewModel.reloadPostComments(args.id)
+
+                    AdvertisementDetailViewModel.AdvertisementOperationSuccess.IMAGE_UPLOAD ->
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.image_uploaded_successfully),
+                            Toast.LENGTH_LONG
+                        ).show()
                 }
             }
         }

@@ -106,6 +106,7 @@ val viewModelModule = module {
             getPostComments = get(),
             postOrRespondComment = get(),
             deleteComment = get(),
+            uploadImagePost = get(),
             dispatcher = get()
         )
     }
@@ -122,6 +123,7 @@ val viewModelModule = module {
             getPostComments = get(),
             postOrRespondComment = get(),
             deleteComment = get(),
+            uploadImagePost = get(),
             dispatcher = get()
         )
     }
@@ -137,6 +139,7 @@ val viewModelModule = module {
             getPostComments = get(),
             postOrRespondComment = get(),
             deleteComment = get(),
+            uploadImagePost = get(),
             dispatcher = get()
         )
     }

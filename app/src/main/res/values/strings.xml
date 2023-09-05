@@ -59,6 +59,7 @@
     <string name="not_now_button">Not now</string>
     <string name="select_image">Select image…</string>
     <string name="image_uploaded_successfully">Image uploaded successfully to the post!</string>
+    <string name="image_updatedd_successfully">Image updated successfully to the post!</string>
 
     <!-- PopUp option post menu -->
     <string name="popup_edit_option">Edit</string>
