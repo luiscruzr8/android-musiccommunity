@@ -1,0 +1,118 @@
+\chapter{Introducción}
+\label{chap:introduccion}
+
+\lettrine{N}{este} primeiro capítulo da memoria abordaráse a introducción á problemática a tratar. Ademáis, explicarase a motivación para levar a cabo o desenvolvemento do proxecto e por último comentaránse os obxetivos que se esperan acadar.
+
+\section{Motivación}
+\label{sec:motivación}
+
+Hoxe en día, existen diferentes comunidades en gremios, así como acontece co conxuntos dos músicos: un grupo nicho dentro da sociedade que buscan desenvolverse neste ámbito pero moitas veces resulta difícil debido á ampla cantidade de información que circula polas redes sociais e distintos foros. Aínda que cada vez esta información sexa personalizada, sigue habendo datos que pode pasar desapercibidos para certos colectivos, como pode ser o caso dos músicos, que poder perder información debido ao gran volume de datos na actualidade.
+
+Tras consultar e compartir pensamentos con varios músicos e expertos no tema, analizouse que clase de información eles considerarían de relevancia e virían necesaria nunha proposta de aplicación enfocada e destinada ó colectivo de músicos, ou persoas interesadas en seguir eventos  musicais de todo tipo. Houbo concenso xeral na necesidade de dar a coñecer eventos locais ou pequenos, ou anuncios buscando xente para tocar en concertos que moitas veces pasaban desapercibidos en outras redes sociais máis grandes. Entre outras ideas, tamen mencionaban a necesidade de poder discutir en foros de discusións nos que expoñer e comentar o seu traballo, con outra xente de experiencia similar a eles, que calquera crítica constructiva lle sería de utilidade xa que existen moitos foros nos que persoas alleas ou pouco expertos no tema tenden a participar en debates sen fundamentos ou xustificacións non válidas.
+En moitos casos, os encuestados compartían unha opinón xeral de ter un lugar no que almacenar todas as súas partituras e que foran accesibles desde calquer lugar. 
+
+Polo tanto xurde así a idea desta aplicación: \textbf{\textit{Music Community}}, unha app web que propón unha solución a dita problemática \cite{TFGLuis}. Esta aplicación  web foi obxeto do desenvolvemento do meu propio traballo de fin de grao, polo que, para o deselvovemento deste proxecto fin de máster, levarase a cabo a transformación de dito proxecto, migrandoo dunha plataforma web, a un entorno móbil.  Partirase así dun sistema xa establecido, que consta dun servicio REST e unha aplicaicón web, que non se verán afectados polo desenvolvemento deste proxecto (xa que se espera siga funcionando a pesar dos cambios) salvo unha modificación que se fará para os dispositivos móbiles: as notificacións push. Decidiuse actualizalo proxecto xa que as tendencias cambian no tempo, e debemos adaptarnos as novas tecnoloxías. Ademáis, na actualidade existen moitos proxectos reais de actualización do legacy para modernizalos e darlle sempre un cambio de aires. Isto representa un novo desafío a nivel académico e persoal, no que asentar os coñecementos obtidos no mestrado, realizando a transformación dunha aplicación legacy nun proxecto actualizado.
+
+\section{Estado do arte}
+\label{sec:estado-arte}
+
+No meu proxecto de grao, fixérase unha comparativa con diferentes aplicacións no ámbito web. Para este proxecto avaliaránse, por consecuente, aplicacións no ámbito móbil que compartan funcionalidades similares ás des critas previamente para este proxecto. Se ben, moitas das apps citadas neste apartado, cumpren a funcionalidade recollida no proxecto, moitas delas son de pago ou tipo \textit{freemium} , para as que fai falta realizar algún tipo de pago para usalas ao completo. Entre estas podemos destacar:
+
+\begin{itemize}
+	\item \textbf{\textit{MuseScore: partitura}} 
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.3]{06_imagenes/intro/musescore-logo.jpg}
+		\caption{Logo 'MuseScore: partitura' (\url{https://play.google.com/store/apps/details?id=com.musescore.playerlite&hl=es&pli=1})}
+	\end{figure}
+	
+	Esta é unha app Android que permite a xestión, visualización e reproducción de partituras. Este exemplo non profundiza no apartado social da app, ademáis de ser unha app  \textit{freemium}, moitos usuarios gratuitos queixanse bastante do funcionamento xeral da versión gratuita.
+	A principal ventaxa desta app é o seu catálogo e a variedade de partituras, e a principal desventaxa é o baixo rendemento da súa versión gratuita, empeorando a experiencia do usuarios básicos. 
+	
+\end{itemize}
+
+\begin{itemize}
+	\item \textbf{\textit{Musicnotes Sheet Music Player}}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.3]{06_imagenes/intro/music-notes.png}
+		\caption{Logo 'MuseScore: partitura' (\url{https://play.google.com/store/apps/details?id=com.musicnotes.xamarin.android.smv&hl=es_419&gl=US})}
+	\end{figure}
+	
+	Esta app Android permite a xestión e a reproducción dun repositorio de partituras. Ademáis permite a compra de partituras, enfocándose máis así no entorno educativo, máis que no social. Unha das súas mellores funcionalidades como é un modo interactivo cas partituras é unha funcionalidade de pago. A principal ventaxa é que aporta moitas funcionalidades para as partituras, aínda que abandone prácticamente o elemento social.
+	
+\end{itemize}
+
+Por outro lado, temos aplicacións que cumplen no ámbito social, pero que chegan a ser de temática tan xeral que non cubren as necesidades que neste proxecto se van levar a cabo.
+
+\begin{itemize}
+	\item \textbf{\textit{Bandsintown Concerts}} 
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.3]{06_imagenes/intro/BandsintownConcerts.png}
+		\caption{Logo 'Bandsintown Concerts' (\url{https://play.google.com/store/apps/details?id=com.bandsintown&hl=es&gl=US})}
+	\end{figure}
+	
+	Trátase da mellor opción en canto ámbito social e músicos se refire. Permite estar atento e ao día do que pasa cerca do usuario, xa sexan concertos, festivais, etc. Aínda que sigue fallando no ámbito do repositorio de partituras.
+	
+\end{itemize}
+
+\begin{itemize}
+	\item \textbf{\textit{Facebook}} 
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.05]{06_imagenes/intro/Facebook-logo.png}
+		\caption{Logo 'Facebook' (\url{https://play.google.com/store/apps/details?id=com.facebook.katana&hl=es&gl=US})}
+	\end{figure}
+	
+	A opción máis coñecida, que é capaz de cumplir con todos os puntos explicados anteriormente. Ademáis permite iniciar  debates nas publicacións, compartir eventos de interés, publicar anuncios\dots 
+	Independientemente, esta app ten moitísimas funcionalidades extra que ensombrecen a experencia de usuario para determinados colectivos.
+	
+\end{itemize}
+
+\begin{itemize}	
+	\item \textbf{\textit{X (antigamente coñecida como Twitter)}} 
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.3]{06_imagenes/intro/x-twitter.png}
+		\caption{Logo 'X (Twitter)' (\url{https://play.google.com/store/apps/details?id=com.twitter.android&hl=es&gl=US})}
+	\end{figure}
+	
+	Outra opción bastante coñecida  polos usuarios á hora de manter fíos de discusión e compartir novedades de forma rápida, moi similar ao boca a boca. En calquer caso, esta app tamén empeorou a súa experiencia de usuario coa reciente integración de publicidade e cambio de dirección.
+	
+\end{itemize}
+
+Con todo, dentro das alternativas mencionadas non se atoparon exemplos que cubran as funcionalidades descritas previamente: unha app móbil que lle permita aos músicos unha forma de darse a conocer e recibir retroalimentación das súas obras e incluso que lles permita estar enterados de eventos, anuncios ou discusións de actualidade. Merece a pena destacar, que desde a realización do TFG \cite{TFGLuis} non houbo grandes avances en aplicacións similares, facendo máis énfasis na necesidade dunha aplicación así.
+
+\section{Obxetivos}
+\label{sec:objetivos}
+Una de las secciones más habituales dentro de la memoria es la correspondiente a los objetivos del proyecto, los cuales se suelen separar en objetivos generales y objetivos concretos.  
+
+\subsection{Obxetivos principais}
+\label{subsec:obxetivos-principais}
+\begin{enumerate}[label={\textbf{Objetivo \arabic*:}},leftmargin=2.5cm,labelindent=\parindent]
+	\item Levar a cabo un análise detallado para a adaptación do API existente para plataforma web para poder ser utilizada cunha plataforma móbil baseada en Android. En consecuencia de dito análise, levaranse a cabo as modificacións oportunas no código e decidirase sobre a necesidade da inclusión de novas funcionalidades
+	\item Emprego e manexo de novas tecnoloxías móbiles e ferramentas de desenvolvemento para a creación dun \textit{frontend} móbil amigable para o usuario, para a adaptación do \textit{backend} e para o almacenamento apropiado dos datos do sistema.
+	\item Manter e actualizar un proxecto \textit{legacy} coa finalidade de darlle máis tempo de vida útil, adaptándoo a novos casos de uso.
+\end{enumerate}
+
+\subsection{Obxetivos concretos}
+\label{subsec:obxetivos-concretos}
+\begin{enumerate}[label={\textbf{Objetivo Concreto \arabic*:}},leftmargin=4.5cm,labelindent=\parindent]
+	\item Cumprir coas funcionalidades actuais do sistema para a plataforma web, de forma que dita plataforma siga funcionando independientemente do desenvolvemento desta nova app móbill
+	\item Engadir novas funcionalidades máis adaptadas ao entorno móbil, como o envío envío de notificacións \textit{push}.
+\end{enumerate}
+
+
+\section{Estructura da memoria}
+Procederemos así a explicar brevemente o contido do que constará este documento, a grandes rasgos de cada apartado a tratar:
+
+\begin{enumerate}[label={Capítulo \arabic*},leftmargin=2.5cm]
+	\item O capítulo introductorio, que propón unha contextualización do problema que busca resolver a app e actualización de un proxecto legacy.
+	\item Este apartado queda pendiente para cando acabe a memoria \ldots
+\end{enumerate}

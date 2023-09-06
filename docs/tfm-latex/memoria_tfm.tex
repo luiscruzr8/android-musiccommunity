@@ -1,0 +1,130 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preámbulo                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,a4paper,titlepage,twoside, openright]{report}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SELECCIÓN DE IDIOMA %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Descomenta la línea correspondiente al idioma de la memoria
+%\def\idioma{esp}  % Castellano (Español)
+\def\idioma{gal} % Galego
+%\def\idioma{eng} % English
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DATOS DEL PROYECTO A CONFIGURAR %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\titulo{Music Community - Aplicación móbil adicada á xestión de partituras e comunicación de eventos musicais}      % cambiar aquí el título completo
+\def\alumno{Luis Fernando Cruz Ramos}                  % nombre del alumno     
+\def\directorA{Tiago Manuel Fernandez Caramés}             % nombre del director
+%\def\directorB{Nombre del segundo director}    % descomentar aquí está línea y en la portada
+                                                % para incluir uno más.
+                                                % De haber más añadirlos cambiando la letra por C, D, ...
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CARGA DEL FICHERO DE ESTILO %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{estilo_tfm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PAQUETES QUE PUEDEN SER DE UTILIDAD %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \usepackage{alltt}       % para campos alltt, similar a verbatim pero que respecta comandos
+% \usepackage{booktabs}     % permite mejorar el aspecto de las tablas con líneas de diferente grosor para el cierre
+ \usepackage{enumitem}     % permite personalizar los entornos de lista
+% \usepackage{eurofont}    % proporciona el comando \euro
+% \usepackage{float}       % permite más control de objetos flotantes (tablas y figuras)
+% \usepackage{hhline}      % permite personalizar las liñas horizontales en arrays y tablas
+  \usepackage{longtable}   % permite construir tablas que ocupan más de una página
+% \usepackage{lscape}      % permite colocar partes del documento en orientación apaisada
+% \usepackage{moreverb}    % permite personalizar o entorno verbatim
+% \usepackage{multirow}    % permite crear celdas que ocupan varias filas en una tabla
+% \usepackage{pdfpages}    % permite insertar ficheros PDF
+% \usepackage{rotating}    % permite diferentes tipos de rotaciones para los flotantes
+% \usepackage{subcaption}  % permite a inclusión de varias subfiguras en una figura
+% \usepackage{tabu}        % permite tablas flexibles
+% \usepackage{tabularx}    % permite tablas con columnas de anchura determinada
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CUERPO PRINCIPAL DEL DOCUMENTO                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Preliminares do documento            %
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \include{01_preambulo/contenido_obligatorio/00_portada}
+ \include{01_preambulo/contenido_opcional/01_Dedicatoria} % de no haberla comentar esta línea
+ \include{01_preambulo/contenido_opcional/02_Acknowledgement} % de no haberlos comentar esta línea
+ \include{01_preambulo/contenido_obligatorio/01_Resumen}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Índices y numeración en romano     %
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \pagenumbering{Roman}
+ \setcounter{page}{1}
+ \bstctlcite{IEEEexample:BSTcontrol}
+
+
+ \tableofcontents
+ \listoffigures
+ \listoftables
+ \clearpage
+ \paginablanca
+ 
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Capítulos   de la memoria           %
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ % Numeración arábiga
+ \pagenumbering{arabic}
+ \setcounter{page}{1}
+
+ \include{02_contenido_principal/01_chap_introducion}
+ \include{02_contenido_principal/02_chap_ferramentas}
+ \include{02_contenido_principal/02_chap_demo}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INTRODUCIR EL RESTO DEL CONTENIDO AQUÍ %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\include{02_contenido_principal/...}
+ \include{02_contenido_principal/03_chap_conclusions}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Anejos                               %
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \appendix
+ \appendixpage
+ \include{03_anexos/adicional}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   INTRODUCIR EL RESTO DE ANEJOS AQUÍ   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\include{04_anexos/...}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acrónimos y Glosarios y bibliografía %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\printglossary[type=\acronymtype,title=\acronymHeader]
+\printglossary[title=\glossaryHeader]
+\input{04_terminos/01_acronimos}
+\input{04_terminos/02_glosario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliografía                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \bibliographystyle{IEEEtranN}
+ \bibliography{\bibconfig,05_bibliografia/bibliografia}
+ \clearpage
+ 
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
