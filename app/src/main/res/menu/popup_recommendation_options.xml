@@ -11,5 +11,5 @@
 
     <item
         android:id="@+id/recommendation_rate_option"
-        android:title="@string/popup_recommend_option"/>
+        android:title="@string/popup_rate_option"/>
 </menu>

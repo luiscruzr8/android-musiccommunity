@@ -53,7 +53,6 @@ class RecommendationDetailViewModel(
         viewModelScope.launch(dispatcher) {
             _showRecommendationLoader.postValue(true)
             handleGetRecommendationByIdResult(getRecommendationById(recommendationId))
-            handleGetPostImageResult(getPostImageByPostId(recommendationId))
             handleGetCurrentUserResult(getCurrentUser())
         }
     }
@@ -64,10 +63,13 @@ class RecommendationDetailViewModel(
         }
     }
 
-    private fun handleGetRecommendationByIdResult(result: GetRecommendationByIdResult) {
+    private suspend fun handleGetRecommendationByIdResult(result: GetRecommendationByIdResult) {
         when (result) {
             is GetRecommendationByIdResult.Success -> {
                 _recommendation.postValue(result.recommendation)
+                if (result.recommendation?.postId != null) {
+                    handleGetPostImageResult(getPostImageByPostId(result.recommendation.postId))
+                }
             }
 
             is GetRecommendationByIdResult.NetworkError -> {
