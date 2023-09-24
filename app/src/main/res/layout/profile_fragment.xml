@@ -7,6 +7,20 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/followUnfollowButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/profile_screen_follow_button"
+        app:icon="@drawable/ic_follow"
+        app:iconGravity="textStart"
+        app:layout_constraintEnd_toStartOf="@+id/editProfileButton"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/profile_screen_follow_button" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/editProfileButton"
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="0dp"
@@ -14,10 +28,11 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
         android:text="@string/profile_screen_edit_button"
+        android:visibility="gone"
         app:icon="@drawable/ic_edit"
         app:iconGravity="textStart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/tvTitle"
@@ -49,44 +64,61 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/profile_screen_username_label"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textAppearance="?attr/textAppearanceTitleMedium"
         android:textColor="@color/onSurfaceColor"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tvUserChip"
+        app:layout_constraintEnd_toStartOf="@+id/tvUserChip"
         app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+        app:layout_constraintTop_toTopOf="@+id/tvUserChip" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/tvUserChip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:backgroundTint="@color/userColor"
+        android:textAlignment="center"
+        android:textColor="@color/onPrimaryColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        tools:text="@string/chip_user" />
 
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:textAppearance="?attr/textAppearanceBodyMedium"
         android:textColor="@color/onSurfaceVariantColor"
-        app:layout_constraintEnd_toEndOf="@+id/tvUsername"
+        app:layout_constraintEnd_toEndOf="@+id/tvUserChip"
         app:layout_constraintStart_toStartOf="@+id/tvUsername"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsername"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserChip"
         tools:text="thisistheemail@email.com" />
 
     <TextView
         android:id="@+id/tvPhoneNumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:textAppearance="?attr/textAppearanceBodyMedium"
         android:textColor="@color/onSurfaceVariantColor"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/tvEmail"
         app:layout_constraintStart_toStartOf="@+id/tvEmail"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail"
-        tools:text="999666333" />
+        tools:text="999666333"
+        tools:visibility="visible"/>
 
     <TextView
         android:id="@+id/tvBioLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/profile_screen_bio_label"
         android:textAppearance="?attr/textAppearanceBodyMedium"
         android:textColor="@color/onSurfaceVariantColor"
@@ -130,51 +162,110 @@
         app:layout_constraintTop_toBottomOf="@+id/tvInterestsLabel" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/followersButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/profile_screen_followers_button"
-        android:textColor="@color/primaryColor"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/tvInterestsLabel"
-        app:layout_constraintTop_toBottomOf="@+id/profileTagsLayout"
-        style="@style/Widget.Material3.Button.TonalButton" />
-
-    <com.google.android.material.button.MaterialButton
         android:id="@+id/followingButton"
+        style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/profile_screen_following_button"
+        android:text="@string/profile_screen_following"
         android:textColor="@color/primaryColor"
-        app:layout_constraintEnd_toEndOf="@+id/tvInterestsLabel"
-        app:layout_constraintStart_toEndOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/followersButton"
-        style="@style/Widget.Material3.Button.TonalButton" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.50121653" />
+        android:backgroundTint="@color/advertisementColorTonal"
+        android:visibility="gone"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        app:icon="@drawable/ic_arrow_forward"
+        app:iconTint="@color/primaryColor"
+        app:iconGravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileTagsLayout"
+        tools:visibility="visible" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/signoutButton"
+        android:id="@+id/followersButton"
+        style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="@string/profile_screen_followers"
+        android:textColor="@color/primaryColor"
+        android:layout_margin="12dp"
+        app:icon="@drawable/ic_arrow_forward"
+        app:iconTint="@color/primaryColor"
+        app:iconGravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/followingButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/publicScoresButton"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_screen_public_scores_button"
+        android:textColor="@color/primaryColor"
+        android:backgroundTint="@color/scoreColorTonal"
+        android:visibility="gone"
+        android:layout_margin="12dp"
+        app:icon="@drawable/ic_arrow_forward"
+        app:iconTint="@color/primaryColor"
+        app:iconGravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/followersButton"
+        tools:visibility="visible" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/userPostsButton"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_screen_posts_button"
+        android:textColor="@color/primaryColor"
+        android:backgroundTint="@color/userColorTonal"
+        android:layout_margin="12dp"
+        app:icon="@drawable/ic_arrow_forward"
+        app:iconTint="@color/primaryColor"
+        app:iconGravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/publicScoresButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/userRecommendationsButton"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_screen_recommendations_button"
+        android:textColor="@color/primaryColor"
+        android:backgroundTint="@color/recommendationColorTonal"
+        android:layout_margin="12dp"
+        app:icon="@drawable/ic_arrow_forward"
+        app:iconTint="@color/primaryColor"
+        app:iconGravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userPostsButton" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signOutButton"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:layout_marginTop="64dp"
+        android:backgroundTint="@color/errorContainerColor"
         android:text="@string/profile_screen_logout_button"
         android:textColor="@color/onErrorContainerColor"
-        android:backgroundTint="@color/errorContainerColor"
+        android:visibility="gone"
         app:icon="@drawable/ic_logout"
-        app:iconTint="@color/onErrorContainerColor"
         app:iconGravity="textStart"
-        app:layout_constraintEnd_toEndOf="@+id/followingButton"
-        app:layout_constraintStart_toStartOf="@+id/followersButton"
-        app:layout_constraintTop_toBottomOf="@+id/followersButton"
-        style="@style/Widget.Material3.Button.OutlinedButton.Icon" />
+        app:iconTint="@color/onErrorContainerColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userRecommendationsButton"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

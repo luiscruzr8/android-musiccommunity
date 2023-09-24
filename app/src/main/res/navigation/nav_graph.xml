@@ -38,9 +38,9 @@
         android:label="LoginScreenFragment">
 
         <action
-            android:id="@+id/action_loginFragment_to_profileFragment"
-            app:destination="@id/profileFragment"
-            app:popUpTo="@id/loginFragment"
+            android:id="@+id/action_loginFragment_to_homeScreenFragment"
+            app:destination="@id/homeScreenFragment"
+            app:popUpTo="@id/homeScreenFragment"
             app:popUpToInclusive="true" />
     </fragment>
 
@@ -51,6 +51,7 @@
 
         <argument
             android:name="username"
+            android:defaultValue="@null"
             app:nullable="true"
             app:argType="string" />
 
@@ -70,6 +71,40 @@
                 app:argType="string" />
 
         </action>
+
+        <action
+            android:id="@+id/action_profileFragment_to_scoresFragment"
+            app:destination="@id/scoresFragment">
+
+            <argument
+                android:name="login"
+                app:nullable="false"
+                app:argType="string" />
+
+        </action>
+
+        <action
+            android:id="@+id/action_profileFragment_to_userPostsFragment"
+            app:destination="@id/userPostsFragment">
+
+            <argument
+                android:name="login"
+                app:nullable="false"
+                app:argType="string" />
+
+        </action>
+
+        <action
+            android:id="@+id/action_profileFragment_to_userRecommendationsFragment"
+            app:destination="@id/userRecommendationsFragment">
+
+            <argument
+                android:name="login"
+                app:nullable="false"
+                app:argType="string" />
+
+        </action>
+
     </fragment>
 
     <fragment
@@ -98,6 +133,473 @@
                 app:argType="string" />
 
         </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.tfm.musiccommunityapp.ui.community.CommunityFragment"
+        android:label="CommunityFragment">
+
+        <action
+            android:id="@+id/action_communityFragment_to_profileFragment"
+            app:destination="@id/profileFragment">
+
+            <argument
+                android:name="username"
+                app:nullable="false"
+                app:argType="string" />
+        </action>
+
+        <action
+            android:id="@+id/action_communityFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_communityFragment_to_advertisementDetailFragment"
+            app:destination="@id/advertisementDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_communityFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_communityFragment_to_opinionDetailFragment"
+            app:destination="@id/opinionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_communityFragment_to_recommendationDetailFragment"
+            app:destination="@id/recommendationDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.tfm.musiccommunityapp.ui.community.users.UsersFragment"
+        android:label="UsersFragment" />
+
+    <fragment
+        android:id="@+id/eventDetailFragment"
+        android:name="com.tfm.musiccommunityapp.ui.community.events.detail.EventDetailFragment"
+        android:label="EventDetailFragment">
+
+        <argument
+            android:name="id"
+            app:nullable="false"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/advertisementDetailFragment"
+        android:name="com.tfm.musiccommunityapp.ui.community.advertisements.detail.AdvertisementDetailFragment"
+        android:label="AdvertisementDetailFragment">
+
+        <argument
+            android:name="id"
+            app:nullable="false"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/discussionDetailFragment"
+        android:name="com.tfm.musiccommunityapp.ui.community.discussions.detail.DiscussionDetailFragment"
+        android:label="DiscussionDetailFragment">
+
+        <argument
+            android:name="id"
+            app:nullable="false"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/opinionDetailFragment"
+        android:name="com.tfm.musiccommunityapp.ui.community.opinions.detail.OpinionDetailFragment"
+        android:label="OpinionDetailFragment">
+
+        <argument
+            android:name="id"
+            app:nullable="false"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recommendationDetailFragment"
+        android:name="com.tfm.musiccommunityapp.ui.community.recommendations.detail.RecommendationDetailFragment"
+        android:label="RecommendationDetailFragment">
+
+        <argument
+            android:name="id"
+            app:nullable="false"
+            app:argType="long" />
+
+        <action
+            android:id="@+id/action_recommendationDetailFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_recommendationDetailFragment_to_advertisementDetailFragment"
+            app:destination="@id/advertisementDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_recommendationDetailFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_recommendationDetailFragment_to_opinionDetailFragment"
+            app:destination="@id/opinionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/scoresFragment"
+        android:name="com.tfm.musiccommunityapp.ui.scores.ScoresFragment"
+        android:label="ScoresFragment">
+
+        <argument
+            android:name="login"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_scoresFragment_to_scoreDetailFragment"
+            app:destination="@id/scoreDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/scoreDetailFragment"
+        android:name="com.tfm.musiccommunityapp.ui.scores.detail.ScoreDetailFragment"
+        android:label="ScoreDetailFragment">
+
+        <argument
+            android:name="id"
+            app:nullable="false"
+            app:argType="long" />
+
+        <action
+            android:id="@+id/action_scoreDetailFragment_to_opinionDetailFragment"
+            app:destination="@id/opinionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.tfm.musiccommunityapp.ui.search.SearchFragment"
+        android:label="SearchFragment">
+
+        <action
+            android:id="@+id/action_searchFragment_to_searchByCityFragment"
+            app:destination="@id/searchByCityFragment"/>
+
+        <action
+            android:id="@+id/action_searchFragment_to_searchByCoordinatesFragment"
+            app:destination="@id/searchByCoordinatesFragment"/>
+
+        <action
+            android:id="@+id/action_searchFragment_to_searchPostsByTagFragment"
+            app:destination="@id/searchPostsByTagFragment"/>
+
+        <action
+            android:id="@+id/action_searchFragment_to_searchUsersByInterestFragment"
+            app:destination="@id/searchUsersByInterestFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/userPostsFragment"
+        android:name="com.tfm.musiccommunityapp.ui.profile.posts.UserPostsFragment"
+        android:label="UserPostsFragment">
+
+        <argument
+            android:name="login"
+            app:nullable="false"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_userPostsFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_userPostsFragment_to_advertisementDetailFragment"
+            app:destination="@id/advertisementDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_userPostsFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_userPostsFragment_to_opinionDetailFragment"
+            app:destination="@id/opinionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/userRecommendationsFragment"
+        android:name="com.tfm.musiccommunityapp.ui.profile.recommendations.UserRecommendationsFragment"
+        android:label="UserRecommendationsFragment">
+
+        <argument
+            android:name="login"
+            app:nullable="false"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_userRecommendationsFragment_to_recommendationDetailFragment"
+            app:destination="@id/recommendationDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchByCityFragment"
+        android:name="com.tfm.musiccommunityapp.ui.search.city.SearchByCityFragment"
+        android:label="SearchByCityFragment">
+
+        <action
+            android:id="@+id/action_searchByCityFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchByCityFragment_to_advertisementDetailFragment"
+            app:destination="@id/advertisementDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchByCityFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchByCityFragment_to_opinionDetailFragment"
+            app:destination="@id/opinionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchByCoordinatesFragment"
+        android:name="com.tfm.musiccommunityapp.ui.search.city.SearchByCoordinatesFragment"
+        android:label="SearchByCoordinatesFragment">
+
+        <action
+            android:id="@+id/action_searchByCoordinatesFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchByCoordinatesFragment_to_advertisementDetailFragment"
+            app:destination="@id/advertisementDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchByCoordinatesFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchByCoordinatesFragment_to_opinionDetailFragment"
+            app:destination="@id/opinionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchPostsByTagFragment"
+        android:name="com.tfm.musiccommunityapp.ui.search.tag.SearchPostsByTagFragment"
+        android:label="SearchPostsByTagFragment">
+
+        <action
+            android:id="@+id/action_searchPostsByTagFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchPostsByTagFragment_to_advertisementDetailFragment"
+            app:destination="@id/advertisementDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchPostsByTagFragment_to_discussionDetailFragment"
+            app:destination="@id/discussionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+        <action
+            android:id="@+id/action_searchPostsByTagFragment_to_opinionDetailFragment"
+            app:destination="@id/opinionDetailFragment">
+
+            <argument
+                android:name="id"
+                app:nullable="false"
+                app:argType="long" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchUsersByInterestFragment"
+        android:name="com.tfm.musiccommunityapp.ui.search.tag.SearchUsersByInterestFragment"
+        android:label="SearchUsersByInterestFragment">
+
+        <action
+            android:id="@+id/action_searchUsersByInterestFragment_to_profileFragment"
+            app:destination="@id/profileFragment">
+
+            <argument
+                android:name="username"
+                app:nullable="false"
+                app:argType="string" />
+        </action>
+
     </fragment>
 
     <!--Global actions-->

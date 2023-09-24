@@ -2,17 +2,20 @@ package com.tfm.musiccommunityapp.ui.profile
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.ProfileFragmentBinding
 import com.tfm.musiccommunityapp.domain.model.UserDomain
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
+import com.tfm.musiccommunityapp.ui.base.MainActivity
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
 import com.tfm.musiccommunityapp.ui.dialogs.profile.EditProfileDialog
-import com.tfm.musiccommunityapp.utils.getRandomColor
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.utils.getRandomColor
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
@@ -35,23 +38,9 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
         observeFollowing()
         observeProfileError()
         observeSignOutResult()
-
-        displayMyProfileButtons(userProfileLogin.isNullOrEmpty())
-
-        binding.signoutButton.setOnClickListener {
-            viewModel.signOut()
-        }
-
-    }
-
-
-    private fun displayMyProfileButtons(displayButtons: Boolean) {
-        binding.apply {
-            tvPhoneNumber.isVisible = displayButtons
-            signoutButton.isVisible = displayButtons
-            editProfileButton.isVisible = displayButtons
-            followingButton.isVisible = displayButtons
-        }
+        observeIsMyProfile()
+        observeOperationSuccessful()
+        observeIsUserFollower()
     }
 
     private fun observeLoader() {
@@ -69,14 +58,14 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                     null,
                     error,
                     getString(R.string.ok),
-                    null
-                )
+                ) { findNavController().popBackStack() }
             }
         }
     }
 
     private fun observeSignOutResult() {
         viewModel.getSignOutSuccess().observe(viewLifecycleOwner) {
+            (activity as MainActivity).setUpNotLoggedInBottomNavigation()
             val action = R.id.action_global_homeScreenFragmentAfterSignOut
             navigateSafe(action)
         }
@@ -101,7 +90,10 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                         String.format(getString(R.string.profile_screen_username_label), it.login)
                     tvEmail.text = it.email
                     tvPhoneNumber.text = it.phone
-
+                    tvUserChip.text = String.format(
+                        getString(R.string.chip_user),
+                        it.id
+                    )
                     ivProfileImage.setImageDrawable(
                         AvatarGenerator.AvatarBuilder(requireContext().applicationContext)
                             .setLabel(it.login)
@@ -132,6 +124,18 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                             profileTagsLayout.visibility = View.VISIBLE
                             profileTagsLayout.setTagList(interests.map { it2 -> it2.tagName })
                         }
+                    }
+
+                    userPostsButton.setOnClickListener { _ ->
+                        val action = ProfileFragmentDirections
+                            .actionProfileFragmentToUserPostsFragment(it.login)
+                        navigateSafe(action)
+                    }
+
+                    userRecommendationsButton.setOnClickListener { _ ->
+                        val action = ProfileFragmentDirections
+                            .actionProfileFragmentToUserRecommendationsFragment(it.login)
+                        navigateSafe(action)
                     }
                 }
             }
@@ -199,6 +203,73 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
 
     private fun saveEditProfile(userDomain: UserDomain) {
         viewModel.sendUpdateProfile(userDomain)
+    }
+
+    private fun observeIsMyProfile() {
+        viewModel.isMyProfileLiveData().observe(viewLifecycleOwner) { isMyProfile ->
+
+            binding.apply {
+                tvPhoneNumber.isVisible = isMyProfile
+                signOutButton.isVisible = isMyProfile
+                followingButton.isVisible = isMyProfile
+                editProfileButton.isVisible = isMyProfile
+                followUnfollowButton.isVisible = !isMyProfile
+                publicScoresButton.isVisible = !isMyProfile
+
+                if (isMyProfile) {
+                    signOutButton.setOnClickListener { viewModel.signOut() }
+                } else {
+                    publicScoresButton.setOnClickListener {
+                        viewModel.getUserInfo().value?.login?.let { loginUsername ->
+                            val action = ProfileFragmentDirections
+                                .actionProfileFragmentToScoresFragment(loginUsername)
+                            navigateSafe(action)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observeIsUserFollower() {
+        viewModel.isUserFollowerLiveData().observe(viewLifecycleOwner) {isFollower ->
+            binding.apply {
+                followUnfollowButton.text = getString(
+                    if (isFollower) R.string.profile_screen_unfollow_button else R.string.profile_screen_follow_button
+                )
+
+                followUnfollowButton.icon = getDrawable(
+                    requireContext(),
+                    if (isFollower) R.drawable.ic_unfollow else R.drawable.ic_follow
+                )
+
+                followUnfollowButton.setOnClickListener {
+                    args.username?.let { username ->
+                        if (isFollower) {
+                            viewModel.sendUnfollowUser(username)
+                        } else {
+                            viewModel.sendFollowUser(username)
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    private fun observeOperationSuccessful() {
+        viewModel.isOperationSuccessfulLiveData().observe(viewLifecycleOwner) {
+            it?.let { type ->
+                when(type) {
+                    ProfileViewModel.UserOperationSuccess.FOLLOW -> {
+                        viewModel.setUp(args.username)
+                    }
+                    ProfileViewModel.UserOperationSuccess.UNFOLLOW -> {
+                        viewModel.setUp(args.username)
+                    }
+                }
+            }
+        }
     }
 
 }

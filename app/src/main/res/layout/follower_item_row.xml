@@ -20,19 +20,33 @@
             app:layout_constraintVertical_bias="0.5"
             tools:srcCompat="@tools:sample/avatars" />
 
+        <com.google.android.material.chip.Chip
+            android:id="@+id/tvUserChip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/userColor"
+            android:textAlignment="center"
+            android:textColor="@color/onPrimaryColor"
+            app:layout_constraintStart_toEndOf="@+id/ivFollowerImage"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/chip_user" />
+
+
         <TextView
             android:id="@+id/tvFollowerUsername"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
             android:textAppearance="?attr/textAppearanceTitleMedium"
             android:textColor="@color/onSurfaceColor"
+            app:layout_constraintBottom_toBottomOf="@+id/tvUserChip"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ivFollowerImage"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvUserChip"
+            app:layout_constraintTop_toTopOf="@+id/tvUserChip"
             tools:text="@string/username_tools" />
 
         <TextView
@@ -44,8 +58,8 @@
             android:textAppearance="?attr/textAppearanceBodySmall"
             android:textColor="@color/onSurfaceVariantColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tvFollowerUsername"
-            app:layout_constraintTop_toBottomOf="@+id/tvFollowerUsername" />
+            app:layout_constraintStart_toStartOf="@+id/tvUserChip"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserChip" />
 
         <com.tfm.musiccommunityapp.ui.custom.HorizontalTagsLayout
             android:id="@+id/followerTagsLayout"
@@ -55,7 +69,7 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="@+id/tvFollowerInterestsLabel"
-            app:layout_constraintStart_toStartOf="@+id/tvFollowerUsername"
+            app:layout_constraintStart_toStartOf="@+id/tvFollowerInterestsLabel"
             app:layout_constraintTop_toBottomOf="@+id/tvFollowerInterestsLabel" />
 
         <View

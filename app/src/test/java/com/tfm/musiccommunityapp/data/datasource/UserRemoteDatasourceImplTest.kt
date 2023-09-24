@@ -1,13 +1,13 @@
 package com.tfm.musiccommunityapp.data.datasource
 
-import com.tfm.musiccommunityapp.data.api.UsersApi
-import com.tfm.musiccommunityapp.data.api.extensions.DEFAULT_ERROR_400_MESSAGE
-import com.tfm.musiccommunityapp.data.api.extensions.DEFAULT_ERROR_404_MESSAGE
-import com.tfm.musiccommunityapp.data.api.extensions.DEFAULT_ERROR_500_MESSAGE
-import com.tfm.musiccommunityapp.data.api.model.ErrorResponse
-import com.tfm.musiccommunityapp.data.api.model.FollowerResponse
-import com.tfm.musiccommunityapp.data.api.model.UserResponse
-import com.tfm.musiccommunityapp.data.api.model.toDomain
+import com.tfm.musiccommunityapp.api.UsersApi
+import com.tfm.musiccommunityapp.api.extensions.DEFAULT_ERROR_400_MESSAGE
+import com.tfm.musiccommunityapp.api.extensions.DEFAULT_ERROR_404_MESSAGE
+import com.tfm.musiccommunityapp.api.extensions.DEFAULT_ERROR_500_MESSAGE
+import com.tfm.musiccommunityapp.api.model.ErrorResponse
+import com.tfm.musiccommunityapp.api.model.FollowerResponse
+import com.tfm.musiccommunityapp.api.model.UserResponse
+import com.tfm.musiccommunityapp.api.model.toDomain
 import com.tfm.musiccommunityapp.data.datasource.remote.UserRemoteDatasourceImpl
 import com.tfm.musiccommunityapp.data.model.FollowerResponseBuilder
 import com.tfm.musiccommunityapp.data.model.UserResponseBuilder
@@ -40,29 +40,35 @@ class UserRemoteDatasourceImplTest {
     @Test
     fun `test that getAllUsers returns a list of users`() {
         val usersResponse = listOf(
-            UserResponseBuilder.default,
-            UserResponseBuilder.default.copy(id = 2, login = "User 2", email = "user2@mail.com", phone = "987654321", bio = "Bio user 2"),
-            UserResponseBuilder.default.copy(id = 3, login = "User 3", email = "user3@mail.com", phone = "987123465", bio = "Bio user 3")
+            FollowerResponseBuilder.default,
+            FollowerResponseBuilder.default.copy(id = 2, login = "User 2", bio = "Bio user 2"),
+            FollowerResponseBuilder.default.copy(id = 3, login = "User 3", bio = "Bio user 3")
         )
         val usersDomain = usersResponse.map { it.toDomain() }
-        coEvery { userApi.getAllUsers() } returns Response.success(usersResponse)
+        coEvery { userApi.getAllUsers(null) } returns Response.success(usersResponse)
 
-        val result = runBlocking { sut.getAllUsers() }
+        val result = runBlocking { sut.getAllUsers(null) }
 
-        coVerify { userApi.getAllUsers() }
+        coVerify { userApi.getAllUsers(null) }
         assertTrue(result.isRight())
         assertEquals(usersDomain, result.getOrNull())
     }
 
     @Test
     fun `test that getAllUsers returns an error`() {
-        val errorResponse = Response.error<List<UserResponse>>(HttpURLConnection.HTTP_INTERNAL_ERROR, internalErrorString.toResponseBody())
-        val expected = ErrorResponse(code = HttpURLConnection.HTTP_INTERNAL_ERROR, message = DEFAULT_ERROR_500_MESSAGE).toDomain()
-        coEvery { userApi.getAllUsers() } returns errorResponse
+        val errorResponse = Response.error<List<FollowerResponse>>(
+            HttpURLConnection.HTTP_INTERNAL_ERROR,
+            internalErrorString.toResponseBody()
+        )
+        val expected = ErrorResponse(
+            code = HttpURLConnection.HTTP_INTERNAL_ERROR,
+            message = DEFAULT_ERROR_500_MESSAGE
+        ).toDomain()
+        coEvery { userApi.getAllUsers(null) } returns errorResponse
 
-        val result = runBlocking { sut.getAllUsers() }
+        val result = runBlocking { sut.getAllUsers(null) }
 
-        coVerify { userApi.getAllUsers() }
+        coVerify { userApi.getAllUsers(null) }
         assertTrue { result.isLeft() }
         assertEquals(expected.code, result.swap().getOrNull()?.code)
     }
@@ -82,13 +88,19 @@ class UserRemoteDatasourceImplTest {
 
     @Test
     fun `test that getUserInfo returns a 404 error`() {
-        val errorResponse = Response.error<List<UserResponse>>(HttpURLConnection.HTTP_NOT_FOUND, notFoundErrorString.toResponseBody())
-        val expected = ErrorResponse(code = HttpURLConnection.HTTP_NOT_FOUND, message = DEFAULT_ERROR_404_MESSAGE).toDomain()
-        coEvery { userApi.getAllUsers() } returns errorResponse
+        val errorResponse = Response.error<List<FollowerResponse>>(
+            HttpURLConnection.HTTP_NOT_FOUND,
+            notFoundErrorString.toResponseBody()
+        )
+        val expected = ErrorResponse(
+            code = HttpURLConnection.HTTP_NOT_FOUND,
+            message = DEFAULT_ERROR_404_MESSAGE
+        ).toDomain()
+        coEvery { userApi.getAllUsers(null) } returns errorResponse
 
-        val result = runBlocking { sut.getAllUsers() }
+        val result = runBlocking { sut.getAllUsers(null) }
 
-        coVerify { userApi.getAllUsers() }
+        coVerify { userApi.getAllUsers(null) }
         assertTrue { result.isLeft() }
         assertEquals(expected.code, result.swap().getOrNull()?.code)
     }

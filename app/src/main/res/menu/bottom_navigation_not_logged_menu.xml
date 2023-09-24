@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeScreenFragment"
+        android:icon="@drawable/bottom_nav_home_selector"
+        android:title="@string/bottom_nav_menu_item_1"
+        android:visible="true"/>
+
+    <!--item
+        android:id="@+id/profileFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/bottom_nav_menu_item_2"
+        android:visible="false"/-->
+</menu>

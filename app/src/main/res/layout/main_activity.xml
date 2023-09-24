@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainCoordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".base.MainActivity" >
+    tools:context=".ui.base.MainActivity">
 
-        <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--app:navigationIcon="@drawable/ic_arrow_back"-->
+        <!--com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!--app:navigationIcon="@drawable/ic_arrow_back"-->
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:menu="@menu/top_app_bar"
-                app:subtitleTextColor="@color/onPrimaryContainerColor"
-                app:title="@string/app_name"
-                app:titleTextAppearance="@style/TextAppearance.Material3.ActionBar.Title"
-                app:titleTextColor="@color/onSurfaceColor" />
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar"
+            app:subtitleTextColor="@color/onPrimaryContainerColor"
+            app:title="@string/app_name"
+            app:titleTextAppearance="@style/TextAppearance.Material3.ActionBar.Title"
+            app:titleTextColor="@color/onSurfaceColor" /-->
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -61,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_not_logged_menu" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loaderLayout"

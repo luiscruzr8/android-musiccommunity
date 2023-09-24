@@ -4,20 +4,72 @@
     <string name="version">Version %1$s</string>
     <!-- Common -->
     <string name="app_name">Music Community</string>
+    <string name="all">Todos</string>
     <string name="or">O</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancelar</string>
     <string name="accept">Aceptar</string>
     <string name="decline">Declinar</string>
     <string name="discard">Descartar</string>
+    <string name="dismiss">Cerrar</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="user_alert">Alerta</string>
-
-    <!-- Common -->
+    <string name="app_logo">App logo</string>
     <string name="username_tools">Nombre de usuario muy largo</string>
+    <string name="post_title_tools">Este es un título muy muy muy muy largo para un post que quiero publicar en esta red social</string>
+    <string name="post_location_tools">Esto es una ubicación</string>
+    <string name="post_start_end_tools">De 11/11/11 19:00\nA 12/12/12 20:00</string>
+    <string name="post_start_end_text">De %1$s\nA %2$s</string>
+    <string name="post_end_tools">Hasta 11/11/11</string>
+    <string name="post_end_text">Hasta %1$s</string>
+    <string name="default_id">#999</string>
+    <string name="post_id">#%1$d</string>
+    <string name="post_creation_date_tools">99/99/99</string>
     <string name="email_tools">thisisareallyreallylongemail@email.com</string>
     <string name="interest_tools">interesLarguisimo</string>
+    <string name="post_related_tags_label">Etiquetas:</string>
+    <string name="chip_post">#%1$d %2$s</string>
+    <string name="chip_comment_user">#%1$d %2$s</string>
+    <string name="chip_user">#%1$d</string>
+    <string name="chip_rating">%1$.1f / 10</string>
+    <string name="user">Usuario</string>
+    <string name="recommendation">Recomendación</string>
+    <string name="advertisement">Anuncio</string>
+    <string name="event">Evento</string>
+    <string name="discussion">Discusión</string>
+    <string name="opinion">Opinión</string>
+    <string name="date">Fecha</string>
+    <string name="date_hint">Seleccione fecha</string>
+    <string name="time">Time</string>
+    <string name="time_hint">Seleccione hora</string>
+    <string name="tags">Tags</string>
+    <string name="tags_hint">Tags (valores separados por coma)</string>
+    <string name="error_empty_field">Valor requerido</string>
+    <string name="error_invalid_format_field">Formato incorrecto</string>
+    <string name="commented_on">comentó el %1$s :</string>
+    <string name="responded_on">respondió el %1$s :</string>
+    <string name="comment_section">Comentarios:</string>
+    <string name="add_comment">Añadir comentario</string>
+    <string name="respond_comment">Responder</string>
+    <string name="no_comments">No hay comentarios aún. Sé el primero en comentar!</string>
+    <string name="no_responses">No hay respuestas aún</string>
+    <string name="comment_hint">Comentario</string>
+    <string name="comment_dialog_title">Deja tu comentario o respuesta</string>
+    <string name="comment_dialog_button">Enviar</string>
+    <string name="not_now_button">Ahora no</string>
+    <string name="select_image">Eligir imagen…</string>
+    <string name="image_uploaded_successfully">¡Imagen subida correctamente a la publicación!</string>
+    <string name="image_updatedd_successfully">Image actualizada successfully to the post!</string>
+
+
+    <!-- PopUp option post menu -->
+    <string name="popup_edit_option">Editar</string>
+    <string name="popup_delete_option">Eliminar</string>
+    <string name="popup_recommend_option">Recomendar</string>
+    <string name="popup_rate_option">Puntuar</string>
+    <string name="send_comment">Enviar</string>
+    <string name="popup_opinion_option">Crear opinión</string>
 
     <!-- Home screen -->
     <string name="home_screen_title">Bienvenido a Music Community</string>
@@ -65,15 +117,26 @@
     <!-- Profile screen -->
     <string name="profile_screen_title">Perfil</string>
     <string name="profile_screen_edit_button">Editar</string>
+    <string name="profile_screen_follow_button">Seguir</string>
+    <string name="profile_screen_unfollow_button">Dejar de seguir</string>
     <string name="profile_screen_logout_button">Cerrar sesión</string>
     <string name="profile_screen_image_description">Imagen de perfil</string>
     <string name="profile_screen_username_label">Perfil de %1$s</string>
     <string name="profile_screen_bio_label">Mi biografía:</string>
     <string name="profile_screen_interests_label">Mis intereses:</string>
     <string name="profile_screen_followers_button">%1$d seguidores</string>
+    <string name="profile_screen_followers">Seguidores</string>
+    <string name="profile_screen_public_scores_button">Partituras públicas</string>
+    <string name="profile_screen_posts_button">Publicaciones del usuario</string>
+    <string name="profile_screen_recommendations_button">Recomendaciones del usuario</string>
     <string name="profile_screen_no_followers">Este usuario no tiene seguidores aún</string>
     <string name="profile_screen_following_button">%1$d siguiendo</string>
+    <string name="profile_screen_following">Siguiendo</string>
     <string name="profile_screen_no_following">Este usuario no esta siguiendo a nadie</string>
+    <string name="profile_screen_title_user_posts">Publicaciones de %1$s</string>
+    <string name="profile_screen_no_posts">No se han encontrado publicaciones</string>
+    <string name="profile_screen_post_type">Tipo de publicación</string>
+    <string name="profile_screen_title_user_recommendations">Recomendaciones de %1$s</string>
 
     <!-- Edit profile dialog -->
     <string name="edit_screen_title">Editar perfil</string>
@@ -83,6 +146,8 @@
     <string name="edit_screen_phone_number_required">Número de teléfono requerido</string>
     <string name="edit_screen_phone_number_incorrect_format">Número de teléfono debe tener entre 6–9 dígitos</string>
     <string name="edit_screen_bio">Biografía</string>
+    <string name="edit_screen_interests">Intereses</string>
+    <string name="edit_screen_interests_hint">Intereses (valores separados por coma)</string>
     <string name="edit_screen_bio_incorrect_format">Biografía no debe exceder los 500 caracteres</string>
     <string name="edit_screen_save_button">Guardar</string>
     <string name="edit_screen_save_dialog_title">Confirmar guardado</string>
@@ -93,7 +158,116 @@
     <string name="follower_screen_following_title">Seguidos</string>
     <string name="follower_screen_interests_label">Interesado en:</string>
 
+    <!-- Community screen -->
+    <string name="community_screen_title">Comunidad</string>
+    <string name="community_screen_browse">Navega entre las distintas categorías</string>
+    <string name="community_screen_tab_layout">Selector de pestañas</string>
+    <string name="community_tab_users">Usuarios</string>
+    <string name="community_tab_advertisements">Anuncios</string>
+    <string name="community_tab_events">Eventos</string>
+    <string name="community_tab_discussions">Discusiones</string>
+    <string name="community_tab_opinions">Opiniones</string>
+    <string name="community_tab_recommendations">Recomendaciones</string>
+    <string name="community_search_label">Buscar</string>
+    <string name="community_search_hint">Búsqueda…</string>
+    <string name="community_fab_add">Nuevo</string>
+
+    <!-- Community - Users screen -->
+    <string name="community_users_no_users">No se han encontrado usuarios</string>
+
+    <!-- Community - Events screen -->
+    <string name="community_events_no_events">No se han encontrado eventos</string>
+    <string name="community_events_title">Título</string>
+    <string name="community_events_location">Ubicación</string>
+    <string name="community_events_description">Descripción</string>
+    <string name="community_events_from">Del:</string>
+    <string name="community_events_to">Al:</string>
+    <string name="community_events_create_title">Nuevo evento</string>
+    <string name="community_events_edit_title">Editar evento</string>
+    <string name="community_event_created_title">Evento creado satisfactoriamente</string>
+    <string name="community_event_created_message">Serás redirigido al nuevo evento creado</string>
+
+    <!-- Community - Advertisements screen -->
+    <string name="community_advertisements_no_advertisements">No se han encontrado anuncios</string>
+    <string name="community_advertisements_title">Título</string>
+    <string name="community_advertisements_location">Ubicación</string>
+    <string name="community_advertisements_description">Descripción</string>
+    <string name="community_advertisements_phone">Número de teléfono</string>
+    <string name="community_advertisements_until">Hasta:</string>
+    <string name="community_advertisements_create_title">Nuevo anuncio</string>
+    <string name="community_advertisements_edit_title">Editar anuncio</string>
+    <string name="community_advertisement_created_title">Anuncio creado satisfactoriamente</string>
+    <string name="community_advertisement_created_message">Serás redirigido al nuevo anuncio</string>
+
+    <!-- Community - Opinions screen -->
+    <string name="community_opinions_no_opinions">No se han encontrado opiniones</string>
+    <string name="community_opinions_title">Título</string>
+    <string name="community_opinions_score">Partitura</string>
+    <string name="community_opinions_description">Descripción</string>
+    <string name="community_opinion_create_title">Nueva opinión</string>
+    <string name="community_opinion_edit_title">Editar opinión</string>
+    <string name="community_opinion_created_title">Opinión creada satisfactoriamente</string>
+    <string name="community_opinion_created_message">Serás redirigido a la nueva opinion</string>
+    <string name="create_opinion_confirmation">Al aceptar, proporcionas acceso a todos los usuarios a esta partitura. Si cancelas, la publicación no se creará.\n¿Quieres crear la publicación de todos modos?</string>
+
+    <!-- Community - Discussions screen -->
+    <string name="community_discussions_no_discussions">No se han encontrado discusiones</string>
+    <string name="community_discussions_title">Título</string>
+    <string name="community_discussions_description">Descripción</string>
+    <string name="community_discussions_create_title">Nueva discusión</string>
+    <string name="community_discussions_edit_title">Editar discusión</string>
+    <string name="community_discussion_created_title">Discusión creada satisfactoriamente</string>
+    <string name="community_discussion_created_message">Serás redirigido a la nueva discusión</string>
+
+    <!-- Community - Recommendations screen -->
+    <string name="community_recommendations_no_recommendations">No se han encontrado recomendaciones</string>
+    <string name="community_recommendations_is_top_10_checkbox">Mostrar \'Top 10 recomendaciones\'</string>
+    <string name="community_recommendations_title">Título</string>
+    <string name="community_recommendations_message">Mensaje</string>
+    <string name="community_recommendations_create_title">Nueva recomendación</string>
+    <string name="community_recommendations_edit_title">Editar recomendación</string>
+    <string name="community_recommendations_created_title">Recomendación creada satisfactoriamente</string>
+    <string name="community_recommendations_created_message">Serás redirigido a la nueva recomendación</string>
+    <string name="community_recommendations_rating_dialog_title">Puntúa esta recomendación</string>
+    <string name="community_recommendations_rating_value">Tu puntuación es: %1$d / 10</string>
+    <string name="community_recommendations_navigate_to_post_message">Serás redirigido al detalle de la publicación. ¿Te gustaría continuar?</string>
+
+    <!-- Scores screen -->
+    <string name="scores_screen_title_mine">Mis partituras</string>
+    <string name="scores_screen_title_user">Partituras de %1$s</string>
+    <string name="scores_screen_no_scores">No se encontraron partituras</string>
+    <string name="scores_screen_created_by_on">Creada por %1$s el %2$s</string>
+    <string name="chip_score">#%1$d Partitura</string>
+    <string name="score_img_description">Descripción de image de partitura</string>
+
+    <!-- Search screen -->
+    <string name="search_screen_title">Búsqueda</string>
+    <string name="search_screen_tbd">Página en construcción…</string>
+    <string name="search_screen_choose_search_type">Elige tu tipo de búsqueda</string>
+    <string name="search_screen_change_search_type">Cambia tu búsqueda</string>
+    <string name="search_by_tag">Búsqueda por etiquetas</string>
+    <string name="search_posts_by_tag">Publicaciones por etiquetas</string>
+    <string name="search_users_by_interest">Usuarios por intereses</string>
+    <string name="search_by_city">Búsquedas por ciudad</string>
+    <string name="search_posts_by_coordinates">Publicaciones cerca de mi</string>
+    <string name="search_posts_by_city">Publicaciones por ciudad</string>
+    <string name="city_hint">Ciudad</string>
+    <string name="your_coordinates">Tus coordenadas</string>
+    <string name="latitude">Latitud: %1$.4f</string>
+    <string name="longitude">Longitud: %1$.4f</string>
+    <string name="search_closest">Buscar en la ciudad más cercana</string>
+    <string name="tag_hint">Etiqueta</string>
+    <string name="interest_hint">Interés</string>
+
     <!-- Navigation menu -->
     <string name="bottom_nav_menu_item_1">Inicio</string>
-    <string name="bottom_nav_menu_item_2">Perfil</string>
+    <string name="bottom_nav_menu_item_2">Comunidad</string>
+    <string name="bottom_nav_menu_item_3">Partituras</string>
+    <string name="bottom_nav_menu_item_4">Búsqueda</string>
+    <string name="bottom_nav_menu_item_5">Perfil</string>
+
+    <!-- Notification channel -->
+    <string name="notification_channel_id">com.tfm.musiccommunityapp.urgent</string>
+    <string name="notification_channel_name">Notificaciones generales</string>
+    <string name="notification_channel_description">Todas las notificaciones recibidas de la app</string>
 </resources>

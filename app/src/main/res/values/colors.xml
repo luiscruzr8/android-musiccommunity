@@ -39,4 +39,16 @@
     <color name="outlineColor">#74796d</color>
     <color name="outlineVariantColor">#c3c8bb</color>
 
+    <color name="advertisementColor">#fdc02e</color>
+    <color name="advertisementColorTonal">#FFECB3</color>
+    <color name="eventColor">#30a54a</color>
+    <color name="discussionColor">#24a2b6</color>
+    <color name="opinionColor">#d93749</color>
+    <color name="recommendationColor">#fd9827</color>
+    <color name="recommendationColorTonal">#FFFFCCBC</color>
+    <color name="userColor">#8f43ff</color>
+    <color name="userColorTonal">#FFD1C4E9</color>
+    <color name="scoreColor">#002021</color>
+    <color name="scoreColorTonal">#FFB3E5FC</color>
+
 </resources>

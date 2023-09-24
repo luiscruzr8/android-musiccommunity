@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/tvRecommendationChip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/recommendationColor"
+        android:textAlignment="center"
+        android:textColor="@color/onPrimaryColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/chip_post" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/optionsButton"
+        style="@style/Widget.Material3.Button.IconButton.Outlined"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        app:icon="@drawable/ic_dots_more"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRecommendationChip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvRecommendationChip" />
+
+    <ImageView
+        android:id="@+id/ivRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRecommendationRating"
+        app:layout_constraintEnd_toStartOf="@+id/tvRecommendationRating"
+        app:layout_constraintTop_toTopOf="@+id/tvRecommendationRating"
+        app:srcCompat="@drawable/ic_rating_recommendation" />
+
+
+    <TextView
+        android:id="@+id/tvRecommendationRating"
+        android:layout_width="0dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="48dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        android:textColor="@color/onSurfaceColor"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRecommendationChip"
+        app:layout_constraintEnd_toStartOf="@+id/optionsButton"
+        app:layout_constraintTop_toTopOf="@+id/tvRecommendationChip"
+        tools:text="@string/chip_rating" />
+
+    <TextView
+        android:id="@+id/tvRecommendationTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        android:textColor="@color/onSurfaceColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecommendationChip"
+        tools:text="@string/post_title_tools" />
+
+    <TextView
+        android:id="@+id/tvRecCreationDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        android:textColor="@color/onSurfaceColor"
+        app:layout_constraintStart_toStartOf="@+id/tvRecommendationTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecommendationTitle"
+        tools:text="@string/post_creation_date_tools" />
+
+    <TextView
+        android:id="@+id/tvRecHyphen"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="-"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        android:textColor="@color/onSurfaceColor"
+        app:layout_constraintStart_toEndOf="@+id/tvRecCreationDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecommendationTitle" />
+
+    <TextView
+        android:id="@+id/tvRecCreationUser"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        android:textColor="@color/onSurfaceColor"
+        app:layout_constraintStart_toEndOf="@+id/tvRecHyphen"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecommendationTitle"
+        tools:text="@string/username_tools" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clPost"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/recommendation_post_background"
+        app:layout_constraintEnd_toEndOf="@+id/tvRecommendationTitle"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/tvRecCreationDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecCreationDate">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/tvPostChip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:textAlignment="center"
+            android:textColor="@color/onPrimaryColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/chip_post" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clImageBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:background="@color/surfaceDimColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPostCreationDate">
+
+            <ImageView
+                android:id="@+id/ivPostImage"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:contentDescription="@string/profile_screen_image_description"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvPostTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            android:textColor="@color/onSurfaceColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPostChip"
+            tools:text="@string/post_title_tools" />
+
+        <TextView
+            android:id="@+id/tvPostCreationDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="@color/onSurfaceColor"
+            app:layout_constraintStart_toStartOf="@+id/tvPostTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvPostTitle"
+            tools:text="@string/post_creation_date_tools" />
+
+        <TextView
+            android:id="@+id/tvHyphen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="-"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="@color/onSurfaceColor"
+            app:layout_constraintStart_toEndOf="@+id/tvPostCreationDate"
+            app:layout_constraintTop_toBottomOf="@+id/tvPostTitle" />
+
+        <TextView
+            android:id="@+id/tvPostCreationUser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="@color/onSurfaceColor"
+            app:layout_constraintStart_toEndOf="@+id/tvHyphen"
+            app:layout_constraintTop_toBottomOf="@+id/tvPostTitle"
+            tools:text="@string/username_tools" />
+
+        <TextView
+            android:id="@+id/tvPostDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textColor="@color/onSurfaceVariantColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clImageBox"
+            tools:text="@tools:sample/lorem/random" />
+
+        <TextView
+            android:id="@+id/tvTagsLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/post_related_tags_label"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="@color/onSurfaceVariantColor"
+            app:layout_constraintEnd_toEndOf="@+id/tvPostTitle"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/tvPostTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvPostDescription" />
+
+        <com.tfm.musiccommunityapp.ui.custom.HorizontalTagsLayout
+            android:id="@+id/relatedTagsLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/clPost"
+            app:layout_constraintEnd_toEndOf="@+id/tvPostTitle"
+            app:layout_constraintStart_toStartOf="@+id/tvPostTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvTagsLabel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvRecMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:ellipsize="end"
+        android:maxLines="5"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        android:textColor="@color/onSurfaceVariantColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clPost"
+        tools:text="@tools:sample/lorem/random" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

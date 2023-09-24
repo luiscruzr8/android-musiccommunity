@@ -12,10 +12,10 @@ import android.widget.RelativeLayout
 import androidx.fragment.app.DialogFragment
 import com.tfm.musiccommunityapp.R
 import com.tfm.musiccommunityapp.databinding.EditProfileDialogBinding
+import com.tfm.musiccommunityapp.domain.model.TagDomain
 import com.tfm.musiccommunityapp.domain.model.UserDomain
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogTwoOptions
 import java.util.regex.Pattern
-
 
 class EditProfileDialog(
     private val userProfile: UserDomain,
@@ -70,7 +70,7 @@ class EditProfileDialog(
         return userProfile.copy(
             phone = binding.phoneNumberEditText.text.toString().trim(),
             bio = binding.bioEditText.text.toString().trim(),
-            interests = emptyList()
+            interests = binding.userInterestsEditText.text.toString().trim().split(", ").map { TagDomain(it) }
         )
     }
 
@@ -82,6 +82,7 @@ class EditProfileDialog(
             binding.emailTextInputLayout.isEnabled = false
             binding.phoneNumberEditText.setText(phone)
             binding.bioEditText.setText(bio)
+            binding.userInterestsEditText.setText(interests.map { it2 -> it2.tagName }.joinToString(", "))
         }
 
         binding.dismissButton.setOnClickListener {
@@ -119,6 +120,14 @@ class EditProfileDialog(
             isValid = false
         } else {
             binding.phoneNumberTextInputLayout.error = null
+        }
+        //Interests validation
+        val interests = binding.userInterestsEditText.text.toString()
+        if (interests.isNotEmpty() && !Pattern.matches("^[a-zA-Z0-9, áéíóúÁÉÍÓÚüÜñÑ]*\$", interests)) {
+            binding.userInterestsInputLayout.error = getString(R.string.error_invalid_format_field)
+            isValid = false
+        } else {
+            binding.userInterestsInputLayout.error = null
         }
         return isValid
     }

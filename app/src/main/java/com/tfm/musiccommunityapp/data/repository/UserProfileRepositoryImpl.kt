@@ -5,13 +5,13 @@ import com.tfm.musiccommunityapp.data.datasource.UserDatasource
 import com.tfm.musiccommunityapp.domain.model.DomainError
 import com.tfm.musiccommunityapp.domain.model.ShortUserDomain
 import com.tfm.musiccommunityapp.domain.model.UserDomain
-import com.tfm.musiccommunityapp.domain.repository.UserProfileRepository
+import com.tfm.musiccommunityapp.usecase.repository.UserProfileRepository
 
 class UserProfileRepositoryImpl(
     private val userDatasource: UserDatasource
 ): UserProfileRepository {
-    override suspend fun getUsers(): Either<DomainError, List<UserDomain>> =
-        userDatasource.getAllUsers()
+    override suspend fun getUsers(username: String?): Either<DomainError, List<ShortUserDomain>> =
+        userDatasource.getAllUsers(username)
 
     override suspend fun getUserInfo(username: String?): Either<DomainError, UserDomain?> =
         userDatasource.getUserInfo(username)

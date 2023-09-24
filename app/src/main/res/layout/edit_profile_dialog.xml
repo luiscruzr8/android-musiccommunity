@@ -34,24 +34,23 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/editProfileTitle"
-            android:layout_width="400dp"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
             android:text="@string/edit_screen_title"
             android:textAppearance="?attr/textAppearanceDisplaySmall"
             android:textColor="@color/onSurfaceVariantColor"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/saveButton" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/username_text_input_layout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="12dp"
             android:labelFor="@string/edit_screen_username"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +69,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_text_input_layout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:labelFor="@string/edit_screen_email"
@@ -91,7 +90,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/phone_number_text_input_layout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:labelFor="@string/edit_screen_phone_number"
@@ -112,7 +111,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/bio_text_input_layout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:labelFor="@string/edit_screen_bio"
@@ -127,6 +126,26 @@
                 android:hint="@string/edit_screen_bio"
                 android:inputType="textMultiLine"
                 android:maxLines="5"
+                android:textColor="@color/primaryColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_interests_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:labelFor="@string/edit_screen_interests"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bio_text_input_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_interests_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_screen_interests_hint"
+                android:inputType="textMultiLine"
+                android:maxLines="3"
                 android:textColor="@color/primaryColor" />
         </com.google.android.material.textfield.TextInputLayout>
 

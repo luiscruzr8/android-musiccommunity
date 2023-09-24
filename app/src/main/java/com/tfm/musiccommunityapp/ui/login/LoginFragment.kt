@@ -1,17 +1,21 @@
 package com.tfm.musiccommunityapp.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import com.google.android.material.progressindicator.CircularProgressIndicatorSpec
 import com.google.android.material.progressindicator.IndeterminateDrawable
+import com.google.firebase.messaging.FirebaseMessaging
 import com.tfm.musiccommunityapp.R
-import com.tfm.musiccommunityapp.base.BaseFragment
 import com.tfm.musiccommunityapp.databinding.LoginFragmentBinding
-import com.tfm.musiccommunityapp.domain.interactor.login.SignInUseCaseResult
-import com.tfm.musiccommunityapp.domain.interactor.login.SignUpUseCaseResult
+import com.tfm.musiccommunityapp.ui.base.BaseFragment
+import com.tfm.musiccommunityapp.ui.base.MainActivity
 import com.tfm.musiccommunityapp.ui.dialogs.common.alertDialogOneOption
-import com.tfm.musiccommunityapp.utils.viewBinding
+import com.tfm.musiccommunityapp.ui.utils.viewBinding
+import com.tfm.musiccommunityapp.usecase.login.SignInUseCaseResult
+import com.tfm.musiccommunityapp.usecase.login.SignUpUseCaseResult
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.regex.Pattern
 
@@ -34,6 +38,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
             when (signInResult) {
                 is SignInUseCaseResult.Success -> {
                     clearFields()
+                    (activity as MainActivity).setUpLoggedInBottomNavigation()
                     navigateToUserProfile()
                 }
 
@@ -88,7 +93,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun navigateToUserProfile() {
-        val direction = LoginFragmentDirections.actionLoginFragmentToProfileFragment(null)
+        val direction = LoginFragmentDirections.actionLoginFragmentToHomeScreenFragment()
         navigateSafe(direction)
     }
 
@@ -187,7 +192,17 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
             val username = binding.usernameEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
 
-            viewModel.performSignIn(username, password)
+            getFirebaseToken { token ->
+                token?.let {
+                    viewModel.performSignIn(username, password, it)
+                } ?: run {
+                    Toast.makeText(
+                        requireContext(),
+                        "Error getting firebase token",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         } else return
     }
 
@@ -224,7 +239,18 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
             val email = binding.emailEditText.text.toString().trim()
             val phone = binding.phoneNumberEditText.text.toString().trim()
 
-            viewModel.performSignUp(username, password, email, phone)
+            getFirebaseToken { token ->
+                token?.let {
+                    viewModel.performSignUp(username, password, email, phone, it)
+                } ?: run {
+                    Toast.makeText(
+                        requireContext(),
+                        "Error getting firebase token",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
         } else return
     }
 
@@ -245,8 +271,23 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
 
     companion object {
         const val USERNAME_OR_PASSWORD_REGEX = "^[a-zA-Z0-9_]{6,40}$"
-        const val EMAIL_REGEX = "^(?=.{6,60}\$)[a-zA-Z0-9_!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,6}\$"
+        const val EMAIL_REGEX =
+            "^(?=.{6,60}\$)[a-zA-Z0-9_!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,6}\$"
         const val PHONE_NUMBER_REGEX = "^[0-9]{6,9}\$"
+    }
+
+    private fun getFirebaseToken(callback: (String?) -> Unit) {
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w("LoginFragment", "Fetching FCM registration token failed", task.exception)
+                    callback(null)
+                    return@addOnCompleteListener
+                }
+                // Get new Instance ID token
+                val token = task.result
+                callback(token)
+            }
     }
 
 }

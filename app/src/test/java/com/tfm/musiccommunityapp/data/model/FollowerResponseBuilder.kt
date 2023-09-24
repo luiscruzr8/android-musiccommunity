@@ -1,7 +1,6 @@
 package com.tfm.musiccommunityapp.data.model
 
-import com.tfm.musiccommunityapp.data.api.model.FollowerResponse
-import com.tfm.musiccommunityapp.data.api.model.UserResponse
+import com.tfm.musiccommunityapp.api.model.FollowerResponse
 
 object FollowerResponseBuilder {
     internal val default = FollowerResponse(

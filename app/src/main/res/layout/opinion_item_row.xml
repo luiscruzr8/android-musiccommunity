@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/tvOpinionChip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/opinionColor"
+            android:textAlignment="center"
+            android:textColor="@color/onPrimaryColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/chip_post" />
+
+        <TextView
+            android:id="@+id/tvOpinionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="@color/onSurfaceColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvOpinionChip"
+            tools:text="@string/post_title_tools" />
+
+        <ImageView
+            android:id="@+id/ivFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/tvOpinionTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvOpinionTitle"
+            app:srcCompat="@drawable/ic_score" />
+
+        <TextView
+            android:id="@+id/tvFileName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="@color/onSurfaceColor"
+            app:layout_constraintBottom_toBottomOf="@+id/ivFile"
+            app:layout_constraintEnd_toEndOf="@+id/tvOpinionTitle"
+            app:layout_constraintStart_toEndOf="@+id/ivFile"
+            app:layout_constraintTop_toTopOf="@+id/ivFile"
+            tools:text="@string/post_location_tools" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="?android:attr/listDivider"
+            android:backgroundTint="@color/surfaceColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivFile" />
+
+        <TextView
+            android:id="@+id/tvCreationDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="@color/onSurfaceColor"
+            app:layout_constraintBottom_toBottomOf="@+id/tvOpinionChip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvOpinionChip"
+            tools:text="@string/post_creation_date_tools" />
+
+        <TextView
+            android:id="@+id/tvRelatedTags"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:text="@string/post_related_tags_label"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="@color/onSurfaceVariantColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvOpinionTitle"
+            app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+        <com.tfm.musiccommunityapp.ui.custom.HorizontalTagsLayout
+            android:id="@+id/relatedTagsLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
+            app:layout_constraintEnd_toEndOf="@+id/tvRelatedTags"
+            app:layout_constraintStart_toStartOf="@+id/tvOpinionTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvRelatedTags" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:background="?android:attr/listDivider"
+            android:backgroundTint="@color/onSurfaceVariantColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

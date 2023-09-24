@@ -1,10 +1,10 @@
 package com.tfm.musiccommunityapp.data.datasource.remote
 
 import arrow.core.Either
-import com.tfm.musiccommunityapp.data.api.UsersApi
-import com.tfm.musiccommunityapp.data.api.extensions.toErrorResponse
-import com.tfm.musiccommunityapp.data.api.model.toDomain
-import com.tfm.musiccommunityapp.data.api.model.toResponse
+import com.tfm.musiccommunityapp.api.UsersApi
+import com.tfm.musiccommunityapp.api.extensions.toErrorResponse
+import com.tfm.musiccommunityapp.api.model.toDomain
+import com.tfm.musiccommunityapp.api.model.toResponse
 import com.tfm.musiccommunityapp.data.datasource.UserDatasource
 import com.tfm.musiccommunityapp.data.extensions.eitherOf
 import com.tfm.musiccommunityapp.domain.model.DomainError
@@ -15,18 +15,20 @@ internal class UserRemoteDatasourceImpl(
     private val usersApi: UsersApi
 ) : UserDatasource {
 
-    override suspend fun getAllUsers(): Either<DomainError, List<UserDomain>> = eitherOf(
-        response = usersApi.getAllUsers(),
-        mapper = { it -> it?.map { it.toDomain() } ?: emptyList() },
-        errorMapper = { error -> error.toErrorResponse().toDomain() }
-    )
+    override suspend fun getAllUsers(username: String?): Either<DomainError, List<ShortUserDomain>> =
+        eitherOf(
+            response = usersApi.getAllUsers(username),
+            mapper = { it -> it?.map { it.toDomain() } ?: emptyList() },
+            errorMapper = { error -> error.toErrorResponse().toDomain() }
+        )
 
 
-    override suspend fun getUserInfo(username: String?): Either<DomainError, UserDomain?> = eitherOf(
-        response = usersApi.getUser(username),
-        mapper = { it?.toDomain() },
-        errorMapper = { error -> error.toErrorResponse().toDomain() }
-    )
+    override suspend fun getUserInfo(username: String?): Either<DomainError, UserDomain?> =
+        eitherOf(
+            response = usersApi.getUser(username),
+            mapper = { it?.toDomain() },
+            errorMapper = { error -> error.toErrorResponse().toDomain() }
+        )
 
     override suspend fun updateUserInfo(user: UserDomain): Either<DomainError, UserDomain?> = eitherOf(
         response = usersApi.updateUserInfo(user.toResponse()),

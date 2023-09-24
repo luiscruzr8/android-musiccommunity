@@ -1,6 +1,6 @@
 package com.tfm.musiccommunityapp.data.model
 
-import com.tfm.musiccommunityapp.data.api.model.UserResponse
+import com.tfm.musiccommunityapp.api.model.UserResponse
 
 
 object UserResponseBuilder {
