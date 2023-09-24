@@ -28,7 +28,7 @@ internal class BackendAuthenticator(private val localAuth: AuthDatasource, priva
         cookieManager.removeCookiesSession(request.url)
 
         return synchronized(this) {
-            val urlCredentials = "${request.url.baseUrl}${request.url.server}/signin"
+            val urlCredentials = "${request.url.baseUrl}${request.url.server}/api/signin"
             val credentials = localAuth.bearerToken
 
             val requestLogin = Request.Builder()
